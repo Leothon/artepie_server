@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao">
+
+    <select id="getPhoneNumber" resultType="integer" parameterType="string">
+
+
+        select isnull((select user_phone from `user` where user_phone=#{phoneNumber} ))
+    </select>
+
+    <insert id="insertPhoneTokenUuid">
+
+        insert into `user` (user_id,user_phone,user_token,user_name) values (#{uuid},#{phoneNumber},#{token},#{username})
+    </insert>
+
+    <select id="getTokenByPhoneNumber" parameterType="string" resultType="string">
+        select user_token from `user` where user_phone = #{phoneNumber}
+    </select>
+</mapper>
