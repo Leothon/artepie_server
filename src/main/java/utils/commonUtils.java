@@ -3,6 +3,8 @@ package utils;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -35,6 +37,12 @@ public class commonUtils {
             hashCodeV = - hashCodeV;
         }
         return machineId + String.format("%015d", hashCodeV);
+    }
+
+    public static String getTime(){
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(d);
     }
 
 

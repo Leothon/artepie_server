@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(String uuid, String phoneNumber, String token,String username) {
-        userDao.insertPhoneTokenUuid(uuid,phoneNumber,token,username);
+    public void register(String uuid, String phoneNumber, String token,String username,String registerTime) {
+        userDao.insertPhoneTokenUuid(uuid,phoneNumber,token,username,registerTime);
     }
 
     @Override

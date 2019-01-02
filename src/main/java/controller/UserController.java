@@ -70,18 +70,19 @@ public class UserController {
                     String token = tokenUtils.getToken(uuid);
                     //TODO 插入数据库
                     tokeninfo = new Token();
-                    tokeninfo.setInfo("第一次注册");
+                    tokeninfo.setInfo("注册成功");
                     tokeninfo.setToken(token);
-                    userService.register(uuid,phonenumber,token,"用户" + uuid);
+                    String registerTime = commonUtils.getTime();
+                    userService.register(uuid,phonenumber,token,"用户" + uuid,registerTime);
                     return new Result<>(true,tokeninfo);
                 }else {
                     //已注册
                     //TODO　根据电话号码从数据库中查询token并返回
                     tokeninfo = new Token();
-                    tokeninfo.setInfo("已经注册");
-
+                    tokeninfo.setInfo("登录成功");
                     String token = userService.returnTokenByPhone(phonenumber);
                     tokeninfo.setToken(token);
+                    //TODO 将登录时间插进数据库
                     return new Result<>(true,tokeninfo);
 
                 }
