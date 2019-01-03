@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.GetDataDao">
+
+
+    <resultMap id="bannerMap" type="entity.Banner">
+        <id column="banner_id" property="banner_id"/>
+        <result column="banner_img" property="banner_img"/>
+        <result column="banner_type" property="banner_type"/>
+    </resultMap>
+    <select id="getBanners" resultMap="bannerMap">
+        select banner_id,banner_img,banner_type from banner order by banner_create_time desc limit 4
+    </select>
+
+    <resultMap id="classMap" type="entity.TeaClasss">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_author" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="class_view" property="selectstucount"/>
+    </resultMap>
+    <select id="getClasses" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit 10
+    </select>
+    <select id="getMoreClass" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit 10,20
+    </select>
+</mapper>

@@ -11,7 +11,7 @@
 
     <insert id="insertPhoneTokenUuid">
 
-        insert into `user` (user_id,user_phone,user_token,user_name) values (#{uuid},#{phoneNumber},#{token},#{username})
+        insert into `user` (user_id,user_phone,user_token,user_name,user_register_time) values (#{uuid},#{phoneNumber},#{token},#{username},#{registerTime})
     </insert>
 
     <select id="getTokenByPhoneNumber" parameterType="string" resultType="string">
