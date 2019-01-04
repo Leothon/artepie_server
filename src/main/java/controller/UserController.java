@@ -3,6 +3,7 @@ package controller;
 import dto.Result;
 import dto.Token;
 import dto.VerifyCode;
+import entity.TokenValid;
 import entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -102,4 +103,18 @@ public class UserController {
     }
 
 
+    @GetMapping("/getuserinfo")
+    @ResponseBody
+    public Result<User> getUserInfo(@RequestParam("token") String token){
+
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        return new Result<User>(true,userService.getUserInfoById(uuid));
+    }
+
+
+//    @PostMapping("/updateuserinfo")
+//    @ResponseBody
+//    public Result<> updateUserInfo(@RequestParam("") String )
 }

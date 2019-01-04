@@ -3,6 +3,7 @@ package utils;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
+import entity.TokenValid;
 import net.minidev.json.JSONObject;
 
 import java.text.ParseException;
@@ -116,28 +117,36 @@ public class tokenUtils {
     }
 
     //处理解析的业务逻辑
-    public static void ValidToken(String token) {
+    public static TokenValid ValidToken(String token) {
         //解析token
+        TokenValid tokenValid = new TokenValid();
         try {
             if (token != null) {
 
                 Map<String, Object> validMap = valid(token);
                 int i = (int) validMap.get("Result");
                 if (i == 0) {
-                    System.out.println("token解析成功");
+                    tokenValid.setExpired(false);
                     JSONObject jsonObject = (JSONObject) validMap.get("data");
-                    System.out.println("uid是" + jsonObject.get("uid"));
-                    System.out.println("sta是"+jsonObject.get("sta"));
-                    System.out.println("exp是"+jsonObject.get("exp"));
+                    tokenValid.setUid(jsonObject.get("uid").toString());
+
+                    tokenValid.setSta(jsonObject.get("sta").toString());
+
+                    tokenValid.setExp(jsonObject.get("exp").toString());
+
                 } else if (i == 2) {
-                    System.out.println("token已经过期");
+                    tokenValid.setExpired(true);
                 }
+
+                return tokenValid;
             }
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (JOSEException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
 

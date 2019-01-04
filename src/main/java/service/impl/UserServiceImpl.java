@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.UserDao;
+import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.UserService;
@@ -33,5 +34,15 @@ public class UserServiceImpl implements UserService {
     public String returnTokenByPhone(String number) {
 
         return userDao.getTokenByPhoneNumber(number);
+    }
+
+    @Override
+    public User getUserInfoById(String id) {
+        return userDao.getUserInfo(id);
+    }
+
+    @Override
+    public String getTokenByUID(String userId) {
+        return userDao.getTokenByUid(userId);
     }
 }

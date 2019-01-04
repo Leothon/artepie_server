@@ -7,6 +7,8 @@ public class Result<T> {
 
     private String error;
 
+
+
     public Result(){}
 
     public Result(boolean success,T data){
@@ -17,6 +19,8 @@ public class Result<T> {
         this.success = success;
         this.error = error;
     }
+
+
 
     public boolean isSuccess() {
         return success;

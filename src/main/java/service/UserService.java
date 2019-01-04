@@ -1,5 +1,7 @@
 package service;
 
+import entity.User;
+
 public interface UserService {
 
     boolean phoneExits(String phoneNumber);
@@ -7,4 +9,8 @@ public interface UserService {
     void register(String uuid,String phoneNumber,String token,String username,String registerTime);
 
     String returnTokenByPhone(String number);
+
+    User getUserInfoById(String id);
+
+    String getTokenByUID(String userId);
 }
