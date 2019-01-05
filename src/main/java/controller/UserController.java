@@ -5,6 +5,7 @@ import dto.Token;
 import dto.VerifyCode;
 import entity.TokenValid;
 import entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -12,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import service.UserService;
 import utils.commonUtils;
 import utils.tokenUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -114,7 +118,40 @@ public class UserController {
     }
 
 
-//    @PostMapping("/updateuserinfo")
-//    @ResponseBody
-//    public Result<> updateUserInfo(@RequestParam("") String )
+    @PostMapping("/uploadimg")
+    @ResponseBody
+    public Result<String> updateUserInfo(@RequestParam("pic") MultipartFile file) throws IllegalStateException, IOException {
+
+
+
+
+        String fileName = file.getOriginalFilename();
+
+        File targetFile=new File("/resource",fileName);
+
+        if(!targetFile.exists()){
+
+            targetFile.mkdirs();
+
+        }
+
+        file.transferTo(targetFile);
+
+
+        String returnPath = targetFile.getAbsolutePath();
+
+        return new Result<>(true,fileName);
+
+    }
+
+    @PostMapping("/updateuserinfo")
+    @ResponseBody
+    public Result<String> updateUserInfo(@RequestBody User user){
+
+
+        userService.updateInfo(user);
+
+        return new Result<>(true,"success");
+    }
+
 }

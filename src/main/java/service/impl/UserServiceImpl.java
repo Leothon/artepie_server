@@ -5,6 +5,7 @@ import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.UserService;
+import utils.tokenUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,5 +45,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getTokenByUID(String userId) {
         return userDao.getTokenByUid(userId);
+    }
+
+    @Override
+    public void updateInfo(User user) {
+        String userId = tokenUtils.ValidToken(user.getUser_token()).getUid();
+        if (user.getUser_icon() != null && !user.getUser_icon().equals("")){
+            userDao.updateUserIcon(user.getUser_icon(),userId);
+        }
+        userDao.updateUserInfo(user.getUser_name(),user.getUser_sex(),user.getUser_birth(),user.getUser_phone(),user.getUser_signal(),user.getUser_address(),userId);
     }
 }

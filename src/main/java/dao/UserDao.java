@@ -21,4 +21,8 @@ public interface UserDao {
     User getUserInfo(String userId);
 
     String getTokenByUid(String userId);
+
+    void updateUserInfo(@Param("username") String username,@Param("userSex") int userSex,@Param("userBirth") String userBirth,@Param("userPhone") String userPhone,@Param("userSignal") String userSignal,@Param("userAddress") String userAddress,@Param("userId") String userId);
+
+    void updateUserIcon(@Param("userIcon") String userIcon,@Param("userId") String userId);
 }

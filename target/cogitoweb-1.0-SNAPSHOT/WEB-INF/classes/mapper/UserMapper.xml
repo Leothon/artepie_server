@@ -17,4 +17,42 @@
     <select id="getTokenByPhoneNumber" parameterType="string" resultType="string">
         select user_token from `user` where user_phone = #{phoneNumber}
     </select>
+
+
+    <resultMap id="userMap" type="entity.User">
+        <id column="user_id" property="user_id" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_birth" property="user_birth"/>
+        <result column="user_sex" property="user_sex"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_address" property="user_address"/>
+        <result column="user_phone" property="user_phone"/>
+        <result column="user_balance" property="user_balance"/>
+    </resultMap>
+    <select id="getUserInfo" parameterType="string" resultMap="userMap">
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_phone,user_balance
+        from `user`
+        where user_id = #{userId}
+    </select>
+
+    <select id="getTokenByUid" resultType="string">
+        select user_token from `user` where user_id = #{userId}
+    </select>
+
+
+    <update id="updateUserInfo" parameterType="entity.User">
+        update `user` set
+        user_name = #{username},
+        user_sex = #{userSex},
+        user_birth = #{userBirth},
+        user_phone = #{userPhone},
+        user_signal = #{userSignal},
+        user_address = #{userAddress}
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateUserIcon" parameterType="string">
+        update `user` set user_icon = #{userIcon} where user_id = #{userId}
+    </update>
 </mapper>

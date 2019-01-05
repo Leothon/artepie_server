@@ -13,4 +13,6 @@ public interface UserService {
     User getUserInfoById(String id);
 
     String getTokenByUID(String userId);
+
+    void updateInfo(User user);
 }

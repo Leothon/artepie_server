@@ -39,4 +39,20 @@
     <select id="getTokenByUid" resultType="string">
         select user_token from `user` where user_id = #{userId}
     </select>
+
+
+    <update id="updateUserInfo" parameterType="entity.User">
+        update `user` set
+        user_name = #{username},
+        user_sex = #{userSex},
+        user_birth = #{userBirth},
+        user_phone = #{userPhone},
+        user_signal = #{userSignal},
+        user_address = #{userAddress}
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateUserIcon" parameterType="string">
+        update `user` set user_icon = #{userIcon} where user_id = #{userId}
+    </update>
 </mapper>
