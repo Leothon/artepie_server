@@ -118,9 +118,9 @@ public class UserController {
     }
 
 
-    @PostMapping("/uploadimg")
+    @PostMapping("/uploadfile")
     @ResponseBody
-    public Result<String> updateUserInfo(@RequestParam("pic") MultipartFile file) throws IllegalStateException, IOException {
+    public Result<String> updateUserInfo(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
 
 
 

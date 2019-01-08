@@ -24,7 +24,37 @@
     <select id="getClasses" resultMap="classMap">
         select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit 10
     </select>
-    <select id="getMoreClass" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit 10,20
+    <select id="getMoreClass" resultMap="classMap" parameterType="integer">
+        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit #{currentPage} ,10
     </select>
+
+
+    <resultMap id="qaMap" type="dto.QAData">
+        <id column="qa_id" property="qa_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="qa_user_id" property="qa_user_id"/>
+        <result column="qa_content" property="qa_content"/>
+        <result column="qa_like" property="qa_like"/>
+        <result column="qa_comment" property="qa_comment"/>
+        <result column="qa_video" property="qa_video"/>
+        <result column="qa_audio" property="qa_audio"/>
+        <result column="qa_time" property="qa_time"/>
+        <result column="qa_video_cover" property="qa_video_cover"/>
+    </resultMap>
+
+    <select id="getQAData" resultMap="qaMap">
+
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
+    </select>
+
+
+    <select id="getMoreQAData" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
+
+    </select>
+
 </mapper>

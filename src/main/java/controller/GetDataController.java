@@ -1,6 +1,7 @@
 package controller;
 
 import dto.HomeData;
+import dto.QAData;
 import dto.Result;
 import entity.TeaClasss;
 import entity.TokenValid;
@@ -48,14 +49,41 @@ public class GetDataController {
 
     @GetMapping("/getmoredata")
     @ResponseBody
-    public Result<ArrayList<TeaClasss>> getMoreData(){
+    public Result<ArrayList<TeaClasss>> getMoreData(@RequestParam("currentpage") int currentPage){
 
 
 
 
 
-        return new Result<ArrayList<TeaClasss>>(true,getDataService.getMoreClass());
+        return new Result<ArrayList<TeaClasss>>(true,getDataService.getMoreClass(currentPage));
 
 
     }
+
+
+    @GetMapping("/getquestion")
+    @ResponseBody
+    public Result<ArrayList<QAData>> getQuestionData(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        String tokenInDb = userService.getTokenByUID(uuid);
+
+        if (tokenInDb.equals(token)){
+            return new Result<ArrayList<QAData>>(true,getDataService.getQAData());
+        }else {
+            return new Result<>(false,"登录过期或者错误，请重新登录");
+        }
+    }
+
+
+    @GetMapping("/getmorequestion")
+    @ResponseBody
+    public Result<ArrayList<QAData>> getMoreQuestionData(@RequestParam("currentpage") int currentPage){
+
+
+        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQAData(currentPage));
+
+    }
+
 }

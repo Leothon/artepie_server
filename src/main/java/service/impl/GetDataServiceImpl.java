@@ -2,6 +2,7 @@ package service.impl;
 
 import dao.GetDataDao;
 import dto.HomeData;
+import dto.QAData;
 import entity.Banner;
 import entity.TeaClasss;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,18 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<TeaClasss> getMoreClass() {
-        return getDataDao.getMoreClass();
+    public ArrayList<TeaClasss> getMoreClass(int currentPage) {
+        return getDataDao.getMoreClass(currentPage);
+    }
+
+    @Override
+    public ArrayList<QAData> getQAData() {
+        return getDataDao.getQAData();
+    }
+
+    @Override
+    public ArrayList<QAData> getMoreQAData(int currentPage) {
+        return getDataDao.getMoreQAData(currentPage);
     }
 
 }
