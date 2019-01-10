@@ -27,11 +27,12 @@
         <result column="user_sex" property="user_sex"/>
         <result column="user_signal" property="user_signal"/>
         <result column="user_address" property="user_address"/>
+        <result column="user_token" property="user_token"/>
         <result column="user_phone" property="user_phone"/>
         <result column="user_balance" property="user_balance"/>
     </resultMap>
     <select id="getUserInfo" parameterType="string" resultMap="userMap">
-        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_phone,user_balance
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_token,user_phone,user_balance
         from `user`
         where user_id = #{userId}
     </select>

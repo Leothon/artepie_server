@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.SendDataDao">
+    <insert id="insertQa" >
+
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_like,qa_comment)
+        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},"0","0")
+    </insert>
+</mapper>
