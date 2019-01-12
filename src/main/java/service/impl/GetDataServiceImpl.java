@@ -3,7 +3,10 @@ package service.impl;
 import dao.GetDataDao;
 import dto.HomeData;
 import dto.QAData;
+import dto.QADataDetail;
 import entity.Banner;
+import entity.Comment;
+import entity.Reply;
 import entity.TeaClasss;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +41,22 @@ public class GetDataServiceImpl implements GetDataService {
     @Override
     public ArrayList<QAData> getMoreQAData(int currentPage) {
         return getDataDao.getMoreQAData(currentPage);
+    }
+
+    @Override
+    public QADataDetail getQADetail(String qaId) {
+
+        QAData qaData = getDataDao.getQADetail(qaId);
+
+        ArrayList<Comment> comments = getDataDao.getComment(qaId);
+        for (int i = 0;i < comments.size();i ++){
+            ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
+            comments.get(i).setReplies(replies);
+        }
+        QADataDetail qaDataDetail = new QADataDetail();
+        qaDataDetail.setQaData(qaData);
+        qaDataDetail.setComments(comments);
+        return qaDataDetail;
     }
 
 }

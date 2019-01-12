@@ -57,4 +57,45 @@
 
     </select>
 
+    <select id="getQADetail" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
+
+    </select>
+
+    <resultMap id="commentMap" type="entity.Comment">
+        <id column="comment_q_id" property="comment_q_id"/>
+        <result column="comment_q_qa_id" property="comment_q_qa_id"/>
+        <result column="comment_q_user_id" property="comment_q_user_id"/>
+        <result column="comment_q_content" property="comment_q_content"/>
+        <result column="comment_q_like" property="comment_q_like"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="comment_q_time" property="comment_q_time"/>
+    </resultMap>
+
+    <select id="getComment" resultMap="commentMap">
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_like,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_qa_id = #{qaId} order by a.comment_q_like desc
+    </select>
+
+    <resultMap id="replyMap" type="entity.Reply">
+        <id column="reply_id" property="reply_id"/>
+        <result column="reply_r_id" property="reply_r_id"/>
+        <result column="reply_comment" property="reply_comment"/>
+        <result column="reply_user_id" property="reply_user_id"/>
+        <result column="reply_to_user_id" property="reply_to_user_id"/>
+        <result column="reply_like" property="reply_like"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_name" property="to_user_name"/>
+        <result column="user_icon" property="to_user_icon"/>
+        <result column="reply_time" property="reply_time"/>
+    </resultMap>
+    <select id="getReply" resultMap="replyMap">
+
+        select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_like,a.reply_time,b.user_name,b.user_icon,d.user_name,d.user_icon from reply a
+        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_like desc
+    </select>
+
 </mapper>

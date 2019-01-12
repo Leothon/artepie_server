@@ -2,6 +2,7 @@ package controller;
 
 import dto.HomeData;
 import dto.QAData;
+import dto.QADataDetail;
 import dto.Result;
 import entity.TeaClasss;
 import entity.TokenValid;
@@ -84,6 +85,22 @@ public class GetDataController {
 
         return new Result<ArrayList<QAData>>(true,getDataService.getMoreQAData(currentPage));
 
+    }
+
+
+    @GetMapping("/getqadetail")
+    @ResponseBody
+    public Result<QADataDetail> getQADetail(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        String tokenInDb = userService.getTokenByUID(uuid);
+
+        if (tokenInDb.equals(token)){
+            return new Result<QADataDetail>(true,getDataService.getQADetail(qaId));
+        }else {
+            return new Result<>(false,"登录过期或者错误，请重新登录");
+        }
     }
 
 }

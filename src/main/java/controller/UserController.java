@@ -47,7 +47,7 @@ public class UserController {
             public void run() {
                 phonecode.remove(phonenumber);
             }
-        }, 10*30*1000);
+        }, 10*60*1000);
 
         VerifyCode verifyCode = new VerifyCode();
         verifyCode.setCode(code);

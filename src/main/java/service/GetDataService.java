@@ -2,6 +2,7 @@ package service;
 
 import dto.HomeData;
 import dto.QAData;
+import dto.QADataDetail;
 import entity.TeaClasss;
 
 import java.util.ArrayList;
@@ -15,4 +16,6 @@ public interface GetDataService {
     ArrayList<QAData> getQAData();
 
     ArrayList<QAData> getMoreQAData(int currentPage);
+
+    QADataDetail getQADetail(String qaId);
 }
