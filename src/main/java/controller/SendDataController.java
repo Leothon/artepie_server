@@ -47,4 +47,27 @@ public class SendDataController {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }
     }
+
+    @PostMapping("/addlikeqa")
+    @ResponseBody
+    public Result<String> likeQa(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.addLikeQa(uuid,qaId);
+        return new Result<>(true,"success");
+    }
+
+    @PostMapping("/removelikeqa")
+    @ResponseBody
+    public Result<String> removelikeQa(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.removeLikeQa(uuid,qaId);
+
+        return new Result<>(true,"success");
+    }
 }

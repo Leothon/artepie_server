@@ -7,4 +7,16 @@
         insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_like,qa_comment)
         values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},"0","0")
     </insert>
+
+
+    <insert id="addLikeQaWithUser">
+
+        insert into `qa_like` (qa_like_id,qa_like_qa_id,qa_like_user_id)
+        values (#{qaLikeId} ,#{qaLikeQaId} ,#{qaLikeUserId} )
+    </insert>
+
+
+    <delete id="removeLikeQaWithUser">
+        delete from qa_like where qa_like_qa_id = #{qaLikeQaId} and qa_like_user_id = #{qaLikeUserId}
+    </delete>
 </mapper>

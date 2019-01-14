@@ -36,8 +36,8 @@
         <result column="user_signal" property="user_signal"/>
         <result column="qa_user_id" property="qa_user_id"/>
         <result column="qa_content" property="qa_content"/>
-        <result column="qa_like" property="qa_like"/>
-        <result column="qa_comment" property="qa_comment"/>
+        <!--<result column="qa_like" property="qa_like"/>-->
+        <!--<result column="qa_comment" property="qa_comment"/>-->
         <result column="qa_video" property="qa_video"/>
         <result column="qa_audio" property="qa_audio"/>
         <result column="qa_time" property="qa_time"/>
@@ -46,13 +46,13 @@
 
     <select id="getQAData" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getMoreQAData" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
 
     </select>
@@ -100,4 +100,21 @@
         join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_like desc
     </select>
 
+
+    <select id="getSingleComment" resultMap="commentMap">
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_like,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_id = #{commentId}
+    </select>
+
+    <select id="getQALike" resultType="integer">
+        select count(*) from qa_like where qa_like_qa_id = #{qaId}
+    </select>
+
+    <select id="getQAComment" resultType="integer">
+        select count(*) from comment_qa where comment_q_qa_id = #{qaId}
+    </select>
+
+    <select id="isLike" resultType="integer" parameterType="string">
+        select isnull((select qa_like_id from `qa_like` where qa_like_qa_id = #{qaId} and qa_like_user_id = #{userId}))
+    </select>
 </mapper>

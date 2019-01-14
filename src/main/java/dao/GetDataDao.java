@@ -6,6 +6,7 @@ import entity.Banner;
 import entity.Comment;
 import entity.Reply;
 import entity.TeaClasss;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -23,4 +24,11 @@ public interface GetDataDao {
     ArrayList<Comment> getComment(String qaId);
     ArrayList<Reply> getReply(String commentId);
 
+
+    Comment getSingleComment(String commentId);
+
+    int getQALike(String qaId);
+    int getQAComment(String qaId);
+
+    int isLike(@Param("userId") String userId, @Param("qaId") String qaId);
 }

@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.GetDataDao;
+import dto.CommentDetail;
 import dto.HomeData;
 import dto.QAData;
 import dto.QADataDetail;
@@ -34,8 +35,20 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<QAData> getQAData() {
-        return getDataDao.getQAData();
+    public ArrayList<QAData> getQAData(String uuid) {
+
+        ArrayList<QAData> qaData = getDataDao.getQAData();
+        for (int i = 0;i < qaData.size();i ++){
+            qaData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaData.get(i).getQa_id())));
+            qaData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaData.get(i).getQa_id())));
+            if (getDataDao.isLike(uuid,qaData.get(i).getQa_id()) == 0){
+                qaData.get(i).setLiked(true);
+            }else {
+                qaData.get(i).setLiked(false);
+            }
+
+        }
+        return qaData;
     }
 
     @Override
@@ -57,6 +70,17 @@ public class GetDataServiceImpl implements GetDataService {
         qaDataDetail.setQaData(qaData);
         qaDataDetail.setComments(comments);
         return qaDataDetail;
+    }
+
+    @Override
+    public CommentDetail getCommentDetail(String commentId) {
+
+        Comment comment = getDataDao.getSingleComment(commentId);
+        ArrayList<Reply> replies = getDataDao.getReply(commentId);
+        CommentDetail commentDetail = new CommentDetail();
+        commentDetail.setComment(comment);
+        commentDetail.setReplies(replies);
+        return commentDetail;
     }
 
 }

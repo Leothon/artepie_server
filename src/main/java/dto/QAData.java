@@ -16,10 +16,19 @@ public class QAData {
     private String user_signal;
 
     private String qa_video_cover;
-
+    private boolean liked;
     public String getQa_video_cover() {
         return qa_video_cover;
     }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
 
     public void setQa_video_cover(String qa_video_cover) {
         this.qa_video_cover = qa_video_cover;

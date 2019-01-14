@@ -1,9 +1,6 @@
 package controller;
 
-import dto.HomeData;
-import dto.QAData;
-import dto.QADataDetail;
-import dto.Result;
+import dto.*;
 import entity.TeaClasss;
 import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +68,7 @@ public class GetDataController {
         String tokenInDb = userService.getTokenByUID(uuid);
 
         if (tokenInDb.equals(token)){
-            return new Result<ArrayList<QAData>>(true,getDataService.getQAData());
+            return new Result<ArrayList<QAData>>(true,getDataService.getQAData(uuid));
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }
@@ -102,5 +99,15 @@ public class GetDataController {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }
     }
+
+
+    @GetMapping("/getcommentdetail")
+    @ResponseBody
+    public Result<CommentDetail> getCommentDetail(@RequestParam("commentid") String commentId){
+
+
+        return new Result<CommentDetail>(true,getDataService.getCommentDetail(commentId));
+    }
+
 
 }
