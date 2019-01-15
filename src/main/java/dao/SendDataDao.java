@@ -12,4 +12,23 @@ public interface SendDataDao {
     void removeLikeQaWithUser(@Param("qaLikeQaId") String qaLikeQaId,@Param("qaLikeUserId") String qaLikeUserId);
 
 
+
+    void addLikeCommentWithUser(@Param("commentLikeId") String commentLikeId,@Param("commentLikeCommentId") String commentLikeCommentId,@Param("commentLikeUserId") String commentLikeUserId);
+
+    void removeLikeCommentWithUser(@Param("commentLikeCommentId") String commentLikeCommentId,@Param("commentLikeUserId") String commentLikeUserId);
+    void addLikeReplyWithUser(@Param("replyLikeId") String replyLikeId,@Param("replyLikeReplyId") String replyLikeReplyId,@Param("replyLikeUserId") String replyLikeUserId);
+
+    void removeLikeReplyWithUser(@Param("replyLikeReplyId") String replyLikeReplyId,@Param("replyLikeUserId") String replyLikeUserId);
+
+
+    void insertQaComment(@Param("commentQId") String commentQId,@Param("qaId") String qaId,@Param("uuid") String uuid,@Param("content") String content,@Param("sendTime") String sendTime);
+
+    void insertReply(@Param("replyId") String replyId,@Param("replyRId") String replyRId,@Param("replyContent") String replyContent,@Param("replyUid") String replyUid,@Param("replyToUid") String replyToUid,@Param("replyTime") String replyTime);
+
+    void deleteComment(@Param("commentQId") String commentQId,@Param("commentQUserId") String commentQUserId);
+
+    void updateComment(@Param("commentQId") String commentQId,@Param("commentQUserId") String commentQUserId);
+
+
+    void deleteReply(@Param("replyId") String replyId,@Param("replyUserId") String replyUserId);
 }

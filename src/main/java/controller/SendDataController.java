@@ -70,4 +70,93 @@ public class SendDataController {
 
         return new Result<>(true,"success");
     }
+
+
+    @PostMapping("/addlikecomment")
+    @ResponseBody
+    public Result<String> likeComment(@RequestParam("token") String token,@RequestParam("commentid") String commentId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.addLikeComment(uuid,commentId);
+        return new Result<>(true,"success");
+    }
+
+    @PostMapping("/removelikecomment")
+    @ResponseBody
+    public Result<String> removelikeComment(@RequestParam("token") String token,@RequestParam("commentid") String commentid){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.removeLikeComment(uuid,commentid);
+
+        return new Result<>(true,"success");
+    }
+
+    @PostMapping("/addlikereply")
+    @ResponseBody
+    public Result<String> likeReply(@RequestParam("token") String token,@RequestParam("replyid") String replyId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.addLikeReply(uuid,replyId);
+        return new Result<>(true,"success");
+    }
+
+    @PostMapping("/removelikereply")
+    @ResponseBody
+    public Result<String> removelikeReply(@RequestParam("token") String token,@RequestParam("replyid") String replyId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.removeLikeReply(uuid,replyId);
+
+        return new Result<>(true,"success");
+    }
+
+
+    
+    @PostMapping("/sendqacomment")
+    @ResponseBody
+    public Result<String> sendQaComment(@RequestParam("qaid") String qaId,@RequestParam("token") String token,@RequestParam("content") String content){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        String time = commonUtils.getTime();
+        sendDataService.sendQaComment(qaId,uuid,content,time);
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/sendreply")
+    @ResponseBody
+    public Result<String> sendReply(@RequestParam("commentid") String commentid,@RequestParam("token") String token,@RequestParam("touserid") String toUserId,@RequestParam("content") String content){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        String time = commonUtils.getTime();
+        sendDataService.sendReply(commentid,content,uuid,toUserId,time);
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/deleteqacomment")
+    @ResponseBody
+    public Result<String> deleteQaComment(@RequestParam("commentid") String commentId,@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.deleteComment(commentId,uuid);
+        return new Result<>(true,"删除成功");
+    }
+    @PostMapping("/deletereply")
+    @ResponseBody
+    public Result<String> deleteReply(@RequestParam("replyId") String replyId,@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.deleteReply(replyId,uuid);
+        return new Result<>(true,"删除成功");
+    }
+
 }

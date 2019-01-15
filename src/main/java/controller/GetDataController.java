@@ -77,10 +77,11 @@ public class GetDataController {
 
     @GetMapping("/getmorequestion")
     @ResponseBody
-    public Result<ArrayList<QAData>> getMoreQuestionData(@RequestParam("currentpage") int currentPage){
+    public Result<ArrayList<QAData>> getMoreQuestionData(@RequestParam("currentpage") int currentPage,@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
 
-
-        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQAData(currentPage));
+        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQAData(currentPage,uuid));
 
     }
 
@@ -94,7 +95,7 @@ public class GetDataController {
         String tokenInDb = userService.getTokenByUID(uuid);
 
         if (tokenInDb.equals(token)){
-            return new Result<QADataDetail>(true,getDataService.getQADetail(qaId));
+            return new Result<QADataDetail>(true,getDataService.getQADetail(qaId,uuid));
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }

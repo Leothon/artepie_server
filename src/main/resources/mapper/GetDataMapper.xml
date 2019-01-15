@@ -58,7 +58,7 @@
     </select>
 
     <select id="getQADetail" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_like,a.qa_comment,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
 
     </select>
@@ -68,15 +68,15 @@
         <result column="comment_q_qa_id" property="comment_q_qa_id"/>
         <result column="comment_q_user_id" property="comment_q_user_id"/>
         <result column="comment_q_content" property="comment_q_content"/>
-        <result column="comment_q_like" property="comment_q_like"/>
+        <!--<result column="comment_q_like" property="comment_q_like"/>-->
         <result column="user_name" property="user_name"/>
         <result column="user_icon" property="user_icon"/>
         <result column="comment_q_time" property="comment_q_time"/>
     </resultMap>
 
     <select id="getComment" resultMap="commentMap">
-        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_like,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
-         on a.comment_q_user_id = b.user_id where a.comment_q_qa_id = #{qaId} order by a.comment_q_like desc
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_qa_id = #{qaId} order by a.comment_q_time desc
     </select>
 
     <resultMap id="replyMap" type="entity.Reply">
@@ -94,20 +94,24 @@
     </resultMap>
     <select id="getReply" resultMap="replyMap">
 
-        select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_like,a.reply_time,b.user_name,b.user_icon,d.user_name as to_user_name,d.user_icon as to_user_icon
+        select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_time,b.user_name,b.user_icon,d.user_name as to_user_name,d.user_icon as to_user_icon
 
         from reply a
-        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_like desc
+        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_time desc
     </select>
 
 
     <select id="getSingleComment" resultMap="commentMap">
-        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_like,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
          on a.comment_q_user_id = b.user_id where a.comment_q_id = #{commentId}
     </select>
 
     <select id="getQALike" resultType="integer">
         select count(*) from qa_like where qa_like_qa_id = #{qaId}
+    </select>
+
+    <select id="getCommentLike" resultType="integer">
+        select count(*) from comment_like where comment_like_comment_id = #{commentId}
     </select>
 
     <select id="getQAComment" resultType="integer">
@@ -116,5 +120,22 @@
 
     <select id="isLike" resultType="integer" parameterType="string">
         select isnull((select qa_like_id from `qa_like` where qa_like_qa_id = #{qaId} and qa_like_user_id = #{userId}))
+    </select>
+
+    <select id="isCommentLike" resultType="integer" parameterType="string">
+        select isnull((select comment_like_id from comment_like where comment_like_comment_id = #{commentId} and comment_like_user_id = #{userId} ))
+    </select>
+
+    <select id="getReplyLike" resultType="integer">
+        select count(*) from reply_like where reply_like_reply_id = #{replyId}
+    </select>
+
+    <select id="isReplyLike" resultType="integer" parameterType="string">
+         select isnull((select reply_like_id from reply_like where reply_like_reply_id = #{replyId} and reply_like_user_id = #{userId}))
+
+    </select>
+
+    <select id="getCommentReplyCount" resultType="integer">
+         select count(*) from reply where reply_r_id = #{commentId}
     </select>
 </mapper>

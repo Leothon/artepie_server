@@ -4,8 +4,8 @@
 <mapper namespace="dao.SendDataDao">
     <insert id="insertQa" >
 
-        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_like,qa_comment)
-        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},"0","0")
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio)
+        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio})
     </insert>
 
 
@@ -18,5 +18,52 @@
 
     <delete id="removeLikeQaWithUser">
         delete from qa_like where qa_like_qa_id = #{qaLikeQaId} and qa_like_user_id = #{qaLikeUserId}
+    </delete>
+
+    <insert id="addLikeCommentWithUser">
+
+        insert into comment_like (comment_like_id,comment_like_comment_id,comment_like_user_id)
+        values (#{commentLikeId} ,#{commentLikeCommentId} ,#{commentLikeUserId} )
+    </insert>
+
+
+    <delete id="removeLikeCommentWithUser">
+        delete from comment_like where comment_like_comment_id = #{commentLikeCommentId} and comment_like_user_id = #{commentLikeUserId}
+    </delete>
+
+    <insert id="addLikeReplyWithUser">
+
+        insert into reply_like (reply_like_id,reply_like_reply_id,reply_like_user_id)
+        values (#{replyLikeId} ,#{replyLikeReplyId} ,#{replyLikeUserId} )
+    </insert>
+
+
+    <delete id="removeLikeReplyWithUser">
+        delete from reply_like where reply_like_reply_id = #{replyLikeReplyId} and reply_like_user_id = #{replyLikeUserId}
+    </delete>
+
+    <insert id="insertQaComment">
+
+        insert into comment_qa (comment_q_id,comment_q_qa_id,comment_q_user_id,comment_q_content,comment_q_time)
+        values (#{commentQId} ,#{qaId} ,#{uuid} ,#{content} ,#{sendTime} )
+    </insert>
+
+    <insert id="insertReply">
+
+        insert into reply (reply_id,reply_r_id,reply_comment,reply_user_id,reply_to_user_id,reply_time)
+        values (#{replyId} ,#{replyRId} ,#{replyUid} ,#{replyToUid} ,#{replyTime} )
+    </insert>
+
+
+    <delete id="deleteComment">
+        delete from comment_qa where comment_q_id = #{commentQId} and comment_q_user_id = #{commentQUserId}
+    </delete>
+
+    <update id="updateComment">
+        update comment_qa set comment_q_content = "该评论已被删除" where comment_q_id = #{commentQId} and comment_q_user_id = #{commentQUserId}
+    </update>
+
+    <delete id="deleteReply">
+        delete from reply where reply_id = #{replyId} and reply_user_id = #{replyUserId}
     </delete>
 </mapper>

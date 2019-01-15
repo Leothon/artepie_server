@@ -16,9 +16,9 @@ public interface GetDataService {
 
     ArrayList<QAData> getQAData(String uuid);
 
-    ArrayList<QAData> getMoreQAData(int currentPage);
+    ArrayList<QAData> getMoreQAData(int currentPage,String uuid);
 
-    QADataDetail getQADetail(String qaId);
+    QADataDetail getQADetail(String qaId,String uuid);
 
     CommentDetail getCommentDetail(String commentId);
 }

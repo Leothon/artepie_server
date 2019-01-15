@@ -31,4 +31,14 @@ public interface GetDataDao {
     int getQAComment(String qaId);
 
     int isLike(@Param("userId") String userId, @Param("qaId") String qaId);
+
+    int getCommentLike(String commentId);
+
+    int isCommentLike(@Param("userId") String userId,@Param("commentId") String commentId);
+
+    int getReplyLike(String replyId);
+
+    int isReplyLike(@Param("userId") String userId,@Param("replyId") String replyId);
+
+    int getCommentReplyCount(String commentId);
 }

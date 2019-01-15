@@ -52,18 +52,51 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<QAData> getMoreQAData(int currentPage) {
-        return getDataDao.getMoreQAData(currentPage);
+    public ArrayList<QAData> getMoreQAData(int currentPage,String userId) {
+
+        ArrayList<QAData> qaMoreData = getDataDao.getMoreQAData(currentPage);
+        for (int i = 0;i < qaMoreData.size();i ++){
+            qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
+            qaMoreData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaMoreData.get(i).getQa_id())));
+            if (getDataDao.isLike(userId,qaMoreData.get(i).getQa_id()) == 0){
+                qaMoreData.get(i).setLiked(true);
+            }else {
+                qaMoreData.get(i).setLiked(false);
+            }
+
+        }
+        return qaMoreData;
     }
 
     @Override
-    public QADataDetail getQADetail(String qaId) {
+    public QADataDetail getQADetail(String qaId,String uuid) {
 
         QAData qaData = getDataDao.getQADetail(qaId);
 
+        qaData.setQa_like(Integer.toString(getDataDao.getQALike(qaId)));
+        qaData.setQa_comment(Integer.toString(getDataDao.getQAComment(qaId)));
         ArrayList<Comment> comments = getDataDao.getComment(qaId);
+        if (getDataDao.isLike(uuid,qaId) == 0){
+            qaData.setLiked(true);
+        }else {
+            qaData.setLiked(false);
+        }
         for (int i = 0;i < comments.size();i ++){
+            comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
+            if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
+                comments.get(i).setComment_liked(true);
+            }else {
+                comments.get(i).setComment_liked(false);
+            }
             ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
+            for (int j = 0;j < replies.size();j ++){
+                replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
+                if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
+                    replies.get(j).setReply_liked(true);
+                }else {
+                    replies.get(j).setReply_liked(false);
+                }
+            }
             comments.get(i).setReplies(replies);
         }
         QADataDetail qaDataDetail = new QADataDetail();
