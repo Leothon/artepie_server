@@ -106,13 +106,27 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public CommentDetail getCommentDetail(String commentId) {
+    public CommentDetail getCommentDetail(String commentId,String uuid) {
 
         Comment comment = getDataDao.getSingleComment(commentId);
-        ArrayList<Reply> replies = getDataDao.getReply(commentId);
+        comment.setComment_q_like(Integer.toString(getDataDao.getCommentLike(commentId)));
+        if (getDataDao.isCommentLike(uuid,commentId) == 0){
+            comment.setComment_liked(true);
+        }else {
+            comment.setComment_liked(false);
+        }
+        ArrayList<Reply> replie = getDataDao.getReply(commentId);
+        for (int i = 0;i < replie.size();i ++){
+            replie.get(i).setReply_like(Integer.toString(getDataDao.getReplyLike(replie.get(i).getReply_id())));
+            if (getDataDao.isReplyLike(uuid,replie.get(i).getReply_id()) == 0){
+                replie.get(i).setReply_liked(true);
+            }else {
+                replie.get(i).setReply_liked(false);
+            }
+        }
         CommentDetail commentDetail = new CommentDetail();
         commentDetail.setComment(comment);
-        commentDetail.setReplies(replies);
+        commentDetail.setReplies(replie);
         return commentDetail;
     }
 

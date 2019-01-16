@@ -51,7 +51,7 @@
     <insert id="insertReply">
 
         insert into reply (reply_id,reply_r_id,reply_comment,reply_user_id,reply_to_user_id,reply_time)
-        values (#{replyId} ,#{replyRId} ,#{replyUid} ,#{replyToUid} ,#{replyTime} )
+        values (#{replyId} ,#{replyRId} ,#{replyContent},#{replyUid} ,#{replyToUid} ,#{replyTime} )
     </insert>
 
 

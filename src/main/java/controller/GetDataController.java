@@ -104,10 +104,11 @@ public class GetDataController {
 
     @GetMapping("/getcommentdetail")
     @ResponseBody
-    public Result<CommentDetail> getCommentDetail(@RequestParam("commentid") String commentId){
+    public Result<CommentDetail> getCommentDetail(@RequestParam("commentid") String commentId,@RequestParam("token") String token){
 
-
-        return new Result<CommentDetail>(true,getDataService.getCommentDetail(commentId));
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        return new Result<CommentDetail>(true,getDataService.getCommentDetail(commentId,uuid));
     }
 
 

@@ -119,7 +119,7 @@ public class SendDataController {
     }
 
 
-    
+
     @PostMapping("/sendqacomment")
     @ResponseBody
     public Result<String> sendQaComment(@RequestParam("qaid") String qaId,@RequestParam("token") String token,@RequestParam("content") String content){

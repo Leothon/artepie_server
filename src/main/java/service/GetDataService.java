@@ -20,5 +20,5 @@ public interface GetDataService {
 
     QADataDetail getQADetail(String qaId,String uuid);
 
-    CommentDetail getCommentDetail(String commentId);
+    CommentDetail getCommentDetail(String commentId,String uuid);
 }
