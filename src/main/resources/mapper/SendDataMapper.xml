@@ -20,6 +20,14 @@
         delete from qa_like where qa_like_qa_id = #{qaLikeQaId} and qa_like_user_id = #{qaLikeUserId}
     </delete>
 
+    <insert id="insertFav">
+        insert into `fav` (fav_id,fav_user_id,fav_class_id,fav_time)
+        values (#{favId} ,#{uuid} ,#{classId} ,#{favTime})
+    </insert>
+
+    <delete id="deleteFav">
+        delete from `fav` where fav_user_id = #{uuid} and fav_class_id = #{classId}
+    </delete>
     <insert id="addLikeCommentWithUser">
 
         insert into comment_like (comment_like_id,comment_like_comment_id,comment_like_user_id)

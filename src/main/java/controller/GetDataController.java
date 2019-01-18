@@ -34,7 +34,7 @@ public class GetDataController {
         String tokenInDb = userService.getTokenByUID(uuid);
 
         if (tokenInDb.equals(token)){
-            return new Result<HomeData>(true,getDataService.getHomeData());
+            return new Result<HomeData>(true,getDataService.getHomeData(uuid));
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }
@@ -47,13 +47,14 @@ public class GetDataController {
 
     @GetMapping("/getmoredata")
     @ResponseBody
-    public Result<ArrayList<TeaClasss>> getMoreData(@RequestParam("currentpage") int currentPage){
+    public Result<ArrayList<TeaClasss>> getMoreData(@RequestParam("currentpage") int currentPage,@RequestParam("token") String token){
 
 
 
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
 
-
-        return new Result<ArrayList<TeaClasss>>(true,getDataService.getMoreClass(currentPage));
+        return new Result<ArrayList<TeaClasss>>(true,getDataService.getMoreClass(currentPage,uuid));
 
 
     }
@@ -112,4 +113,15 @@ public class GetDataController {
     }
 
 
+    @GetMapping("/getclassdetail")
+    @ResponseBody
+    public Result<ClassDetail> getClassDetail(@RequestParam("token") String token,@RequestParam("classid") String classId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+
+
+        return new Result<ClassDetail>(true,getDataService.getClassDetail(uuid,classId));
+
+    }
 }

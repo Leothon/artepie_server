@@ -159,4 +159,25 @@ public class SendDataController {
         return new Result<>(true,"删除成功");
     }
 
+    @PostMapping("/favclass")
+    @ResponseBody
+    public Result<String> favClass(@RequestParam("token") String token,@RequestParam("classid") String classId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        String favId = "fav" + commonUtils.createUUID();
+        sendDataService.addFav(uuid,classId,favId);
+        return new Result<>(true,"收藏成功");
+
+    }
+
+    @PostMapping("/unfavclass")
+    @ResponseBody
+    public Result<String> unFavClass(@RequestParam("token") String token,@RequestParam("classid") String classId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.removeFav(uuid,classId);
+        return new Result<>(true,"取消收藏");
+
+    }
 }

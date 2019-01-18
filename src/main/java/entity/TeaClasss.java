@@ -13,8 +13,34 @@ public class TeaClasss {
     private boolean isfav;
     private String selectdesc;
     private String selectprice;
+    private String selectauthordes;
+    private String selectscore;
 
+    public String getSelectscore() {
+        return selectscore;
+    }
 
+    public void setSelectscore(String selectscore) {
+        this.selectscore = selectscore;
+    }
+
+    public String getSelectauthordes() {
+        return selectauthordes;
+    }
+
+    public void setSelectauthordes(String selectauthordes) {
+        this.selectauthordes = selectauthordes;
+    }
+
+    private boolean isbuy;
+
+    public boolean isIsbuy() {
+        return isbuy;
+    }
+
+    public void setIsbuy(boolean isbuy) {
+        this.isbuy = isbuy;
+    }
     public String getSelectId() {
         return selectId;
     }

@@ -1,14 +1,8 @@
 package service.impl;
 
 import dao.GetDataDao;
-import dto.CommentDetail;
-import dto.HomeData;
-import dto.QAData;
-import dto.QADataDetail;
-import entity.Banner;
-import entity.Comment;
-import entity.Reply;
-import entity.TeaClasss;
+import dto.*;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.GetDataService;
@@ -20,9 +14,17 @@ public class GetDataServiceImpl implements GetDataService {
     @Autowired
     GetDataDao getDataDao;
     @Override
-    public HomeData getHomeData() {
+    public HomeData getHomeData(String uuid) {
         ArrayList<Banner> banners = getDataDao.getBanners();
         ArrayList<TeaClasss> teaClassses = getDataDao.getClasses();
+        for (int i = 0;i < teaClassses.size();i ++){
+            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
+                teaClassses.get(i).setIsbuy(true);
+            }else {
+                teaClassses.get(i).setIsbuy(false);
+            }
+        }
         HomeData homeData = new HomeData();
         homeData.setBanners(banners);
         homeData.setTeaClasses(teaClassses);
@@ -30,8 +32,17 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<TeaClasss> getMoreClass(int currentPage) {
-        return getDataDao.getMoreClass(currentPage);
+    public ArrayList<TeaClasss> getMoreClass(int currentPage,String uuid) {
+        ArrayList<TeaClasss> teaClassses = getDataDao.getMoreClass(currentPage);
+        for (int i = 0;i < teaClassses.size();i ++){
+            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
+                teaClassses.get(i).setIsbuy(true);
+            }else {
+                teaClassses.get(i).setIsbuy(false);
+            }
+        }
+        return teaClassses;
     }
 
     @Override
@@ -128,6 +139,28 @@ public class GetDataServiceImpl implements GetDataService {
         commentDetail.setComment(comment);
         commentDetail.setReplies(replie);
         return commentDetail;
+    }
+
+    @Override
+    public ClassDetail getClassDetail(String uuid, String classId) {
+        TeaClasss teaClasss = getDataDao.getClassDetail(classId);
+        if (getDataDao.isUserBuy(classId,uuid) == 0){
+            teaClasss.setIsbuy(true);
+            teaClasss.setSelectprice("0.00");
+        }else {
+            teaClasss.setIsbuy(false);
+        }
+
+        if (getDataDao.isFav(uuid,classId) == 0){
+            teaClasss.setIsfav(true);
+        }else {
+            teaClasss.setIsfav(false);
+        }
+        ArrayList<ClassDetailList> classDetailList = getDataDao.getClassList(classId);
+        ClassDetail classDetail = new ClassDetail();
+        classDetail.setTeaClasss(teaClasss);
+        classDetail.setClassDetailLists(classDetailList);
+        return classDetail;
     }
 
 }

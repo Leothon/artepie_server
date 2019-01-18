@@ -18,4 +18,8 @@ public interface SendDataService {
     void deleteComment(String commentId,String userId);
 
     void deleteReply(String replyId,String userId);
+
+    void addFav(String uuid,String classId,String favId);
+
+    void removeFav(String uuid,String classId);
 }

@@ -89,4 +89,18 @@ public class SendDataServiceImpl implements SendDataService {
     public void deleteReply(String replyId, String userId) {
         sendDataDao.deleteReply(replyId,userId);
     }
+
+    @Override
+    public void addFav(String uuid, String classId, String favId) {
+        String nowTime = commonUtils.getTime();
+        if (getDataDao.isFav(uuid,classId) != 0){
+            sendDataDao.insertFav(favId,uuid,classId,nowTime);
+        }
+
+    }
+
+    @Override
+    public void removeFav(String uuid, String classId) {
+        sendDataDao.deleteFav(uuid,classId);
+    }
 }

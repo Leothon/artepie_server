@@ -20,15 +20,53 @@
         <result column="class_author" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
-        <result column="class_view" property="selectstucount"/>
     </resultMap>
     <select id="getClasses" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit 10
+        select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit 10
     </select>
     <select id="getMoreClass" resultMap="classMap" parameterType="integer">
-        select class_id,class_title,class_author,class_price,class_img,class_view from `class` order by class_create_time desc limit #{currentPage} ,10
+        select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit #{currentPage} ,10
     </select>
 
+    <resultMap id="classDetailMap" type="entity.TeaClasss">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_author" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_duration" property="selecttime"/>
+        <result column="class_author_des" property="selectauthordes"/>
+        <result column="class_score" property="selectscore"/>
+    </resultMap>
+
+    <select id="getClassDetail" resultMap="classDetailMap">
+        select class_id,class_title,class_author,class_price,class_img,class_des,class_duration, class_author_des,class_score from `class` where class_id = #{classId}
+    </select>
+
+    <select id="isFav" resultType="integer">
+        select isnull((select fav_id from fav where fav_user_id = #{userId} and fav_class_id = #{classId} ))
+    </select>
+    <select id="getClassView" resultType="integer">
+         select count(*) from classd_view where classd_view_class_id = #{classId}
+    </select>
+    <select id="isUserBuy" resultType="integer" parameterType="string">
+        select isnull((select class_buy_id from class_buy where class_buy_class_id = #{classId} and class_buy_user_id = #{userId} ))
+    </select>
+
+    <resultMap id="classListMap" type="entity.ClassDetailList">
+        <id column="classd_id" property="classd_id"/>
+        <result column="classd_title" property="classd_title"/>
+        <result column="class_classd_id" property="class_classd_id"/>
+        <result column="classd_des" property="classd_des"/>
+        <result column="classd_duration" property="classd_duration"/>
+        <result column="classd_video" property="classd_video"/>
+        <result column="classd_create_time" property="classd_create_time"/>
+    </resultMap>
+    <select id="getClassList" resultMap="classListMap">
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
+        from class_detail  where class_classd_id = #{classId} order by classd_create_time
+    </select>
 
     <resultMap id="qaMap" type="dto.QAData">
         <id column="qa_id" property="qa_id"/>

@@ -1,18 +1,15 @@
 package service;
 
-import dto.CommentDetail;
-import dto.HomeData;
-import dto.QAData;
-import dto.QADataDetail;
+import dto.*;
 import entity.TeaClasss;
 
 import java.util.ArrayList;
 
 
 public interface GetDataService {
-    HomeData getHomeData();
+    HomeData getHomeData(String uuid);
 
-    ArrayList<TeaClasss> getMoreClass(int currentPage);
+    ArrayList<TeaClasss> getMoreClass(int currentPage,String uuid);
 
     ArrayList<QAData> getQAData(String uuid);
 
@@ -21,4 +18,6 @@ public interface GetDataService {
     QADataDetail getQADetail(String qaId,String uuid);
 
     CommentDetail getCommentDetail(String commentId,String uuid);
+
+    ClassDetail getClassDetail(String uuid,String classId );
 }

@@ -2,11 +2,9 @@ package dao;
 
 import dto.QAData;
 import dto.QADataDetail;
-import entity.Banner;
-import entity.Comment;
-import entity.Reply;
-import entity.TeaClasss;
+import entity.*;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -16,7 +14,8 @@ public interface GetDataDao {
     ArrayList<TeaClasss> getClasses();
     ArrayList<TeaClasss> getMoreClass(int currentPage);
     ArrayList<QAData> getQAData();
-
+    int getClassView(String classId);
+    int isUserBuy(@Param("classId") String classId, @Param("userId") String userId);
     ArrayList<QAData> getMoreQAData(int currentPage);
 
 
@@ -41,4 +40,10 @@ public interface GetDataDao {
     int isReplyLike(@Param("userId") String userId,@Param("replyId") String replyId);
 
     int getCommentReplyCount(String commentId);
+
+    TeaClasss getClassDetail(String classId);
+
+    int isFav(@Param("userId") String userId,@Param("classId") String classId);
+
+    ArrayList<ClassDetailList> getClassList(String classId);
 }

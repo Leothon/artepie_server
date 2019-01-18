@@ -31,4 +31,7 @@ public interface SendDataDao {
 
 
     void deleteReply(@Param("replyId") String replyId,@Param("replyUserId") String replyUserId);
+
+    void insertFav(@Param("favId") String favId,@Param("uuid") String uuid,@Param("classId") String classId,@Param("favTime") String favTime);
+    void deleteFav(@Param("uuid") String uuid,@Param("classId") String classId);
 }
