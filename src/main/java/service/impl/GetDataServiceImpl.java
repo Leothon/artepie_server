@@ -163,4 +163,54 @@ public class GetDataServiceImpl implements GetDataService {
         return classDetail;
     }
 
+    @Override
+    public VideoDetail getVideoDetail(String uuid, String classId, String classdId) {
+        ClassDetailList classDetailList = getDataDao.getClassVideo(classId,classdId);
+        classDetailList.setClassd_like(Integer.toString(getDataDao.getFavCount(classId)));
+        classDetailList.setClassd_view(Integer.toString(getDataDao.getClassdView(classdId)));
+
+        ArrayList<String> classdIds = getDataDao.getClassdIds(classId);
+
+        ArrayList<Comment> comments = getDataDao.getComment(classdId);
+
+        for (int i = 0;i < comments.size();i ++){
+            comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
+            if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
+                comments.get(i).setComment_liked(true);
+            }else {
+                comments.get(i).setComment_liked(false);
+            }
+            ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
+            for (int j = 0;j < replies.size();j ++){
+                replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
+                if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
+                    replies.get(j).setReply_liked(true);
+                }else {
+                    replies.get(j).setReply_liked(false);
+                }
+            }
+            comments.get(i).setReplies(replies);
+        }
+
+        VideoDetail videoDetail = new VideoDetail();
+        videoDetail.setClassDetailList(classDetailList);
+        videoDetail.setComments(comments);
+        if (getDataDao.isUserBuy(classId,uuid) == 0){
+            videoDetail.setBuy(true);
+        }else {
+            videoDetail.setBuy(false);
+        }
+
+        if (getDataDao.getClassPrice(classId).equals("0.00")){
+            videoDetail.setFree(true);
+        }else {
+            videoDetail.setFree(false);
+        }
+
+        videoDetail.setClassd_id(classdIds);
+
+
+        return videoDetail;
+    }
+
 }

@@ -74,4 +74,9 @@
     <delete id="deleteReply">
         delete from reply where reply_id = #{replyId} and reply_user_id = #{replyUserId}
     </delete>
+
+    <insert id="insertVideoView">
+        insert into classd_view (classd_view_id,classd_view_classd_id,classd_view_user_id,classd_view_time,classd_view_class_id)
+        values (#{classdViewId} ,#{classdViewClassdId} ,#{classdViewUserId} ,#{classdViewTime},#{classdViewClassId} )
+    </insert>
 </mapper>

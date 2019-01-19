@@ -34,4 +34,6 @@ public interface SendDataDao {
 
     void insertFav(@Param("favId") String favId,@Param("uuid") String uuid,@Param("classId") String classId,@Param("favTime") String favTime);
     void deleteFav(@Param("uuid") String uuid,@Param("classId") String classId);
+
+    void insertVideoView(@Param("classdViewId") String classdViewId,@Param("classdViewClassdId") String classdViewClassdId,@Param("classdViewUserId") String classdViewUserId,@Param("classdViewTime") String classdViewTime,@Param("classdViewClassId") String classdViewClassId);
 }

@@ -50,6 +50,14 @@
     <select id="getClassView" resultType="integer">
          select count(*) from classd_view where classd_view_class_id = #{classId}
     </select>
+
+    <select id="getClassdView" resultType="integer">
+         select count(*) from classd_view where classd_view_classd_id = #{classdId}
+    </select>
+
+    <select id="getFavCount" resultType="integer">
+        select count(*) from `fav` where fav_class_id = #{classId}
+    </select>
     <select id="isUserBuy" resultType="integer" parameterType="string">
         select isnull((select class_buy_id from class_buy where class_buy_class_id = #{classId} and class_buy_user_id = #{userId} ))
     </select>
@@ -68,6 +76,18 @@
         from class_detail  where class_classd_id = #{classId} order by classd_create_time
     </select>
 
+    <select id="getClassVideo" resultMap="classListMap">
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
+        from class_detail  where class_classd_id = #{classId} and classd_id = #{classdId}
+    </select>
+
+    <select id="getClassdIds" resultType="string">
+        select classd_id from class_detail where class_classd_id = #{classId} order by classd_create_time
+    </select>
+
+    <select id="getClassPrice" resultType="string">
+        select class_price from `class` where class_id = #{classId}
+    </select>
     <resultMap id="qaMap" type="dto.QAData">
         <id column="qa_id" property="qa_id"/>
         <result column="user_name" property="user_name"/>

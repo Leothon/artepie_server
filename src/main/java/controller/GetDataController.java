@@ -124,4 +124,13 @@ public class GetDataController {
         return new Result<ClassDetail>(true,getDataService.getClassDetail(uuid,classId));
 
     }
+
+    @GetMapping("/getclassvideo")
+    @ResponseBody
+    public  Result<VideoDetail> getClassVideo(@RequestParam("token") String token,@RequestParam("classdid") String classdId,@RequestParam("classid") String classId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        return new Result<>(true,getDataService.getVideoDetail(uuid,classId,classdId));
+    }
+
 }

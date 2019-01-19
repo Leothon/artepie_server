@@ -22,4 +22,5 @@ public interface SendDataService {
     void addFav(String uuid,String classId,String favId);
 
     void removeFav(String uuid,String classId);
+    void addVideoView(String uuid,String classdId,String classId);
 }

@@ -103,4 +103,12 @@ public class SendDataServiceImpl implements SendDataService {
     public void removeFav(String uuid, String classId) {
         sendDataDao.deleteFav(uuid,classId);
     }
+
+    @Override
+    public void addVideoView(String uuid, String classdId, String classId) {
+        String nowTime = commonUtils.getTime();
+        String viewId = "classview" + commonUtils.createUUID();
+
+        sendDataDao.insertVideoView(viewId,classdId,uuid,nowTime,classId);
+    }
 }

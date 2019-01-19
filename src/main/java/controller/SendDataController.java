@@ -180,4 +180,15 @@ public class SendDataController {
         return new Result<>(true,"取消收藏");
 
     }
+
+    @PostMapping("/addvideoview")
+    @ResponseBody
+    public Result<String> addVideoView(@RequestParam("token") String token,@RequestParam("classid") String classId,@RequestParam("classdid") String classdId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.addVideoView(uuid,classdId,classId);
+        return new Result<>(true,"成功");
+    }
 }

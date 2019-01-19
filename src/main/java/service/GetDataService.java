@@ -20,4 +20,6 @@ public interface GetDataService {
     CommentDetail getCommentDetail(String commentId,String uuid);
 
     ClassDetail getClassDetail(String uuid,String classId );
+
+    VideoDetail getVideoDetail(String uuid,String classId,String classdId);
 }
