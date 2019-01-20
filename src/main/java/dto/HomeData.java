@@ -3,13 +3,14 @@ package dto;
 import entity.Banner;
 import entity.TeaClasss;
 import entity.Teacher;
+import entity.User;
 
 import java.util.ArrayList;
 
 public class HomeData {
 
     public ArrayList<Banner> banners;
-    public ArrayList<Teacher> teachers;
+    public ArrayList<User> teachers;
     public ArrayList<TeaClasss> teaClasses;
 
     public ArrayList<Banner> getBanners() {
@@ -28,11 +29,11 @@ public class HomeData {
         this.teaClasses = teaClasses;
     }
 
-    public ArrayList<Teacher> getTeachers() {
+    public ArrayList<User> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(ArrayList<Teacher> teachers) {
+    public void setTeachers(ArrayList<User> teachers) {
         this.teachers = teachers;
     }
 

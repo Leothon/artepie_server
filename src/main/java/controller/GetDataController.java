@@ -12,6 +12,7 @@ import service.GetDataService;
 import service.UserService;
 import utils.tokenUtils;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 @Controller
@@ -133,4 +134,35 @@ public class GetDataController {
         return new Result<>(true,getDataService.getVideoDetail(uuid,classId,classdId));
     }
 
+
+    @GetMapping("/getteaclass")
+    @ResponseBody
+    public Result<TeacherClass> getTeaClass(@RequestParam("token") String token,@RequestParam("teaid") String teaId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<>(true,getDataService.getTeaClass(uuid,teaId));
+    }
+
+    @GetMapping("/getclassbytype")
+    @ResponseBody
+    public Result<TypeClass> getClassByType(@RequestParam("token") String token,@RequestParam("type") String type){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        String decodeType = "";
+        try{
+            decodeType = URLDecoder.decode(type,"utf-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new Result<>(true,getDataService.getClassByType(uuid,decodeType));
+    }
+
+    @GetMapping("/getbuyclassinfo")
+    @ResponseBody
+    public Result<TeaClasss> getBuyClassInfo(@RequestParam("classid") String classId){
+
+
+        return new Result<>(true,getDataService.getClassInfo(classId));
+    }
 }

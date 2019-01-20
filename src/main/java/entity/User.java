@@ -19,6 +19,16 @@ public class User {
     private String user_role;
     private String user_balance;
 
+    private String user_art_coin;
+
+    public String getUser_art_coin() {
+        return user_art_coin;
+    }
+
+    public void setUser_art_coin(String user_art_coin) {
+        this.user_art_coin = user_art_coin;
+    }
+
     public String getUser_id() {
         return user_id;
     }

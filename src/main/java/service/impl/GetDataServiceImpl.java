@@ -25,9 +25,11 @@ public class GetDataServiceImpl implements GetDataService {
                 teaClassses.get(i).setIsbuy(false);
             }
         }
+        ArrayList<User> teachers = getDataDao.getTeacherInUser();
         HomeData homeData = new HomeData();
         homeData.setBanners(banners);
         homeData.setTeaClasses(teaClassses);
+        homeData.setTeachers(teachers);
         return homeData;
     }
 
@@ -211,6 +213,49 @@ public class GetDataServiceImpl implements GetDataService {
 
 
         return videoDetail;
+    }
+
+    @Override
+    public TeacherClass getTeaClass(String uuid, String teaId) {
+        ArrayList<TeaClasss> teaClass = getDataDao.getClassByTea(teaId);
+        for (int i = 0;i < teaClass.size();i ++){
+            teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
+                teaClass.get(i).setIsbuy(true);
+            }else {
+                teaClass.get(i).setIsbuy(false);
+            }
+        }
+        User teachers = getDataDao.getTeaInfo(teaId);
+        TeacherClass teacherClass = new TeacherClass();
+        teacherClass.setTeacher(teachers);
+        teacherClass.setTeaClassses(teaClass);
+        return teacherClass;
+    }
+
+    @Override
+    public TypeClass getClassByType(String uuid, String type) {
+        ArrayList<TeaClasss> teaClass = getDataDao.getClassByType(type);
+        for (int i = 0;i < teaClass.size();i ++){
+            teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
+                teaClass.get(i).setIsbuy(true);
+            }else {
+                teaClass.get(i).setIsbuy(false);
+            }
+        }
+        String count = Integer.toString(getDataDao.getTypeClassCount(type));
+
+        TypeClass typeClass = new TypeClass();
+        typeClass.setTypeClassCount(count);
+        typeClass.setTypeClass(teaClass);
+        return typeClass;
+    }
+
+    @Override
+    public TeaClasss getClassInfo(String classId) {
+
+        return getDataDao.getClassInfo(classId);
     }
 
 }

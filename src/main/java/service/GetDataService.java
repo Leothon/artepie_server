@@ -22,4 +22,9 @@ public interface GetDataService {
     ClassDetail getClassDetail(String uuid,String classId );
 
     VideoDetail getVideoDetail(String uuid,String classId,String classdId);
+
+    TeacherClass getTeaClass(String uuid,String teaId);
+    TypeClass getClassByType(String uuid,String type);
+
+    TeaClasss getClassInfo(String classId);
 }

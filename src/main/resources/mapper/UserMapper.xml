@@ -30,9 +30,10 @@
         <result column="user_token" property="user_token"/>
         <result column="user_phone" property="user_phone"/>
         <result column="user_balance" property="user_balance"/>
+        <result column="user_art_coin" property="user_art_coin"/>
     </resultMap>
     <select id="getUserInfo" parameterType="string" resultMap="userMap">
-        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_token,user_phone,user_balance
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_token,user_phone,user_balance,user_art_coin
         from `user`
         where user_id = #{userId}
     </select>

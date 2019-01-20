@@ -20,9 +20,24 @@
         <result column="class_author" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
+        <result column="class_author_id" property="selectauthorid"/>
+        <result column="class_des" property="selectdesc"/>
     </resultMap>
+
+    <select id="getClassInfo" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_id = #{classId}
+    </select>
     <select id="getClasses" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit 10
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` order by class_create_time desc limit 10
+    </select>
+
+    <select id="getClassByTea" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_author_id = #{teaId} order by class_create_time desc
+    </select>
+
+
+    <select id="getClassByType" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_type_detail = #{type} order by class_create_time desc
     </select>
     <select id="getMoreClass" resultMap="classMap" parameterType="integer">
         select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit #{currentPage} ,10
@@ -55,6 +70,9 @@
          select count(*) from classd_view where classd_view_classd_id = #{classdId}
     </select>
 
+    <select id="getTypeClassCount" resultType="integer">
+        select count(*) from `class` where class_type_detail = #{type}
+    </select>
     <select id="getFavCount" resultType="integer">
         select count(*) from `fav` where fav_class_id = #{classId}
     </select>
@@ -76,6 +94,16 @@
         from class_detail  where class_classd_id = #{classId} order by classd_create_time
     </select>
 
+    <resultMap id="teacherMap" type="entity.User">
+        <id column="user_id" property="user_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_role" property="user_role"/>
+        <result column="user_signal" property="user_signal"/>
+    </resultMap>
+    <select id="getTeacherInUser" resultMap="teacherMap">
+        select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1"
+    </select>
     <select id="getClassVideo" resultMap="classListMap">
         select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
         from class_detail  where class_classd_id = #{classId} and classd_id = #{classdId}
@@ -196,5 +224,16 @@
 
     <select id="getCommentReplyCount" resultType="integer">
          select count(*) from reply where reply_r_id = #{commentId}
+    </select>
+
+    <resultMap id="teaInfo" type="entity.User">
+        <id column="user_id" property="user_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_role" property="user_role"/>
+        <result column="user_icon" property="user_icon"/>
+    </resultMap>
+    <select id="getTeaInfo" resultMap="teaInfo">
+        select user_id,user_name,user_signal,user_role,user_icon from `user` where user_id = #{teaId}
     </select>
 </mapper>
