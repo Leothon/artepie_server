@@ -55,4 +55,15 @@ public class UserServiceImpl implements UserService {
         }
         userDao.updateUserInfo(user.getUser_name(),user.getUser_sex(),user.getUser_birth(),user.getUser_phone(),user.getUser_signal(),user.getUser_address(),userId);
     }
+
+    @Override
+    public void qqRegister(String uuid, String userIcon, String userName, int sex, String registerTime, String token, String tencentToken) {
+        userDao.insertQQRegister(uuid,userIcon,userName,sex,registerTime,token,tencentToken);
+    }
+
+    @Override
+    public User getUserInfoByQQ(String accessToken) {
+
+        return userDao.getUserInfoByQQ(accessToken);
+    }
 }

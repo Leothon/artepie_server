@@ -191,4 +191,13 @@ public class SendDataController {
         sendDataService.addVideoView(uuid,classdId,classId);
         return new Result<>(true,"成功");
     }
+
+    @PostMapping("/removeclassviewhis")
+    @ResponseBody
+    public Result<String> removeClassViewHis(@RequestParam("token") String token,@RequestParam("classdid") String classdId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        sendDataService.removeViewHis(uuid,classdId);
+        return new Result<>(true,"成功");
+    }
 }

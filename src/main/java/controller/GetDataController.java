@@ -1,6 +1,7 @@
 package controller;
 
 import dto.*;
+import entity.ClassDetailList;
 import entity.TeaClasss;
 import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,5 +165,33 @@ public class GetDataController {
 
 
         return new Result<>(true,getDataService.getClassInfo(classId));
+    }
+
+
+    @GetMapping("/isqqregister")
+    @ResponseBody
+    public Result<String> isQQRegister(@RequestParam("accesstoken") String accessToken){
+
+
+        return new Result<>(true,getDataService.isQQRegister(accessToken));
+    }
+
+
+    @GetMapping("/getfavclassbyuid")
+    @ResponseBody
+    public Result<ArrayList<TeaClasss>> getFavClassByUid(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<>(true,getDataService.getFavClassByUid(uuid));
+    }
+
+    @GetMapping("/getclassviewhis")
+    @ResponseBody
+    public Result<ArrayList<ClassDetailList>> getClassViewHis(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<>(true,getDataService.getClassViewById(uuid));
     }
 }

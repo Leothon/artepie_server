@@ -1,6 +1,7 @@
 package service;
 
 import dto.*;
+import entity.ClassDetailList;
 import entity.TeaClasss;
 
 import java.util.ArrayList;
@@ -27,4 +28,10 @@ public interface GetDataService {
     TypeClass getClassByType(String uuid,String type);
 
     TeaClasss getClassInfo(String classId);
+
+    String isQQRegister(String accessToken);
+
+    ArrayList<TeaClasss> getFavClassByUid(String uuid);
+
+    ArrayList<ClassDetailList> getClassViewById(String uuid);
 }

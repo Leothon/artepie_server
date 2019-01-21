@@ -5,6 +5,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import entity.TokenValid;
 import net.minidev.json.JSONObject;
+import org.springframework.test.context.TestExecutionListeners;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -150,4 +151,10 @@ public class tokenUtils {
     }
 
 
+
+//    public static void  main(String [] args){
+//        String token = tokenUtils.getToken("19861986198619861986");
+//
+//        System.out.println(token);
+//    }
 }

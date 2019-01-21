@@ -15,4 +15,8 @@ public interface UserService {
     String getTokenByUID(String userId);
 
     void updateInfo(User user);
+
+    void qqRegister(String uuid,String userIcon,String userName,int sex,String registerTime,String token,String tencentToken);
+
+    User getUserInfoByQQ(String accessToken);
 }

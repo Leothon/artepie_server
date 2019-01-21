@@ -66,4 +66,10 @@ public interface GetDataDao {
     int getTypeClassCount(String type);
 
     TeaClasss getClassInfo(String classId);
+
+    int isQQRegister(String accessToken);
+
+    ArrayList<TeaClasss> getFavClassByUid(String uuid);
+
+    ArrayList<ClassDetailList> getViewHisById(String uuid);
 }

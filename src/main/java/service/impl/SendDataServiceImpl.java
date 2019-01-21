@@ -111,4 +111,9 @@ public class SendDataServiceImpl implements SendDataService {
 
         sendDataDao.insertVideoView(viewId,classdId,uuid,nowTime,classId);
     }
+
+    @Override
+    public void removeViewHis(String uuid, String classdId) {
+        sendDataDao.removeViewHis(uuid,classdId);
+    }
 }

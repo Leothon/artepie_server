@@ -149,4 +149,27 @@ public class UserController {
         return new Result<>(true,"success");
     }
 
+
+    @PostMapping("/qquserregister")
+    @ResponseBody
+    public Result<User> qqUserRegister(@RequestBody User user){
+        String uuid = "tenc" + commonUtils.createUUID();
+        String token = tokenUtils.getToken(uuid);
+        Token tokeninfo = new Token();
+        tokeninfo.setInfo("注册成功");
+        tokeninfo.setToken(token);
+        String registerTime = commonUtils.getTime();
+        userService.qqRegister(uuid,user.getUser_icon(),user.getUser_name(),user.getUser_sex(),registerTime,token,user.getTencent_token());
+
+        return new Result<User>(true,userService.getUserInfoById(uuid));
+
+    }
+
+
+    @GetMapping("/getuserinfobyqq")
+    @ResponseBody
+    public Result<User> getUserInfoByQQ(@RequestParam("accesstoken") String accessToken){
+        return new Result<>(true,userService.getUserInfoByQQ(accessToken));
+    }
+
 }

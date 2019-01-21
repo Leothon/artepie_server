@@ -79,4 +79,9 @@
         insert into classd_view (classd_view_id,classd_view_classd_id,classd_view_user_id,classd_view_time,classd_view_class_id)
         values (#{classdViewId} ,#{classdViewClassdId} ,#{classdViewUserId} ,#{classdViewTime},#{classdViewClassId} )
     </insert>
+
+
+    <update id="removeViewHis">
+        update classd_view set classd_view_user_id = "00000000" where classd_view_classd_id = #{classdId} and classd_view_user_id = #{uuid}
+    </update>
 </mapper>

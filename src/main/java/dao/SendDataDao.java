@@ -1,6 +1,7 @@
 package dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface SendDataDao {
 
@@ -36,4 +37,6 @@ public interface SendDataDao {
     void deleteFav(@Param("uuid") String uuid,@Param("classId") String classId);
 
     void insertVideoView(@Param("classdViewId") String classdViewId,@Param("classdViewClassdId") String classdViewClassdId,@Param("classdViewUserId") String classdViewUserId,@Param("classdViewTime") String classdViewTime,@Param("classdViewClassId") String classdViewClassId);
+
+    void removeViewHis(@Param("uuid") String uuid, @Param("classdId") String classdId);
 }

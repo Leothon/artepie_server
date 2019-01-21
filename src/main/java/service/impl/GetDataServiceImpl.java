@@ -258,4 +258,22 @@ public class GetDataServiceImpl implements GetDataService {
         return getDataDao.getClassInfo(classId);
     }
 
+    @Override
+    public String isQQRegister(String accessToken) {
+
+        return Integer.toString(getDataDao.isQQRegister(accessToken));
+    }
+
+    @Override
+    public ArrayList<TeaClasss> getFavClassByUid(String uuid) {
+
+        return getDataDao.getFavClassByUid(uuid);
+    }
+
+    @Override
+    public ArrayList<ClassDetailList> getClassViewById(String uuid) {
+
+        return getDataDao.getViewHisById(uuid);
+    }
+
 }

@@ -80,6 +80,9 @@
         select isnull((select class_buy_id from class_buy where class_buy_class_id = #{classId} and class_buy_user_id = #{userId} ))
     </select>
 
+    <select id="isQQRegister" resultType="integer" parameterType="string">
+        select isnull((select tencent_token from `user` where tencent_token = #{accessToken} ))
+    </select>
     <resultMap id="classListMap" type="entity.ClassDetailList">
         <id column="classd_id" property="classd_id"/>
         <result column="classd_title" property="classd_title"/>
@@ -184,7 +187,7 @@
         select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_time,b.user_name,b.user_icon,d.user_name as to_user_name,d.user_icon as to_user_icon
 
         from reply a
-        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_time desc
+        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_time
     </select>
 
 
@@ -236,4 +239,28 @@
     <select id="getTeaInfo" resultMap="teaInfo">
         select user_id,user_name,user_signal,user_role,user_icon from `user` where user_id = #{teaId}
     </select>
+
+    <resultMap id="favClassById" type="entity.TeaClasss">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_img" property="selectbackimg"/>
+    </resultMap>
+
+    <select id="getFavClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `fav` a join `class` b on a.fav_class_id = b.class_id where a.fav_user_id = #{uuid} order by a.fav_time
+    </select>
+
+
+    <resultMap id="classDetailByIdView" type="entity.ClassDetailList">
+        <id column="classd_id" property="classd_id"/>
+        <result column="classd_title" property="classd_title"/>
+        <result column="classd_des" property="classd_des"/>
+        <result column="class_classd_id" property="class_classd_id"/>
+    </resultMap>
+    
+    <select id="getViewHisById" resultMap="classDetailByIdView">
+        select b.classd_id,b.classd_title,b.classd_des,b.class_classd_id from class_detail b join classd_view a on a.classd_view_classd_id = b.classd_id where a.classd_view_user_id = #{uuid} order by a.classd_view_time
+    </select>
+
 </mapper>
