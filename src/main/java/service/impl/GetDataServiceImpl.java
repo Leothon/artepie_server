@@ -6,6 +6,7 @@ import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.GetDataService;
+import utils.commonUtils;
 
 import java.util.ArrayList;
 @Service
@@ -68,6 +69,40 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<QAData> getMoreQAData(int currentPage,String userId) {
 
         ArrayList<QAData> qaMoreData = getDataDao.getMoreQAData(currentPage);
+        for (int i = 0;i < qaMoreData.size();i ++){
+            qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
+            qaMoreData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaMoreData.get(i).getQa_id())));
+            if (getDataDao.isLike(userId,qaMoreData.get(i).getQa_id()) == 0){
+                qaMoreData.get(i).setLiked(true);
+            }else {
+                qaMoreData.get(i).setLiked(false);
+            }
+
+        }
+        return qaMoreData;
+    }
+
+    @Override
+    public ArrayList<QAData> getQADataById(String uuid) {
+
+        ArrayList<QAData> qaData = getDataDao.getQADataById(uuid);
+        for (int i = 0;i < qaData.size();i ++){
+            qaData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaData.get(i).getQa_id())));
+            qaData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaData.get(i).getQa_id())));
+            if (getDataDao.isLike(uuid,qaData.get(i).getQa_id()) == 0){
+                qaData.get(i).setLiked(true);
+            }else {
+                qaData.get(i).setLiked(false);
+            }
+
+        }
+        return qaData;
+    }
+
+    @Override
+    public ArrayList<QAData> getMoreQADataById(int currentPage,String userId) {
+
+        ArrayList<QAData> qaMoreData = getDataDao.getMoreQADataById(currentPage,userId);
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
             qaMoreData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaMoreData.get(i).getQa_id())));
@@ -274,6 +309,74 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<ClassDetailList> getClassViewById(String uuid) {
 
         return getDataDao.getViewHisById(uuid);
+    }
+
+    @Override
+    public BagPageData getBagPageData(String uuid) {
+
+        ArrayList<ClassDView> classDViews = getDataDao.getStudyEveryday(uuid, commonUtils.getTime());
+        StudyLine studyLine = new StudyLine();
+        int[] days = {0,0,0,0,0,0,0};
+        ArrayList<String> day = new ArrayList<>();
+        for (int i = 0;i < classDViews.size();i ++){
+
+            switch (commonUtils.getTimeRange(commonUtils.getTime(),classDViews.get(i).getClassd_view_time())){
+                case "0":
+                    days[6] ++;
+                    break;
+                case "1":
+                    days[5] ++;
+                    break;
+                case "2":
+                    days[4] ++;
+                    break;
+                case "3":
+                    days[3] ++;
+                    break;
+                case "4":
+                    days[2] ++;
+                    break;
+                case "5":
+                    days[1] ++;
+                    break;
+                case "6":
+                    days[0] ++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        studyLine.setClassCount(classDViews.size());
+        for (int j = 0;j < days.length;j ++){
+            day.add(Integer.toString(days[j]));
+        }
+
+        studyLine.setClassCountDat(day);
+        ArrayList<TeaClasss> buyClasses = getDataDao.getBuyClassByid(uuid);
+        for (int i = 0;i < buyClasses.size();i ++){
+            buyClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(buyClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(buyClasses.get(i).getSelectId(),uuid) == 0){
+                buyClasses.get(i).setIsbuy(true);
+            }else {
+                buyClasses.get(i).setIsbuy(false);
+            }
+        }
+        ArrayList<TeaClasss> fineClasses = getDataDao.getClasses();
+        for (int i = 0;i < fineClasses.size();i ++){
+            fineClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(fineClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(fineClasses.get(i).getSelectId(),uuid) == 0){
+                fineClasses.get(i).setIsbuy(true);
+            }else {
+                fineClasses.get(i).setIsbuy(false);
+            }
+        }
+
+        BagPageData bagPageData = new BagPageData();
+        bagPageData.setStudyLine(studyLine);
+        bagPageData.setTeaClassses(buyClasses);
+        bagPageData.setFineClasses(fineClasses);
+
+        return bagPageData;
     }
 
 }

@@ -45,5 +45,27 @@ public class commonUtils {
         return sdf.format(d);
     }
 
+    public static String getTimeRange(String nowTime,String calTime){
+
+
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+        int days = 0;
+        try {
+            String fromDate = simpleFormat.format(calTime);
+            String toDate = simpleFormat.format(nowTime);
+            long from = simpleFormat.parse(fromDate).getTime();
+            long to = simpleFormat.parse(toDate).getTime();
+            days = (int) ((to - from)/(1000 * 60 * 60 * 24));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return Integer.toString(days);
+
+    }
+
 
 }

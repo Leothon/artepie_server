@@ -88,6 +88,32 @@ public class GetDataController {
 
     }
 
+    @GetMapping("/getquestionbyid")
+    @ResponseBody
+    public Result<ArrayList<QAData>> getQuestionDataById(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        String tokenInDb = userService.getTokenByUID(uuid);
+
+        if (tokenInDb.equals(token)){
+            return new Result<ArrayList<QAData>>(true,getDataService.getQADataById(uuid));
+        }else {
+            return new Result<>(false,"登录过期或者错误，请重新登录");
+        }
+    }
+
+
+    @GetMapping("/getmorequestionbyid")
+    @ResponseBody
+    public Result<ArrayList<QAData>> getMoreQuestionDataById(@RequestParam("currentpage") int currentPage,@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQADataById(currentPage,uuid));
+
+    }
+
 
     @GetMapping("/getqadetail")
     @ResponseBody
@@ -193,5 +219,16 @@ public class GetDataController {
         String uuid = tokenValid.getUid();
 
         return new Result<>(true,getDataService.getClassViewById(uuid));
+    }
+
+
+    @GetMapping("/getbagpagedata")
+    @ResponseBody
+    public Result<BagPageData> getBagPageData(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+
+        return new Result<>(true,getDataService.getBagPageData(uuid));
     }
 }

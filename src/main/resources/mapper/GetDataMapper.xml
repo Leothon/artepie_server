@@ -39,6 +39,11 @@
     <select id="getClassByType" resultMap="classMap">
         select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_type_detail = #{type} order by class_create_time desc
     </select>
+
+    <select id="getBuyClassByid" resultMap="classMap">
+        select b.class_id,b.class_title,b.class_author,b.class_price,b.class_img,b.class_author_id,b.class_des from `class` b join class_buy a on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
+
+    </select>
     <select id="getMoreClass" resultMap="classMap" parameterType="integer">
         select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit #{currentPage} ,10
     </select>
@@ -144,6 +149,19 @@
     <select id="getMoreQAData" resultMap="qaMap">
         select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
+
+    </select>
+
+    <select id="getQADataById" resultMap="qaMap">
+
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid} order by a.qa_time desc limit 15
+    </select>
+
+
+    <select id="getMoreQADataById" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid}  order by a.qa_time desc limit #{currentPage} ,15
 
     </select>
 
@@ -260,7 +278,21 @@
     </resultMap>
     
     <select id="getViewHisById" resultMap="classDetailByIdView">
-        select b.classd_id,b.classd_title,b.classd_des,b.class_classd_id from class_detail b join classd_view a on a.classd_view_classd_id = b.classd_id where a.classd_view_user_id = #{uuid} order by a.classd_view_time
+        select b.classd_id,b.classd_title,b.classd_des,b.class_classd_id from class_detail b join classd_view a on a.classd_view_classd_id = b.classd_id where a.classd_view_user_id = #{uuid} and a.classd_view_gone = 1 order by a.classd_view_time
+    </select>
+
+
+    <resultMap id="classDView" type="entity.ClassDView">
+        <id property="classd_view_id" column="classd_view_id"/>
+        <result property="classd_view_classd_id" column="classd_view_classd_id"/>
+        <result property="classd_view_user_id" column="classd_view_user_id"/>
+        <result property="classd_view_time" column="classd_view_time"/>
+        <result property="classd_view_class_id" column="classd_view_class_id"/>
+        <result property="classd_view_gone" column="classd_view_gone"/>
+    </resultMap>
+    <select id="getStudyEveryday" resultMap="classDView">
+
+        select * from (select * from classd_view a where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(#{time}) and a.classd_view_user_id = #{uuid} ) a where not exists (select 1 from classd_view b where b.classd_view_classd_id = a.classd_view_classd_id and a.classd_view_user_id = b.classd_view_user_id and a.classd_view_id &lt; b.classd_view_id)
     </select>
 
 </mapper>

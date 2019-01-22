@@ -19,7 +19,8 @@ public interface GetDataDao {
     int getClassdView(String classdId);
     int isUserBuy(@Param("classId") String classId, @Param("userId") String userId);
     ArrayList<QAData> getMoreQAData(int currentPage);
-
+    ArrayList<QAData> getQADataById(String uuid);
+    ArrayList<QAData> getMoreQADataById(@Param("currentPage") int currentPage,@Param("uuid") String uuid);
 
     QAData getQADetail(String qaId);
     ArrayList<Comment> getComment(String qaId);
@@ -72,4 +73,8 @@ public interface GetDataDao {
     ArrayList<TeaClasss> getFavClassByUid(String uuid);
 
     ArrayList<ClassDetailList> getViewHisById(String uuid);
+
+    ArrayList<ClassDView> getStudyEveryday(@Param("uuid") String uuid,@Param("time") String time);
+
+    ArrayList<TeaClasss> getBuyClassByid(String uid);
 }

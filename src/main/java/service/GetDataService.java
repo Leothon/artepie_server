@@ -16,6 +16,10 @@ public interface GetDataService {
 
     ArrayList<QAData> getMoreQAData(int currentPage,String uuid);
 
+    ArrayList<QAData> getQADataById(String uuid);
+
+    ArrayList<QAData> getMoreQADataById(int currentPage,String uuid);
+
     QADataDetail getQADetail(String qaId,String uuid);
 
     CommentDetail getCommentDetail(String commentId,String uuid);
@@ -34,4 +38,6 @@ public interface GetDataService {
     ArrayList<TeaClasss> getFavClassByUid(String uuid);
 
     ArrayList<ClassDetailList> getClassViewById(String uuid);
+
+    BagPageData getBagPageData(String uuid);
 }
