@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="a06af8a4-8781-4696-a106-e60ce079fea5" name="cogito" url="http://47.92.215.32">
-        <fileTransfer host="47.92.215.32" port="22" rootFolder="/usr/local/tomcat/webapps" accessType="SFTP">
+        <fileTransfer host="47.92.215.32" port="22" rootFolder="/home/tomcat/webapps" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

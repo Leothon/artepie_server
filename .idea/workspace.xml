@@ -2,32 +2,26 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="cogitoweb:war exploded" />
+      <artifact name="cogitoweb:war" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da7e1c30-c59b-40e0-87c6-f97995b49c1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/BagPageData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/StudyLine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/ClassDView.java" afterDir="false" />
+    <list default="true" id="da7e1c30-c59b-40e0-87c6-f97995b49c1b" name="Default Changelist" comment="购买课程，学习曲线设计">
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/GetDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/GetDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/commonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/commonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/tokenUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/tokenUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/utils/tokenUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/utils/tokenUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/shiro/MyRealm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-shiro.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/shiro/MyRealm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring/spring-shiro.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utils/commonUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/commonUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/jdbc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/shiro/MyRealm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/spring/spring-shiro.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/utils/commonUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cogitoweb-1.0-SNAPSHOT/WEB-INF/classes/utils/commonUtils.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,172 +34,80 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+            <state relative-caret-position="437">
+              <caret line="281" column="13" lean-forward="true" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#15308#15312#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dto/BagPageData.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#273#274#0" expanded="true" />
-                <element signature="e#307#308#0" expanded="true" />
-                <element signature="e#375#376#0" expanded="true" />
-                <element signature="e#421#422#0" expanded="true" />
-                <element signature="e#473#474#0" expanded="true" />
-                <element signature="e#507#508#0" expanded="true" />
-                <element signature="e#575#576#0" expanded="true" />
-                <element signature="e#621#622#0" expanded="true" />
-                <element signature="e#660#661#0" expanded="true" />
-                <element signature="e#692#693#0" expanded="true" />
-                <element signature="e#745#746#0" expanded="true" />
-                <element signature="e#787#788#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="773">
+              <caret line="84" column="126" lean-forward="true" selection-start-line="84" selection-start-column="126" selection-end-line="84" selection-end-column="126" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#278#279#0" expanded="true" />
-                <element signature="e#317#318#0" expanded="true" />
-                <element signature="e#496#497#0" expanded="true" />
-                <element signature="e#528#529#0" expanded="true" />
-                <element signature="e#581#582#0" expanded="true" />
-                <element signature="e#623#624#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="564">
+              <caret line="63" column="51" lean-forward="true" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cogitoweb.iml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="1064">
+              <caret line="302" column="30" lean-forward="true" selection-start-line="302" selection-start-column="30" selection-end-line="302" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="357" column="69" selection-start-line="357" selection-start-column="69" selection-end-line="357" selection-end-column="69" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="57">
+              <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/utils/commonUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dto/StudyLine.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
-              <caret line="16" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
-              <folding>
-                <element signature="e#216#217#0" expanded="true" />
-                <element signature="e#252#253#0" expanded="true" />
-                <element signature="e#321#322#0" expanded="true" />
-                <element signature="e#371#372#0" expanded="true" />
-                <element signature="e#334#335#0" expanded="true" />
-                <element signature="e#367#368#0" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-                <element signature="e#460#461#0" expanded="true" />
-                <element signature="e#491#492#0" expanded="true" />
-                <element signature="e#518#519#0" expanded="true" />
-                <element signature="e#558#559#0" expanded="true" />
-                <element signature="e#590#591#0" expanded="true" />
-              </folding>
+              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
-              <folding>
-                <element signature="e#15308#15312#0" expanded="true" />
-                <element signature="e#14748#14752#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-redis.xml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="40" lean-forward="true" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
-              <folding>
-                <element signature="e#310#311#0" expanded="true" />
-                <element signature="e#349#350#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
-                <element signature="e#575#576#0" expanded="true" />
-                <element signature="e#763#764#0" expanded="true" />
-                <element signature="e#807#808#0" expanded="true" />
-                <element signature="e#868#869#0" expanded="true" />
-                <element signature="e#924#925#0" expanded="true" />
-                <element signature="e#965#966#0" expanded="true" />
-                <element signature="e#1002#1003#0" expanded="true" />
-                <element signature="e#1062#1063#0" expanded="true" />
-                <element signature="e#1114#1115#0" expanded="true" />
-                <element signature="e#1157#1158#0" expanded="true" />
-                <element signature="e#1196#1197#0" expanded="true" />
-                <element signature="e#1260#1261#0" expanded="true" />
-                <element signature="e#1316#1317#0" expanded="true" />
-                <element signature="e#1362#1363#0" expanded="true" />
-                <element signature="e#1404#1405#0" expanded="true" />
-                <element signature="e#1474#1475#0" expanded="true" />
-                <element signature="e#1536#1537#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-service.xml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -228,7 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-shiro.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-service.xml" />
         <option value="$PROJECT_DIR$/src/main/java/shiro/MyRealm.java" />
@@ -237,7 +138,6 @@
         <option value="$PROJECT_DIR$/src/main/java/dto/VerifyCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/entity/TokenValid.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/ROOT/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
         <option value="$PROJECT_DIR$/src/main/java/dto/Result.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/新建文本文档.html" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml" />
@@ -279,6 +179,8 @@
         <option value="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
       </list>
     </option>
   </component>
@@ -320,7 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -409,6 +310,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shiro" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cogitoweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cogitoweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -457,21 +366,26 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="cogitoweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548155909474" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550417819966" />
     <property name="last_opened_file_path" value="D:/ssm" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.32413793" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -539,14 +453,14 @@
       <option name="HOST" value="47.92.215.32" />
       <option name="PORT" value="80" />
       <option name="LOCAL" value="false" />
-      <option name="OPEN_IN_BROWSER_URL" value="http://47.92.215.32/cogitoweb_war_exploded/" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://47.92.215.32/cogitoweb_war/" />
       <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="hot-swap-classes" />
       <deployment>
-        <artifact name="cogitoweb:war exploded">
+        <artifact name="cogitoweb:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/cogitoweb_war_exploded" />
+            <option name="CONTEXT_PATH" value="/cogitoweb_war" />
           </settings>
         </artifact>
       </deployment>
@@ -605,7 +519,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="cogitoweb:war exploded" />
+          <artifact name="cogitoweb:war" />
         </option>
       </method>
     </configuration>
@@ -716,7 +630,8 @@
       <workItem from="1547700000831" duration="4234000" />
       <workItem from="1547784159280" duration="31973000" />
       <workItem from="1548041832416" duration="14761000" />
-      <workItem from="1548131869656" duration="12125000" />
+      <workItem from="1548131869656" duration="12311000" />
+      <workItem from="1550374287236" duration="7756000" />
     </task>
     <task id="LOCAL-00001" summary="登陆注册">
       <created>1546436854063</created>
@@ -830,11 +745,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548066862536</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="购买课程，学习曲线设计">
+      <created>1548156032772</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1548156032772</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226790000" />
+    <option name="totallyTimeSpent" value="234732000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -849,7 +771,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21333334" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21546666" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -860,18 +782,18 @@
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992" visible="true" weight="0.3991323" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992" visible="true" weight="0.6106291" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286334" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.5151844" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.12039045" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3286334" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5008" side_tool="true" weight="0.55531454" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008" side_tool="true" weight="0.55531454" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286334" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.45336226" />
-      <window_info anchor="bottom" id="File Transfer" order="13" sideWeight="0.49973333" weight="0.10412148" />
+      <window_info anchor="bottom" id="File Transfer" order="13" sideWeight="0.49973333" weight="0.4110629" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" weight="0.3286334" />
       <window_info anchor="bottom" id="Database Changes" order="15" />
       <window_info anchor="bottom" id="Version Control" order="16" weight="0.18004338" />
@@ -948,137 +870,10 @@
     <MESSAGE value="视频详情页数据获取，增加观看次数" />
     <MESSAGE value="支付页面数据，教师类型选取" />
     <MESSAGE value="接受QQ登录信息并注册，收藏页，取消收藏，历史页，删除历史" />
-    <option name="LAST_COMMIT_MESSAGE" value="接受QQ登录信息并注册，收藏页，取消收藏，历史页，删除历史" />
+    <MESSAGE value="购买课程，学习曲线设计" />
+    <option name="LAST_COMMIT_MESSAGE" value="购买课程，学习曲线设计" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-redis.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/redis.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.7.RELEASE/spring-web-4.3.7.RELEASE.jar!/org/springframework/web/multipart/MultipartFile.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/新建文本文档.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/QAResult.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1729">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utils/redisUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="114" column="5" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entity/Reply.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="27" selection-end-column="5" />
-          <folding>
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#604#605#0" expanded="true" />
-            <element signature="e#755#756#0" expanded="true" />
-            <element signature="e#787#788#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/Result.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/SendQAData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding>
-            <element signature="e#230#231#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#327#328#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="e#397#398#0" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/VerifyCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="e#94#95#0" expanded="true" />
-            <element signature="e#121#122#0" expanded="true" />
-            <element signature="e#161#162#0" expanded="true" />
-            <element signature="e#193#194#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entity/Banner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entity/TokenValid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -1226,16 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="20" column="16" lean-forward="true" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -1249,35 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="60" column="55" selection-start-line="60" selection-start-column="55" selection-end-line="60" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#974#975#0" expanded="true" />
-            <element signature="e#1020#1021#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="173" selection-start-line="173" selection-end-line="173" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/utils/tokenUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="832">
@@ -1285,31 +1041,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1870#1871#0" expanded="true" />
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#2914#2915#0" expanded="true" />
-            <element signature="e#3247#3248#0" expanded="true" />
-            <element signature="e#3298#3299#0" expanded="true" />
-            <element signature="e#3661#3662#0" expanded="true" />
-            <element signature="e#3717#3718#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1333,23 +1064,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="84" column="126" lean-forward="true" selection-start-line="84" selection-start-column="126" selection-end-line="84" selection-end-column="126" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SendDataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="190" column="24" selection-start-line="190" selection-start-column="24" selection-end-line="190" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1363,12 +1077,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/SendDataDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dto/BagPageData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="38" column="16" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+        <state relative-caret-position="95">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#273#274#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+            <element signature="e#375#376#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#621#622#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#787#788#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#278#279#0" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#581#582#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/utils/commonUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1007">
+          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dto/StudyLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="16" column="5" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#252#253#0" expanded="true" />
+            <element signature="e#321#322#0" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1376,7 +1143,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="7" column="40" lean-forward="true" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
           <folding>
             <element signature="e#310#311#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
@@ -1402,79 +1169,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/utils/commonUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+        <state relative-caret-position="855">
+          <caret line="116" column="29" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1870#1871#0" expanded="true" />
+            <element signature="e#1937#1938#0" expanded="true" />
+            <element signature="e#2859#2860#0" expanded="true" />
+            <element signature="e#2914#2915#0" expanded="true" />
+            <element signature="e#3247#3248#0" expanded="true" />
+            <element signature="e#3298#3299#0" expanded="true" />
+            <element signature="e#3661#3662#0" expanded="true" />
+            <element signature="e#3717#3718#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="312" lean-forward="true" selection-start-line="312" selection-end-line="312" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/SendDataDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        <state relative-caret-position="569">
+          <caret line="38" column="16" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#278#279#0" expanded="true" />
-            <element signature="e#317#318#0" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#581#582#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/BagPageData.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#273#274#0" expanded="true" />
-            <element signature="e#307#308#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-            <element signature="e#421#422#0" expanded="true" />
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#507#508#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#692#693#0" expanded="true" />
-            <element signature="e#745#746#0" expanded="true" />
-            <element signature="e#787#788#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/StudyLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
-          <folding>
-            <element signature="e#216#217#0" expanded="true" />
-            <element signature="e#252#253#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#460#461#0" expanded="true" />
-            <element signature="e#491#492#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        <state relative-caret-position="494">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1483,8 +1219,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+        <state relative-caret-position="380">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SendDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3211">
+          <caret line="190" column="24" selection-start-line="190" selection-start-column="24" selection-end-line="190" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/redis.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ValidationMessages.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/log4j.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="125" column="53" lean-forward="true" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1493,32 +1268,125 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state relative-caret-position="676">
+          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="51" column="46" lean-forward="true" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#1020#1021#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-shiro.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="52" lean-forward="true" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-redis.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-service.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
+        <state relative-caret-position="437">
+          <caret line="281" column="13" lean-forward="true" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
           <folding>
             <element signature="e#15308#15312#0" expanded="true" />
-            <element signature="e#14748#14752#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="357" column="69" selection-start-line="357" selection-start-column="69" selection-end-line="357" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="773">
+          <caret line="84" column="126" lean-forward="true" selection-start-line="84" selection-start-column="126" selection-end-line="84" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="63" column="51" lean-forward="true" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/shiro/MyRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cogitoweb.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="302" column="30" lean-forward="true" selection-start-line="302" selection-start-column="30" selection-end-line="302" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1604,7 +1472,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3899127" />
+                <option value="0.32413793" />
               </list>
             </option>
           </splitter-proportions>
