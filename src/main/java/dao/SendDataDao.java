@@ -39,4 +39,6 @@ public interface SendDataDao {
     void insertVideoView(@Param("classdViewId") String classdViewId,@Param("classdViewClassdId") String classdViewClassdId,@Param("classdViewUserId") String classdViewUserId,@Param("classdViewTime") String classdViewTime,@Param("classdViewClassId") String classdViewClassId);
 
     void removeViewHis(@Param("uuid") String uuid, @Param("classdId") String classdId);
+
+    void uploadArticle(@Param("articleId") String articleId,@Param("articleAuthorId") String articleAuthorId,@Param("articleTime") String articleTime,@Param("articleContent") String articleContent,@Param("articleImg") String articleImg,@Param("articleTitle") String articleTitle);
 }

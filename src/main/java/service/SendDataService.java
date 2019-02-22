@@ -25,4 +25,6 @@ public interface SendDataService {
     void addVideoView(String uuid,String classdId,String classId);
 
     void removeViewHis(String uuid,String classdId);
+
+    void uploadArticle(String title,String img,String content,String uid);
 }

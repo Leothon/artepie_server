@@ -77,4 +77,11 @@ public interface GetDataDao {
     ArrayList<ClassDView> getStudyEveryday(@Param("uuid") String uuid,@Param("time") String time);
 
     ArrayList<TeaClasss> getBuyClassByid(String uid);
+
+
+    ArrayList<Banner> getArticleBanner();
+
+    ArrayList<Article> getArticleList();
+
+    Article getArticleDetail(String articleId);
 }

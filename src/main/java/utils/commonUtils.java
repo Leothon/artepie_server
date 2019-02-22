@@ -53,8 +53,10 @@ public class commonUtils {
 
         int days = 0;
         try {
-            String fromDate = simpleFormat.format(calTime);
-            String toDate = simpleFormat.format(nowTime);
+            java.util.Date now = simpleFormat.parse(nowTime);
+            java.util.Date cal = simpleFormat.parse(calTime);
+            String fromDate = simpleFormat.format(cal);
+            String toDate = simpleFormat.format(now);
             long from = simpleFormat.parse(fromDate).getTime();
             long to = simpleFormat.parse(toDate).getTime();
             days = (int) ((to - from)/(1000 * 60 * 60 * 24));
@@ -67,5 +69,10 @@ public class commonUtils {
 
     }
 
+//    public static void main(String args[]){
+//        System.out.println(getTime());
+//        System.out.println(getTimeRange("2019-02-18","2019-01-21"));
+//    }
+//
 
 }

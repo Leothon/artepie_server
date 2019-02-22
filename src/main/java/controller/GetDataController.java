@@ -1,6 +1,7 @@
 package controller;
 
 import dto.*;
+import entity.Article;
 import entity.ClassDetailList;
 import entity.TeaClasss;
 import entity.TokenValid;
@@ -230,5 +231,23 @@ public class GetDataController {
 
 
         return new Result<>(true,getDataService.getBagPageData(uuid));
+    }
+
+    @GetMapping("/getarticledata")
+    @ResponseBody
+    public Result<ArticleData> getArticleData(@RequestParam("token") String token){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<>(true,getDataService.getArticleData(uuid));
+    }
+
+    @GetMapping("/getarticledetail")
+    @ResponseBody
+    public Result<Article> getArticleDetail(@RequestParam("token") String token,@RequestParam("articleid") String articleId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        return new Result<>(true,getDataService.getArticleDetail(uuid,articleId));
+
     }
 }

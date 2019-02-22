@@ -1,6 +1,7 @@
 package service;
 
 import dto.*;
+import entity.Article;
 import entity.ClassDetailList;
 import entity.TeaClasss;
 
@@ -40,4 +41,8 @@ public interface GetDataService {
     ArrayList<ClassDetailList> getClassViewById(String uuid);
 
     BagPageData getBagPageData(String uuid);
+
+    ArticleData getArticleData(String uuid);
+
+    Article getArticleDetail(String uuid,String articleId);
 }

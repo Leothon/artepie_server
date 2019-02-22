@@ -116,4 +116,11 @@ public class SendDataServiceImpl implements SendDataService {
     public void removeViewHis(String uuid, String classdId) {
         sendDataDao.removeViewHis(uuid,classdId);
     }
+
+    @Override
+    public void uploadArticle(String title, String img, String content, String uid) {
+        String time = commonUtils.getTime();
+        String articleId = "article" + commonUtils.createUUID();
+        sendDataDao.uploadArticle(articleId,uid,time,content,img,title);
+    }
 }

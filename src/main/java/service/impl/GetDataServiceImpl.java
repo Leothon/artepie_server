@@ -347,6 +347,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
         }
         studyLine.setClassCount(classDViews.size());
+
         for (int j = 0;j < days.length;j ++){
             day.add(Integer.toString(days[j]));
         }
@@ -377,6 +378,25 @@ public class GetDataServiceImpl implements GetDataService {
         bagPageData.setFineClasses(fineClasses);
 
         return bagPageData;
+    }
+
+    @Override
+    public ArticleData getArticleData(String uuid) {
+
+        ArrayList<Banner> banners = getDataDao.getArticleBanner();
+        ArrayList<Article> articles = getDataDao.getArticleList();
+
+        ArticleData articleData = new ArticleData();
+        articleData.setArticles(articles);
+        articleData.setBanners(banners);
+        return articleData;
+    }
+
+    @Override
+    public Article getArticleDetail(String uuid, String articleId) {
+
+        Article article = getDataDao.getArticleDetail(articleId);
+        return article;
     }
 
 }

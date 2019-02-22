@@ -84,4 +84,8 @@
     <update id="removeViewHis">
         update classd_view set classd_view_gone = 0 where classd_view_classd_id = #{classdId} and classd_view_user_id = #{uuid}
     </update>
+
+    <insert id="uploadArticle">
+        insert into article (article_id,article_author_id,article_time,article_content,article_img,article_title) values (#{articleId} ,#{articleAuthorId} ,#{articleTime} ,#{articleContent} ,#{articleImg} ,#{articleTitle} )
+    </insert>
 </mapper>

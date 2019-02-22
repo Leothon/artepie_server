@@ -3,6 +3,7 @@ package controller;
 import dto.QAData;
 import dto.Result;
 import dto.SendQAData;
+import entity.Article;
 import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -198,6 +199,14 @@ public class SendDataController {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         sendDataService.removeViewHis(uuid,classdId);
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/uploadarticle")
+    @ResponseBody
+    public Result<String> uploadArticle(@RequestBody Article article){
+
+        sendDataService.uploadArticle(article.getArticleTitle(),article.getArticleImg(),article.getArticleContent(),article.getArticleAuthorId());
         return new Result<>(true,"成功");
     }
 }

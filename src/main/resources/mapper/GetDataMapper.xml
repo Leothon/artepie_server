@@ -295,4 +295,39 @@
         select * from (select * from classd_view a where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(#{time}) and a.classd_view_user_id = #{uuid} ) a where not exists (select 1 from classd_view b where b.classd_view_classd_id = a.classd_view_classd_id and a.classd_view_user_id = b.classd_view_user_id and a.classd_view_id &lt; b.classd_view_id)
     </select>
 
+    <resultMap id="bannerArticle" type="entity.Banner">
+        <id column="article_id" property="banner_id"/>
+        <result column="article_img" property="banner_img"/>
+        <result column="article_title" property="banner_url"/>
+    </resultMap>
+    <select id="getArticleBanner" resultMap="bannerArticle">
+        select article_id,article_img,article_title from article order by article_time limit 3
+    </select>
+
+    <resultMap id="articleList" type="entity.Article">
+        <id column="article_id" property="articleId"/>
+        <result column="article_img" property="articleImg"/>
+        <result column="article_time" property="articleTime"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="user_name" property="articleAuthorName"/>
+        <result column="user_icon" property="articleAuthorIcon"/>
+    </resultMap>
+    <select id="getArticleList" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon from article a join user b on a.article_author_id = b.user_id order by a.article_time desc
+    </select>
+
+    <resultMap id="articleDetail" type="entity.Article">
+        <id column="article_id" property="articleId"/>
+        <result column="article_author_id" property="articleAuthorId"/>
+        <result column="article_img" property="articleImg"/>
+        <result column="article_time" property="articleTime"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="user_name" property="articleAuthorName"/>
+        <result column="user_icon" property="articleAuthorIcon"/>
+        <result column="article_content" property="articleContent"/>
+    </resultMap>
+
+    <select id="getArticleDetail" resultMap="articleDetail">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
+    </select>
 </mapper>
