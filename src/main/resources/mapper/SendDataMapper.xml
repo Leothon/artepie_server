@@ -4,8 +4,8 @@
 <mapper namespace="dao.SendDataDao">
     <insert id="insertQa" >
 
-        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio)
-        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio})
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_video_cover)
+        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},#{qaVideoCover} )
     </insert>
 
 
@@ -87,5 +87,10 @@
 
     <insert id="uploadArticle">
         insert into article (article_id,article_author_id,article_time,article_content,article_img,article_title) values (#{articleId} ,#{articleAuthorId} ,#{articleTime} ,#{articleContent} ,#{articleImg} ,#{articleTitle} )
+    </insert>
+
+    <insert id="sendRe">
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_time,qa_re_id)
+        values (#{qaId} ,#{qaUserId} ,#{qaContent} ,#{qaTime} ,#{qaReId})
     </insert>
 </mapper>

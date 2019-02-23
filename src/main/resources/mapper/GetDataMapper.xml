@@ -137,11 +137,12 @@
         <result column="qa_audio" property="qa_audio"/>
         <result column="qa_time" property="qa_time"/>
         <result column="qa_video_cover" property="qa_video_cover"/>
+        <result column="qa_re_id" property="qa_re_id"/>
     </resultMap>
 
     <select id="getQAData" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
     </select>
 
@@ -166,7 +167,7 @@
     </select>
 
     <select id="getQADetail" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
 
     </select>

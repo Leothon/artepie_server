@@ -42,7 +42,7 @@ public class SendDataController {
             String time = commonUtils.getTime();
             String qaId = "qa" + commonUtils.createUUID();
 
-            sendDataService.insertQAData(qaId,uuid,sendQAData.getQa_content(),sendQAData.getQa_video(),time,sendQAData.getQa_audio());
+            sendDataService.insertQAData(qaId,uuid,sendQAData.getQa_content(),sendQAData.getQa_video(),time,sendQAData.getQa_audio(),sendQAData.getQa_video_cover());
             return new Result<>(true,"发送成功");
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
@@ -207,6 +207,15 @@ public class SendDataController {
     public Result<String> uploadArticle(@RequestBody Article article){
 
         sendDataService.uploadArticle(article.getArticleTitle(),article.getArticleImg(),article.getArticleContent(),article.getArticleAuthorId());
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/sendre")
+    @ResponseBody
+    public Result<String> SendRe(@RequestParam("token") String token,@RequestParam("content") String content,@RequestParam("qaid") String qaId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        sendDataService.sendRe(uuid,content,qaId);
         return new Result<>(true,"成功");
     }
 }

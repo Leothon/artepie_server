@@ -17,9 +17,9 @@ public class SendDataServiceImpl implements SendDataService {
     @Autowired
     GetDataDao getDataDao;
     @Override
-    public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio) {
+    public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio,String qaVideoCover) {
 
-        sendDataDao.insertQa(qaId,userId,qaContent,qaVideo,qa_time,qaAudio);
+        sendDataDao.insertQa(qaId,userId,qaContent,qaVideo,qa_time,qaAudio,qaVideoCover);
     }
 
     @Override
@@ -122,5 +122,12 @@ public class SendDataServiceImpl implements SendDataService {
         String time = commonUtils.getTime();
         String articleId = "article" + commonUtils.createUUID();
         sendDataDao.uploadArticle(articleId,uid,time,content,img,title);
+    }
+
+    @Override
+    public void sendRe(String uuid, String content, String qaReId) {
+        String time = commonUtils.getTime();
+        String qaId = "qa" + commonUtils.createUUID();
+        sendDataDao.sendRe(qaId,uuid,content,time,qaReId);
     }
 }

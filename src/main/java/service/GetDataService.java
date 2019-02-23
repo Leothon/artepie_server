@@ -22,7 +22,7 @@ public interface GetDataService {
     ArrayList<QAData> getMoreQADataById(int currentPage,String uuid);
 
     QADataDetail getQADetail(String qaId,String uuid);
-
+    QAData getQA(String qaId,String uuid);
     CommentDetail getCommentDetail(String commentId,String uuid);
 
     ClassDetail getClassDetail(String uuid,String classId );

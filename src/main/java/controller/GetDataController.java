@@ -131,6 +131,21 @@ public class GetDataController {
         }
     }
 
+    @GetMapping("/getqainfo")
+    @ResponseBody
+    public Result<QAData> getQA(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        String tokenInDb = userService.getTokenByUID(uuid);
+
+        if (tokenInDb.equals(token)){
+            return new Result<QAData>(true,getDataService.getQA(qaId,uuid));
+        }else {
+            return new Result<>(false,"登录过期或者错误，请重新登录");
+        }
+    }
+
 
     @GetMapping("/getcommentdetail")
     @ResponseBody

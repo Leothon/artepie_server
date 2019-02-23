@@ -2,7 +2,7 @@ package service;
 
 public interface SendDataService {
 
-    void insertQAData(String qaId,String userId,String qaContent,String qaVideo,String qa_time,String qaAudio);
+    void insertQAData(String qaId,String userId,String qaContent,String qaVideo,String qa_time,String qaAudio,String qaVideoCover);
 
     void addLikeQa(String userId,String qaId);
     void removeLikeQa(String userId,String qaId);
@@ -27,4 +27,6 @@ public interface SendDataService {
     void removeViewHis(String uuid,String classdId);
 
     void uploadArticle(String title,String img,String content,String uid);
+
+    void sendRe(String uuid,String content,String qaReId);
 }

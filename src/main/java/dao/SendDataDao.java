@@ -7,7 +7,7 @@ public interface SendDataDao {
 
 
 
-    void insertQa(@Param("qaId") String qaId, @Param("userId") String userId,@Param("qaContent") String qaContent,@Param("qaVideo") String qaVideo,@Param("qaTime") String qaTime,@Param("qaAudio") String qaAudio);
+    void insertQa(@Param("qaId") String qaId, @Param("userId") String userId,@Param("qaContent") String qaContent,@Param("qaVideo") String qaVideo,@Param("qaTime") String qaTime,@Param("qaAudio") String qaAudio,@Param("qaVideoCover") String qaVideoCover);
 
     void addLikeQaWithUser(@Param("qaLikeId") String qaLikeId,@Param("qaLikeQaId") String qaLikeQaId,@Param("qaLikeUserId") String qaLikeUserId);
     void removeLikeQaWithUser(@Param("qaLikeQaId") String qaLikeQaId,@Param("qaLikeUserId") String qaLikeUserId);
@@ -41,4 +41,6 @@ public interface SendDataDao {
     void removeViewHis(@Param("uuid") String uuid, @Param("classdId") String classdId);
 
     void uploadArticle(@Param("articleId") String articleId,@Param("articleAuthorId") String articleAuthorId,@Param("articleTime") String articleTime,@Param("articleContent") String articleContent,@Param("articleImg") String articleImg,@Param("articleTitle") String articleTitle);
+
+    void sendRe(@Param("qaId") String qaId,@Param("qaUserId") String uuid,@Param("qaContent") String content,@Param("qaTime") String qaTime,@Param("qaReId") String qaReId);
 }
