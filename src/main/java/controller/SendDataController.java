@@ -218,4 +218,24 @@ public class SendDataController {
         sendDataService.sendRe(uuid,content,qaId);
         return new Result<>(true,"成功");
     }
+
+
+    @PostMapping("/deletearticle")
+    @ResponseBody
+    public Result<String> deleteArticle(@RequestParam("token") String token,@RequestParam("articleid") String articleId){
+
+
+        sendDataService.deleteArticle(token,articleId);
+
+        return new Result<>(true,"删除成功");
+    }
+    @PostMapping("/deleteqa")
+    @ResponseBody
+    public Result<String> deleteQa(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+
+
+        sendDataService.deleteQa(token,qaId);
+
+        return new Result<>(true,"删除成功");
+    }
 }

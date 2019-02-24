@@ -22,15 +22,18 @@ public class QAData {
 
     private String qa_re_id;
 
-    private ArrayList<QAData> reQA;
 
-    public ArrayList<QAData> getReQA() {
-        return reQA;
+    private QAData qaData;
+
+    public QAData getQaData() {
+        return qaData;
     }
 
-    public void setReQA(ArrayList<QAData> reQA) {
-        this.reQA = reQA;
+    public void setQaData(QAData qaData) {
+        this.qaData = qaData;
     }
+
+
 
     public String getQa_re_id() {
         return qa_re_id;

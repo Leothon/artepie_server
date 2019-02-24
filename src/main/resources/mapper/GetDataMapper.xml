@@ -302,7 +302,7 @@
         <result column="article_title" property="banner_url"/>
     </resultMap>
     <select id="getArticleBanner" resultMap="bannerArticle">
-        select article_id,article_img,article_title from article order by article_time limit 3
+        select article_id,article_img,article_title from article order by article_time desc limit 5
     </select>
 
     <resultMap id="articleList" type="entity.Article">

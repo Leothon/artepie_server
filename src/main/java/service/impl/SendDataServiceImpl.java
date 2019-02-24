@@ -2,10 +2,12 @@ package service.impl;
 
 import dao.GetDataDao;
 import dao.SendDataDao;
+import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.SendDataService;
 import utils.commonUtils;
+import utils.tokenUtils;
 
 @Service
 public class SendDataServiceImpl implements SendDataService {
@@ -129,5 +131,18 @@ public class SendDataServiceImpl implements SendDataService {
         String time = commonUtils.getTime();
         String qaId = "qa" + commonUtils.createUUID();
         sendDataDao.sendRe(qaId,uuid,content,time,qaReId);
+    }
+
+    @Override
+    public void deleteArticle(String token, String articleId) {
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        sendDataDao.deleteArticle(articleId,uuid);
+    }
+    @Override
+    public void deleteQa(String token, String qaId) {
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        sendDataDao.deleteQa(qaId,uuid);
     }
 }

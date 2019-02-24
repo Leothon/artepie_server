@@ -63,6 +63,13 @@
     </insert>
 
 
+    <delete id="deleteArticle">
+        delete from article where article_id = #{articleId} and article_author_id = #{uuid}
+    </delete>
+
+    <delete id="deleteQa">
+        delete from `question_answer` where qa_id = #{qaId} and qa_user_id = #{uuid}
+    </delete>
     <delete id="deleteComment">
         delete from comment_qa where comment_q_id = #{commentQId} and comment_q_user_id = #{commentQUserId}
     </delete>

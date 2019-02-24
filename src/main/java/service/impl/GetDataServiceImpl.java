@@ -55,17 +55,28 @@ public class GetDataServiceImpl implements GetDataService {
 
 
         for (int i = 0;i < qaData.size();i ++){
-            ArrayList<QAData> reQa = new ArrayList<>();
+
             String reId = qaData.get(i).getQa_re_id();
 
-            while (reId != null){
+            if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
-                qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
-                qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
-                reId = qaDataSingle.getQa_re_id();
-                reQa.add(qaDataSingle);
+                if (qaDataSingle != null){
+                    qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
+                    qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
+                }else {
+                    qaDataSingle = new QAData();
+                    qaDataSingle.setQa_id(reId);
+                    qaDataSingle.setQa_like("0");
+                    qaDataSingle.setQa_comment("0");
+                    qaDataSingle.setUser_name("");
+                    qaDataSingle.setUser_name("已删除");
+                    qaDataSingle.setQa_content("该内容已被作者删除");
+                }
+                qaData.get(i).setQaData(qaDataSingle);
+
             }
-            qaData.get(i).setReQA(reQa);
+
+
             qaData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaData.get(i).getQa_id())));
             qaData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaData.get(i).getQa_id())));
             if (getDataDao.isLike(uuid,qaData.get(i).getQa_id()) == 0){
@@ -84,17 +95,26 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<QAData> qaMoreData = getDataDao.getMoreQAData(currentPage);
         for (int i = 0;i < qaMoreData.size();i ++){
 
-            ArrayList<QAData> reQa = new ArrayList<>();
             String reId = qaMoreData.get(i).getQa_re_id();
 
-            while (reId != null){
+
+            if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
-                qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
-                qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
-                reId = qaDataSingle.getQa_re_id();
-                reQa.add(qaDataSingle);
+                if (qaDataSingle != null){
+                    qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
+                    qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
+                }else {
+                    qaDataSingle = new QAData();
+                    qaDataSingle.setQa_id(reId);
+                    qaDataSingle.setQa_like("0");
+                    qaDataSingle.setQa_comment("0");
+                    qaDataSingle.setUser_name("");
+                    qaDataSingle.setUser_name("已删除");
+                    qaDataSingle.setQa_content("该内容已被作者删除");
+                }
+                qaMoreData.get(i).setQaData(qaDataSingle);
             }
-            qaMoreData.get(i).setReQA(reQa);
+
             qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
             qaMoreData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaMoreData.get(i).getQa_id())));
             if (getDataDao.isLike(userId,qaMoreData.get(i).getQa_id()) == 0){
@@ -145,17 +165,25 @@ public class GetDataServiceImpl implements GetDataService {
     public QADataDetail getQADetail(String qaId,String uuid) {
 
         QAData qaData = getDataDao.getQADetail(qaId);
-        ArrayList<QAData> reQa = new ArrayList<>();
         String reId = qaData.getQa_re_id();
 
-        while (reId != null){
+
+        if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
-            qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
-            qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
-            reId = qaDataSingle.getQa_re_id();
-            reQa.add(qaDataSingle);
+            if (qaDataSingle != null){
+                qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
+                qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
+            }else {
+                qaDataSingle = new QAData();
+                qaDataSingle.setQa_id(reId);
+                qaDataSingle.setQa_like("0");
+                qaDataSingle.setQa_comment("0");
+                qaDataSingle.setUser_name("已删除");
+                qaDataSingle.setQa_content("该内容已被作者删除");
+            }
+            qaData.setQaData(qaDataSingle);
         }
-        qaData.setReQA(reQa);
+
         qaData.setQa_like(Integer.toString(getDataDao.getQALike(qaId)));
         qaData.setQa_comment(Integer.toString(getDataDao.getQAComment(qaId)));
         ArrayList<Comment> comments = getDataDao.getComment(qaId);
@@ -191,17 +219,29 @@ public class GetDataServiceImpl implements GetDataService {
     public QAData getQA(String qaId,String uuid) {
 
         QAData qaData = getDataDao.getQADetail(qaId);
-        ArrayList<QAData> reQa = new ArrayList<>();
+
         String reId = qaData.getQa_re_id();
 
-        while (reId != null){
+
+        if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
-            qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
-            qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
-            reId = qaDataSingle.getQa_re_id();
-            reQa.add(qaDataSingle);
+
+            if (qaDataSingle != null){
+                qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
+                qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
+            }else {
+                qaDataSingle = new QAData();
+                qaDataSingle.setQa_id(reId);
+                qaDataSingle.setQa_like("0");
+                qaDataSingle.setQa_comment("0");
+                qaDataSingle.setUser_name("");
+                qaDataSingle.setUser_name("已删除");
+                qaDataSingle.setQa_content("该内容已被作者删除");
+            }
+
+            qaData.setQaData(qaDataSingle);
         }
-        qaData.setReQA(reQa);
+
         qaData.setQa_like(Integer.toString(getDataDao.getQALike(qaId)));
         qaData.setQa_comment(Integer.toString(getDataDao.getQAComment(qaId)));
 

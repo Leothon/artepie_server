@@ -13,6 +13,9 @@ public interface SendDataDao {
     void removeLikeQaWithUser(@Param("qaLikeQaId") String qaLikeQaId,@Param("qaLikeUserId") String qaLikeUserId);
 
 
+    void deleteArticle(@Param("articleId") String articleId,@Param("uuid") String uuid);
+
+    void deleteQa(@Param("qaId") String qaId,@Param("uuid") String uuid);
 
     void addLikeCommentWithUser(@Param("commentLikeId") String commentLikeId,@Param("commentLikeCommentId") String commentLikeCommentId,@Param("commentLikeUserId") String commentLikeUserId);
 

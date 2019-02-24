@@ -29,4 +29,8 @@ public interface SendDataService {
     void uploadArticle(String title,String img,String content,String uid);
 
     void sendRe(String uuid,String content,String qaReId);
+
+    void deleteArticle(String token,String articleId);
+
+    void deleteQa(String token,String qaId);
 }
