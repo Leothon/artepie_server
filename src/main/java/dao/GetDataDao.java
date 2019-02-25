@@ -84,4 +84,7 @@ public interface GetDataDao {
     ArrayList<Article> getArticleList();
 
     Article getArticleDetail(String articleId);
+
+    String getUserIdByQaId(String qaId);
+
 }

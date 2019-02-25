@@ -2,12 +2,19 @@ package service.impl;
 
 import dao.GetDataDao;
 import dao.SendDataDao;
+import dao.UserDao;
 import entity.TokenValid;
+import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.SendDataService;
+import service.UserService;
+import utils.JpushUtils;
 import utils.commonUtils;
 import utils.tokenUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class SendDataServiceImpl implements SendDataService {
@@ -18,6 +25,9 @@ public class SendDataServiceImpl implements SendDataService {
 
     @Autowired
     GetDataDao getDataDao;
+
+    @Autowired
+    UserDao userDao;
     @Override
     public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio,String qaVideoCover) {
 
@@ -27,6 +37,17 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void addLikeQa(String userId, String qaId) {
         String qaLikeId = "qalike" + commonUtils.createUUID();
+
+        String authorId = getDataDao.getUserIdByQaId(qaId);
+        if (!authorId.equals(userId)){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",authorId);
+            User user = userDao.getUserInfo(userId);
+            parm.put("msg",user.getUser_name() + "给您点赞 : " + user.getUser_icon());
+            JpushUtils.jpushAndroidByAlias(parm);
+        }
+
+
         if (getDataDao.isLike(userId,qaId) != 0){
             sendDataDao.addLikeQaWithUser(qaLikeId,qaId,userId);
         }

@@ -331,4 +331,10 @@
     <select id="getArticleDetail" resultMap="articleDetail">
         select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
     </select>
+
+    <select id="getUserIdByQaId" resultType="string">
+        select qa_user_id from question_answer where qa_id = #{qaId}
+    </select>
+
+
 </mapper>
