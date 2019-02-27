@@ -1,10 +1,7 @@
 package controller;
 
 import dto.*;
-import entity.Article;
-import entity.ClassDetailList;
-import entity.TeaClasss;
-import entity.TokenValid;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -264,5 +261,34 @@ public class GetDataController {
         String uuid = tokenValid.getUid();
         return new Result<>(true,getDataService.getArticleDetail(uuid,articleId));
 
+    }
+
+
+    @GetMapping("/ishasnotice")
+    @ResponseBody
+    public Result<String> isHasNotice(@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        int result = getDataService.isHasNotice(uuid);
+        if (result == 0){
+            return new Result<>(true,"empty");
+        }else {
+            return new Result<>(true,"notice");
+        }
+    }
+
+    @GetMapping("/getnoticeinfo")
+    @ResponseBody
+    public Result<ArrayList<NoticeInfo>> getNoticeInfo(@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result<>(true,getDataService.getNoticeInfo(uuid));
+    }
+
+    @GetMapping("/getauthinfo")
+    @ResponseBody
+    public Result<ArrayList<AuthInfo>> getAuthInfo(@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        return new Result<>(true,getDataService.getAuthInfo(uuid));
     }
 }

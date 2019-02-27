@@ -38,65 +38,119 @@ public class SendDataServiceImpl implements SendDataService {
     public void addLikeQa(String userId, String qaId) {
         String qaLikeId = "qalike" + commonUtils.createUUID();
 
-        String authorId = getDataDao.getUserIdByQaId(qaId);
-        if (!authorId.equals(userId)){
-            Map<String, String> parm = new HashMap<String, String>();
-            parm.put("id",authorId);
-            User user = userDao.getUserInfo(userId);
-            parm.put("msg",user.getUser_name() + "给您点赞 : " + user.getUser_icon());
-            JpushUtils.jpushAndroidByAlias(parm);
-        }
-
 
         if (getDataDao.isLike(userId,qaId) != 0){
             sendDataDao.addLikeQaWithUser(qaLikeId,qaId,userId);
+            String authorId = getDataDao.getUserIdByQaId(qaId);
+            if (!authorId.equals(userId)){
+                Map<String, String> parm = new HashMap<String, String>();
+                parm.put("id",authorId);
+                User user = userDao.getUserInfo(userId);
+                parm.put("msg",user.getUser_name() + "点赞了您的问答");
+                JpushUtils.jpushAndroidByAlias(parm);
+                String noticeId = "noticeId" + commonUtils.createUUID();
+                sendDataDao.noticeInfo(noticeId,userId,authorId,"","qalike",qaId,0,commonUtils.getTime());
+            }
         }
+
 
     }
 
     @Override
     public void removeLikeQa(String userId, String qaId) {
         sendDataDao.removeLikeQaWithUser(qaId,userId);
+        sendDataDao.deleteNoticeInfo(qaId,userId,"qalike");
     }
 
     @Override
     public void addLikeComment(String userId, String commentId) {
 
         String commentLikeId = "commentlike" + commonUtils.createUUID();
+
         if (getDataDao.isCommentLike(userId,commentId) != 0){
             sendDataDao.addLikeCommentWithUser(commentLikeId,commentId,userId);
+            String authorId = getDataDao.getUserIdByCommentId(commentId);
+            if (!authorId.equals(userId)){
+                Map<String, String> parm = new HashMap<String, String>();
+                parm.put("id",authorId);
+                User user = userDao.getUserInfo(userId);
+                parm.put("msg",user.getUser_name() + "点赞了您的评论 ");
+                JpushUtils.jpushAndroidByAlias(parm);
+                String noticeId = "noticeId" + commonUtils.createUUID();
+                sendDataDao.noticeInfo(noticeId,userId,authorId,"","commentlike",commentId,0,commonUtils.getTime());
+            }
         }
+
 
     }
 
     @Override
     public void removeLikeComment(String userId, String commentId) {
         sendDataDao.removeLikeCommentWithUser(commentId,userId);
+        sendDataDao.deleteNoticeInfo(commentId,userId,"commentlike");
     }
 
     @Override
     public void addLikeReply(String userId, String replyId) {
         String commentReplyId = "replylike" + commonUtils.createUUID();
+
         if (getDataDao.isReplyLike(userId,replyId) != 0){
             sendDataDao.addLikeReplyWithUser(commentReplyId,replyId,userId);
+            String authorId = getDataDao.getUserIdByReplyId(replyId);
+            if (!authorId.equals(userId)){
+                Map<String, String> parm = new HashMap<String, String>();
+                parm.put("id",authorId);
+                User user = userDao.getUserInfo(userId);
+                parm.put("msg",user.getUser_name() + "点赞了您的回复 ");
+                JpushUtils.jpushAndroidByAlias(parm);
+                String noticeId = "noticeId" + commonUtils.createUUID();
+                sendDataDao.noticeInfo(noticeId,userId,authorId,"","replylike",getDataDao.getCommentIdByReplyId(replyId),0,commonUtils.getTime());
+            }
         }
+
     }
 
     @Override
     public void removeLikeReply(String userId, String replyId) {
         sendDataDao.removeLikeReplyWithUser(replyId,userId);
+        sendDataDao.deleteNoticeInfo(replyId,userId,"replylike");
     }
 
     @Override
     public void sendQaComment(String qaId, String uuid, String content, String sendTime) {
         String commentQId = "comq" + commonUtils.createUUID();
         sendDataDao.insertQaComment(commentQId,qaId,uuid,content,sendTime);
+
+        if (qaId.substring(0,2).equals("qa")){
+            String authorId = getDataDao.getUserIdByQaId(qaId);
+            if (!authorId.equals(uuid)){
+                Map<String, String> parm = new HashMap<String, String>();
+                parm.put("id",authorId);
+                User user = userDao.getUserInfo(uuid);
+                parm.put("msg",user.getUser_name() + "评论了您: " + content);
+                JpushUtils.jpushAndroidByAlias(parm);
+                String noticeId = "noticeId" + commonUtils.createUUID();
+                sendDataDao.noticeInfo(noticeId,uuid,authorId,content,"qacomment",qaId,0,commonUtils.getTime());
+            }
+        }
+
     }
 
     @Override
     public void sendReply(String replyRId, String replyComment, String replyUserId, String replyToUserId, String replyTime) {
         String replyId = "repq" + commonUtils.createUUID();
         sendDataDao.insertReply(replyId,replyRId,replyComment,replyUserId,replyToUserId,replyTime);
+
+        //String authorId = getDataDao.getUserIdByReplyId(replyRId);
+        if (!replyToUserId.equals(replyUserId)){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",replyToUserId);
+            User user = userDao.getUserInfo(replyUserId);
+            parm.put("msg",user.getUser_name() + "回复了您 : " + replyComment);
+            JpushUtils.jpushAndroidByAlias(parm);
+            String noticeId = "noticeId" + commonUtils.createUUID();
+            sendDataDao.noticeInfo(noticeId,replyUserId,replyToUserId,replyComment,"replycomment",replyRId,0,commonUtils.getTime());
+        }
     }
 
     @Override
@@ -106,11 +160,13 @@ public class SendDataServiceImpl implements SendDataService {
         }else {
             sendDataDao.updateComment(commentId,userId);
         }
+        sendDataDao.deleteNoticeInfo(commentId,userId,"qacomment");
     }
 
     @Override
     public void deleteReply(String replyId, String userId) {
         sendDataDao.deleteReply(replyId,userId);
+        sendDataDao.deleteNoticeInfo(getDataDao.getCommentIdByReplyId(replyId),userId,"replycomment");
     }
 
     @Override
@@ -165,5 +221,20 @@ public class SendDataServiceImpl implements SendDataService {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         sendDataDao.deleteQa(qaId,uuid);
+    }
+
+    @Override
+    public void visibleNotice(String uuid, String noticeId) {
+        sendDataDao.noticeVisible(noticeId,uuid);
+    }
+    @Override
+    public void visibleNoticeAll(String uuid) {
+        sendDataDao.noticeVisibleAll(uuid);
+    }
+
+    @Override
+    public void sendAuthInfo(String uuid, String img, String content) {
+        String authId = "auth" + commonUtils.createUUID();
+        sendDataDao.sendAuthInfo(authId,uuid,img,content,commonUtils.getTime());
     }
 }

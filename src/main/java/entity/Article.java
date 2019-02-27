@@ -11,6 +11,15 @@ public class Article {
     private String articleTime;
     private String articleAuthorId;
 
+    private String authorRole;
+
+    public String getAuthorRole() {
+        return authorRole;
+    }
+
+    public void setAuthorRole(String authorRole) {
+        this.authorRole = authorRole;
+    }
     public String getArticleAuthorId() {
         return articleAuthorId;
     }

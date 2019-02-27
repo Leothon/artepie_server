@@ -87,4 +87,18 @@ public interface GetDataDao {
 
     String getUserIdByQaId(String qaId);
 
+    String getUserIdByCommentId(String commentId);
+
+    String getUserIdByReplyId(String replyId);
+
+
+    ArrayList<NoticeInfo> getNoticeInfo(String userId);
+
+    int isHasNotice(String userId);
+
+    String getCommentIdByReplyId(String replyId);
+
+    ArrayList<AuthInfo> getAuthInfo(String uuid);
+
+
 }

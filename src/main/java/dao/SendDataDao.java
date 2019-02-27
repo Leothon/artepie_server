@@ -46,4 +46,14 @@ public interface SendDataDao {
     void uploadArticle(@Param("articleId") String articleId,@Param("articleAuthorId") String articleAuthorId,@Param("articleTime") String articleTime,@Param("articleContent") String articleContent,@Param("articleImg") String articleImg,@Param("articleTitle") String articleTitle);
 
     void sendRe(@Param("qaId") String qaId,@Param("qaUserId") String uuid,@Param("qaContent") String content,@Param("qaTime") String qaTime,@Param("qaReId") String qaReId);
+
+    void noticeInfo(@Param("noticeId") String noticeId,@Param("noticeFromUserId") String noticeFromUserId,@Param("noticeToUserId") String noticeToUserId,@Param("noticeContent") String noticeContent,@Param("noticeType") String noticeType,@Param("noticeTargetId") String noticeTargetId,@Param("noticeStatus") int noticeStatus,@Param("noticeTime") String noticeTime);
+
+    void noticeVisible(@Param("noticeId") String noticeId,@Param("noticeToUserId") String noticeToUserId);
+
+    void noticeVisibleAll(String uuid);
+    void deleteNoticeInfo(@Param("noticeTargetId") String noticeTargetId,@Param("noticeFromUserId") String noticeFromUserId,@Param("noticeType") String noticeType);
+
+    void sendAuthInfo(@Param("authId") String authId,@Param("authUserId") String authUserId,@Param("authImg") String authImg,@Param("authInfo") String authInfo,@Param("authTime") String authTime);
+
 }

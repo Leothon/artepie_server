@@ -33,4 +33,10 @@ public interface SendDataService {
     void deleteArticle(String token,String articleId);
 
     void deleteQa(String token,String qaId);
+
+    void visibleNotice(String uuid,String noticeId);
+    void visibleNoticeAll(String uuid);
+
+    void sendAuthInfo(String uuid,String img,String content);
+
 }

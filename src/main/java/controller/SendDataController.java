@@ -238,4 +238,37 @@ public class SendDataController {
 
         return new Result<>(true,"删除成功");
     }
+    @PostMapping("/visiblenotice")
+    @ResponseBody
+    public Result<String> visibleNotice(@RequestParam("token") String token,@RequestParam("noticeid") String noticeId){
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.visibleNotice(uuid,noticeId);
+
+        return new Result<>(true,"已查阅该提醒");
+    }
+
+    @PostMapping("/visiblenoticeall")
+    @ResponseBody
+    public Result<String> visibleNoticeAll(@RequestParam("token") String token){
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.visibleNoticeAll(uuid);
+
+        return new Result<>(true,"已全部查阅提醒");
+    }
+
+    @PostMapping("/uploadauthinfo")
+    @ResponseBody
+    public Result<String> uploadAuthInfo(@RequestParam("token") String token,@RequestParam("authimg") String img,@RequestParam("authcontent") String content){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        sendDataService.sendAuthInfo(uuid,img,content);
+        return new Result<>(true,"已上传认证信息，请等候审核");
+    }
+
+
+
 }

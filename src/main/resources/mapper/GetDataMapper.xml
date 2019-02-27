@@ -110,7 +110,7 @@
         <result column="user_signal" property="user_signal"/>
     </resultMap>
     <select id="getTeacherInUser" resultMap="teacherMap">
-        select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1"
+        select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1教师"
     </select>
     <select id="getClassVideo" resultMap="classListMap">
         select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
@@ -131,8 +131,7 @@
         <result column="user_signal" property="user_signal"/>
         <result column="qa_user_id" property="qa_user_id"/>
         <result column="qa_content" property="qa_content"/>
-        <!--<result column="qa_like" property="qa_like"/>-->
-        <!--<result column="qa_comment" property="qa_comment"/>-->
+        <result column="user_role" property="user_role"/>
         <result column="qa_video" property="qa_video"/>
         <result column="qa_audio" property="qa_audio"/>
         <result column="qa_time" property="qa_time"/>
@@ -142,32 +141,32 @@
 
     <select id="getQAData" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getMoreQAData" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
 
     </select>
 
     <select id="getQADataById" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid} order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getMoreQADataById" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid}  order by a.qa_time desc limit #{currentPage} ,15
 
     </select>
 
     <select id="getQADetail" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
 
     </select>
@@ -177,7 +176,6 @@
         <result column="comment_q_qa_id" property="comment_q_qa_id"/>
         <result column="comment_q_user_id" property="comment_q_user_id"/>
         <result column="comment_q_content" property="comment_q_content"/>
-        <!--<result column="comment_q_like" property="comment_q_like"/>-->
         <result column="user_name" property="user_name"/>
         <result column="user_icon" property="user_icon"/>
         <result column="comment_q_time" property="comment_q_time"/>
@@ -312,9 +310,10 @@
         <result column="article_title" property="articleTitle"/>
         <result column="user_name" property="articleAuthorName"/>
         <result column="user_icon" property="articleAuthorIcon"/>
+        <result column="user_role" property="authorRole"/>
     </resultMap>
     <select id="getArticleList" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon from article a join user b on a.article_author_id = b.user_id order by a.article_time desc
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc
     </select>
 
     <resultMap id="articleDetail" type="entity.Article">
@@ -326,15 +325,59 @@
         <result column="user_name" property="articleAuthorName"/>
         <result column="user_icon" property="articleAuthorIcon"/>
         <result column="article_content" property="articleContent"/>
+        <result column="user_role" property="authorRole"/>
     </resultMap>
 
     <select id="getArticleDetail" resultMap="articleDetail">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
     </select>
 
     <select id="getUserIdByQaId" resultType="string">
         select qa_user_id from question_answer where qa_id = #{qaId}
     </select>
 
+    <select id="getUserIdByCommentId" resultType="string">
+        select comment_q_user_id from comment_qa where comment_q_id = #{commentId}
+    </select>
 
+    <select id="getUserIdByReplyId" resultType="string">
+        select reply_user_id from reply where reply_id = #{replyId}
+    </select>
+
+    <resultMap id="noticeMap" type="entity.NoticeInfo">
+        <id column="notice_id" property="noticeId"/>
+        <result column="notice_from_user_id" property="noticeFromUserId"/>
+        <result column="notice_to_user_id" property="noticeToUserId"/>
+        <result column="notice_content" property="noticeContent"/>
+        <result column="notice_type" property="noticeType"/>
+        <result column="notice_target_id" property="noticeTargetId"/>
+        <result column="notice_status" property="noticeStatus"/>
+        <result column="notice_time" property="noticeTime"/>
+    </resultMap>
+    <select id="getNoticeInfo" resultMap="noticeMap">
+        select notice_id,notice_from_user_id,notice_to_user_id,notice_content,notice_type,notice_target_id,notice_status,notice_time from notice
+        where notice_to_user_id = #{userId} order by notice_time desc
+    </select>
+
+    <select id="isHasNotice" resultType="integer" parameterType="string">
+        select count(*) from notice where notice_to_user_id = #{userId}  and notice_status = 0
+    </select>
+
+    <select id="getCommentIdByReplyId" resultType="string">
+        select reply_r_id from reply where reply_id = #{replyId}
+    </select>
+
+    <resultMap id="authMap" type="entity.AuthInfo">
+        <id column="auth_handle_id" property="authId"/>
+        <result column="auth_handle_applicant_id" property="authUserId"/>
+        <result column="auth_handle_img" property="authImg"/>
+        <result column="auth_handle_info" property="authContent"/>
+        <result column="auth_handle_time" property="authTime"/>
+        <result column="auth_handle_status" property="authStatus"/>
+        <result column="auth_handle_advice" property="authAdvice"/>
+    </resultMap>
+    <select id="getAuthInfo" resultMap="authMap">
+        select auth_handle_id,auth_handle_applicant_id,auth_handle_img,auth_handle_info,auth_handle_time,auth_handle_status,auth_handle_advice
+        from auth_handle where auth_handle_applicant_id = #{uuid} order by auth_handle_time desc
+    </select>
 </mapper>

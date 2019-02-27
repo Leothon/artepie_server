@@ -100,4 +100,26 @@
         insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_time,qa_re_id)
         values (#{qaId} ,#{qaUserId} ,#{qaContent} ,#{qaTime} ,#{qaReId})
     </insert>
+
+    <insert id="noticeInfo">
+        insert into notice (notice_id,notice_from_user_id,notice_to_user_id,notice_content,notice_type,notice_target_id,notice_status,notice_time)
+        values (#{noticeId},#{noticeFromUserId} ,#{noticeToUserId} ,#{noticeContent} ,#{noticeType} ,#{noticeTargetId} ,#{noticeStatus} ,#{noticeTime} )
+    </insert>
+
+    <update id="noticeVisible">
+        update notice set notice_status = 1 where notice_id = #{noticeId} and notice_to_user_id = #{noticeToUserId}
+    </update>
+
+    <update id="noticeVisibleAll">
+        update notice set notice_status = 1 where notice_to_user_id = #{noticeToUserId}
+    </update>
+
+    <delete id="deleteNoticeInfo">
+        delete from notice where notice_target_id = #{noticeTargetId} and notice_from_user_id = #{noticeFromUserId} and notice_type = #{noticeType}
+    </delete>
+
+    <insert id="sendAuthInfo">
+        insert into auth_handle (auth_handle_id,auth_handle_applicant_id,auth_handle_img,auth_handle_info,auth_handle_time,auth_handle_status,auth_handle_advice)
+        values (#{authId} ,#{authUserId} ,#{authImg} ,#{authInfo} ,#{authTime} ,0,"请等待审核")
+    </insert>
 </mapper>

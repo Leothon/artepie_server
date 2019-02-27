@@ -1,9 +1,8 @@
 package service;
 
+import com.mysql.cj.protocol.x.Notice;
 import dto.*;
-import entity.Article;
-import entity.ClassDetailList;
-import entity.TeaClasss;
+import entity.*;
 
 import java.util.ArrayList;
 
@@ -45,4 +44,10 @@ public interface GetDataService {
     ArticleData getArticleData(String uuid);
 
     Article getArticleDetail(String uuid,String articleId);
+
+    int isHasNotice(String uuid);
+
+    ArrayList<NoticeInfo> getNoticeInfo(String uuid);
+
+    ArrayList<AuthInfo> getAuthInfo(String uuid);
 }

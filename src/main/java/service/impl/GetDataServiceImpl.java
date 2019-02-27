@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.GetDataDao;
+import dao.UserDao;
 import dto.*;
 import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Autowired
     GetDataDao getDataDao;
+
+    @Autowired
+    UserDao userDao;
     @Override
     public HomeData getHomeData(String uuid) {
         ArrayList<Banner> banners = getDataDao.getBanners();
@@ -492,6 +496,29 @@ public class GetDataServiceImpl implements GetDataService {
 
         Article article = getDataDao.getArticleDetail(articleId);
         return article;
+    }
+
+    @Override
+    public int isHasNotice(String uuid) {
+
+        return getDataDao.isHasNotice(uuid);
+    }
+
+    @Override
+    public ArrayList<NoticeInfo> getNoticeInfo(String uuid) {
+        ArrayList<NoticeInfo> noticeInfos = getDataDao.getNoticeInfo(uuid);
+        for (int i = 0;i < noticeInfos.size();i ++){
+            User user = userDao.getUserInfo(noticeInfos.get(i).getNoticeFromUserId());
+            noticeInfos.get(i).setUserName(user.getUser_name());
+            noticeInfos.get(i).setUserIcon(user.getUser_icon());
+        }
+        return noticeInfos;
+    }
+
+    @Override
+    public ArrayList<AuthInfo> getAuthInfo(String uuid) {
+
+        return getDataDao.getAuthInfo(uuid);
     }
 
 }
