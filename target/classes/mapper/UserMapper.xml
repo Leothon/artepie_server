@@ -11,7 +11,7 @@
 
     <insert id="insertPhoneTokenUuid">
 
-        insert into `user` (user_id,user_phone,user_token,user_name,user_register_time,user_role) values (#{uuid},#{phoneNumber},#{token},#{username},#{registerTime},"未知")
+        insert into `user` (user_id,user_phone,user_token,user_name,user_register_time,user_role,user_password) values (#{uuid},#{phoneNumber},#{token},#{username},#{registerTime},"未知","")
     </insert>
 
     <select id="getTokenByPhoneNumber" parameterType="string" resultType="string">
@@ -26,6 +26,7 @@
         <result column="user_birth" property="user_birth"/>
         <result column="user_sex" property="user_sex"/>
         <result column="user_signal" property="user_signal"/>
+        <result column="user_password" property="user_password"/>
         <result column="user_address" property="user_address"/>
         <result column="user_token" property="user_token"/>
         <result column="user_phone" property="user_phone"/>
@@ -34,14 +35,14 @@
         <result column="user_role" property="user_role"/>
     </resultMap>
     <select id="getUserInfo" parameterType="string" resultMap="userMap">
-        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
         from `user`
         where user_id = #{userId}
     </select>
 
 
     <select id="getUserInfoByQQ" parameterType="string" resultMap="userMap">
-        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
         from `user`
         where tencent_token = #{accessToken}
     </select>
@@ -55,6 +56,7 @@
         user_name = #{username},
         user_sex = #{userSex},
         user_birth = #{userBirth},
+        user_password = #{userPassword},
         user_phone = #{userPhone},
         user_signal = #{userSignal},
         user_address = #{userAddress}
@@ -66,7 +68,25 @@
     </update>
 
     <insert id="insertQQRegister">
-        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role)
-        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知")
+        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password)
+        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","")
     </insert>
+
+    <update id="updatePhoneNumber" parameterType="string">
+
+        update `user` set
+        user_phone = #{phoneNumber}
+        where user_id = #{userId}
+
+    </update>
+
+    <select id="getUserIdByPhoneNumber" parameterType="string" resultType="string">
+        select user_id from `user` where user_phone = #{phoneNumber}
+    </select>
+
+    <update id="insertPassword" parameterType="string">
+        update `user` set
+        user_password = #{password}
+        where user_id = #{uuid}
+    </update>
 </mapper>
