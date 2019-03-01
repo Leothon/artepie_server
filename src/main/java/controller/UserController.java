@@ -103,6 +103,20 @@ public class UserController {
     }
 
 
+    @GetMapping("/usepasswordlogin")
+    @ResponseBody
+    public Result<User> usePasswordLogin(@RequestParam("phonenumber") String phoneNumber,@RequestParam("password") String password){
+        String passwordInDB = userService.getPasswordByPhoneNumber(phoneNumber);
+        if (passwordInDB.equals("")){
+            return new Result<>(false,"您尚未设置密码，请使用验证码登录");
+        }else if (passwordInDB.equals(password)){
+            return new Result<>(true, userService.getUserInfoById(tokenUtils.ValidToken(userService.returnTokenByPhone(phoneNumber)).getUid()));
+        }else {
+            return new Result<>(false,"密码错误！");
+        }
+    }
+
+
     @GetMapping("/getuserinfo")
     @ResponseBody
     public Result<User> getUserInfo(@RequestParam("token") String token) {
@@ -111,6 +125,15 @@ public class UserController {
         TokenValid tokenValid = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         return new Result<User>(true, userService.getUserInfoById(uuid));
+    }
+
+    @GetMapping("/getuserinfobyid")
+    @ResponseBody
+    public Result<User> getUserInfoById(@RequestParam("userid") String userId) {
+
+
+
+        return new Result<User>(true, userService.getUserInfoById(userId));
     }
 
 

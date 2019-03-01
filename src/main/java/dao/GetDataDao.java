@@ -100,5 +100,9 @@ public interface GetDataDao {
 
     ArrayList<AuthInfo> getAuthInfo(String uuid);
 
+    ArrayList<TeaClasss> getClassDataByKeyword(String keyword);
+    ArrayList<QAData> getQADataByKeyword(String keyword);
+    ArrayList<User> getUserByKeyword(String keyword);
+    ArrayList<Article> getArticleByKeyword(String keyword);
 
 }

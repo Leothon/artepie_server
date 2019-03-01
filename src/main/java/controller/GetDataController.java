@@ -291,4 +291,32 @@ public class GetDataController {
         String uuid = tokenUtils.ValidToken(token).getUid();
         return new Result<>(true,getDataService.getAuthInfo(uuid));
     }
+
+    @GetMapping("/searchclass")
+    @ResponseBody
+    public Result<ArrayList<TeaClasss>> searchClass(@RequestParam("keyword") String keyword){
+
+
+        return new Result<>(true,getDataService.searchClassByKeyword(keyword));
+
+    }
+    @GetMapping("/searchqa")
+    @ResponseBody
+    public Result<ArrayList<QAData>> searchQA(@RequestParam("keyword") String keyword){
+
+        return new Result<>(true,getDataService.searchQAByKeyword(keyword));
+
+    }
+    @GetMapping("/searchuser")
+    @ResponseBody
+    public Result<ArrayList<User>> searchUser(@RequestParam("keyword") String keyword){
+
+        return new Result<>(true,getDataService.searchUserByKeyword(keyword));
+    }
+    @GetMapping("/searcharticle")
+    @ResponseBody
+    public Result<ArrayList<Article>> searchArticle(@RequestParam("keyword") String keyword){
+        return new Result<>(true,getDataService.searchArticleByKeyword(keyword));
+
+    }
 }

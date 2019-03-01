@@ -122,4 +122,9 @@
         insert into auth_handle (auth_handle_id,auth_handle_applicant_id,auth_handle_img,auth_handle_info,auth_handle_time,auth_handle_status,auth_handle_advice)
         values (#{authId} ,#{authUserId} ,#{authImg} ,#{authInfo} ,#{authTime} ,0,"请等待审核")
     </insert>
+
+    <insert id="insertFeedBackInfo">
+        insert into feedback (feedback_id,feedback_user_id,feedback_content,feedback_time)
+        values (#{feedbackId},#{userId},#{feedbackContent},#{feedbackTime})
+    </insert>
 </mapper>

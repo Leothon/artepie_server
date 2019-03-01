@@ -89,4 +89,8 @@
         user_password = #{password}
         where user_id = #{uuid}
     </update>
+
+    <select id="getPasswordByPhoneNumber" resultType="string">
+        select user_password from `user` where user_phone = #{phoneNumber}
+    </select>
 </mapper>

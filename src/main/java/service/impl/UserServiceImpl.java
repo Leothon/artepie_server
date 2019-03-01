@@ -83,4 +83,11 @@ public class UserServiceImpl implements UserService {
 
         userDao.insertPassword(uuid,password);
     }
+
+    @Override
+    public String getPasswordByPhoneNumber(String phoneNumber) {
+
+
+        return userDao.getPasswordByPhoneNumber(phoneNumber);
+    }
 }

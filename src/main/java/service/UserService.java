@@ -24,4 +24,6 @@ public interface UserService {
     String getUserIdByPhoneNumber(String phoneNumber);
 
     void insertPassword(String uuid,String password);
+
+    String getPasswordByPhoneNumber(String phoneNumber);
 }

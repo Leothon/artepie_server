@@ -1,5 +1,6 @@
 package service.impl;
 
+import com.vdurmont.emoji.EmojiParser;
 import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
@@ -31,7 +32,8 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio,String qaVideoCover) {
 
-        sendDataDao.insertQa(qaId,userId,qaContent,qaVideo,qa_time,qaAudio,qaVideoCover);
+        String content = EmojiParser.parseToAliases(qaContent);
+        sendDataDao.insertQa(qaId,userId,content,qaVideo,qa_time,qaAudio,qaVideoCover);
     }
 
     @Override
@@ -119,7 +121,8 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void sendQaComment(String qaId, String uuid, String content, String sendTime) {
         String commentQId = "comq" + commonUtils.createUUID();
-        sendDataDao.insertQaComment(commentQId,qaId,uuid,content,sendTime);
+        String contentwithoutemoji = EmojiParser.parseToAliases(content);
+        sendDataDao.insertQaComment(commentQId,qaId,uuid,contentwithoutemoji,sendTime);
 
         if (qaId.substring(0,2).equals("qa")){
             String authorId = getDataDao.getUserIdByQaId(qaId);
@@ -127,10 +130,10 @@ public class SendDataServiceImpl implements SendDataService {
                 Map<String, String> parm = new HashMap<String, String>();
                 parm.put("id",authorId);
                 User user = userDao.getUserInfo(uuid);
-                parm.put("msg",user.getUser_name() + "评论了您: " + content);
+                parm.put("msg",user.getUser_name() + "评论了您: " + contentwithoutemoji);
                 JpushUtils.jpushAndroidByAlias(parm);
                 String noticeId = "noticeId" + commonUtils.createUUID();
-                sendDataDao.noticeInfo(noticeId,uuid,authorId,content,"qacomment",qaId,0,commonUtils.getTime());
+                sendDataDao.noticeInfo(noticeId,uuid,authorId,contentwithoutemoji,"qacomment",qaId,0,commonUtils.getTime());
             }
         }
 
@@ -139,17 +142,18 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void sendReply(String replyRId, String replyComment, String replyUserId, String replyToUserId, String replyTime) {
         String replyId = "repq" + commonUtils.createUUID();
-        sendDataDao.insertReply(replyId,replyRId,replyComment,replyUserId,replyToUserId,replyTime);
+        String contentwithoutemoji = EmojiParser.parseToAliases(replyComment);
+        sendDataDao.insertReply(replyId,replyRId,contentwithoutemoji,replyUserId,replyToUserId,replyTime);
 
         //String authorId = getDataDao.getUserIdByReplyId(replyRId);
         if (!replyToUserId.equals(replyUserId)){
             Map<String, String> parm = new HashMap<String, String>();
             parm.put("id",replyToUserId);
             User user = userDao.getUserInfo(replyUserId);
-            parm.put("msg",user.getUser_name() + "回复了您 : " + replyComment);
+            parm.put("msg",user.getUser_name() + "回复了您 : " + contentwithoutemoji);
             JpushUtils.jpushAndroidByAlias(parm);
             String noticeId = "noticeId" + commonUtils.createUUID();
-            sendDataDao.noticeInfo(noticeId,replyUserId,replyToUserId,replyComment,"replycomment",replyRId,0,commonUtils.getTime());
+            sendDataDao.noticeInfo(noticeId,replyUserId,replyToUserId,contentwithoutemoji,"replycomment",replyRId,0,commonUtils.getTime());
         }
     }
 
@@ -207,7 +211,8 @@ public class SendDataServiceImpl implements SendDataService {
     public void sendRe(String uuid, String content, String qaReId) {
         String time = commonUtils.getTime();
         String qaId = "qa" + commonUtils.createUUID();
-        sendDataDao.sendRe(qaId,uuid,content,time,qaReId);
+        String contentwithoutemoji = EmojiParser.parseToAliases(content);
+        sendDataDao.sendRe(qaId,uuid,contentwithoutemoji,time,qaReId);
     }
 
     @Override
@@ -235,6 +240,16 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void sendAuthInfo(String uuid, String img, String content) {
         String authId = "auth" + commonUtils.createUUID();
-        sendDataDao.sendAuthInfo(authId,uuid,img,content,commonUtils.getTime());
+        String contentwithoutemoji = EmojiParser.parseToAliases(content);
+        sendDataDao.sendAuthInfo(authId,uuid,img,contentwithoutemoji,commonUtils.getTime());
+    }
+
+
+
+    @Override
+    public void sendFeedBack(String uuid, String content) {
+        String feedbackId = "feed" + commonUtils.createUUID();
+        String contentwithoutemoji = EmojiParser.parseToAliases(content);
+        sendDataDao.insertFeedBackInfo(feedbackId,uuid,contentwithoutemoji,commonUtils.getTime());
     }
 }

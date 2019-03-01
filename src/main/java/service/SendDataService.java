@@ -39,4 +39,7 @@ public interface SendDataService {
 
     void sendAuthInfo(String uuid,String img,String content);
 
+
+    void sendFeedBack(String uuid, String content);
+
 }

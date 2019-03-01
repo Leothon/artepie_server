@@ -36,4 +36,6 @@ public interface UserDao {
 
     void insertPassword(@Param("uuid") String uuid,@Param("password") String password);
 
+    String getPasswordByPhoneNumber(String phoneNumber);
+
 }

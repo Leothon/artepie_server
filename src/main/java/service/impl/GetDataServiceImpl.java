@@ -1,5 +1,7 @@
 package service.impl;
 
+import com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLService;
+import com.vdurmont.emoji.EmojiParser;
 import dao.GetDataDao;
 import dao.UserDao;
 import dto.*;
@@ -60,6 +62,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         for (int i = 0;i < qaData.size();i ++){
 
+            qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
 
             if (reId != null){
@@ -76,7 +79,9 @@ public class GetDataServiceImpl implements GetDataService {
                     qaDataSingle.setUser_name("已删除");
                     qaDataSingle.setQa_content("该内容已被作者删除");
                 }
+                qaDataSingle.setQa_content(EmojiParser.parseToUnicode(qaDataSingle.getQa_content()));
                 qaData.get(i).setQaData(qaDataSingle);
+
 
             }
 
@@ -98,7 +103,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<QAData> qaMoreData = getDataDao.getMoreQAData(currentPage);
         for (int i = 0;i < qaMoreData.size();i ++){
-
+            qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             String reId = qaMoreData.get(i).getQa_re_id();
 
 
@@ -116,6 +121,7 @@ public class GetDataServiceImpl implements GetDataService {
                     qaDataSingle.setUser_name("已删除");
                     qaDataSingle.setQa_content("该内容已被作者删除");
                 }
+                qaDataSingle.setQa_content(EmojiParser.parseToUnicode(qaDataSingle.getQa_content()));
                 qaMoreData.get(i).setQaData(qaDataSingle);
             }
 
@@ -136,6 +142,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<QAData> qaData = getDataDao.getQADataById(uuid);
         for (int i = 0;i < qaData.size();i ++){
+            qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             qaData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaData.get(i).getQa_id())));
             qaData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaData.get(i).getQa_id())));
             if (getDataDao.isLike(uuid,qaData.get(i).getQa_id()) == 0){
@@ -153,6 +160,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<QAData> qaMoreData = getDataDao.getMoreQADataById(currentPage,userId);
         for (int i = 0;i < qaMoreData.size();i ++){
+            qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
             qaMoreData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaMoreData.get(i).getQa_id())));
             if (getDataDao.isLike(userId,qaMoreData.get(i).getQa_id()) == 0){
@@ -170,7 +178,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         QAData qaData = getDataDao.getQADetail(qaId);
         String reId = qaData.getQa_re_id();
-
+        qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
 
         if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
@@ -185,6 +193,7 @@ public class GetDataServiceImpl implements GetDataService {
                 qaDataSingle.setUser_name("已删除");
                 qaDataSingle.setQa_content("该内容已被作者删除");
             }
+            qaDataSingle.setQa_content(EmojiParser.parseToUnicode(qaDataSingle.getQa_content()));
             qaData.setQaData(qaDataSingle);
         }
 
@@ -197,6 +206,7 @@ public class GetDataServiceImpl implements GetDataService {
             qaData.setLiked(false);
         }
         for (int i = 0;i < comments.size();i ++){
+            comments.get(i).setComment_q_content(EmojiParser.parseToUnicode(comments.get(i).getComment_q_content()));
             comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
             if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
                 comments.get(i).setComment_liked(true);
@@ -205,6 +215,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
             ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
             for (int j = 0;j < replies.size();j ++){
+                replies.get(j).setReply_comment(EmojiParser.parseToUnicode(replies.get(j).getReply_comment()));
                 replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
                 if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
                     replies.get(j).setReply_liked(true);
@@ -223,7 +234,7 @@ public class GetDataServiceImpl implements GetDataService {
     public QAData getQA(String qaId,String uuid) {
 
         QAData qaData = getDataDao.getQADetail(qaId);
-
+        qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
         String reId = qaData.getQa_re_id();
 
 
@@ -242,6 +253,7 @@ public class GetDataServiceImpl implements GetDataService {
                 qaDataSingle.setUser_name("已删除");
                 qaDataSingle.setQa_content("该内容已被作者删除");
             }
+            qaDataSingle.setQa_content(EmojiParser.parseToUnicode(qaDataSingle.getQa_content()));
 
             qaData.setQaData(qaDataSingle);
         }
@@ -256,6 +268,7 @@ public class GetDataServiceImpl implements GetDataService {
     public CommentDetail getCommentDetail(String commentId,String uuid) {
 
         Comment comment = getDataDao.getSingleComment(commentId);
+        comment.setComment_q_content(EmojiParser.parseToUnicode(comment.getComment_q_content()));
         comment.setComment_q_like(Integer.toString(getDataDao.getCommentLike(commentId)));
         if (getDataDao.isCommentLike(uuid,commentId) == 0){
             comment.setComment_liked(true);
@@ -264,6 +277,7 @@ public class GetDataServiceImpl implements GetDataService {
         }
         ArrayList<Reply> replie = getDataDao.getReply(commentId);
         for (int i = 0;i < replie.size();i ++){
+            replie.get(i).setReply_comment(EmojiParser.parseToUnicode(replie.get(i).getReply_comment()));
             replie.get(i).setReply_like(Integer.toString(getDataDao.getReplyLike(replie.get(i).getReply_id())));
             if (getDataDao.isReplyLike(uuid,replie.get(i).getReply_id()) == 0){
                 replie.get(i).setReply_liked(true);
@@ -310,6 +324,7 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<Comment> comments = getDataDao.getComment(classdId);
 
         for (int i = 0;i < comments.size();i ++){
+            comments.get(i).setComment_q_content(comments.get(i).getComment_q_content());
             comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
             if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
                 comments.get(i).setComment_liked(true);
@@ -318,6 +333,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
             ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
             for (int j = 0;j < replies.size();j ++){
+                replies.get(j).setReply_comment(replies.get(j).getReply_comment());
                 replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
                 if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
                     replies.get(j).setReply_liked(true);
@@ -508,6 +524,7 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<NoticeInfo> getNoticeInfo(String uuid) {
         ArrayList<NoticeInfo> noticeInfos = getDataDao.getNoticeInfo(uuid);
         for (int i = 0;i < noticeInfos.size();i ++){
+            noticeInfos.get(i).setNoticeContent(EmojiParser.parseToUnicode(noticeInfos.get(i).getNoticeContent()));
             User user = userDao.getUserInfo(noticeInfos.get(i).getNoticeFromUserId());
             noticeInfos.get(i).setUserName(user.getUser_name());
             noticeInfos.get(i).setUserIcon(user.getUser_icon());
@@ -519,6 +536,28 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<AuthInfo> getAuthInfo(String uuid) {
 
         return getDataDao.getAuthInfo(uuid);
+    }
+
+    @Override
+    public ArrayList<TeaClasss> searchClassByKeyword(String keyword) {
+
+
+        return getDataDao.getClassDataByKeyword(keyword);
+    }
+
+    @Override
+    public ArrayList<QAData> searchQAByKeyword(String keyword) {
+        return getDataDao.getQADataByKeyword(keyword);
+    }
+
+    @Override
+    public ArrayList<User> searchUserByKeyword(String keyword) {
+        return getDataDao.getUserByKeyword(keyword);
+    }
+
+    @Override
+    public ArrayList<Article> searchArticleByKeyword(String keyword) {
+        return getDataDao.getArticleByKeyword(keyword);
     }
 
 }

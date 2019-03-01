@@ -4,6 +4,7 @@ import dto.QAData;
 import dto.Result;
 import dto.SendQAData;
 import entity.Article;
+import entity.FeedbackInfo;
 import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -270,5 +271,15 @@ public class SendDataController {
     }
 
 
+
+
+    @PostMapping("/sendfeedback")
+    @ResponseBody
+    public Result<String> sendFeedback(@RequestBody FeedbackInfo feedbackInfo){
+        String userId = feedbackInfo.getUserId();
+        String content = "反馈内容：" + feedbackInfo.getFeedbackContent() + "安卓版本" + feedbackInfo.getAndroidVersion() + "\nBuild Api" + feedbackInfo.getBuildApi() + "\n手机品牌" + feedbackInfo.getDeviceBrand() + "\n手机型号" + feedbackInfo.getDeviceModel() + "\n版本号" + feedbackInfo.getVersionCode();
+        sendDataService.sendFeedBack(userId,content);
+        return new Result<>(true,"我们已收到您的反馈，谢谢！");
+    }
 
 }

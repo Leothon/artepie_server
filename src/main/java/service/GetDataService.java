@@ -50,4 +50,9 @@ public interface GetDataService {
     ArrayList<NoticeInfo> getNoticeInfo(String uuid);
 
     ArrayList<AuthInfo> getAuthInfo(String uuid);
+
+    ArrayList<TeaClasss> searchClassByKeyword(String keyword);
+    ArrayList<QAData> searchQAByKeyword(String keyword);
+    ArrayList<User> searchUserByKeyword(String keyword);
+    ArrayList<Article> searchArticleByKeyword(String keyword);
 }

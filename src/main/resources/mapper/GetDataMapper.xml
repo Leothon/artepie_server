@@ -380,4 +380,37 @@
         select auth_handle_id,auth_handle_applicant_id,auth_handle_img,auth_handle_info,auth_handle_time,auth_handle_status,auth_handle_advice
         from auth_handle where auth_handle_applicant_id = #{uuid} order by auth_handle_time desc
     </select>
+
+    <select id="getClassDataByKeyword" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_title like "%"#{keyword}"%" or class_des like "%"#{keyword}"%" or class_author like "%"#{keyword}"%" order by class_create_time desc
+    </select>
+
+    <resultMap id="userMap" type="entity.User">
+        <id column="user_id" property="user_id" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_birth" property="user_birth"/>
+        <result column="user_sex" property="user_sex"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_password" property="user_password"/>
+        <result column="user_address" property="user_address"/>
+        <result column="user_token" property="user_token"/>
+        <result column="user_phone" property="user_phone"/>
+        <result column="user_balance" property="user_balance"/>
+        <result column="user_art_coin" property="user_art_coin"/>
+        <result column="user_role" property="user_role"/>
+    </resultMap>
+    <select id="getQADataByKeyword" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_content like "%"#{keyword}"%" order by a.qa_time desc limit 15
+    </select>
+    <select id="getUserByKeyword" resultMap="userMap">
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        from `user`
+        where user_name like "%"#{keyword}"%" or user_signal like "%"#{keyword}"%" or user_role like "%"#{keyword}"%"
+    </select>
+    <select id="getArticleByKeyword" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" order by a.article_time desc
+    </select>
+
 </mapper>
