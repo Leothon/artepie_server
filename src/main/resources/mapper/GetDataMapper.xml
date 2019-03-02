@@ -410,7 +410,7 @@
         where user_name like "%"#{keyword}"%" or user_signal like "%"#{keyword}"%" or user_role like "%"#{keyword}"%"
     </select>
     <select id="getArticleByKeyword" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" order by a.article_time desc
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" or b.user_name like "%"#{keyword}"%" order by a.article_time desc
     </select>
 
 </mapper>

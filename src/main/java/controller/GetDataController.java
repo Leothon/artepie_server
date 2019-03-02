@@ -292,31 +292,20 @@ public class GetDataController {
         return new Result<>(true,getDataService.getAuthInfo(uuid));
     }
 
-    @GetMapping("/searchclass")
+    @GetMapping("/searchresult")
     @ResponseBody
-    public Result<ArrayList<TeaClasss>> searchClass(@RequestParam("keyword") String keyword){
+    public Result<SearchResult> searchClass(@RequestParam("keyword") String keyword,@RequestParam("token") String token){
 
+        String uuid = tokenUtils.ValidToken(token).getUid();
 
-        return new Result<>(true,getDataService.searchClassByKeyword(keyword));
+        SearchResult searchResult = new SearchResult();
+        searchResult.setSelectClasses(getDataService.searchClassByKeyword(keyword,uuid));
+        searchResult.setQaData(getDataService.searchQAByKeyword(keyword,uuid));
+        searchResult.setUsers(getDataService.searchUserByKeyword(keyword,uuid));
+        searchResult.setArticles(getDataService.searchArticleByKeyword(keyword,uuid));
+
+        return new Result<>(true,searchResult);
 
     }
-    @GetMapping("/searchqa")
-    @ResponseBody
-    public Result<ArrayList<QAData>> searchQA(@RequestParam("keyword") String keyword){
 
-        return new Result<>(true,getDataService.searchQAByKeyword(keyword));
-
-    }
-    @GetMapping("/searchuser")
-    @ResponseBody
-    public Result<ArrayList<User>> searchUser(@RequestParam("keyword") String keyword){
-
-        return new Result<>(true,getDataService.searchUserByKeyword(keyword));
-    }
-    @GetMapping("/searcharticle")
-    @ResponseBody
-    public Result<ArrayList<Article>> searchArticle(@RequestParam("keyword") String keyword){
-        return new Result<>(true,getDataService.searchArticleByKeyword(keyword));
-
-    }
 }

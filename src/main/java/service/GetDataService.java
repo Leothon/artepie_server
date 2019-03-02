@@ -51,8 +51,8 @@ public interface GetDataService {
 
     ArrayList<AuthInfo> getAuthInfo(String uuid);
 
-    ArrayList<TeaClasss> searchClassByKeyword(String keyword);
-    ArrayList<QAData> searchQAByKeyword(String keyword);
-    ArrayList<User> searchUserByKeyword(String keyword);
-    ArrayList<Article> searchArticleByKeyword(String keyword);
+    ArrayList<TeaClasss> searchClassByKeyword(String keyword,String uuid);
+    ArrayList<QAData> searchQAByKeyword(String keyword,String uuid);
+    ArrayList<User> searchUserByKeyword(String keyword,String uuid);
+    ArrayList<Article> searchArticleByKeyword(String keyword,String uuid);
 }

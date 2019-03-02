@@ -539,24 +539,70 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<TeaClasss> searchClassByKeyword(String keyword) {
+    public ArrayList<TeaClasss> searchClassByKeyword(String keyword,String uuid) {
 
+        ArrayList<TeaClasss> teaClassses = getDataDao.getClassDataByKeyword(keyword);
+        for (int i = 0;i < teaClassses.size();i ++){
+            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
+                teaClassses.get(i).setIsbuy(true);
+            }else {
+                teaClassses.get(i).setIsbuy(false);
+            }
+        }
 
         return getDataDao.getClassDataByKeyword(keyword);
     }
 
     @Override
-    public ArrayList<QAData> searchQAByKeyword(String keyword) {
-        return getDataDao.getQADataByKeyword(keyword);
+    public ArrayList<QAData> searchQAByKeyword(String keyword,String uuid) {
+
+        ArrayList<QAData> qaData = getDataDao.getQADataByKeyword(keyword);
+        for (int i = 0;i < qaData.size();i ++){
+
+            qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
+            String reId = qaData.get(i).getQa_re_id();
+
+            if (reId != null){
+                QAData qaDataSingle = getDataDao.getQADetail(reId);
+                if (qaDataSingle != null){
+                    qaDataSingle.setQa_like(Integer.toString(getDataDao.getQALike(qaDataSingle.getQa_id())));
+                    qaDataSingle.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataSingle.getQa_id())));
+                }else {
+                    qaDataSingle = new QAData();
+                    qaDataSingle.setQa_id(reId);
+                    qaDataSingle.setQa_like("0");
+                    qaDataSingle.setQa_comment("0");
+                    qaDataSingle.setUser_name("");
+                    qaDataSingle.setUser_name("已删除");
+                    qaDataSingle.setQa_content("该内容已被作者删除");
+                }
+                qaDataSingle.setQa_content(EmojiParser.parseToUnicode(qaDataSingle.getQa_content()));
+                qaData.get(i).setQaData(qaDataSingle);
+
+
+            }
+
+
+            qaData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaData.get(i).getQa_id())));
+            qaData.get(i).setQa_comment(Integer.toString(getDataDao.getQAComment(qaData.get(i).getQa_id())));
+            if (getDataDao.isLike(uuid,qaData.get(i).getQa_id()) == 0){
+                qaData.get(i).setLiked(true);
+            }else {
+                qaData.get(i).setLiked(false);
+            }
+
+        }
+        return qaData;
     }
 
     @Override
-    public ArrayList<User> searchUserByKeyword(String keyword) {
+    public ArrayList<User> searchUserByKeyword(String keyword,String uuid) {
         return getDataDao.getUserByKeyword(keyword);
     }
 
     @Override
-    public ArrayList<Article> searchArticleByKeyword(String keyword) {
+    public ArrayList<Article> searchArticleByKeyword(String keyword,String uuid) {
         return getDataDao.getArticleByKeyword(keyword);
     }
 
