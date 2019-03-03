@@ -213,6 +213,16 @@ public class SendDataServiceImpl implements SendDataService {
         String qaId = "qa" + commonUtils.createUUID();
         String contentwithoutemoji = EmojiParser.parseToAliases(content);
         sendDataDao.sendRe(qaId,uuid,contentwithoutemoji,time,qaReId);
+        String reUserId = getDataDao.getUserIdByQaId(qaReId);
+        if (!uuid.equals(reUserId)){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",reUserId);
+            User user = userDao.getUserInfo(reUserId);
+            parm.put("msg",user.getUser_name() + "转发了您的问题 : " + contentwithoutemoji);
+            JpushUtils.jpushAndroidByAlias(parm);
+            String noticeId = "noticeId" + commonUtils.createUUID();
+            sendDataDao.noticeInfo(noticeId,uuid,reUserId,contentwithoutemoji,"qacomment",qaId,0,commonUtils.getTime());
+        }
     }
 
     @Override

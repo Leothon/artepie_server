@@ -313,7 +313,16 @@
         <result column="user_role" property="authorRole"/>
     </resultMap>
     <select id="getArticleList" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit 15
+    </select>
+    <select id="getMoreArticleList" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit #{currentPage},15
+    </select>
+    <select id="getArticleListById" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id  where b.user_id = #{userId} order by a.article_time desc limit 15
+    </select>
+    <select id="getMoreArticleListById" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where b.user_id = #{userId} order by a.article_time desc limit #{currentPage},15
     </select>
 
     <resultMap id="articleDetail" type="entity.Article">
@@ -411,6 +420,10 @@
     </select>
     <select id="getArticleByKeyword" resultMap="articleList">
         select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" or b.user_name like "%"#{keyword}"%" order by a.article_time desc
+    </select>
+
+    <select id="getUserNameByUserId" resultType="string">
+        select user_name from `user` where user_id = #{userId}
     </select>
 
 </mapper>

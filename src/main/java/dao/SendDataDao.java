@@ -57,5 +57,6 @@ public interface SendDataDao {
     void sendAuthInfo(@Param("authId") String authId,@Param("authUserId") String authUserId,@Param("authImg") String authImg,@Param("authInfo") String authInfo,@Param("authTime") String authTime);
 
 
+
     void insertFeedBackInfo(@Param("feedbackId") String feedbackId,@Param("userId") String userId,@Param("feedbackContent") String feedBackContent,@Param("feedbackTime") String feedbackTime);
 }

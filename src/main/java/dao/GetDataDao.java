@@ -82,6 +82,10 @@ public interface GetDataDao {
     ArrayList<Banner> getArticleBanner();
 
     ArrayList<Article> getArticleList();
+    ArrayList<Article> getMoreArticleList(int currentPage);
+
+    ArrayList<Article> getArticleListById(String userId);
+    ArrayList<Article> getMoreArticleListById(@Param("userId") String userId,@Param("currentPage") int currentPage);
 
     Article getArticleDetail(String articleId);
 
@@ -104,5 +108,8 @@ public interface GetDataDao {
     ArrayList<QAData> getQADataByKeyword(String keyword);
     ArrayList<User> getUserByKeyword(String keyword);
     ArrayList<Article> getArticleByKeyword(String keyword);
+
+    String getUserNameByUserId(String userId);
+
 
 }

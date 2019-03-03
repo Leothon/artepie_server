@@ -506,6 +506,29 @@ public class GetDataServiceImpl implements GetDataService {
         articleData.setBanners(banners);
         return articleData;
     }
+    @Override
+    public ArrayList<Article> getMoreArticleData(String uuid,int currentPage) {
+
+
+        ArrayList<Article> articles = getDataDao.getMoreArticleList(currentPage);
+
+        return articles;
+    }
+    @Override
+    public ArrayList<Article> getArticleDataById(String uuid) {
+
+
+        ArrayList<Article> articles = getDataDao.getArticleListById(uuid);
+
+        return articles;
+    }
+    @Override
+    public ArrayList<Article> getMoreArticleDataById(String uuid,int currentPage) {
+
+
+        ArrayList<Article> articles = getDataDao.getMoreArticleListById(uuid,currentPage);
+        return articles;
+    }
 
     @Override
     public Article getArticleDetail(String uuid, String articleId) {

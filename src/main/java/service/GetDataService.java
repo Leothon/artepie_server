@@ -42,6 +42,9 @@ public interface GetDataService {
     BagPageData getBagPageData(String uuid);
 
     ArticleData getArticleData(String uuid);
+    ArrayList<Article> getMoreArticleData(String uuid,int currentPage);
+    ArrayList<Article> getArticleDataById(String uuid);
+    ArrayList<Article> getMoreArticleDataById(String uuid,int currentPage);
 
     Article getArticleDetail(String uuid,String articleId);
 

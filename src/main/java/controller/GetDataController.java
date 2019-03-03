@@ -88,27 +88,23 @@ public class GetDataController {
 
     @GetMapping("/getquestionbyid")
     @ResponseBody
-    public Result<ArrayList<QAData>> getQuestionDataById(@RequestParam("token") String token){
-        TokenValid tokenValid  = tokenUtils.ValidToken(token);
-        String uuid = tokenValid.getUid();
+    public Result<ArrayList<QAData>> getQuestionDataById(@RequestParam("userid") String userId){
 
-        String tokenInDb = userService.getTokenByUID(uuid);
 
-        if (tokenInDb.equals(token)){
-            return new Result<ArrayList<QAData>>(true,getDataService.getQADataById(uuid));
-        }else {
-            return new Result<>(false,"登录过期或者错误，请重新登录");
-        }
+
+
+
+        return new Result<ArrayList<QAData>>(true,getDataService.getQADataById(userId));
+
     }
 
 
     @GetMapping("/getmorequestionbyid")
     @ResponseBody
-    public Result<ArrayList<QAData>> getMoreQuestionDataById(@RequestParam("currentpage") int currentPage,@RequestParam("token") String token){
-        TokenValid tokenValid  = tokenUtils.ValidToken(token);
-        String uuid = tokenValid.getUid();
+    public Result<ArrayList<QAData>> getMoreQuestionDataById(@RequestParam("currentpage") int currentPage,@RequestParam("userid") String userId){
 
-        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQADataById(currentPage,uuid));
+
+        return new Result<ArrayList<QAData>>(true,getDataService.getMoreQADataById(currentPage,userId));
 
     }
 
@@ -252,6 +248,27 @@ public class GetDataController {
         String uuid = tokenValid.getUid();
 
         return new Result<>(true,getDataService.getArticleData(uuid));
+    }
+    @GetMapping("/getmorearticledata")
+    @ResponseBody
+    public Result<ArrayList<Article>> getMoreArticleData(@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        return new Result<>(true,getDataService.getMoreArticleData(uuid,currentPage));
+    }
+    @GetMapping("/getarticledatabyid")
+    @ResponseBody
+    public Result<ArrayList<Article>> getArticleDataById(@RequestParam("userid") String userId){
+
+        return new Result<>(true,getDataService.getArticleDataById(userId));
+    }
+    @GetMapping("/getmorearticledatabyid")
+    @ResponseBody
+    public Result<ArrayList<Article>> getMoreArticleDataById(@RequestParam("userid") String userId,@RequestParam("currentpage") int currentPage){
+
+
+        return new Result<>(true,getDataService.getMoreArticleDataById(userId,currentPage));
     }
 
     @GetMapping("/getarticledetail")
