@@ -1,18 +1,18 @@
 package dto;
 
-import entity.TeaClasss;
+import entity.SelectClass;
 
 import java.util.ArrayList;
 
 public class TypeClass {
     private String typeClassCount;
-    private ArrayList<TeaClasss> typeClass;
+    private ArrayList<SelectClass> typeClass;
 
-    public ArrayList<TeaClasss> getTypeClass() {
+    public ArrayList<SelectClass> getTypeClass() {
         return typeClass;
     }
 
-    public void setTypeClass(ArrayList<TeaClasss> typeClass) {
+    public void setTypeClass(ArrayList<SelectClass> typeClass) {
         this.typeClass = typeClass;
     }
 

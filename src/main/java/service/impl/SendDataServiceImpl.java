@@ -262,4 +262,12 @@ public class SendDataServiceImpl implements SendDataService {
         String contentwithoutemoji = EmojiParser.parseToAliases(content);
         sendDataDao.insertFeedBackInfo(feedbackId,uuid,contentwithoutemoji,commonUtils.getTime());
     }
+
+    @Override
+    public void createClassInfo(String classTitle, String classAuthor, String classAuthorId, String classPrice, String classDes, String classImg, String classType, String classAuthorDes) {
+        String classId = "class" + commonUtils.createUUID();
+        String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
+        String deswithoutemoji = EmojiParser.parseToAliases(classDes);
+        sendDataDao.createClassInfo(classId,titlewithoutemoji,classAuthor,classAuthorId,classPrice,deswithoutemoji,classImg,classType,classAuthorDes,commonUtils.getTime());
+    }
 }

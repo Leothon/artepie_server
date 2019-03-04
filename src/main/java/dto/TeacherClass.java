@@ -1,6 +1,6 @@
 package dto;
 
-import entity.TeaClasss;
+import entity.SelectClass;
 import entity.User;
 
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class TeacherClass {
     private User teacher;
 
-    private ArrayList<TeaClasss> teaClassses;
+    private ArrayList<SelectClass> selectClasses;
 
-    public ArrayList<TeaClasss> getTeaClassses() {
-        return teaClassses;
+    public ArrayList<SelectClass> getSelectClasses() {
+        return selectClasses;
     }
 
     public void setTeacher(User teacher) {
@@ -22,7 +22,7 @@ public class TeacherClass {
         return teacher;
     }
 
-    public void setTeaClassses(ArrayList<TeaClasss> teaClassses) {
-        this.teaClassses = teaClassses;
+    public void setSelectClasses(ArrayList<SelectClass> selectClasses) {
+        this.selectClasses = selectClasses;
     }
 }

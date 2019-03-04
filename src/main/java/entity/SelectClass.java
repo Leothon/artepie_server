@@ -2,7 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
-public class TeaClasss {
+public class SelectClass {
 
     private String selectId;
     private String selectbackimg;
@@ -18,6 +18,15 @@ public class TeaClasss {
 
     private String selectauthorid;
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     public String getSelectauthorid() {
         return selectauthorid;
     }

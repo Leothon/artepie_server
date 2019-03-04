@@ -1,12 +1,12 @@
 package dto;
 
 import entity.ClassDetailList;
-import entity.TeaClasss;
+import entity.SelectClass;
 
 import java.util.ArrayList;
 
 public class ClassDetail {
-    private TeaClasss teaClasss;
+    private SelectClass selectClass;
     private ArrayList<ClassDetailList> classDetailLists;
 
     public ArrayList<ClassDetailList> getClassDetailLists() {
@@ -17,11 +17,11 @@ public class ClassDetail {
         this.classDetailLists = classDetailLists;
     }
 
-    public TeaClasss getTeaClasss() {
-        return teaClasss;
+    public SelectClass getSelectClass() {
+        return selectClass;
     }
 
-    public void setTeaClasss(TeaClasss teaClasss) {
-        this.teaClasss = teaClasss;
+    public void setSelectClass(SelectClass selectClass) {
+        this.selectClass = selectClass;
     }
 }

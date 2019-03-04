@@ -127,4 +127,9 @@
         insert into feedback (feedback_id,feedback_user_id,feedback_content,feedback_time)
         values (#{feedbackId},#{userId},#{feedbackContent},#{feedbackTime})
     </insert>
+
+    <insert id="createClassInfo">
+        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time)
+        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"100","音乐",#{classType},#{classAuthorDes},"0",#{classTime})
+    </insert>
 </mapper>

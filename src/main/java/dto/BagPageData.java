@@ -1,29 +1,29 @@
 package dto;
 
-import entity.TeaClasss;
+import entity.SelectClass;
 
 import java.util.ArrayList;
 
 public class BagPageData {
     private StudyLine studyLine;
 
-    private ArrayList<TeaClasss> teaClassses;
+    private ArrayList<SelectClass> selectClasses;
 
-    private ArrayList<TeaClasss> fineClasses;
+    private ArrayList<SelectClass> fineClasses;
 
-    public ArrayList<TeaClasss> getTeaClassses() {
-        return teaClassses;
+    public ArrayList<SelectClass> getSelectClasses() {
+        return selectClasses;
     }
 
-    public void setTeaClassses(ArrayList<TeaClasss> teaClassses) {
-        this.teaClassses = teaClassses;
+    public void setSelectClasses(ArrayList<SelectClass> selectClasses) {
+        this.selectClasses = selectClasses;
     }
 
-    public ArrayList<TeaClasss> getFineClasses() {
+    public ArrayList<SelectClass> getFineClasses() {
         return fineClasses;
     }
 
-    public void setFineClasses(ArrayList<TeaClasss> fineClasses) {
+    public void setFineClasses(ArrayList<SelectClass> fineClasses) {
         this.fineClasses = fineClasses;
     }
 

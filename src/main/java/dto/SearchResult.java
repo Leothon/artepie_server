@@ -1,13 +1,13 @@
 package dto;
 
 import entity.Article;
-import entity.TeaClasss;
+import entity.SelectClass;
 import entity.User;
 
 import java.util.ArrayList;
 
 public class SearchResult {
-    private ArrayList<TeaClasss> selectClasses;
+    private ArrayList<SelectClass> selectClasses;
     private ArrayList<QAData> qaData;
     private ArrayList<User> users;
     private ArrayList<Article> articles;
@@ -28,11 +28,11 @@ public class SearchResult {
         this.qaData = qaData;
     }
 
-    public ArrayList<TeaClasss> getSelectClasses() {
+    public ArrayList<SelectClass> getSelectClasses() {
         return selectClasses;
     }
 
-    public void setSelectClasses(ArrayList<TeaClasss> selectClasses) {
+    public void setSelectClasses(ArrayList<SelectClass> selectClasses) {
         this.selectClasses = selectClasses;
     }
 

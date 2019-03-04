@@ -47,14 +47,14 @@ public class GetDataController {
 
     @GetMapping("/getmoredata")
     @ResponseBody
-    public Result<ArrayList<TeaClasss>> getMoreData(@RequestParam("currentpage") int currentPage,@RequestParam("token") String token){
+    public Result<ArrayList<SelectClass>> getMoreData(@RequestParam("currentpage") int currentPage, @RequestParam("token") String token){
 
 
 
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
 
-        return new Result<ArrayList<TeaClasss>>(true,getDataService.getMoreClass(currentPage,uuid));
+        return new Result<ArrayList<SelectClass>>(true,getDataService.getMoreClass(currentPage,uuid));
 
 
     }
@@ -196,7 +196,7 @@ public class GetDataController {
 
     @GetMapping("/getbuyclassinfo")
     @ResponseBody
-    public Result<TeaClasss> getBuyClassInfo(@RequestParam("classid") String classId){
+    public Result<SelectClass> getBuyClassInfo(@RequestParam("classid") String classId){
 
 
         return new Result<>(true,getDataService.getClassInfo(classId));
@@ -214,7 +214,7 @@ public class GetDataController {
 
     @GetMapping("/getfavclassbyuid")
     @ResponseBody
-    public Result<ArrayList<TeaClasss>> getFavClassByUid(@RequestParam("token") String token){
+    public Result<ArrayList<SelectClass>> getFavClassByUid(@RequestParam("token") String token){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
 

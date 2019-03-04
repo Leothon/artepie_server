@@ -1,10 +1,10 @@
 package controller;
 
-import dto.QAData;
 import dto.Result;
 import dto.SendQAData;
 import entity.Article;
 import entity.FeedbackInfo;
+import entity.SelectClass;
 import entity.TokenValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,6 @@ import service.SendDataService;
 import service.UserService;
 import utils.commonUtils;
 import utils.tokenUtils;
-
-import java.util.ArrayList;
 
 @Controller
 public class SendDataController {
@@ -280,6 +278,13 @@ public class SendDataController {
         String content = "反馈内容：" + feedbackInfo.getFeedbackContent() + "安卓版本" + feedbackInfo.getAndroidVersion() + "\nBuild Api" + feedbackInfo.getBuildApi() + "\n手机品牌" + feedbackInfo.getDeviceBrand() + "\n手机型号" + feedbackInfo.getDeviceModel() + "\n版本号" + feedbackInfo.getVersionCode();
         sendDataService.sendFeedBack(userId,content);
         return new Result<>(true,"我们已收到您的反馈，谢谢！");
+    }
+
+    @PostMapping("/createclass")
+    @ResponseBody
+    public Result<String> createClass(@RequestBody SelectClass selectClass){
+        sendDataService.createClassInfo(selectClass.getSelectlisttitle(),selectClass.getSelectauthor(),selectClass.getSelectauthorid(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType(),selectClass.getSelectauthordes());
+        return new Result<>(true,"您已成功创建课程！");
     }
 
 }

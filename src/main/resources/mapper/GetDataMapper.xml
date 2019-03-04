@@ -14,7 +14,7 @@
         select banner_id,banner_img,banner_type,banner_to_class_id from banner order by banner_create_time desc limit 4
     </select>
 
-    <resultMap id="classMap" type="entity.TeaClasss">
+    <resultMap id="classMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
         <result column="class_author" property="selectauthor"/>
@@ -48,7 +48,7 @@
         select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit #{currentPage} ,10
     </select>
 
-    <resultMap id="classDetailMap" type="entity.TeaClasss">
+    <resultMap id="classDetailMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
         <result column="class_author" property="selectauthor"/>
@@ -257,7 +257,7 @@
         select user_id,user_name,user_signal,user_role,user_icon from `user` where user_id = #{teaId}
     </select>
 
-    <resultMap id="favClassById" type="entity.TeaClasss">
+    <resultMap id="favClassById" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
         <result column="class_des" property="selectdesc"/>
@@ -370,6 +370,10 @@
 
     <select id="isHasNotice" resultType="integer" parameterType="string">
         select count(*) from notice where notice_to_user_id = #{userId}  and notice_status = 0
+    </select>
+
+    <select id="isHasClassDetail" resultType="integer" parameterType="string">
+        select count(*) from class_detail where class_classd_id = #{classId}
     </select>
 
     <select id="getCommentIdByReplyId" resultType="string">

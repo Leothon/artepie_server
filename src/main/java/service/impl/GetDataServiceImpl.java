@@ -1,6 +1,5 @@
 package service.impl;
 
-import com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLService;
 import com.vdurmont.emoji.EmojiParser;
 import dao.GetDataDao;
 import dao.UserDao;
@@ -23,35 +22,41 @@ public class GetDataServiceImpl implements GetDataService {
     @Override
     public HomeData getHomeData(String uuid) {
         ArrayList<Banner> banners = getDataDao.getBanners();
-        ArrayList<TeaClasss> teaClassses = getDataDao.getClasses();
-        for (int i = 0;i < teaClassses.size();i ++){
-            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
-            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
-                teaClassses.get(i).setIsbuy(true);
+        ArrayList<SelectClass> selectClasses = getDataDao.getClasses();
+
+        for (int a = 0; a < selectClasses.size(); a ++ ){
+            if (getDataDao.isHasClassDetail(selectClasses.get(a).getSelectId()) == 0){
+                selectClasses.remove(a);
+            }
+        }
+        for (int i = 0; i < selectClasses.size(); i ++){
+            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
+                selectClasses.get(i).setIsbuy(true);
             }else {
-                teaClassses.get(i).setIsbuy(false);
+                selectClasses.get(i).setIsbuy(false);
             }
         }
         ArrayList<User> teachers = getDataDao.getTeacherInUser();
         HomeData homeData = new HomeData();
         homeData.setBanners(banners);
-        homeData.setTeaClasses(teaClassses);
+        homeData.setTeaClasses(selectClasses);
         homeData.setTeachers(teachers);
         return homeData;
     }
 
     @Override
-    public ArrayList<TeaClasss> getMoreClass(int currentPage,String uuid) {
-        ArrayList<TeaClasss> teaClassses = getDataDao.getMoreClass(currentPage);
-        for (int i = 0;i < teaClassses.size();i ++){
-            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
-            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
-                teaClassses.get(i).setIsbuy(true);
+    public ArrayList<SelectClass> getMoreClass(int currentPage, String uuid) {
+        ArrayList<SelectClass> selectClasses = getDataDao.getMoreClass(currentPage);
+        for (int i = 0; i < selectClasses.size(); i ++){
+            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
+                selectClasses.get(i).setIsbuy(true);
             }else {
-                teaClassses.get(i).setIsbuy(false);
+                selectClasses.get(i).setIsbuy(false);
             }
         }
-        return teaClassses;
+        return selectClasses;
     }
 
     @Override
@@ -293,22 +298,22 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Override
     public ClassDetail getClassDetail(String uuid, String classId) {
-        TeaClasss teaClasss = getDataDao.getClassDetail(classId);
+        SelectClass selectClass = getDataDao.getClassDetail(classId);
         if (getDataDao.isUserBuy(classId,uuid) == 0){
-            teaClasss.setIsbuy(true);
-            teaClasss.setSelectprice("0.00");
+            selectClass.setIsbuy(true);
+            selectClass.setSelectprice("0.00");
         }else {
-            teaClasss.setIsbuy(false);
+            selectClass.setIsbuy(false);
         }
 
         if (getDataDao.isFav(uuid,classId) == 0){
-            teaClasss.setIsfav(true);
+            selectClass.setIsfav(true);
         }else {
-            teaClasss.setIsfav(false);
+            selectClass.setIsfav(false);
         }
         ArrayList<ClassDetailList> classDetailList = getDataDao.getClassList(classId);
         ClassDetail classDetail = new ClassDetail();
-        classDetail.setTeaClasss(teaClasss);
+        classDetail.setSelectClass(selectClass);
         classDetail.setClassDetailLists(classDetailList);
         return classDetail;
     }
@@ -367,7 +372,7 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Override
     public TeacherClass getTeaClass(String uuid, String teaId) {
-        ArrayList<TeaClasss> teaClass = getDataDao.getClassByTea(teaId);
+        ArrayList<SelectClass> teaClass = getDataDao.getClassByTea(teaId);
         for (int i = 0;i < teaClass.size();i ++){
             teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
             if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
@@ -379,13 +384,13 @@ public class GetDataServiceImpl implements GetDataService {
         User teachers = getDataDao.getTeaInfo(teaId);
         TeacherClass teacherClass = new TeacherClass();
         teacherClass.setTeacher(teachers);
-        teacherClass.setTeaClassses(teaClass);
+        teacherClass.setSelectClasses(teaClass);
         return teacherClass;
     }
 
     @Override
     public TypeClass getClassByType(String uuid, String type) {
-        ArrayList<TeaClasss> teaClass = getDataDao.getClassByType(type);
+        ArrayList<SelectClass> teaClass = getDataDao.getClassByType(type);
         for (int i = 0;i < teaClass.size();i ++){
             teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
             if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
@@ -403,7 +408,7 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public TeaClasss getClassInfo(String classId) {
+    public SelectClass getClassInfo(String classId) {
 
         return getDataDao.getClassInfo(classId);
     }
@@ -415,7 +420,7 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<TeaClasss> getFavClassByUid(String uuid) {
+    public ArrayList<SelectClass> getFavClassByUid(String uuid) {
 
         return getDataDao.getFavClassByUid(uuid);
     }
@@ -468,7 +473,7 @@ public class GetDataServiceImpl implements GetDataService {
         }
 
         studyLine.setClassCountDat(day);
-        ArrayList<TeaClasss> buyClasses = getDataDao.getBuyClassByid(uuid);
+        ArrayList<SelectClass> buyClasses = getDataDao.getBuyClassByid(uuid);
         for (int i = 0;i < buyClasses.size();i ++){
             buyClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(buyClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(buyClasses.get(i).getSelectId(),uuid) == 0){
@@ -477,7 +482,7 @@ public class GetDataServiceImpl implements GetDataService {
                 buyClasses.get(i).setIsbuy(false);
             }
         }
-        ArrayList<TeaClasss> fineClasses = getDataDao.getClasses();
+        ArrayList<SelectClass> fineClasses = getDataDao.getClasses();
         for (int i = 0;i < fineClasses.size();i ++){
             fineClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(fineClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(fineClasses.get(i).getSelectId(),uuid) == 0){
@@ -489,7 +494,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         BagPageData bagPageData = new BagPageData();
         bagPageData.setStudyLine(studyLine);
-        bagPageData.setTeaClassses(buyClasses);
+        bagPageData.setSelectClasses(buyClasses);
         bagPageData.setFineClasses(fineClasses);
 
         return bagPageData;
@@ -562,15 +567,15 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public ArrayList<TeaClasss> searchClassByKeyword(String keyword,String uuid) {
+    public ArrayList<SelectClass> searchClassByKeyword(String keyword, String uuid) {
 
-        ArrayList<TeaClasss> teaClassses = getDataDao.getClassDataByKeyword(keyword);
-        for (int i = 0;i < teaClassses.size();i ++){
-            teaClassses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClassses.get(i).getSelectId())));
-            if (getDataDao.isUserBuy(teaClassses.get(i).getSelectId(),uuid) == 0){
-                teaClassses.get(i).setIsbuy(true);
+        ArrayList<SelectClass> selectClasses = getDataDao.getClassDataByKeyword(keyword);
+        for (int i = 0; i < selectClasses.size(); i ++){
+            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
+                selectClasses.get(i).setIsbuy(true);
             }else {
-                teaClassses.get(i).setIsbuy(false);
+                selectClasses.get(i).setIsbuy(false);
             }
         }
 

@@ -1,8 +1,7 @@
 package dto;
 
 import entity.Banner;
-import entity.TeaClasss;
-import entity.Teacher;
+import entity.SelectClass;
 import entity.User;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class HomeData {
 
     public ArrayList<Banner> banners;
     public ArrayList<User> teachers;
-    public ArrayList<TeaClasss> teaClasses;
+    public ArrayList<SelectClass> teaClasses;
 
     public ArrayList<Banner> getBanners() {
         return banners;
@@ -21,11 +20,11 @@ public class HomeData {
         this.banners = banners;
     }
 
-    public ArrayList<TeaClasss> getTeaClasses() {
+    public ArrayList<SelectClass> getTeaClasses() {
         return teaClasses;
     }
 
-    public void setTeaClasses(ArrayList<TeaClasss> teaClasses) {
+    public void setTeaClasses(ArrayList<SelectClass> teaClasses) {
         this.teaClasses = teaClasses;
     }
 

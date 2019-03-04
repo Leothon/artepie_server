@@ -42,4 +42,6 @@ public interface SendDataService {
 
     void sendFeedBack(String uuid, String content);
 
+    void createClassInfo(String classTitle,String classAuthor,String classAuthorId, String classPrice, String classDes,String classImg, String classType, String classAuthorDes);
+
 }

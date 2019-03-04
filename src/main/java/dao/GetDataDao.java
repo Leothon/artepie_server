@@ -1,18 +1,16 @@
 package dao;
 
 import dto.QAData;
-import dto.QADataDetail;
 import entity.*;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
 public interface GetDataDao {
 
     ArrayList<Banner> getBanners();
-    ArrayList<TeaClasss> getClasses();
-    ArrayList<TeaClasss> getMoreClass(int currentPage);
+    ArrayList<SelectClass> getClasses();
+    ArrayList<SelectClass> getMoreClass(int currentPage);
     ArrayList<QAData> getQAData();
     ArrayList<User> getTeacherInUser();
     int getClassView(String classId);
@@ -44,7 +42,7 @@ public interface GetDataDao {
 
     int getCommentReplyCount(String commentId);
 
-    TeaClasss getClassDetail(String classId);
+    SelectClass getClassDetail(String classId);
 
     int isFav(@Param("userId") String userId,@Param("classId") String classId);
 
@@ -58,25 +56,25 @@ public interface GetDataDao {
 
     int getFavCount(String classId);
 
-    ArrayList<TeaClasss> getClassByTea(String teaId);
+    ArrayList<SelectClass> getClassByTea(String teaId);
 
     User getTeaInfo(String teaId);
 
-    ArrayList<TeaClasss> getClassByType(String type);
+    ArrayList<SelectClass> getClassByType(String type);
 
     int getTypeClassCount(String type);
 
-    TeaClasss getClassInfo(String classId);
+    SelectClass getClassInfo(String classId);
 
     int isQQRegister(String accessToken);
 
-    ArrayList<TeaClasss> getFavClassByUid(String uuid);
+    ArrayList<SelectClass> getFavClassByUid(String uuid);
 
     ArrayList<ClassDetailList> getViewHisById(String uuid);
 
     ArrayList<ClassDView> getStudyEveryday(@Param("uuid") String uuid,@Param("time") String time);
 
-    ArrayList<TeaClasss> getBuyClassByid(String uid);
+    ArrayList<SelectClass> getBuyClassByid(String uid);
 
 
     ArrayList<Banner> getArticleBanner();
@@ -99,12 +97,13 @@ public interface GetDataDao {
     ArrayList<NoticeInfo> getNoticeInfo(String userId);
 
     int isHasNotice(String userId);
+    int isHasClassDetail(String classId);
 
     String getCommentIdByReplyId(String replyId);
 
     ArrayList<AuthInfo> getAuthInfo(String uuid);
 
-    ArrayList<TeaClasss> getClassDataByKeyword(String keyword);
+    ArrayList<SelectClass> getClassDataByKeyword(String keyword);
     ArrayList<QAData> getQADataByKeyword(String keyword);
     ArrayList<User> getUserByKeyword(String keyword);
     ArrayList<Article> getArticleByKeyword(String keyword);

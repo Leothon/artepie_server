@@ -1,6 +1,5 @@
 package service;
 
-import com.mysql.cj.protocol.x.Notice;
 import dto.*;
 import entity.*;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 public interface GetDataService {
     HomeData getHomeData(String uuid);
 
-    ArrayList<TeaClasss> getMoreClass(int currentPage,String uuid);
+    ArrayList<SelectClass> getMoreClass(int currentPage, String uuid);
 
     ArrayList<QAData> getQAData(String uuid);
 
@@ -31,11 +30,11 @@ public interface GetDataService {
     TeacherClass getTeaClass(String uuid,String teaId);
     TypeClass getClassByType(String uuid,String type);
 
-    TeaClasss getClassInfo(String classId);
+    SelectClass getClassInfo(String classId);
 
     String isQQRegister(String accessToken);
 
-    ArrayList<TeaClasss> getFavClassByUid(String uuid);
+    ArrayList<SelectClass> getFavClassByUid(String uuid);
 
     ArrayList<ClassDetailList> getClassViewById(String uuid);
 
@@ -54,7 +53,7 @@ public interface GetDataService {
 
     ArrayList<AuthInfo> getAuthInfo(String uuid);
 
-    ArrayList<TeaClasss> searchClassByKeyword(String keyword,String uuid);
+    ArrayList<SelectClass> searchClassByKeyword(String keyword, String uuid);
     ArrayList<QAData> searchQAByKeyword(String keyword,String uuid);
     ArrayList<User> searchUserByKeyword(String keyword,String uuid);
     ArrayList<Article> searchArticleByKeyword(String keyword,String uuid);
