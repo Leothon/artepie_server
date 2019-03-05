@@ -6,7 +6,7 @@ import entity.SelectClass;
 import java.util.ArrayList;
 
 public class ClassDetail {
-    private SelectClass selectClass;
+    private SelectClass teaClasss;
     private ArrayList<ClassDetailList> classDetailLists;
 
     public ArrayList<ClassDetailList> getClassDetailLists() {
@@ -17,11 +17,11 @@ public class ClassDetail {
         this.classDetailLists = classDetailLists;
     }
 
-    public SelectClass getSelectClass() {
-        return selectClass;
+    public SelectClass getTeaClasss() {
+        return teaClasss;
     }
 
-    public void setSelectClass(SelectClass selectClass) {
-        this.selectClass = selectClass;
+    public void setTeaClasss(SelectClass selectClass) {
+        this.teaClasss = selectClass;
     }
 }

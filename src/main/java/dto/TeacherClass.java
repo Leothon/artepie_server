@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class TeacherClass {
     private User teacher;
 
-    private ArrayList<SelectClass> selectClasses;
+    private ArrayList<SelectClass> teaClassses;
 
-    public ArrayList<SelectClass> getSelectClasses() {
-        return selectClasses;
+    public ArrayList<SelectClass> getTeaClassses() {
+        return teaClassses;
     }
 
     public void setTeacher(User teacher) {
@@ -22,7 +22,7 @@ public class TeacherClass {
         return teacher;
     }
 
-    public void setSelectClasses(ArrayList<SelectClass> selectClasses) {
-        this.selectClasses = selectClasses;
+    public void setTeaClassses(ArrayList<SelectClass> selectClasses) {
+        this.teaClassses = selectClasses;
     }
 }

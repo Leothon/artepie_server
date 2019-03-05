@@ -24,11 +24,6 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<Banner> banners = getDataDao.getBanners();
         ArrayList<SelectClass> selectClasses = getDataDao.getClasses();
 
-        for (int a = 0; a < selectClasses.size(); a ++ ){
-            if (getDataDao.isHasClassDetail(selectClasses.get(a).getSelectId()) == 0){
-                selectClasses.remove(a);
-            }
-        }
         for (int i = 0; i < selectClasses.size(); i ++){
             selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
@@ -64,7 +59,14 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<QAData> qaData = getDataDao.getQAData();
 
-
+        QAData qaDataTop = getDataDao.getTopQA("qa1000000500878171");
+        qaDataTop.setQa_like(Integer.toString(getDataDao.getQALike(qaDataTop.getQa_id())));
+        qaDataTop.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataTop.getQa_id())));
+        if (getDataDao.isLike(uuid,qaDataTop.getQa_id()) == 0){
+            qaDataTop.setLiked(true);
+        }else {
+            qaDataTop.setLiked(false);
+        }
         for (int i = 0;i < qaData.size();i ++){
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
@@ -100,6 +102,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
 
         }
+        qaData.add(0,qaDataTop);
         return qaData;
     }
 
@@ -164,6 +167,7 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<QAData> getMoreQADataById(int currentPage,String userId) {
 
         ArrayList<QAData> qaMoreData = getDataDao.getMoreQADataById(currentPage,userId);
+
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             qaMoreData.get(i).setQa_like(Integer.toString(getDataDao.getQALike(qaMoreData.get(i).getQa_id())));
@@ -175,6 +179,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
 
         }
+
         return qaMoreData;
     }
 
@@ -241,6 +246,7 @@ public class GetDataServiceImpl implements GetDataService {
         QAData qaData = getDataDao.getQADetail(qaId);
         qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
         String reId = qaData.getQa_re_id();
+
 
 
         if (reId != null){
@@ -313,7 +319,7 @@ public class GetDataServiceImpl implements GetDataService {
         }
         ArrayList<ClassDetailList> classDetailList = getDataDao.getClassList(classId);
         ClassDetail classDetail = new ClassDetail();
-        classDetail.setSelectClass(selectClass);
+        classDetail.setTeaClasss(selectClass);
         classDetail.setClassDetailLists(classDetailList);
         return classDetail;
     }
@@ -384,13 +390,14 @@ public class GetDataServiceImpl implements GetDataService {
         User teachers = getDataDao.getTeaInfo(teaId);
         TeacherClass teacherClass = new TeacherClass();
         teacherClass.setTeacher(teachers);
-        teacherClass.setSelectClasses(teaClass);
+        teacherClass.setTeaClassses(teaClass);
         return teacherClass;
     }
 
     @Override
     public TypeClass getClassByType(String uuid, String type) {
         ArrayList<SelectClass> teaClass = getDataDao.getClassByType(type);
+
         for (int i = 0;i < teaClass.size();i ++){
             teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
             if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
@@ -483,6 +490,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
         }
         ArrayList<SelectClass> fineClasses = getDataDao.getClasses();
+
         for (int i = 0;i < fineClasses.size();i ++){
             fineClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(fineClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(fineClasses.get(i).getSelectId(),uuid) == 0){

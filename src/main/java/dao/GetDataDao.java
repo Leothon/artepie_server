@@ -12,6 +12,7 @@ public interface GetDataDao {
     ArrayList<SelectClass> getClasses();
     ArrayList<SelectClass> getMoreClass(int currentPage);
     ArrayList<QAData> getQAData();
+    QAData getTopQA(String topId);
     ArrayList<User> getTeacherInUser();
     int getClassView(String classId);
     int getClassdView(String classdId);
