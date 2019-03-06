@@ -130,6 +130,37 @@
 
     <insert id="createClassInfo">
         insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time)
-        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"100","音乐",#{classType},#{classAuthorDes},"0",#{classTime})
+        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime})
     </insert>
+
+    <update id="editClassInfo">
+        update class set
+        class_title = #{classTitle},
+        class_price = #{classsPrice},
+        class_des = #{classDes},
+        class_img = #{classImg},
+        class_type_detail = #{classType},
+        class_create_time = #{classTime}
+        where class_id = #{classId}
+    </update>
+
+    <insert id="uploadClassDetail">
+        insert into class_detail
+        (classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover)
+        values (#{classdId},#{classdTitle},#{classclassdId},#{classdDes},#{classdDuration},#{classdVideo},#{classdCreateTime},#{classdVideoCover})
+    </insert>
+
+    <update id="addDuration">
+        update `class` set
+        class_duration = #{classDuration}
+        where class_id = #{classId}
+    </update>
+
+    <delete id="deleteClass">
+        delete from `class` where class_id = #{classId} and class_author_id = #{uuid}
+    </delete>
+
+    <delete id="deleteClassDetail">
+        delete from `class_detail` where classd_id = #{classdId}
+    </delete>
 </mapper>

@@ -17,51 +17,64 @@
     <resultMap id="classMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
+        <result column="user_name" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="user_id" property="selectauthorid"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_type_detail" property="type"/>
+    </resultMap>
+
+    <select id="getClassInfo" resultMap="classMap">
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id  where a.class_id = #{classId}
+    </select>
+    <select id="getClasses" resultMap="classMap">
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id order by class_create_time desc limit 10
+    </select>
+
+    <select id="getClassByTea" resultMap="classMap">
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId} order by a.class_create_time desc
+    </select>
+
+
+    <select id="getClassByType" resultMap="classMap">
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc
+    </select>
+
+
+    <resultMap id="classBuyMap" type="entity.SelectClass">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
         <result column="class_author" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
         <result column="class_author_id" property="selectauthorid"/>
         <result column="class_des" property="selectdesc"/>
     </resultMap>
-
-    <select id="getClassInfo" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_id = #{classId}
-    </select>
-    <select id="getClasses" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` order by class_create_time desc limit 10
-    </select>
-
-    <select id="getClassByTea" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_author_id = #{teaId} order by class_create_time desc
-    </select>
-
-
-    <select id="getClassByType" resultMap="classMap">
-        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_type_detail = #{type} order by class_create_time desc
-    </select>
-
-    <select id="getBuyClassByid" resultMap="classMap">
+    <select id="getBuyClassByid" resultMap="classBuyMap">
         select b.class_id,b.class_title,b.class_author,b.class_price,b.class_img,b.class_author_id,b.class_des from `class` b join class_buy a on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
 
     </select>
     <select id="getMoreClass" resultMap="classMap" parameterType="integer">
-        select class_id,class_title,class_author,class_price,class_img from `class` order by class_create_time desc limit #{currentPage} ,10
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
     </select>
 
     <resultMap id="classDetailMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
-        <result column="class_author" property="selectauthor"/>
+        <result column="user_name" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
         <result column="class_des" property="selectdesc"/>
         <result column="class_duration" property="selecttime"/>
-        <result column="class_author_des" property="selectauthordes"/>
+        <result column="user_signal" property="selectauthordes"/>
+        <result column="class_type_detail" property="type"/>
         <result column="class_score" property="selectscore"/>
+        <result column="user_id" property="selectauthorid"/>
     </resultMap>
 
     <select id="getClassDetail" resultMap="classDetailMap">
-        select class_id,class_title,class_author,class_price,class_img,class_des,class_duration, class_author_des,class_score from `class` where class_id = #{classId}
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
     </select>
 
     <select id="isFav" resultType="integer">
@@ -96,9 +109,10 @@
         <result column="classd_duration" property="classd_duration"/>
         <result column="classd_video" property="classd_video"/>
         <result column="classd_create_time" property="classd_create_time"/>
+        <result column="classd_video_cover" property="classd_video_cover"/>
     </resultMap>
     <select id="getClassList" resultMap="classListMap">
-        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover
         from class_detail  where class_classd_id = #{classId} order by classd_create_time
     </select>
 
@@ -113,7 +127,7 @@
         select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1教师"
     </select>
     <select id="getClassVideo" resultMap="classListMap">
-        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover
         from class_detail  where class_classd_id = #{classId} and classd_id = #{classdId}
     </select>
 
@@ -435,5 +449,12 @@
     </select>
 
 
+    <select id="getUserIdByClassId" resultType="string">
+        select class_author_id from `class` where class_id = #{classId}
+    </select>
+
+    <select id="getClassAllDuration" resultType="string">
+        select class_duration from `class` where class_id = #{classId}
+    </select>
 
 </mapper>

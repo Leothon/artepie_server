@@ -57,4 +57,9 @@ public interface GetDataService {
     ArrayList<QAData> searchQAByKeyword(String keyword,String uuid);
     ArrayList<User> searchUserByKeyword(String keyword,String uuid);
     ArrayList<Article> searchArticleByKeyword(String keyword,String uuid);
+
+    ArrayList<SelectClass> getSelectClassByUserId(String userId);
+
+
+
 }

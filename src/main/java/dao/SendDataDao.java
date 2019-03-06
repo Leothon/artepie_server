@@ -63,4 +63,15 @@ public interface SendDataDao {
     void insertFeedBackInfo(@Param("feedbackId") String feedbackId,@Param("userId") String userId,@Param("feedbackContent") String feedBackContent,@Param("feedbackTime") String feedbackTime);
 
     void createClassInfo(@Param("classId") String classId, @Param("classTitle") String classTitle, @Param("classAuthor") String classAuthor, @Param("classAuthorId") String classAuthorId, @Param("classsPrice") String classPrice, @Param("classDes") String classDes, @Param("classImg") String classImg, @Param("classType") String classType, @Param("classAuthorDes") String classAuthorDes, @Param("classTime") String classTime);
+
+    void editClassInfo(@Param("classId") String classId, @Param("classTitle") String classTitle, @Param("classsPrice") String classPrice, @Param("classDes") String classDes, @Param("classImg") String classImg, @Param("classType") String classType, @Param("classTime") String classTime);
+
+    void uploadClassDetail(@Param("classdId") String classdId,@Param("classdTitle") String classdTitle,@Param("classclassdId") String classclassdId,@Param("classdDes") String classdDes,@Param("classdDuration") String classdDuration,@Param("classdVideo") String classdVideo,@Param("classdCreateTime") String classdCreateTime,@Param("classdVideoCover") String classdVideoCover);
+
+
+    void addDuration(@Param("classId") String classId,@Param("classDuration") String duration);
+
+    void deleteClass(@Param("uuid") String uuid,@Param("classId") String classId);
+
+    void deleteClassDetail(String classdId);
 }

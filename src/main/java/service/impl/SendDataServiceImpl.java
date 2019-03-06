@@ -264,10 +264,40 @@ public class SendDataServiceImpl implements SendDataService {
     }
 
     @Override
-    public void createClassInfo(String classTitle, String classAuthor, String classAuthorId, String classPrice, String classDes, String classImg, String classType, String classAuthorDes) {
-        String classId = "class" + commonUtils.createUUID();
+    public void createClassInfo(String classId,String classTitle, String classAuthor, String classAuthorId, String classPrice, String classDes, String classImg, String classType, String classAuthorDes) {
+
         String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
         sendDataDao.createClassInfo(classId,titlewithoutemoji,classAuthor,classAuthorId,classPrice,deswithoutemoji,classImg,classType,classAuthorDes,commonUtils.getTime());
+    }
+
+    @Override
+    public void editClassInfo(String classId,String classTitle, String classPrice, String classDes, String classImg, String classType) {
+        String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
+        String deswithoutemoji = EmojiParser.parseToAliases(classDes);
+        if (classPrice.equals("")){
+            classPrice = "0.00";
+        }
+        sendDataDao.editClassInfo(classId,titlewithoutemoji,classPrice,deswithoutemoji,classImg,classType,commonUtils.getTime());
+
+    }
+
+    @Override
+    public void uploadClassDetail(String classdId, String classdTitle, String classclassdId, String classdDes, String classdDuration, String classdVideo, String classdVideoCover) {
+        String titlewithoutemoji = EmojiParser.parseToAliases(classdTitle);
+        String deswithoutemoji = EmojiParser.parseToAliases(classdDes);
+        String allDuration = String.valueOf(Integer.parseInt(getDataDao.getClassAllDuration(classclassdId)) + Integer.parseInt(classdDuration)) ;
+        sendDataDao.addDuration(classclassdId,allDuration);
+        sendDataDao.uploadClassDetail(classdId,titlewithoutemoji,classclassdId,deswithoutemoji,classdDuration,classdVideo,commonUtils.getTime(),classdVideoCover);
+    }
+
+    @Override
+    public void deleteClass(String uuid, String classId) {
+        sendDataDao.deleteClass(uuid,classId);
+    }
+
+    @Override
+    public void deleteClassDetail(String classdId) {
+        sendDataDao.deleteClassDetail(classdId);
     }
 }

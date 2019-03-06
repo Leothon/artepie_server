@@ -355,9 +355,14 @@ public class GetDataServiceImpl implements GetDataService {
             comments.get(i).setReplies(replies);
         }
 
+        String authorId = getDataDao.getUserIdByClassId(classDetailList.getClass_classd_id());
+        User user = userDao.getUserInfo(authorId);
         VideoDetail videoDetail = new VideoDetail();
         videoDetail.setClassDetailList(classDetailList);
         videoDetail.setComments(comments);
+        videoDetail.setAuthorIcon(user.getUser_icon());
+        videoDetail.setAuthorId(authorId);
+        videoDetail.setAuthorName(user.getUser_name());
         if (getDataDao.isUserBuy(classId,uuid) == 0){
             videoDetail.setBuy(true);
         }else {
@@ -641,5 +646,22 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<Article> searchArticleByKeyword(String keyword,String uuid) {
         return getDataDao.getArticleByKeyword(keyword);
     }
+
+    @Override
+    public ArrayList<SelectClass> getSelectClassByUserId(String userId) {
+        ArrayList<SelectClass> selectClasses = getDataDao.getClassByTea(userId);
+        for (int i = 0;i < selectClasses.size();i ++){
+            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),userId) == 0){
+                selectClasses.get(i).setIsbuy(true);
+            }else {
+                selectClasses.get(i).setIsbuy(false);
+            }
+        }
+        return selectClasses;
+    }
+
+
+
 
 }

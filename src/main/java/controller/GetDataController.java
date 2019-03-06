@@ -180,6 +180,23 @@ public class GetDataController {
         return new Result<>(true,getDataService.getTeaClass(uuid,teaId));
     }
 
+    @GetMapping("/getclassbyuserid")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getClassByUserId(@RequestParam("userid") String userId){
+
+
+        return new Result<>(true,getDataService.getSelectClassByUserId(userId));
+    }
+
+    @GetMapping("/getclassbyclassid")
+    @ResponseBody
+    public Result<SelectClass> getTeaClass(@RequestParam("classid") String classId){
+
+
+        return new Result<>(true,getDataService.getClassInfo(classId));
+    }
+
+
     @GetMapping("/getclassbytype")
     @ResponseBody
     public Result<TypeClass> getClassByType(@RequestParam("token") String token,@RequestParam("type") String type){
@@ -324,5 +341,6 @@ public class GetDataController {
         return new Result<>(true,searchResult);
 
     }
+
 
 }

@@ -2,16 +2,14 @@ package controller;
 
 import dto.Result;
 import dto.SendQAData;
-import entity.Article;
-import entity.FeedbackInfo;
-import entity.SelectClass;
-import entity.TokenValid;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.GetDataService;
 import service.SendDataService;
 import service.UserService;
 import utils.commonUtils;
@@ -25,6 +23,9 @@ public class SendDataController {
 
     @Autowired
     SendDataService sendDataService;
+
+    @Autowired
+    GetDataService getDataService;
 
     @PostMapping("/sendqadata")
     @ResponseBody
@@ -283,8 +284,42 @@ public class SendDataController {
     @PostMapping("/createclass")
     @ResponseBody
     public Result<String> createClass(@RequestBody SelectClass selectClass){
-        sendDataService.createClassInfo(selectClass.getSelectlisttitle(),selectClass.getSelectauthor(),selectClass.getSelectauthorid(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType(),selectClass.getSelectauthordes());
-        return new Result<>(true,"您已成功创建课程！");
+        String classId = "class" + commonUtils.createUUID();
+        sendDataService.createClassInfo(classId,selectClass.getSelectlisttitle(),selectClass.getSelectauthor(),selectClass.getSelectauthorid(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType(),selectClass.getSelectauthordes());
+
+        return new Result<>(true,classId);
     }
 
+    @PostMapping("/editclass")
+    @ResponseBody
+    public Result<String> editClass(@RequestBody SelectClass selectClass){
+        sendDataService.editClassInfo(selectClass.getSelectId(),selectClass.getSelectlisttitle(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType());
+        return new Result<>(true,selectClass.getSelectId());
+    }
+
+    @PostMapping("/uploadclass")
+    @ResponseBody
+    public Result<String> createClass(@RequestBody ClassDetailList classDetailList){
+        String classdId = "classd" + commonUtils.createUUID();
+        sendDataService.uploadClassDetail(classdId,classDetailList.getClassd_title(),classDetailList.getClass_classd_id(),classDetailList.getClassd_des(),classDetailList.getClassd_duration(),classDetailList.getClassd_video(),classDetailList.getClassd_video_cover());
+
+        return new Result<>(true,"课程上传成功");
+    }
+
+    @PostMapping("/deleteclass")
+    @ResponseBody
+    public Result<String> deleteClass(@RequestParam("classid") String classId,@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        sendDataService.deleteClass(uuid,classId);
+        return new Result<>(true,"课程删除成功");
+    }
+
+    @PostMapping("/deleteclassdetail")
+    @ResponseBody
+    public Result<String> deleteClassDetail(@RequestParam("classdid") String classdId){
+
+        sendDataService.deleteClassDetail(classdId);
+        return new Result<>(true,"本节课程删除成功");
+    }
 }

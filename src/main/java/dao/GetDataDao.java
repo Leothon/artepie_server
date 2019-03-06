@@ -110,6 +110,8 @@ public interface GetDataDao {
     ArrayList<Article> getArticleByKeyword(String keyword);
 
     String getUserNameByUserId(String userId);
+    String getUserIdByClassId(String classId);
 
+    String getClassAllDuration(String classId);
 
 }

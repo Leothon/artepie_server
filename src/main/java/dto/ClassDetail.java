@@ -9,6 +9,7 @@ public class ClassDetail {
     private SelectClass teaClasss;
     private ArrayList<ClassDetailList> classDetailLists;
 
+
     public ArrayList<ClassDetailList> getClassDetailLists() {
         return classDetailLists;
     }

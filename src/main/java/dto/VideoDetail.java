@@ -13,6 +13,33 @@ public class VideoDetail {
     private boolean buy;
 
     private boolean free;
+    private String authorName;
+    private String authorIcon;
+    private String authorId;
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorIcon() {
+        return authorIcon;
+    }
+
+    public void setAuthorIcon(String authorIcon) {
+        this.authorIcon = authorIcon;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
 
     public boolean isFree() {
         return free;

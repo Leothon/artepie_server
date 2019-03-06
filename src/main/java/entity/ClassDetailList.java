@@ -12,6 +12,15 @@ public class ClassDetailList {
     private String classd_create_time;
     private boolean liked;
 
+    private String classd_video_cover;
+
+    public String getClassd_video_cover() {
+        return classd_video_cover;
+    }
+
+    public void setClassd_video_cover(String classd_video_cover) {
+        this.classd_video_cover = classd_video_cover;
+    }
 
     public boolean isLiked() {
         return liked;

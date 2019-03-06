@@ -8,11 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="da7e1c30-c59b-40e0-87c6-f97995b49c1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SendDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SendDataController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/SendDataDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/SendDataDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dto/ClassDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/ClassDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/TeacherClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/TeacherClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/VideoDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/VideoDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/GetDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/GetDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/SendDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/SendDataService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,20 +35,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1763">
-              <caret line="154" column="22" lean-forward="true" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
+            <state relative-caret-position="163">
+              <caret line="152" column="32" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -48,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+            <state relative-caret-position="239">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,41 +56,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="579" column="44" selection-start-line="579" selection-start-column="44" selection-end-line="579" selection-end-column="44" />
+            <state relative-caret-position="228">
+              <caret line="306" column="54" lean-forward="true" selection-start-line="306" selection-start-column="54" selection-end-line="306" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/dto/TeacherClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/entity/SelectClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -99,8 +71,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4617">
-              <caret line="266" column="120" selection-start-line="266" selection-start-column="120" selection-end-line="266" selection-end-column="120" />
+            <state relative-caret-position="552">
+              <caret line="300" column="48" selection-start-line="300" selection-start-column="48" selection-end-line="300" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#12218#12219#0" expanded="true" />
+                <element signature="e#12259#12260#0" expanded="true" />
+                <element signature="e#12339#12340#0" expanded="true" />
+                <element signature="e#12394#12395#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,13 +97,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="68" column="59" lean-forward="true" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/SendDataController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4978">
-              <caret line="277" column="43" selection-start-line="277" selection-start-column="43" selection-end-line="277" selection-end-column="43" />
+            <state relative-caret-position="343">
+              <caret line="312" lean-forward="true" selection-start-line="312" selection-end-line="312" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/service/SendDataService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="609">
+              <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -123,11 +129,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/SendDataDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1159">
-              <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+            <state relative-caret-position="704">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="609">
+              <caret line="162" column="29" selection-start-line="162" selection-start-column="29" selection-end-line="162" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -161,8 +176,6 @@
         <option value="$PROJECT_DIR$/src/main/java/entity/Comment.java" />
         <option value="$PROJECT_DIR$/src/main/java/entity/Reply.java" />
         <option value="$PROJECT_DIR$/src/main/java/entity/Banner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dto/VideoDetail.java" />
         <option value="$PROJECT_DIR$/src/main/java/entity/Teacher.java" />
         <option value="$PROJECT_DIR$/src/main/java/dto/HomeData.java" />
         <option value="$PROJECT_DIR$/src/main/java/dto/TypeClass.java" />
@@ -189,20 +202,22 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/main/java/dto/SearchResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/GetDataService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entity/TeaClasss.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entity/SelectClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dto/TeacherClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dto/ClassDetail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dto/VideoDetail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/GetDataService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/dao/SendDataDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/SendDataService.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entity/TeaClasss.java" />
-        <option value="$PROJECT_DIR$/src/main/java/entity/SelectClass.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/controller/SendDataController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/GetDataDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dto/ClassDetail.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dto/TeacherClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -232,7 +247,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -391,7 +406,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551711159377" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551884840624" />
     <property name="last_opened_file_path" value="D:/ssm" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -649,7 +664,7 @@
       <workItem from="1551275184935" duration="739000" />
       <workItem from="1551324063708" duration="631000" />
       <workItem from="1551325038056" duration="46174000" />
-      <workItem from="1551753931740" duration="1988000" />
+      <workItem from="1551753931740" duration="21740000" />
     </task>
     <task id="LOCAL-00001" summary="登陆注册">
       <created>1546436854063</created>
@@ -847,11 +862,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551699762154</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="修复变量名不同导致的BUG">
+      <created>1551791057382</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1551791057382</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="362240000" />
+    <option name="totallyTimeSpent" value="381992000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -866,7 +888,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49860725" visible="true" weight="0.28624734" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49860725" visible="true" weight="0.19296375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -877,7 +899,7 @@
       <window_info id="Web" order="8" sideWeight="0.5013928" side_tool="true" weight="0.2176" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49733475" visible="true" weight="0.15401301" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49733475" visible="true" weight="0.1637744" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -949,7 +971,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="个人信息修改和头像上传" />
     <MESSAGE value="讨论区域接口" />
     <MESSAGE value="修改登录接口" />
     <MESSAGE value="评论回复接口" />
@@ -974,31 +995,10 @@
     <MESSAGE value="文章作者模糊搜索" />
     <MESSAGE value="个人问题和文章，加载更多文章，转发提醒" />
     <MESSAGE value="创建课程，筛选未加入内容的课程" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建课程，筛选未加入内容的课程" />
+    <MESSAGE value="修复变量名不同导致的BUG" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复变量名不同导致的BUG" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/StudyLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="44" lean-forward="true" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-          <folding>
-            <element signature="e#216#217#0" expanded="true" />
-            <element signature="e#252#253#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#563#564#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1203,18 +1203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#974#975#0" expanded="true" />
-            <element signature="e#1020#1021#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="535">
@@ -1288,13 +1276,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="39" column="33" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="39" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -1349,112 +1330,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/SendDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="44" column="175" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="175" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="131" column="98" selection-start-line="131" selection-start-column="98" selection-end-line="131" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dto/BagPageData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2812">
-          <caret line="148" column="21" selection-start-line="148" selection-start-column="21" selection-end-line="148" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4617">
-          <caret line="266" column="120" selection-start-line="266" selection-start-column="120" selection-end-line="266" selection-end-column="120" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SendDataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4978">
-          <caret line="277" column="43" selection-start-line="277" selection-start-column="43" selection-end-line="277" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/SendDataDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/entity/SelectClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1763">
-          <caret line="154" column="22" lean-forward="true" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1465,10 +1344,169 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="39" column="33" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="39" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="90" column="41" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#1020#1021#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dto/ClassDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entity/ClassDetailList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding>
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#501#502#0" expanded="true" />
+            <element signature="e#569#570#0" expanded="true" />
+            <element signature="e#629#630#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dto/VideoDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding>
+            <element signature="e#389#390#0" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+            <element signature="e#508#509#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entity/SelectClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="579" column="44" selection-start-line="579" selection-start-column="44" selection-end-line="579" selection-end-column="44" />
+        <state relative-caret-position="228">
+          <caret line="306" column="54" lean-forward="true" selection-start-line="306" selection-start-column="54" selection-end-line="306" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="68" column="59" lean-forward="true" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="152" column="32" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SendDataMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="162" column="29" selection-start-line="162" selection-start-column="29" selection-end-line="162" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/SendDataDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/SendDataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/SendDataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="300" column="48" selection-start-line="300" selection-start-column="48" selection-end-line="300" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12218#12219#0" expanded="true" />
+            <element signature="e#12259#12260#0" expanded="true" />
+            <element signature="e#12339#12340#0" expanded="true" />
+            <element signature="e#12394#12395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SendDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="312" lean-forward="true" selection-start-line="312" selection-end-line="312" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
