@@ -98,7 +98,7 @@
         select isnull((select class_buy_id from class_buy where class_buy_class_id = #{classId} and class_buy_user_id = #{userId} ))
     </select>
 
-    <select id="isQQRegister" resultType="integer" parameterType="string">
+    <select id="isQQOrWeChatRegister" resultType="integer" parameterType="string">
         select isnull((select tencent_token from `user` where tencent_token = #{accessToken} ))
     </select>
     <resultMap id="classListMap" type="entity.ClassDetailList">

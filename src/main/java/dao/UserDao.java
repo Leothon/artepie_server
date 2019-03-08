@@ -28,6 +28,8 @@ public interface UserDao {
 
     void insertQQRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken);
 
+    void insertWeChatRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("location") String location,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken);
+
     User getUserInfoByQQ(String accessToken);
 
     void updatePhoneNumber(@Param("userId") String uuid,@Param("phoneNumber") String phoneNumber);

@@ -67,7 +67,7 @@ public interface GetDataDao {
 
     SelectClass getClassInfo(String classId);
 
-    int isQQRegister(String accessToken);
+    int isQQOrWeChatRegister(String accessToken);
 
     ArrayList<SelectClass> getFavClassByUid(String uuid);
 

@@ -184,6 +184,21 @@ public class UserController {
 
     }
 
+    @PostMapping("/wechatuserregister")
+    @ResponseBody
+    public Result<User> weChatUserRegister(@RequestBody User user) {
+        String uuid = "wec" + commonUtils.createUUID();
+        String token = tokenUtils.getToken(uuid);
+        Token tokeninfo = new Token();
+        tokeninfo.setInfo("注册成功");
+        tokeninfo.setToken(token);
+        String registerTime = commonUtils.getTime();
+        userService.weChatRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), user.getUser_address(),registerTime, token, user.getTencent_token());
+
+        return new Result<User>(true, userService.getUserInfoById(uuid));
+
+    }
+
 
     @GetMapping("/getuserinfobyqq")
     @ResponseBody

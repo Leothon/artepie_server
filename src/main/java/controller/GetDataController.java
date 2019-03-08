@@ -220,12 +220,12 @@ public class GetDataController {
     }
 
 
-    @GetMapping("/isqqregister")
+    @GetMapping("/isqqwechatregister")
     @ResponseBody
-    public Result<String> isQQRegister(@RequestParam("accesstoken") String accessToken){
+    public Result<String> isQQOrWeChatRegister(@RequestParam("accesstoken") String accessToken){
 
 
-        return new Result<>(true,getDataService.isQQRegister(accessToken));
+        return new Result<>(true,getDataService.isQQOrWeChatRegister(accessToken));
     }
 
 

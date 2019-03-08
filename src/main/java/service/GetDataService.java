@@ -32,7 +32,7 @@ public interface GetDataService {
 
     SelectClass getClassInfo(String classId);
 
-    String isQQRegister(String accessToken);
+    String isQQOrWeChatRegister(String accessToken);
 
     ArrayList<SelectClass> getFavClassByUid(String uuid);
 

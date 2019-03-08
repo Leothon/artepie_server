@@ -72,6 +72,11 @@
         values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","")
     </insert>
 
+    <insert id="insertWeChatRegister">
+        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password,user_address)
+        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","",#{location})
+    </insert>
+
     <update id="updatePhoneNumber" parameterType="string">
 
         update `user` set

@@ -426,9 +426,9 @@ public class GetDataServiceImpl implements GetDataService {
     }
 
     @Override
-    public String isQQRegister(String accessToken) {
+    public String isQQOrWeChatRegister(String accessToken) {
 
-        return Integer.toString(getDataDao.isQQRegister(accessToken));
+        return Integer.toString(getDataDao.isQQOrWeChatRegister(accessToken));
     }
 
     @Override
