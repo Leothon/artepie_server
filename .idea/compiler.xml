@@ -9,5 +9,8 @@
         <module name="cogitoweb" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cogitoweb" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

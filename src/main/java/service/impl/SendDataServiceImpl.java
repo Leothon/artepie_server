@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import service.SendDataService;
 import service.UserService;
 import utils.JpushUtils;
+import utils.SensitiveWord;
 import utils.commonUtils;
 import utils.tokenUtils;
 
@@ -33,7 +34,8 @@ public class SendDataServiceImpl implements SendDataService {
     public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio,String qaVideoCover) {
 
         String content = EmojiParser.parseToAliases(qaContent);
-        sendDataDao.insertQa(qaId,userId,content,qaVideo,qa_time,qaAudio,qaVideoCover);
+        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
+        sendDataDao.insertQa(qaId,userId,contentWithoutSensitiveWord,qaVideo,qa_time,qaAudio,qaVideoCover);
     }
 
     @Override
@@ -122,7 +124,8 @@ public class SendDataServiceImpl implements SendDataService {
     public void sendQaComment(String qaId, String uuid, String content, String sendTime) {
         String commentQId = "comq" + commonUtils.createUUID();
         String contentwithoutemoji = EmojiParser.parseToAliases(content);
-        sendDataDao.insertQaComment(commentQId,qaId,uuid,contentwithoutemoji,sendTime);
+        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(contentwithoutemoji);
+        sendDataDao.insertQaComment(commentQId,qaId,uuid,contentWithoutSensitiveWord,sendTime);
 
         if (qaId.substring(0,2).equals("qa")){
             String authorId = getDataDao.getUserIdByQaId(qaId);
@@ -130,10 +133,10 @@ public class SendDataServiceImpl implements SendDataService {
                 Map<String, String> parm = new HashMap<String, String>();
                 parm.put("id",authorId);
                 User user = userDao.getUserInfo(uuid);
-                parm.put("msg",user.getUser_name() + "评论了您: " + contentwithoutemoji);
+                parm.put("msg",user.getUser_name() + "评论了您: " + contentWithoutSensitiveWord);
                 JpushUtils.jpushAndroidByAlias(parm);
                 String noticeId = "noticeId" + commonUtils.createUUID();
-                sendDataDao.noticeInfo(noticeId,uuid,authorId,contentwithoutemoji,"qacomment",qaId,0,commonUtils.getTime());
+                sendDataDao.noticeInfo(noticeId,uuid,authorId,contentWithoutSensitiveWord,"qacomment",qaId,0,commonUtils.getTime());
             }
         }
 
@@ -143,17 +146,18 @@ public class SendDataServiceImpl implements SendDataService {
     public void sendReply(String replyRId, String replyComment, String replyUserId, String replyToUserId, String replyTime) {
         String replyId = "repq" + commonUtils.createUUID();
         String contentwithoutemoji = EmojiParser.parseToAliases(replyComment);
-        sendDataDao.insertReply(replyId,replyRId,contentwithoutemoji,replyUserId,replyToUserId,replyTime);
+        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(contentwithoutemoji);
+        sendDataDao.insertReply(replyId,replyRId,contentWithoutSensitiveWord,replyUserId,replyToUserId,replyTime);
 
         //String authorId = getDataDao.getUserIdByReplyId(replyRId);
         if (!replyToUserId.equals(replyUserId)){
             Map<String, String> parm = new HashMap<String, String>();
             parm.put("id",replyToUserId);
             User user = userDao.getUserInfo(replyUserId);
-            parm.put("msg",user.getUser_name() + "回复了您 : " + contentwithoutemoji);
+            parm.put("msg",user.getUser_name() + "回复了您 : " + contentWithoutSensitiveWord);
             JpushUtils.jpushAndroidByAlias(parm);
             String noticeId = "noticeId" + commonUtils.createUUID();
-            sendDataDao.noticeInfo(noticeId,replyUserId,replyToUserId,contentwithoutemoji,"replycomment",replyRId,0,commonUtils.getTime());
+            sendDataDao.noticeInfo(noticeId,replyUserId,replyToUserId,contentWithoutSensitiveWord,"replycomment",replyRId,0,commonUtils.getTime());
         }
     }
 
@@ -204,7 +208,8 @@ public class SendDataServiceImpl implements SendDataService {
     public void uploadArticle(String title, String img, String content, String uid) {
         String time = commonUtils.getTime();
         String articleId = "article" + commonUtils.createUUID();
-        sendDataDao.uploadArticle(articleId,uid,time,content,img,title);
+        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
+        sendDataDao.uploadArticle(articleId,uid,time,contentWithoutSensitiveWord,img,title);
     }
 
     @Override
@@ -212,16 +217,17 @@ public class SendDataServiceImpl implements SendDataService {
         String time = commonUtils.getTime();
         String qaId = "qa" + commonUtils.createUUID();
         String contentwithoutemoji = EmojiParser.parseToAliases(content);
-        sendDataDao.sendRe(qaId,uuid,contentwithoutemoji,time,qaReId);
+        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(contentwithoutemoji);
+        sendDataDao.sendRe(qaId,uuid,contentWithoutSensitiveWord,time,qaReId);
         String reUserId = getDataDao.getUserIdByQaId(qaReId);
         if (!uuid.equals(reUserId)){
             Map<String, String> parm = new HashMap<String, String>();
             parm.put("id",reUserId);
             User user = userDao.getUserInfo(reUserId);
-            parm.put("msg",user.getUser_name() + "转发了您的问题 : " + contentwithoutemoji);
+            parm.put("msg",user.getUser_name() + "转发了您的问题 : " + contentWithoutSensitiveWord);
             JpushUtils.jpushAndroidByAlias(parm);
             String noticeId = "noticeId" + commonUtils.createUUID();
-            sendDataDao.noticeInfo(noticeId,uuid,reUserId,contentwithoutemoji,"qacomment",qaId,0,commonUtils.getTime());
+            sendDataDao.noticeInfo(noticeId,uuid,reUserId,contentWithoutSensitiveWord,"qacomment",qaId,0,commonUtils.getTime());
         }
     }
 
@@ -268,17 +274,21 @@ public class SendDataServiceImpl implements SendDataService {
 
         String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
-        sendDataDao.createClassInfo(classId,titlewithoutemoji,classAuthor,classAuthorId,classPrice,deswithoutemoji,classImg,classType,classAuthorDes,commonUtils.getTime());
+        String titleWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(titlewithoutemoji);
+        String desWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(deswithoutemoji);
+        sendDataDao.createClassInfo(classId,titleWithoutSensitiveWord,classAuthor,classAuthorId,classPrice,desWithoutSensitiveWord,classImg,classType,classAuthorDes,commonUtils.getTime());
     }
 
     @Override
     public void editClassInfo(String classId,String classTitle, String classPrice, String classDes, String classImg, String classType) {
         String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
+        String titleWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(titlewithoutemoji);
+        String desWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(deswithoutemoji);
         if (classPrice.equals("")){
             classPrice = "0.00";
         }
-        sendDataDao.editClassInfo(classId,titlewithoutemoji,classPrice,deswithoutemoji,classImg,classType,commonUtils.getTime());
+        sendDataDao.editClassInfo(classId,titleWithoutSensitiveWord,classPrice,desWithoutSensitiveWord,classImg,classType,commonUtils.getTime());
 
     }
 
@@ -286,9 +296,11 @@ public class SendDataServiceImpl implements SendDataService {
     public void uploadClassDetail(String classdId, String classdTitle, String classclassdId, String classdDes, String classdDuration, String classdVideo, String classdVideoCover) {
         String titlewithoutemoji = EmojiParser.parseToAliases(classdTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classdDes);
+        String titleWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(titlewithoutemoji);
+        String desWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(deswithoutemoji);
         String allDuration = String.valueOf(Integer.parseInt(getDataDao.getClassAllDuration(classclassdId)) + Integer.parseInt(classdDuration)) ;
         sendDataDao.addDuration(classclassdId,allDuration);
-        sendDataDao.uploadClassDetail(classdId,titlewithoutemoji,classclassdId,deswithoutemoji,classdDuration,classdVideo,commonUtils.getTime(),classdVideoCover);
+        sendDataDao.uploadClassDetail(classdId,titleWithoutSensitiveWord,classclassdId,desWithoutSensitiveWord,classdDuration,classdVideo,commonUtils.getTime(),classdVideoCover);
     }
 
     @Override
