@@ -83,9 +83,15 @@ public class UserController {
                 } else {
                     //已注册
 
+
                     String token = userService.returnTokenByPhone(phonenumber);
                     TokenValid tokenValid = tokenUtils.ValidToken(token);
                     String uuid = tokenValid.getUid();
+                    if (tokenValid.isExpired()){
+                        String newtoken = tokenUtils.getToken(uuid);
+                        userService.updateToken(newtoken,uuid);
+                    }
+
                     return new Result<User>(true, userService.getUserInfoById(uuid));
 
                 }

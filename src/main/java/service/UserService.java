@@ -27,4 +27,6 @@ public interface UserService {
     void insertPassword(String uuid,String password);
 
     String getPasswordByPhoneNumber(String phoneNumber);
+
+    void updateToken(String token,String uuid);
 }

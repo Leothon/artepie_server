@@ -7,11 +7,12 @@
     <resultMap id="bannerMap" type="entity.Banner">
         <id column="banner_id" property="banner_id"/>
         <result column="banner_img" property="banner_img"/>
+        <result column="banner_url" property="banner_url"/>
         <result column="banner_type" property="banner_type"/>
         <result column="banner_to_class_id" property="banner_to_class_id"/>
     </resultMap>
     <select id="getBanners" resultMap="bannerMap">
-        select banner_id,banner_img,banner_type,banner_to_class_id from banner order by banner_create_time desc limit 4
+        select banner_id,banner_img,banner_url,banner_type,banner_to_class_id from banner order by banner_create_time desc limit 4
     </select>
 
     <resultMap id="classMap" type="entity.SelectClass">

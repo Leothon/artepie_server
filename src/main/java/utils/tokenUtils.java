@@ -104,7 +104,7 @@ public class tokenUtils {
         //生成时间
         map.put("sta", new Date().getTime());
         //过期时间
-        map.put("exp", new Date().getTime() + 12L*30L*24L*60L*60L*1000L);
+        map.put("exp", new Date().getTime() + 6L*30L*24L*60L*60L*1000L);
         try {
             String token = creatToken(map);
             System.out.println("token="+token);

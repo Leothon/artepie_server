@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
 
         return userDao.getPasswordByPhoneNumber(phoneNumber);
     }
+
+    @Override
+    public void updateToken(String token, String uuid) {
+        userDao.updateToken(token,uuid);
+    }
 }

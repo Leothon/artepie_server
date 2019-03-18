@@ -40,4 +40,5 @@ public interface UserDao {
 
     String getPasswordByPhoneNumber(String phoneNumber);
 
+    void updateToken(@Param("token") String token,@Param("uuid") String uuid);
 }

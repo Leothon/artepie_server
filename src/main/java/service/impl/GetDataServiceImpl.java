@@ -216,12 +216,21 @@ public class GetDataServiceImpl implements GetDataService {
             qaData.setLiked(false);
         }
         for (int i = 0;i < comments.size();i ++){
+
             comments.get(i).setComment_q_content(EmojiParser.parseToUnicode(comments.get(i).getComment_q_content()));
             comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
             if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
                 comments.get(i).setComment_liked(true);
             }else {
                 comments.get(i).setComment_liked(false);
+            }
+
+            if (Integer.parseInt(comments.get(i).getComment_q_like()) >= 5){
+                if (Integer.parseInt(comments.get(i).getComment_q_like()) > Integer.parseInt(comments.get(0).getComment_q_like())){
+                    Comment temp  = comments.get(i);
+                    comments.remove(i);
+                    comments.add(0,temp);
+                }
             }
             ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
             for (int j = 0;j < replies.size();j ++){

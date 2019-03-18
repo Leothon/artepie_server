@@ -74,4 +74,6 @@ public interface SendDataDao {
     void deleteClass(@Param("uuid") String uuid,@Param("classId") String classId);
 
     void deleteClassDetail(String classdId);
+
+
 }
