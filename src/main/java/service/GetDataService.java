@@ -25,7 +25,9 @@ public interface GetDataService {
 
     ClassDetail getClassDetail(String uuid,String classId );
 
+
     VideoDetail getVideoDetail(String uuid,String classId,String classdId);
+
 
     TeacherClass getTeaClass(String uuid,String teaId);
     TypeClass getClassByType(String uuid,String type);
@@ -59,6 +61,8 @@ public interface GetDataService {
     ArrayList<Article> searchArticleByKeyword(String keyword,String uuid);
 
     ArrayList<SelectClass> getSelectClassByUserId(String userId);
+
+
 
 
 

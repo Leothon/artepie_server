@@ -163,6 +163,8 @@ public class GetDataController {
 
     }
 
+
+
     @GetMapping("/getclassvideo")
     @ResponseBody
     public  Result<VideoDetail> getClassVideo(@RequestParam("token") String token,@RequestParam("classdid") String classdId,@RequestParam("classid") String classId){
@@ -170,6 +172,8 @@ public class GetDataController {
         String uuid = tokenValid.getUid();
         return new Result<>(true,getDataService.getVideoDetail(uuid,classId,classdId));
     }
+
+
 
 
     @GetMapping("/getteaclass")
@@ -188,6 +192,8 @@ public class GetDataController {
 
         return new Result<>(true,getDataService.getSelectClassByUserId(userId));
     }
+
+
 
     @GetMapping("/getclassbyclassid")
     @ResponseBody
@@ -348,4 +354,6 @@ public class GetDataController {
     public String visitHomePage(){
         return "index";
     }
+
+    
 }

@@ -16,6 +16,8 @@ public class SelectClass {
     private String selectauthordes;
     private String selectscore;
 
+
+
     private String selectauthorid;
 
     private String type;

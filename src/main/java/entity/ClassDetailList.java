@@ -12,6 +12,16 @@ public class ClassDetailList {
     private String classd_create_time;
     private boolean liked;
 
+    private int classdStatus;
+
+    public int getClassdStatus() {
+        return classdStatus;
+    }
+
+    public void setClassdStatus(int classdStatus) {
+        this.classdStatus = classdStatus;
+    }
+
     private String classd_video_cover;
 
     public String getClassd_video_cover() {

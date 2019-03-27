@@ -333,6 +333,7 @@ public class GetDataServiceImpl implements GetDataService {
         return classDetail;
     }
 
+
     @Override
     public VideoDetail getVideoDetail(String uuid, String classId, String classdId) {
         ClassDetailList classDetailList = getDataDao.getClassVideo(classId,classdId);
@@ -669,6 +670,8 @@ public class GetDataServiceImpl implements GetDataService {
         }
         return selectClasses;
     }
+
+
 
 
 

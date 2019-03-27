@@ -98,4 +98,8 @@
     <select id="getPasswordByPhoneNumber" resultType="string">
         select user_password from `user` where user_phone = #{phoneNumber}
     </select>
+
+    <update id="updateToken" parameterType="string">
+        update `user` set user_token = #{token} where user_id = #{uuid}
+    </update>
 </mapper>

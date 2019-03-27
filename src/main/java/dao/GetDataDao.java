@@ -45,11 +45,14 @@ public interface GetDataDao {
 
     SelectClass getClassDetail(String classId);
 
+
     int isFav(@Param("userId") String userId,@Param("classId") String classId);
 
     ArrayList<ClassDetailList> getClassList(String classId);
 
+
     ClassDetailList getClassVideo(@Param("classId") String classId,@Param("classdId") String classdId);
+
 
     ArrayList<String> getClassdIds(String classId);
 
@@ -58,6 +61,8 @@ public interface GetDataDao {
     int getFavCount(String classId);
 
     ArrayList<SelectClass> getClassByTea(String teaId);
+
+    ArrayList<SelectClass> getClassByMyself(String teaId);
 
     User getTeaInfo(String teaId);
 
