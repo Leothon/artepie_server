@@ -2,71 +2,33 @@ package controller;
 
 import dto.Result;
 import dto.Token;
-import dto.VerifyCode;
 import entity.TokenValid;
 import entity.User;
-import org.apache.ibatis.annotations.Param;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import service.UserService;
 import utils.commonUtils;
 import utils.tokenUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.*;
+
 @Controller
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    private Map<String, String> phonecode = new HashMap<>();
-
-    @GetMapping("/verifyphone")
-    @ResponseBody
-    public Result<VerifyCode> verificationPhone(@RequestParam("phonenumber") String phonenumber) {
-
-
-        //commonUtils.sendVerifyCode(phonenumber,commonUtils.getVerifyCode());
-
-
-        //TODO 测试阶段直接通过服务器发送验证码
-
-        String code = String.valueOf(commonUtils.getVerifyCode());
-        phonecode.put(phonenumber, code);
-        //发送验证码后10分钟内有效
-        new Timer().schedule(new TimerTask() {
-            public void run() {
-                phonecode.remove(phonenumber);
-            }
-        }, 10 * 60 * 1000);
-
-        VerifyCode verifyCode = new VerifyCode();
-        verifyCode.setCode(code);
-        return new Result<VerifyCode>(true, verifyCode);
-
-
-    }
 
     @GetMapping("/usephonelogin")
     @ResponseBody
-    public Result<User> usePhoneLogin(@RequestParam("phonenumber") String phonenumber, @RequestParam("verifycode") String verifycode) {
+    public Result<User> usePhoneLogin(@RequestParam("phonenumber") String phonenumber) {
 
         //查询数据库，手机号是否已注册，如果未注册，则生成token，和手机号一块插入数据库，并返回token
         //如果已经注册，则查找数据库，获取token，并返回
 
-        if (phonecode.containsKey(phonenumber)) {
 
-            if (verifycode.equals(phonecode.get(phonenumber))) {
 
                 Token tokeninfo = null;
                 if (!userService.phoneExits(phonenumber)) {
@@ -95,15 +57,10 @@ public class UserController {
                     return new Result<User>(true, userService.getUserInfoById(uuid));
 
                 }
-            } else {
-                return new Result<>(false, "验证码错误！");
-            }
 
 
-        } else {
-            //验证失败
-            return new Result<>(false, "无效验证码，请重新获取！");
-        }
+
+
 
 
     }
@@ -226,11 +183,10 @@ public class UserController {
 
     @PostMapping("/bindphone")
     @ResponseBody
-    public Result<String> bindPhoneNumber(@RequestParam("token") String token, @RequestParam("phonenumber") String phoneNumber,@RequestParam("code") String code) {
+    public Result<String> bindPhoneNumber(@RequestParam("token") String token, @RequestParam("phonenumber") String phoneNumber) {
         String uuid = tokenUtils.ValidToken(token).getUid();
-        if (phonecode.containsKey(phoneNumber)) {
 
-            if (code.equals(phonecode.get(phoneNumber))) {
+
                 if (userService.phoneExits(phoneNumber)) {
                     if (!userService.getUserIdByPhoneNumber(phoneNumber).equals(uuid)) {
                         userService.insertPhoneNumber(userService.getUserIdByPhoneNumber(phoneNumber), "");
@@ -239,15 +195,7 @@ public class UserController {
                 userService.insertPhoneNumber(uuid, phoneNumber);
                 return new Result<>(true, "绑定成功");
 
-            } else {
-                return new Result<>(false, "验证码错误！");
-            }
 
-
-        } else {
-            //验证失败
-            return new Result<>(false, "无效验证码，请重新获取！");
-        }
 
     }
 
