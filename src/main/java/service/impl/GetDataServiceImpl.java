@@ -11,7 +11,7 @@ import service.GetDataService;
 import utils.commonUtils;
 
 import java.util.ArrayList;
-@Service
+@Service("GetDataService")
 public class GetDataServiceImpl implements GetDataService {
 
     @Autowired
@@ -19,6 +19,7 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Autowired
     UserDao userDao;
+
     @Override
     public HomeData getHomeData(String uuid) {
         ArrayList<Banner> banners = getDataDao.getBanners();
@@ -59,14 +60,14 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<QAData> qaData = getDataDao.getQAData();
 
-        QAData qaDataTop = getDataDao.getTopQA("qa1000000500878171");
-        qaDataTop.setQa_like(Integer.toString(getDataDao.getQALike(qaDataTop.getQa_id())));
-        qaDataTop.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataTop.getQa_id())));
-        if (getDataDao.isLike(uuid,qaDataTop.getQa_id()) == 0){
-            qaDataTop.setLiked(true);
-        }else {
-            qaDataTop.setLiked(false);
-        }
+//        QAData qaDataTop = getDataDao.getTopQA("qa1000000500878171");
+//        qaDataTop.setQa_like(Integer.toString(getDataDao.getQALike(qaDataTop.getQa_id())));
+//        qaDataTop.setQa_comment(Integer.toString(getDataDao.getQAComment(qaDataTop.getQa_id())));
+//        if (getDataDao.isLike(uuid,qaDataTop.getQa_id()) == 0){
+//            qaDataTop.setLiked(true);
+//        }else {
+//            qaDataTop.setLiked(false);
+//        }
         for (int i = 0;i < qaData.size();i ++){
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
@@ -102,7 +103,7 @@ public class GetDataServiceImpl implements GetDataService {
             }
 
         }
-        qaData.add(0,qaDataTop);
+        //qaData.add(0,qaDataTop);
         return qaData;
     }
 
@@ -671,9 +672,32 @@ public class GetDataServiceImpl implements GetDataService {
         return selectClasses;
     }
 
+    @Override
+    public ArrayList<SelectClass> getLittleHome(String uuid) {
+        ArrayList<SelectClass> selectClasses = getDataDao.getClasses();
+
+        for (int i = 0; i < selectClasses.size(); i ++){
+            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
+                selectClasses.get(i).setIsbuy(true);
+            }else {
+                selectClasses.get(i).setIsbuy(false);
+            }
+        }
+
+        return selectClasses;
+    }
+
+    @Override
+    public Inform getInform(String uuid) {
+
+        return getDataDao.getInform(uuid);
+    }
 
 
+    @Override
+    public Update getUpdate(String uuid) {
 
-
-
+        return getDataDao.getUpdate(uuid);
+    }
 }

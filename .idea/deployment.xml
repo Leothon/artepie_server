@@ -2,11 +2,17 @@
 <project version="4">
   <component name="PublishConfigData" serverName="artparty">
     <serverData>
+      <paths name="artepie">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="artparty">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$/src/main" web="/" />
-            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

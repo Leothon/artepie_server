@@ -3,6 +3,7 @@ package controller;
 import dto.*;
 import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +40,6 @@ public class GetDataController {
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
         }
-
-
-
-
 
     }
 
@@ -350,10 +347,53 @@ public class GetDataController {
     }
 
 
-    @GetMapping("/homepage")
+    @GetMapping("/")
     public String visitHomePage(){
         return "index";
     }
 
-    
+
+
+    @GetMapping("/getlittlehome")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getLittleHome(@RequestParam("token") String token){
+
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result<ArrayList<SelectClass>>(true,getDataService.getLittleHome(uuid));
+
+
+
+    }
+
+
+    @GetMapping("/getinform")
+    @ResponseBody
+    public Result<Inform> getInform(@RequestParam("token") String token){
+
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result<Inform>(true,getDataService.getInform(uuid));
+
+
+
+    }
+
+    @GetMapping("/getupdate")
+    @ResponseBody
+    public Result<Update> getUpdate(@RequestParam("token") String token){
+
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result<Update>(true,getDataService.getUpdate(uuid));
+
+
+
+    }
 }

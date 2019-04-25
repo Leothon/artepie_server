@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import service.UserService;
 import utils.tokenUtils;
 
-@Service
+@Service("UserService")
 public class UserServiceImpl implements UserService {
 
 

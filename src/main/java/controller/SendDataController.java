@@ -4,6 +4,7 @@ import dto.Result;
 import dto.SendQAData;
 import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,6 @@ import service.SendDataService;
 import service.UserService;
 import utils.commonUtils;
 import utils.tokenUtils;
-
 @Controller
 public class SendDataController {
 

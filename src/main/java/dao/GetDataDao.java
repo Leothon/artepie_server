@@ -1,6 +1,8 @@
 package dao;
 
+import dto.Inform;
 import dto.QAData;
+import dto.Update;
 import entity.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -119,4 +121,7 @@ public interface GetDataDao {
 
     String getClassAllDuration(String classId);
 
+    Inform getInform(String uuid);
+
+    Update getUpdate(String uuid);
 }

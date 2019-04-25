@@ -63,7 +63,10 @@ public interface GetDataService {
     ArrayList<SelectClass> getSelectClassByUserId(String userId);
 
 
+    ArrayList<SelectClass> getLittleHome(String uuid);
 
 
+    Inform getInform(String uuid);
+    Update getUpdate(String uuid);
 
 }

@@ -18,7 +18,7 @@ import utils.tokenUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Service("SendDataService")
 public class SendDataServiceImpl implements SendDataService {
 
     @Autowired

@@ -465,4 +465,24 @@
         select class_duration from `class` where class_id = #{classId}
     </select>
 
+
+    <resultMap id="informMap" type="dto.Inform">
+        <id column="inform_id" property="informId"/>
+        <result column="inform_content" property="informText"/>
+        <result column="inform_time" property="informTime"/>
+    </resultMap>
+
+    <select id="getInform" resultMap="informMap">
+        select inform_id,inform_content,inform_time from inform order by inform_time desc limit 1
+    </select>
+
+    <resultMap id="updateMap" type="dto.Update">
+        <id column="update_id" property="updateId"/>
+        <result column="update_version" property="updateVersion"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getUpdate" resultMap="updateMap">
+        select update_id,update_version,update_time from `update` order by update_time desc limit 1
+    </select>
 </mapper>

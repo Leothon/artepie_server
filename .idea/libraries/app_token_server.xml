@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="app-token-server">
+    <CLASSES>
+      <root url="jar://D:/AppTokenServerDemo/AppTokenServerDemo/app-token-server.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

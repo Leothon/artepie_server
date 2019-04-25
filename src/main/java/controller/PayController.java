@@ -6,6 +6,7 @@ import entity.Merchandise;
 import entity.Orders;
 import org.apache.ibatis.annotations.Param;
 import org.jdom.JDOMException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
