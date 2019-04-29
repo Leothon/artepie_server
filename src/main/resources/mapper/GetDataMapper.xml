@@ -79,7 +79,26 @@
         select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
     </select>
 
-
+    <resultMap id="userMapa" type="entity.User">
+        <id column="user_id" property="user_id" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_birth" property="user_birth"/>
+        <result column="user_sex" property="user_sex"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_password" property="user_password"/>
+        <result column="user_address" property="user_address"/>
+        <result column="user_token" property="user_token"/>
+        <result column="user_phone" property="user_phone"/>
+        <result column="user_balance" property="user_balance"/>
+        <result column="user_art_coin" property="user_art_coin"/>
+        <result column="user_role" property="user_role"/>
+    </resultMap>
+    <select id="getUserInfoInGet" parameterType="string" resultMap="userMapa">
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        from `user`
+        where user_id = #{userId}
+    </select>
 
     <select id="isFav" resultType="integer">
         select isnull((select fav_id from fav where fav_user_id = #{userId} and fav_class_id = #{classId} ))
@@ -180,13 +199,13 @@
 
     <select id="getQADataById" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid} order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getMoreQADataById" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid}  order by a.qa_time desc limit #{currentPage} ,15
 
     </select>

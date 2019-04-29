@@ -15,10 +15,11 @@ import utils.SensitiveWord;
 import utils.commonUtils;
 import utils.tokenUtils;
 
+import javax.print.DocFlavor;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service("SendDataService")
+@Service
 public class SendDataServiceImpl implements SendDataService {
 
     @Autowired
@@ -199,7 +200,9 @@ public class SendDataServiceImpl implements SendDataService {
         sendDataDao.insertVideoView(viewId,classdId,uuid,nowTime,classId);
     }
 
-    @Override
+
+
+  @Override
     public void removeViewHis(String uuid, String classdId) {
         sendDataDao.removeViewHis(uuid,classdId);
     }

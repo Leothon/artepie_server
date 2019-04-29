@@ -124,4 +124,5 @@ public interface GetDataDao {
     Inform getInform(String uuid);
 
     Update getUpdate(String uuid);
+    User getUserInfoInGet(String userId);
 }
