@@ -396,4 +396,21 @@ public class GetDataController {
 
 
     }
+
+
+    @GetMapping("/getauthimg")
+    @ResponseBody
+    public Result getAuthImg(@RequestParam("userid") String userId){
+
+        return new Result(true,getDataService.getAuthImg(userId));
+    }
+
+    @GetMapping("/authuser")
+    @ResponseBody
+    public Result authUser(@RequestParam("userid") String userId,@RequestParam("userrole") String userRole,@RequestParam("usertype") int type){
+
+
+        getDataService.authUser(userRole,userId,type);
+        return new Result(true,"成功");
+    }
 }

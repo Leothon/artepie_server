@@ -69,4 +69,8 @@ public interface GetDataService {
     Inform getInform(String uuid);
     Update getUpdate(String uuid);
 
+    String getAuthImg(String userId);
+
+    void authUser(String userRole,String userId,int userType);
+
 }

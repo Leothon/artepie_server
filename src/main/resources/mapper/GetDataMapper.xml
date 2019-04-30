@@ -504,4 +504,21 @@
     <select id="getUpdate" resultMap="updateMap">
         select update_id,update_version,update_time from `update` order by update_time desc limit 1
     </select>
+
+    <select id="getAuthImg" resultType="string">
+        select auth_handle_img from auth_handle where auth_handle_applicant_id = #{userId}
+    </select>
+
+    <update id="authUserz">
+        update `user` set user_role = "0"#{userRole} where user_id = #{userId}
+    </update>
+
+    <update id="authUsero">
+        update `user` set user_role = "1"#{userRole} where user_id = #{userId}
+    </update>
+
+    <update id="authUserto">
+        update auth_handle set auth_handle_status = 1,auth_handle_advice = "已成功" where auth_handle_applicant_id = #{userId}
+    </update>
+
 </mapper>

@@ -125,4 +125,10 @@ public interface GetDataDao {
 
     Update getUpdate(String uuid);
     User getUserInfoInGet(String userId);
+    String getAuthImg(String userId);
+
+    void authUserz(@Param("userRole") String userRole,@Param("userId") String userId);
+    void authUsero(@Param("userRole") String userRole,@Param("userId") String userId);
+
+    void authUserto(String userId);
 }

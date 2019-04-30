@@ -743,4 +743,19 @@ public class GetDataServiceImpl implements GetDataService {
 
         return getDataDao.getUpdate(uuid);
     }
+
+    @Override
+    public String getAuthImg(String userId) {
+        return getDataDao.getAuthImg(userId);
+    }
+
+    @Override
+    public void authUser(String userRole, String userId, int userType) {
+        if (userType == 1){
+            getDataDao.authUsero(userRole,userId);
+        }else {
+            getDataDao.authUserz(userRole,userId);
+        }
+        getDataDao.authUserto(userId);
+    }
 }
