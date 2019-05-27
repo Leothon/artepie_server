@@ -13,6 +13,49 @@ public class Article {
 
     private String authorRole;
 
+    private String articleVisionCount;
+
+    private boolean like;
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
+    }
+
+
+
+    private String likeCount;
+
+    public String getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    private String commentCount;
+
+    public String getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(String commentCount) {
+        this.commentCount = commentCount;
+    }
+
+
+    public String getArticleVisionCount() {
+        return articleVisionCount;
+    }
+
+    public void setArticleVisionCount(String articleVisionCount) {
+        this.articleVisionCount = articleVisionCount;
+    }
+
     public String getAuthorRole() {
         return authorRole;
     }

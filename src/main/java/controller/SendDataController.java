@@ -36,13 +36,14 @@ public class SendDataController {
         String uuid = tokenValid.getUid();
 
         String tokenInDb = userService.getTokenByUID(uuid);
-
+        System.out.println(tokenInDb);
         if (tokenInDb.equals(token)){
 
             String time = commonUtils.getTime();
             String qaId = "qa" + commonUtils.createUUID();
 
             sendDataService.insertQAData(qaId,uuid,sendQAData.getQa_content(),sendQAData.getQa_video(),time,sendQAData.getQa_audio(),sendQAData.getQa_video_cover());
+
             return new Result<>(true,"发送成功");
         }else {
             return new Result<>(false,"登录过期或者错误，请重新登录");
@@ -115,6 +116,30 @@ public class SendDataController {
         String uuid = tokenValid.getUid();
 
         sendDataService.removeLikeReply(uuid,replyId);
+
+        return new Result<>(true,"success");
+    }
+
+
+    @PostMapping("/addlikearticle")
+    @ResponseBody
+    public Result<String> likeArticle(@RequestParam("token") String token,@RequestParam("articleid") String articleId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.addLikeArticle(uuid,articleId);
+        return new Result<>(true,"success");
+    }
+
+    @PostMapping("/removelikearticle")
+    @ResponseBody
+    public Result<String> removelikeArticle(@RequestParam("token") String token,@RequestParam("articleid") String articleId){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        sendDataService.removeLikeArticle(uuid,articleId);
 
         return new Result<>(true,"success");
     }
@@ -321,5 +346,50 @@ public class SendDataController {
 
         sendDataService.deleteClassDetail(classdId);
         return new Result<>(true,"本节课程删除成功");
+    }
+
+
+    @PostMapping("/insertarticlecomment")
+    @ResponseBody
+    public Result<String> insertArticleComment(@RequestParam("artcomartid") String artComArtId,@RequestParam("token") String token,@RequestParam("artcom") String artCom){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.insertArticleComment(artComArtId,uuid,artCom);
+        return new Result<>(true,"留言成功");
+    }
+    @PostMapping("/replyarticlecomment")
+    @ResponseBody
+    public Result<String> replyArticleComment(@RequestParam("artcomid") String artComId,@RequestParam("token") String token,@RequestParam("artcomreply") String artComReply){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.replyArticleComment(artComId,uuid,artComReply);
+        return new Result<>(true,"回复成功");
+    }
+    @PostMapping("/deletearticlecomment")
+    @ResponseBody
+    public Result<String> deleteArticleComment(@RequestParam("artcomid") String artComId,@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.deleteArticleComment(artComId,uuid);
+        return new Result<>(true,"留言已删除");
+    }
+    @PostMapping("/deletereplyarticlecomment")
+    @ResponseBody
+    public Result<String> deleteReplyArticleComment(@RequestParam("artcomid") String artComId,@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.deleteReplyArticleComment(artComId,uuid);
+        return new Result<>(true,"回复已删除");
+    }
+    @PostMapping("/likeariclecomment")
+    @ResponseBody
+    public Result<String> likeArticleComment(@RequestParam("token") String token,@RequestParam("artcommentid") String artCommentId){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.likeArticleComment(uuid,artCommentId);
+        return new Result<>(true,"已点赞");
+    }
+    @PostMapping("/removelikearticlecomment")
+    @ResponseBody
+    public Result<String> removeLikeArticleComment(@RequestParam("artcommentid") String artCommentId,@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.removeLikeArticleComment(artCommentId,uuid);
+        return new Result<>(true,"已取消");
     }
 }

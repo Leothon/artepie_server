@@ -413,4 +413,22 @@ public class GetDataController {
         getDataService.authUser(userRole,userId,type);
         return new Result(true,"成功");
     }
+
+    @GetMapping("/getarticlecomment")
+    @ResponseBody
+    public Result getArticleComment(@RequestParam("articleid") String articleId){
+
+
+
+        return new Result(true,getDataService.getArticleComment(articleId));
+    }
+    @GetMapping("/getarticlecommentmore")
+    @ResponseBody
+    public Result getArticleComment(@RequestParam("articleid") String articleId,@RequestParam("currentPage") int currentPage){
+
+
+
+        return new Result(true,getDataService.getArticleCommentMore(articleId,currentPage));
+    }
+
 }

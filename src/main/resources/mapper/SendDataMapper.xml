@@ -129,8 +129,8 @@
     </insert>
 
     <insert id="createClassInfo">
-        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time,class_status)
-        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime},0)
+        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time)
+        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime})
     </insert>
 
     <update id="editClassInfo">
@@ -163,4 +163,50 @@
     <delete id="deleteClassDetail">
         delete from `class_detail` where classd_id = #{classdId}
     </delete>
+
+
+
+    <insert id="likeArticle">
+        insert into article_like
+        (article_like_id,article_article_id,article_user_id,article_like_time)
+        values (#{articleLikeId},#{articleId},#{userId},#{articleLikeTime})
+    </insert>
+
+    <delete id="removeLikeArticle">
+        delete from article_like where article_article_id = #{articleId} and article_user_id = #{userId}
+    </delete>
+
+
+    <insert id="insertArticleComment">
+        insert into article_comment
+        (art_com_id,art_com_user_id,art_com_art_id,art_com_content,art_com_time,art_com_reply)
+        values (#{artComId},#{artComUserId},#{artComArtId},#{artCom},#{artComTime},"")
+    </insert>
+
+    <update id="replyArticleComment">
+        update `article_comment` set
+        art_com_reply = #{artComReply}
+        where art_com_id = #{artComId} and art_com_user_id = #{artComUserId}
+    </update>
+
+    <delete id="deleteArticleComment">
+        delete from `article_comment` where art_com_id = #{artComId}
+    </delete>
+
+    <update id="deleteReplyArticleComment">
+        update `article_comment` set
+        art_com_reply = ""
+        where art_com_id = #{artComId} and art_com_user_id = #{artComUserId}
+    </update>
+
+    <insert id="likeArticleComment">
+        insert into article_comment_like
+        (art_com_like_id,art_com_like_user_id,art_com_like_time,art_com_like_artcom_id)
+        values (#{artComLikeId},#{userId},#{artLikeTime},#{artCommentId})
+    </insert>
+
+    <delete id="removeLikeArticleComment">
+        delete from article_comment_like where art_com_like_artcom_id = #{artCommentId} and art_com_like_user_id = #{userId}
+    </delete>
+
 </mapper>

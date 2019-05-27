@@ -287,6 +287,18 @@
 
     </select>
 
+    <select id="isArticleLike" resultType="integer" parameterType="string">
+         select isnull((select article_like_id from article_like where article_user_id = #{userId} and article_article_id = #{articleId}))
+
+    </select>
+
+    <select id="getArticleLike" resultType="integer">
+        select count(*) from article_like where article_article_id = #{articleId}
+    </select>
+
+    <select id="getArticleCommentCount" resultType="integer">
+        select count(*) from article_comment where art_com_art_id = #{articleId}
+    </select>
     <select id="getCommentReplyCount" resultType="integer">
          select count(*) from reply where reply_r_id = #{commentId}
     </select>
@@ -521,4 +533,33 @@
         update auth_handle set auth_handle_status = 1,auth_handle_advice = "已成功" where auth_handle_applicant_id = #{userId}
     </update>
 
+    <select id="getArticleVisionCount" resultType="integer" parameterType="string">
+        select count(*) from article_view where art_vis_co_art_id = #{articleId}
+    </select>
+
+    <insert id="insertArticleView">
+        insert into article_view (art_vis_co_id,art_vis_co_art_id,art_vis_co_user_id,art_vis_co_time,art_vis_gone)
+        values (#{articleViewId} ,#{articleViewArticleId} ,#{articleViewUserId} ,#{articleViewTime},1 )
+    </insert>
+
+
+    <resultMap id="articleCommentMap" type="entity.ArticleComment">
+        <id column="art_com_id" property="articleCommentId"/>
+        <result column="art_com_user_id" property="articleCommentUserId"/>
+        <result column="art_com_art_id" property="articleCommentArticleId"/>
+        <result column="art_com_content" property="articleComment"/>
+        <result column="art_com_time" property="articleCommentTime"/>
+        <result column="art_com_reply" property="articleCommentReply"/>
+        <result column="user_name" property="articleCommentUserName"/>
+        <result column="user_icon" property="articleCommentUserIcon"/>
+    </resultMap>
+    <select id="getArticleComment" resultMap="articleCommentMap">
+        select a.art_com_id,a.art_com_user_id,a.art_com_art_id,a.art_com_content,a.art_com_time,a.art_com_reply,b.user_name,b.user_icon
+        from article_comment a join `user` b on a.art_com_user_id = b.user_id where a.art_com_art_id = #{articleId} order by a.art_com_time desc limit 15
+    </select>
+
+    <select id="getArticleCommentMore" resultMap="articleCommentMap">
+        select a.art_com_id,a.art_com_user_id,a.art_com_art_id,a.art_com_content,a.art_com_time,a.art_com_reply,b.user_name,b.user_icon
+        from article_comment a join `user` b on a.art_com_user_id = b.user_id where a.art_com_art_id = #{articleId} order by a.art_com_time desc limit #{currentPage},15
+    </select>
 </mapper>

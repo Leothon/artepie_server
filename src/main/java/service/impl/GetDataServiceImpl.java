@@ -573,6 +573,10 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<Banner> banners = getDataDao.getArticleBanner();
         ArrayList<Article> articles = getDataDao.getArticleList();
 
+        for (int i = 0;i < articles.size();i++){
+            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
+            articles.get(i).setArticleVisionCount(count);
+        }
         ArticleData articleData = new ArticleData();
         articleData.setArticles(articles);
         articleData.setBanners(banners);
@@ -583,7 +587,10 @@ public class GetDataServiceImpl implements GetDataService {
 
 
         ArrayList<Article> articles = getDataDao.getMoreArticleList(currentPage);
-
+        for (int i = 0;i < articles.size();i++){
+            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
+            articles.get(i).setArticleVisionCount(count);
+        }
         return articles;
     }
     @Override
@@ -591,7 +598,10 @@ public class GetDataServiceImpl implements GetDataService {
 
 
         ArrayList<Article> articles = getDataDao.getArticleListById(uuid);
-
+        for (int i = 0;i < articles.size();i++){
+            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
+            articles.get(i).setArticleVisionCount(count);
+        }
         return articles;
     }
     @Override
@@ -599,6 +609,10 @@ public class GetDataServiceImpl implements GetDataService {
 
 
         ArrayList<Article> articles = getDataDao.getMoreArticleListById(uuid,currentPage);
+        for (int i = 0;i < articles.size();i++){
+            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
+            articles.get(i).setArticleVisionCount(count);
+        }
         return articles;
     }
 
@@ -606,6 +620,15 @@ public class GetDataServiceImpl implements GetDataService {
     public Article getArticleDetail(String uuid, String articleId) {
 
         Article article = getDataDao.getArticleDetail(articleId);
+        if (getDataDao.isArticleLike(uuid,articleId) == 0){
+            article.setLike(true);
+        }else {
+            article.setLike(false);
+        }
+        article.setLikeCount(String.valueOf(getDataDao.getArticleLike(articleId)));
+        article.setCommentCount(String.valueOf(getDataDao.getArticleCommentCount(articleId)));
+        String viewId = "articleview" + commonUtils.createUUID();
+        getDataDao.insertArticleView(viewId,articleId,uuid,commonUtils.getTime());
         return article;
     }
 
@@ -757,5 +780,15 @@ public class GetDataServiceImpl implements GetDataService {
             getDataDao.authUserz(userRole,userId);
         }
         getDataDao.authUserto(userId);
+    }
+
+    @Override
+    public ArrayList<ArticleComment> getArticleComment(String articleId) {
+        return getDataDao.getArticleComment(articleId);
+    }
+
+    @Override
+    public ArrayList<ArticleComment> getArticleCommentMore(String articleId, int currentPage) {
+        return getDataDao.getArticleCommentMore(articleId,currentPage);
     }
 }

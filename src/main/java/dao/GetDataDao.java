@@ -43,6 +43,12 @@ public interface GetDataDao {
 
     int isReplyLike(@Param("userId") String userId,@Param("replyId") String replyId);
 
+    int isArticleLike(@Param("userId") String userId,@Param("articleId") String articleId);
+
+    int getArticleLike(String articleId);
+
+    int getArticleCommentCount(String articleId);
+
     int getCommentReplyCount(String commentId);
 
     SelectClass getClassDetail(String classId);
@@ -131,4 +137,11 @@ public interface GetDataDao {
     void authUsero(@Param("userRole") String userRole,@Param("userId") String userId);
 
     void authUserto(String userId);
+
+    int getArticleVisionCount(String articleId);
+    void insertArticleView(@Param("articleViewId") String articleViewId,@Param("articleViewArticleId") String articleViewArticleId,@Param("articleViewUserId") String articleViewUserId,@Param("articleViewTime") String articleViewTime);
+
+
+    ArrayList<ArticleComment> getArticleComment(String articleId);
+    ArrayList<ArticleComment> getArticleCommentMore(@Param("articleId") String articleId,@Param("currentPage") int currentPage);
 }

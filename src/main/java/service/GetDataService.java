@@ -73,4 +73,7 @@ public interface GetDataService {
 
     void authUser(String userRole,String userId,int userType);
 
+    ArrayList<ArticleComment> getArticleComment(String articleId);
+
+    ArrayList<ArticleComment> getArticleCommentMore(String articleId, int currentPage);
 }

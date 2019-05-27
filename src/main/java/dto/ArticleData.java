@@ -10,6 +10,7 @@ public class ArticleData {
     private ArrayList<Banner> banners;
     private ArrayList<Article> articles;
 
+
     public ArrayList<Article> getArticles() {
         return articles;
     }

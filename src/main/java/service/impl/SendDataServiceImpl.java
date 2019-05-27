@@ -33,10 +33,10 @@ public class SendDataServiceImpl implements SendDataService {
     UserDao userDao;
     @Override
     public void insertQAData(String qaId, String userId, String qaContent, String qaVideo, String qa_time, String qaAudio,String qaVideoCover) {
-
         String content = EmojiParser.parseToAliases(qaContent);
         String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
         sendDataDao.insertQa(qaId,userId,contentWithoutSensitiveWord,qaVideo,qa_time,qaAudio,qaVideoCover);
+
     }
 
     @Override
@@ -119,6 +119,20 @@ public class SendDataServiceImpl implements SendDataService {
     public void removeLikeReply(String userId, String replyId) {
         sendDataDao.removeLikeReplyWithUser(replyId,userId);
         sendDataDao.deleteNoticeInfo(replyId,userId,"replylike");
+    }
+
+    @Override
+    public void addLikeArticle(String userId, String articleId) {
+        String articleLikeId = "articlelike" + commonUtils.createUUID();
+
+        if (getDataDao.isArticleLike(userId,articleId) != 0){
+            sendDataDao.likeArticle(articleLikeId,userId,articleId,commonUtils.getTime());
+        }
+    }
+
+    @Override
+    public void removeLikeArticle(String userId, String articleId) {
+        sendDataDao.removeLikeArticle(articleId,userId);
     }
 
     @Override
@@ -211,8 +225,8 @@ public class SendDataServiceImpl implements SendDataService {
     public void uploadArticle(String title, String img, String content, String uid) {
         String time = commonUtils.getTime();
         String articleId = "article" + commonUtils.createUUID();
-        String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
-        sendDataDao.uploadArticle(articleId,uid,time,contentWithoutSensitiveWord,img,title);
+        //String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
+        sendDataDao.uploadArticle(articleId,uid,time,content,img,title);
     }
 
     @Override
@@ -279,6 +293,9 @@ public class SendDataServiceImpl implements SendDataService {
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
         String titleWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(titlewithoutemoji);
         String desWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(deswithoutemoji);
+        if (classPrice.equals("")){
+            classPrice = "0.00";
+        }
         sendDataDao.createClassInfo(classId,titleWithoutSensitiveWord,classAuthor,classAuthorId,classPrice,desWithoutSensitiveWord,classImg,classType,classAuthorDes,commonUtils.getTime());
     }
 
@@ -314,5 +331,40 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void deleteClassDetail(String classdId) {
         sendDataDao.deleteClassDetail(classdId);
+    }
+
+    @Override
+    public void insertArticleComment(String artComArtId, String artComUserId, String artCom) {
+        String artComId = "artCom" + commonUtils.createUUID();
+        String time = commonUtils.getTime();
+
+        sendDataDao.insertArticleComment(artComId,artComArtId,artComUserId,artCom,time);
+    }
+
+    @Override
+    public void replyArticleComment(String artComId, String artComUserId, String artComReply) {
+        sendDataDao.replyArticleComment(artComId,artComUserId,artComReply);
+    }
+
+    @Override
+    public void deleteArticleComment(String artComId, String artComUserId) {
+        sendDataDao.deleteArticleComment(artComId,artComUserId);
+    }
+
+    @Override
+    public void deleteReplyArticleComment(String artComId, String artComUserId) {
+        sendDataDao.deleteReplyArticleComment(artComId,artComUserId);
+    }
+
+    @Override
+    public void likeArticleComment(String userId, String artCommentId) {
+        String artComLikeId = "artComLike" + commonUtils.createUUID();
+        String time = commonUtils.getTime();
+        sendDataDao.likeArticleComment(artComLikeId,userId,artCommentId,time);
+    }
+
+    @Override
+    public void removeLikeArticleComment(String artCommentId, String userId) {
+        sendDataDao.removeLikeArticleComment(artCommentId,userId);
     }
 }

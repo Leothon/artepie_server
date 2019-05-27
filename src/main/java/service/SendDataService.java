@@ -11,6 +11,9 @@ public interface SendDataService {
     void addLikeReply(String userId,String replyId);
     void removeLikeReply(String userId,String replyId);
 
+    void addLikeArticle(String userId,String articleId);
+    void removeLikeArticle(String userId,String articleId);
+
     void sendQaComment(String qaId,String uuid,String content,String sendTime);
 
     void sendReply(String replyRId,String replyComment,String replyUserId,String replyToUserId,String replyTime);
@@ -51,4 +54,15 @@ public interface SendDataService {
 
     void deleteClass(String uuid,String classId);
     void deleteClassDetail(String classdId);
+
+    void insertArticleComment(String artComArtId,String artComUserId,String artCom);
+
+    void replyArticleComment(String artComId,String artComUserId,String artComReply);
+
+    void deleteArticleComment(String artComId,String artComUserId);
+
+    void deleteReplyArticleComment(String artComId,String artComUserId);
+
+    void likeArticleComment(String userId,String artCommentId);
+    void removeLikeArticleComment(String artCommentId,String userId);
 }

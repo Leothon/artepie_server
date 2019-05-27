@@ -76,4 +76,19 @@ public interface SendDataDao {
     void deleteClassDetail(String classdId);
 
 
+    void likeArticle(@Param("articleLikeId") String articleLikeId,@Param("userId") String userId,@Param("articleId") String articleId,@Param("articleLikeTime") String articleLikeTime);
+
+    void removeLikeArticle(@Param("articleId") String articleId,@Param("userId") String userId);
+
+    void insertArticleComment(@Param("artComId") String artComId,@Param("artComArtId") String artComArtId,@Param("artComUserId") String artComUserId,@Param("artCom") String artCom,@Param("artComTime") String artComTime);
+
+    void replyArticleComment(@Param("artComId") String artComId, @Param("artComUserId") String artComUserId,@Param("artComReply") String artComReply);
+
+    void deleteArticleComment(@Param("artComId") String artComId,@Param("artComUserId") String artComUserId);
+
+    void deleteReplyArticleComment(@Param("artComId") String artComId, @Param("artComUserId") String artComUserId);
+
+    void likeArticleComment(@Param("artComLikeId") String artComLikeId,@Param("userId") String userId,@Param("artCommentId") String artCommentId,@Param("artLikeTime") String artLikeTime);
+    void removeLikeArticleComment(@Param("artCommentId") String artCommentId,@Param("userId") String userId);
+
 }
