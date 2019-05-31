@@ -643,9 +643,12 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<NoticeInfo> noticeInfos = getDataDao.getNoticeInfo(uuid);
         for (int i = 0;i < noticeInfos.size();i ++){
             noticeInfos.get(i).setNoticeContent(EmojiParser.parseToUnicode(noticeInfos.get(i).getNoticeContent()));
-            User user  = getDataDao.getUserInfoInGet(noticeInfos.get(i).getNoticeFromUserId());
-            noticeInfos.get(i).setUserName(user.getUser_name());
-            noticeInfos.get(i).setUserIcon(user.getUser_icon());
+            User user = getDataDao.getUserInfoInGet(noticeInfos.get(i).getNoticeFromUserId());
+            if (user != null){
+                noticeInfos.get(i).setUserName(user.getUser_name());
+                noticeInfos.get(i).setUserIcon(user.getUser_icon());
+            }
+
         }
         return noticeInfos;
     }
