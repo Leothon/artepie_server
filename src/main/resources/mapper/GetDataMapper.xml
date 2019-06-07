@@ -562,4 +562,13 @@
         select a.art_com_id,a.art_com_user_id,a.art_com_art_id,a.art_com_content,a.art_com_time,a.art_com_reply,b.user_name,b.user_icon
         from article_comment a join `user` b on a.art_com_user_id = b.user_id where a.art_com_art_id = #{articleId} order by a.art_com_time desc limit #{currentPage},15
     </select>
+
+
+    <resultMap id="articleInfoMap" type="dto.createArticle">
+        <id column="article_id" property="articleId"/>
+        <result column="article_content" property="content"/>
+    </resultMap>
+    <select id="getArticleInfo" resultMap="articleInfoMap">
+        select article_id,article_content from article
+    </select>
 </mapper>

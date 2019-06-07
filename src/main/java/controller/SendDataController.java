@@ -392,4 +392,12 @@ public class SendDataController {
         sendDataService.removeLikeArticleComment(artCommentId,uuid);
         return new Result<>(true,"已取消");
     }
+
+    @PostMapping("/createarticle")
+    @ResponseBody
+    public Result<String> createArticle(@RequestParam("token") String token){
+
+        sendDataService.createArticle();
+        return new Result<>(true,"成功");
+    }
 }

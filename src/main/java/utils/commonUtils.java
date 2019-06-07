@@ -3,6 +3,7 @@ package utils;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -69,10 +70,38 @@ public class commonUtils {
 
     }
 
+    public static void stringToFile(String article,String articleId){
+        try {
+
+
+
+            File file = new File("/image/" + articleId + ".txt");
+            //File file = new File("D:/" + articleId + ".txt");
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            OutputStreamWriter write = new OutputStreamWriter(new FileOutputStream(file),"UTF-8");
+            BufferedWriter writer=new BufferedWriter(write);
+            writer.write(article);
+            writer.close();
+
+//            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            bw.write(article);
+//            bw.close();
+            file.renameTo(new File("/image/" + articleId + ".html"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 //    public static void main(String args[]){
-//        System.out.println(getTime());
-//        System.out.println(getTimeRange("2019-02-18","2019-01-21"));
+//        stringToFile("aawwwwa","sdws");
 //    }
-//
+
 
 }

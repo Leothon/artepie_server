@@ -4,6 +4,7 @@ import com.vdurmont.emoji.EmojiParser;
 import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
+import dto.createArticle;
 import entity.TokenValid;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import utils.commonUtils;
 import utils.tokenUtils;
 
 import javax.print.DocFlavor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -225,8 +227,10 @@ public class SendDataServiceImpl implements SendDataService {
     public void uploadArticle(String title, String img, String content, String uid) {
         String time = commonUtils.getTime();
         String articleId = "article" + commonUtils.createUUID();
-        //String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
-        sendDataDao.uploadArticle(articleId,uid,time,content,img,title);
+        String article = "<meta charSet=\"utf-8\"/>" + content;
+                //String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(content);
+        sendDataDao.uploadArticle(articleId,uid,time,article,img,title);
+        commonUtils.stringToFile(article,articleId);
     }
 
     @Override
@@ -366,5 +370,13 @@ public class SendDataServiceImpl implements SendDataService {
     @Override
     public void removeLikeArticleComment(String artCommentId, String userId) {
         sendDataDao.removeLikeArticleComment(artCommentId,userId);
+    }
+
+    @Override
+    public void createArticle() {
+        ArrayList<createArticle> articles = getDataDao.getArticleInfo();
+        for (int i = 0;i < articles.size();i ++){
+            commonUtils.stringToFile(articles.get(i).getContent(),articles.get(i).getArticleId());
+        }
     }
 }

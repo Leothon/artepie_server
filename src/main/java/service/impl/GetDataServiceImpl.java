@@ -574,8 +574,8 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<Article> articles = getDataDao.getArticleList();
 
         for (int i = 0;i < articles.size();i++){
-            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
-            articles.get(i).setArticleVisionCount(count);
+            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         ArticleData articleData = new ArticleData();
         articleData.setArticles(articles);
@@ -588,8 +588,8 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getMoreArticleList(currentPage);
         for (int i = 0;i < articles.size();i++){
-            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
-            articles.get(i).setArticleVisionCount(count);
+            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
     }
@@ -599,8 +599,8 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getArticleListById(uuid);
         for (int i = 0;i < articles.size();i++){
-            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
-            articles.get(i).setArticleVisionCount(count);
+            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
     }
@@ -610,8 +610,8 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getMoreArticleListById(uuid,currentPage);
         for (int i = 0;i < articles.size();i++){
-            String count = String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId()));
-            articles.get(i).setArticleVisionCount(count);
+            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
     }

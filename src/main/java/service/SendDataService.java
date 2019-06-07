@@ -65,4 +65,6 @@ public interface SendDataService {
 
     void likeArticleComment(String userId,String artCommentId);
     void removeLikeArticleComment(String artCommentId,String userId);
+
+    void createArticle();
 }
