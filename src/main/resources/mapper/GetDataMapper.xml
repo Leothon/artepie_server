@@ -571,4 +571,8 @@
     <select id="getArticleInfo" resultMap="articleInfoMap">
         select article_id,article_content from article
     </select>
+
+    <select id="getQaView" resultType="integer" parameterType="string">
+        select count(*) from qa_view where qa_view_qa_id = #{qaId}
+    </select>
 </mapper>

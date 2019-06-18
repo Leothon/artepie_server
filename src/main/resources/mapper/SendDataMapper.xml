@@ -209,4 +209,9 @@
         delete from article_comment_like where art_com_like_artcom_id = #{artCommentId} and art_com_like_user_id = #{userId}
     </delete>
 
+    <insert id="addQaView">
+        insert into qa_view
+        (qa_view_id,qa_view_user_id,qa_view_qa_id,qa_view_time)
+        values (#{qaViewId},#{qaViewUserId},#{qaViewQaId},#{qaViewTime})
+    </insert>
 </mapper>

@@ -379,4 +379,12 @@ public class SendDataServiceImpl implements SendDataService {
             commonUtils.stringToFile(articles.get(i).getContent(),articles.get(i).getArticleId());
         }
     }
+
+    @Override
+    public void addQaView(String qaViewUserId, String qaViewQaId) {
+        String qaViewId = "qaview" + commonUtils.createUUID();
+        String time = commonUtils.getTime();
+
+        sendDataDao.addQaView(qaViewId,qaViewUserId,qaViewQaId,time);
+    }
 }

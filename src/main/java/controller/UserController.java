@@ -25,44 +25,29 @@ public class UserController {
     @ResponseBody
     public Result<User> usePhoneLogin(@RequestParam("phonenumber") String phonenumber) {
 
-        //查询数据库，手机号是否已注册，如果未注册，则生成token，和手机号一块插入数据库，并返回token
-        //如果已经注册，则查找数据库，获取token，并返回
+        Token tokeninfo = null;
+        if (!userService.phoneExits(phonenumber)) {
+            //未注册
+            String uuid = "5699" + commonUtils.createUUID();
+            String token = tokenUtils.getToken(uuid);
+            tokeninfo = new Token();
+            tokeninfo.setInfo("注册成功");
+            tokeninfo.setToken(token);
+            String registerTime = commonUtils.getTime();
+            userService.register(uuid, phonenumber, token, "用户" + uuid, registerTime);
+            return new Result<User>(true, userService.getUserInfoById(uuid));
+        } else {
+            //已注册
+            String token = userService.returnTokenByPhone(phonenumber);
+            TokenValid tokenValid = tokenUtils.ValidToken(token);
+            String uuid = tokenValid.getUid();
+            if (tokenValid.isExpired()){
+                String newtoken = tokenUtils.getToken(uuid);
+                userService.updateToken(newtoken,uuid);
+            }
+            return new Result<User>(true, userService.getUserInfoById(uuid));
 
-
-
-                Token tokeninfo = null;
-                if (!userService.phoneExits(phonenumber)) {
-                    //未注册
-                    String uuid = "5699" + commonUtils.createUUID();
-                    String token = tokenUtils.getToken(uuid);
-                    tokeninfo = new Token();
-                    tokeninfo.setInfo("注册成功");
-                    tokeninfo.setToken(token);
-                    String registerTime = commonUtils.getTime();
-                    userService.register(uuid, phonenumber, token, "用户" + uuid, registerTime);
-
-                    return new Result<User>(true, userService.getUserInfoById(uuid));
-                } else {
-                    //已注册
-
-
-                    String token = userService.returnTokenByPhone(phonenumber);
-                    TokenValid tokenValid = tokenUtils.ValidToken(token);
-                    String uuid = tokenValid.getUid();
-                    if (tokenValid.isExpired()){
-                        String newtoken = tokenUtils.getToken(uuid);
-                        userService.updateToken(newtoken,uuid);
-                    }
-
-                    return new Result<User>(true, userService.getUserInfoById(uuid));
-
-                }
-
-
-
-
-
-
+        }
     }
 
 
@@ -93,8 +78,6 @@ public class UserController {
     @GetMapping("/getuserinfobyid")
     @ResponseBody
     public Result<User> getUserInfoById(@RequestParam("userid") String userId) {
-
-
 
         return new Result<User>(true, userService.getUserInfoById(userId));
     }
@@ -205,7 +188,13 @@ public class UserController {
     public Result<String> setPassword(@RequestParam("token") String token,@RequestParam("password") String password){
         String uuid = tokenUtils.ValidToken(token).getUid();
         userService.insertPassword(uuid,password);
-        return new Result<>(true,"设置密码成功");
+        User user = userService.getUserInfoById(uuid);
+        if (!user.getUser_password().equals(password)){
+            return new Result<>(false,"密码设置失败，请重新设置");
+        }else {
+            return new Result<>(true,"设置密码成功");
+        }
+
     }
 
     @PostMapping("/changepassword")
@@ -220,6 +209,21 @@ public class UserController {
             return new Result<>(false,"原密码错误");
         }
 
+
+    }
+
+
+    @PostMapping("/createmoreuser")
+    @ResponseBody
+    public Result<String> createMoreUser(@RequestParam("username") String username,@RequestParam("userphone") String userPhone){
+        if (!userService.phoneExits(userPhone)){
+            String uuid = "5699" + commonUtils.createUUID();
+            String token = tokenUtils.getToken(uuid);
+            userService.insertFalseUser(uuid,username,token,userPhone);
+            return new Result<>(true,"创建成功");
+        }else {
+            return new Result<>(false,"该号码已注册");
+        }
 
     }
 }

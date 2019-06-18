@@ -400,4 +400,13 @@ public class SendDataController {
         sendDataService.createArticle();
         return new Result<>(true,"成功");
     }
+
+
+    @PostMapping("/addqaview")
+    @ResponseBody
+    public Result<String> createArticle(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataService.addQaView(uuid,qaId);
+        return new Result<>(true,"成功");
+    }
 }

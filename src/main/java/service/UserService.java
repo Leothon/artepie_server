@@ -1,6 +1,7 @@
 package service;
 
 import entity.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserService {
 
@@ -29,4 +30,8 @@ public interface UserService {
     String getPasswordByPhoneNumber(String phoneNumber);
 
     void updateToken(String token,String uuid);
+
+    void insertFalseUser(String uuid,String username,String token,String phone);
+
+
 }

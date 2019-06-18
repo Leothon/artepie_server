@@ -147,4 +147,6 @@ public interface GetDataDao {
     ArrayList<ArticleComment> getArticleCommentMore(@Param("articleId") String articleId,@Param("currentPage") int currentPage);
 
     ArrayList<createArticle> getArticleInfo();
+
+    int getQaView(String qaId);
 }

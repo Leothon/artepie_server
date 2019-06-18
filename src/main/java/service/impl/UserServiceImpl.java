@@ -5,6 +5,7 @@ import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.UserService;
+import utils.commonUtils;
 import utils.tokenUtils;
 
 @Service
@@ -98,5 +99,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateToken(String token, String uuid) {
         userDao.updateToken(token,uuid);
+    }
+
+    @Override
+    public void insertFalseUser(String uuid, String username, String token, String phone) {
+        userDao.insertFalseUser(uuid,username, token, commonUtils.getTime(),phone);
     }
 }

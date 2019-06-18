@@ -72,7 +72,7 @@ public class GetDataServiceImpl implements GetDataService {
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-
+            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -114,7 +114,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             String reId = qaMoreData.get(i).getQa_re_id();
-
+            qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
 
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
@@ -153,7 +153,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaData.size();i ++){
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-
+            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -194,7 +194,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             String reId = qaMoreData.get(i).getQa_re_id();
-
+            qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -233,7 +233,7 @@ public class GetDataServiceImpl implements GetDataService {
         QAData qaData = getDataDao.getQADetail(qaId);
         String reId = qaData.getQa_re_id();
         qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
-
+        qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
         if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
             if (qaDataSingle != null){
@@ -299,8 +299,7 @@ public class GetDataServiceImpl implements GetDataService {
         QAData qaData = getDataDao.getQADetail(qaId);
         qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
         String reId = qaData.getQa_re_id();
-
-
+        qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
 
         if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
@@ -683,7 +682,7 @@ public class GetDataServiceImpl implements GetDataService {
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-
+            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){

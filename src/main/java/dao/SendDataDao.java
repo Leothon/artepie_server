@@ -91,4 +91,6 @@ public interface SendDataDao {
     void likeArticleComment(@Param("artComLikeId") String artComLikeId,@Param("userId") String userId,@Param("artCommentId") String artCommentId,@Param("artLikeTime") String artLikeTime);
     void removeLikeArticleComment(@Param("artCommentId") String artCommentId,@Param("userId") String userId);
 
+
+    void addQaView(@Param("qaViewId") String qaViewId,@Param("qaViewUserId") String qaViewUserId,@Param("qaViewQaId") String qaViewQaId,@Param("qaViewTime") String qaViewTime);
 }

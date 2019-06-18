@@ -67,4 +67,6 @@ public interface SendDataService {
     void removeLikeArticleComment(String artCommentId,String userId);
 
     void createArticle();
+
+    void addQaView(String qaViewUserId,String qaViewQaId);
 }
