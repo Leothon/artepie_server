@@ -2,10 +2,20 @@ package entity;
 
 public class Merchandise {
 
+    private String Me_Id;
     private String Me_Name;
     private String Me_Author;
     private String ME_Des;
     private String ME_Create_Time;
+
+
+    public String getMe_Id() {
+        return Me_Id;
+    }
+
+    public void setMe_Id(String me_Id) {
+        Me_Id = me_Id;
+    }
 
 
     public String getMe_Author() {
@@ -38,5 +48,10 @@ public class Merchandise {
 
     public String getMe_Name() {
         return Me_Name;
+    }
+
+    @Override
+    public String toString() {
+        return "商品ID" + Me_Id + "商品名字" + Me_Name + "商品归属者" + Me_Author + "商品描述" + ME_Des + "商品创建时间" + ME_Create_Time;
     }
 }

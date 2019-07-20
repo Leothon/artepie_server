@@ -4,8 +4,8 @@
 <mapper namespace="dao.SendDataDao">
     <insert id="insertQa" >
 
-        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_video_cover)
-        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},#{qaVideoCover} )
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_video,qa_time,qa_audio,qa_video_cover,qa_count)
+        values (#{qaId} ,#{userId} ,#{qaContent} ,#{qaVideo} ,#{qaTime} ,#{qaAudio},#{qaVideoCover},"0" )
     </insert>
 
 
@@ -87,18 +87,22 @@
         values (#{classdViewId} ,#{classdViewClassdId} ,#{classdViewUserId} ,#{classdViewTime},#{classdViewClassId},1 )
     </insert>
 
+    <insert id="insertVideoViewMore">
+        insert into classd_view (classd_view_id,classd_view_classd_id,classd_view_user_id,classd_view_time,classd_view_class_id,classd_view_gone)
+        values (UUID() ,#{classdViewClassdId} ,#{classdViewUserId} ,#{classdViewTime},#{classdViewClassId},1 )
+    </insert>
 
     <update id="removeViewHis">
         update classd_view set classd_view_gone = 0 where classd_view_classd_id = #{classdId} and classd_view_user_id = #{uuid}
     </update>
 
     <insert id="uploadArticle">
-        insert into article (article_id,article_author_id,article_time,article_content,article_img,article_title) values (#{articleId} ,#{articleAuthorId} ,#{articleTime} ,#{articleContent} ,#{articleImg} ,#{articleTitle} )
+        insert into article (article_id,article_author_id,article_time,article_content,article_img,article_title,article_count) values (#{articleId} ,#{articleAuthorId} ,#{articleTime} ,#{articleContent} ,#{articleImg} ,#{articleTitle},"0" )
     </insert>
 
     <insert id="sendRe">
-        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_time,qa_re_id)
-        values (#{qaId} ,#{qaUserId} ,#{qaContent} ,#{qaTime} ,#{qaReId})
+        insert into `question_answer` (qa_id,qa_user_id,qa_content,qa_time,qa_re_id,qa_count)
+        values (#{qaId} ,#{qaUserId} ,#{qaContent} ,#{qaTime} ,#{qaReId},"0")
     </insert>
 
     <insert id="noticeInfo">
@@ -129,8 +133,8 @@
     </insert>
 
     <insert id="createClassInfo">
-        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time)
-        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime})
+        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time,class_count)
+        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime},0)
     </insert>
 
     <update id="editClassInfo">
@@ -146,8 +150,8 @@
 
     <insert id="uploadClassDetail">
         insert into class_detail
-        (classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status)
-        values (#{classdId},#{classdTitle},#{classclassdId},#{classdDes},#{classdDuration},#{classdVideo},#{classdCreateTime},#{classdVideoCover},0)
+        (classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count)
+        values (#{classdId},#{classdTitle},#{classclassdId},#{classdDes},#{classdDuration},#{classdVideo},#{classdCreateTime},#{classdVideoCover},0,0)
     </insert>
 
     <update id="addDuration">
@@ -214,4 +218,48 @@
         (qa_view_id,qa_view_user_id,qa_view_qa_id,qa_view_time)
         values (#{qaViewId},#{qaViewUserId},#{qaViewQaId},#{qaViewTime})
     </insert>
+
+    <update id="addQaViewCount">
+        update `question_answer` set
+        qa_count = convert((convert(qa_count,signed) + 1),char)
+        where qa_id = #{qaId}
+    </update>
+
+    <update id="addVideoViewCount">
+        update `class` set
+        class_count = convert((convert(class_count,signed) + 1),char)
+        where class_id = #{classid};
+        update `class_detail` set
+        classd_count = convert((convert(classd_count,signed) + 1),char)
+        where classd_id = #{classdid}
+    </update>
+
+    <insert id="insertOrders">
+        insert into transaction_order
+        (transaction_id,transaction_number,transaction_user_id,transaction_date,transaction_class_id,transaction_price,transaction_discount,transaction_end_price,transaction_status)
+        values (#{orderId},#{orderNumber},#{orderUserId},#{orderTime},#{orderClassId},#{orderPirce},#{orderDiscount},#{orderEndPrice},#{orderStatus})
+    </insert>
+
+    <update id="updateTransaction">
+        update `transaction_order` set
+        transaction_pay_type = #{payType},
+        transaction_status = #{payStatus},
+        bank_type = #{bankType},
+        wechat_number = #{wechatNumber},
+        transaction_end_time = #{endTime}
+        where transaction_id = #{transactionId}
+
+    </update>
+
+    <insert id="insertClassBuyInfo">
+        insert into class_buy
+        (class_buy_id,class_buy_class_id,class_buy_user_id,class_buy_time)
+        values (#{class_buy_id},#{class_buy_class_id},#{class_buy_user_id},#{buy_time})
+    </insert>
+
+    <update id="updateUserBalance">
+        update `user` set
+        user_balance = #{balance}
+        where user_id = #{userId}
+    </update>
 </mapper>

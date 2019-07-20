@@ -34,4 +34,6 @@ public interface UserService {
     void insertFalseUser(String uuid,String username,String token,String phone);
 
 
+
+    String getTokenByAccessToken(String accessToken);
 }

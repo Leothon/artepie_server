@@ -24,23 +24,24 @@
         <result column="user_id" property="selectauthorid"/>
         <result column="class_des" property="selectdesc"/>
         <result column="class_type_detail" property="type"/>
+        <result column="class_count" property="selectstucount"/>
     </resultMap>
 
     <select id="getClassInfo" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id  where a.class_id = #{classId}
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_id = #{classId}
     </select>
     <select id="getClasses" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
     </select>
 
     <select id="getClassByTea" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc
     </select>
 
 
 
     <select id="getClassByType" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc
     </select>
 
 
@@ -52,13 +53,14 @@
         <result column="class_img" property="selectbackimg"/>
         <result column="class_author_id" property="selectauthorid"/>
         <result column="class_des" property="selectdesc"/>
+        <result column="class_count" property="selectstucount"/>
     </resultMap>
     <select id="getBuyClassByid" resultMap="classBuyMap">
-        select b.class_id,b.class_title,b.class_author,b.class_price,b.class_img,b.class_author_id,b.class_des from `class` b join class_buy a on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
+        select b.class_id,b.class_title,b.class_author,b.class_price,b.class_img,b.class_author_id,b.class_des,b.class_count from `class` b join class_buy a on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
 
     </select>
     <select id="getMoreClass" resultMap="classMap" parameterType="integer">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_count from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
     </select>
 
     <resultMap id="classDetailMap" type="entity.SelectClass">
@@ -73,10 +75,11 @@
         <result column="class_type_detail" property="type"/>
         <result column="class_score" property="selectscore"/>
         <result column="user_id" property="selectauthorid"/>
+        <result column="class_count" property="selectstucount"/>
     </resultMap>
 
     <select id="getClassDetail" resultMap="classDetailMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
+        select a.class_id,a.class_title,b.user_name,a.class_count,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
     </select>
 
     <resultMap id="userMapa" type="entity.User">
@@ -134,9 +137,10 @@
         <result column="classd_create_time" property="classd_create_time"/>
         <result column="classd_video_cover" property="classd_video_cover"/>
         <result column="classd_status" property="classdStatus"/>
+        <result column="classd_count" property="classd_view"/>
     </resultMap>
     <select id="getClassList" resultMap="classListMap">
-        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count
         from class_detail  where class_classd_id = #{classId} order by classd_create_time
     </select>
 
@@ -153,7 +157,7 @@
         select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1教师"
     </select>
     <select id="getClassVideo" resultMap="classListMap">
-        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count
         from class_detail  where class_classd_id = #{classId} and classd_id = #{classdId}
     </select>
 
@@ -178,40 +182,41 @@
         <result column="qa_time" property="qa_time"/>
         <result column="qa_video_cover" property="qa_video_cover"/>
         <result column="qa_re_id" property="qa_re_id"/>
+        <result column="qa_count" property="qa_view"/>
     </resultMap>
 
     <select id="getQAData" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getTopQA" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{topId}
     </select>
     <select id="getMoreQAData" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
 
     </select>
 
     <select id="getQADataById" resultMap="qaMap">
 
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,a.qa_count,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid} order by a.qa_time desc limit 15
     </select>
 
 
     <select id="getMoreQADataById" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
         from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid}  order by a.qa_time desc limit #{currentPage} ,15
 
     </select>
 
     <select id="getQADetail" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
 
     </select>
@@ -368,18 +373,19 @@
         <result column="user_name" property="articleAuthorName"/>
         <result column="user_icon" property="articleAuthorIcon"/>
         <result column="user_role" property="authorRole"/>
+        <result column="article_count" property="articleVisionCount"/>
     </resultMap>
     <select id="getArticleList" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit 15
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit 15
     </select>
     <select id="getMoreArticleList" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit #{currentPage},15
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit #{currentPage},15
     </select>
     <select id="getArticleListById" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id  where b.user_id = #{userId} order by a.article_time desc limit 15
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id  where b.user_id = #{userId} order by a.article_time desc limit 15
     </select>
     <select id="getMoreArticleListById" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where b.user_id = #{userId} order by a.article_time desc limit #{currentPage},15
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where b.user_id = #{userId} order by a.article_time desc limit #{currentPage},15
     </select>
 
     <resultMap id="articleDetail" type="entity.Article">
@@ -392,10 +398,11 @@
         <result column="user_icon" property="articleAuthorIcon"/>
         <result column="article_content" property="articleContent"/>
         <result column="user_role" property="authorRole"/>
+        <result column="article_count" property="articleVisionCount"/>
     </resultMap>
 
     <select id="getArticleDetail" resultMap="articleDetail">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
     </select>
 
     <select id="getUserIdByQaId" resultType="string">
@@ -480,7 +487,7 @@
         where user_name like "%"#{keyword}"%" or user_signal like "%"#{keyword}"%" or user_role like "%"#{keyword}"%"
     </select>
     <select id="getArticleByKeyword" resultMap="articleList">
-        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" or b.user_name like "%"#{keyword}"%" order by a.article_time desc
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" or b.user_name like "%"#{keyword}"%" order by a.article_time desc
     </select>
 
     <select id="getUserNameByUserId" resultType="string">
@@ -543,6 +550,11 @@
     </insert>
 
 
+    <update id="insertArticleViewCount">
+        update article set
+        article_count = convert((convert(article_count,signed) + 1),char)
+        where article_id = #{articleid}
+    </update>
     <resultMap id="articleCommentMap" type="entity.ArticleComment">
         <id column="art_com_id" property="articleCommentId"/>
         <result column="art_com_user_id" property="articleCommentUserId"/>
@@ -575,4 +587,31 @@
     <select id="getQaView" resultType="integer" parameterType="string">
         select count(*) from qa_view where qa_view_qa_id = #{qaId}
     </select>
+
+    <select id="getClassdids" resultType="string" parameterType="string">
+        select classd_id from class_detail where class_classd_id = #{classid}
+    </select>
+
+    <resultMap id="orderMap" type="entity.Orders">
+        <id column="transaction_number" property="order_number"/>
+        <result column="transaction_id" property="order_id"/>
+        <result column="transaction_user_id" property="order_user_id"/>
+        <result column="transaction_date" property="order_date"/>
+        <result column="transaction_class_id" property="order_class_id"/>
+        <result column="transaction_pay_type" property="order_pay_type"/>
+        <result column="transaction_price" property="order_class_price"/>
+        <result column="transaction_discount" property="order_discount"/>
+        <result column="transaction_end_price" property="order_end_price"/>
+        <result column="transaction_status" property="order_status"/>
+    </resultMap>
+    <select id="getOrders" resultMap="orderMap">
+        select transaction_number,transaction_id,transaction_user_id,transaction_date,transaction_class_id,transaction_pay_type,transaction_price,transaction_discount,transaction_end_price,transaction_status
+        from transaction_order where transaction_number = #{tradeNumber}
+    </select>
+    <select id="getAuthorIdByClassId" resultType="string" parameterType="string">
+        select class_author_id from `class`
+        where class_id = #{classId}
+    </select>
+
+
 </mapper>

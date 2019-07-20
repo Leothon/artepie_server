@@ -14,6 +14,16 @@ public class Orders {
 
     private String payInfo;
 
+    private String local_ip;
+
+    public String getLocal_ip() {
+        return local_ip;
+    }
+
+    public void setLocal_ip(String local_ip) {
+        this.local_ip = local_ip;
+    }
+
     public String getPayInfo() {
         return payInfo;
     }
@@ -112,4 +122,20 @@ public class Orders {
         return order_user_id;
     }
 
+
+    @Override
+    public String toString() {
+        return "订单ID" + order_id +
+                "订单号" + order_number +
+                "购买者ID" + order_user_id +
+                "订单日期" + order_date +
+                "订单课程编号" + order_class_id  +
+                "订单支付方式" + order_pay_type +
+                "订单价格" + order_class_price +
+                "订单折扣" + order_discount +
+                "订单最终价格" + order_end_price +
+                "订单状态" + order_status +
+                "订单信息" +  payInfo +
+                "商品信息" + merchandise;
+    }
 }

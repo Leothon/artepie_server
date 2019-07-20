@@ -212,8 +212,18 @@ public class SendDataServiceImpl implements SendDataService {
     public void addVideoView(String uuid, String classdId, String classId) {
         String nowTime = commonUtils.getTime();
         String viewId = "classview" + commonUtils.createUUID();
-
+        sendDataDao.addVideoViewCount(classdId,classId);
         sendDataDao.insertVideoView(viewId,classdId,uuid,nowTime,classId);
+    }
+
+
+
+    @Override
+    public void addVideoViewMore(String uuid, String classdId, String classId) {
+        String nowTime = commonUtils.getTime();
+
+
+        sendDataDao.insertVideoViewMore(classdId,uuid,nowTime,classId);
     }
 
 
@@ -237,6 +247,9 @@ public class SendDataServiceImpl implements SendDataService {
     public void sendRe(String uuid, String content, String qaReId) {
         String time = commonUtils.getTime();
         String qaId = "qa" + commonUtils.createUUID();
+        if (content.equals("")){
+            content = "转发";
+        }
         String contentwithoutemoji = EmojiParser.parseToAliases(content);
         String contentWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(contentwithoutemoji);
         sendDataDao.sendRe(qaId,uuid,contentWithoutSensitiveWord,time,qaReId);
@@ -384,7 +397,7 @@ public class SendDataServiceImpl implements SendDataService {
     public void addQaView(String qaViewUserId, String qaViewQaId) {
         String qaViewId = "qaview" + commonUtils.createUUID();
         String time = commonUtils.getTime();
-
+        sendDataDao.addQaViewCount(qaViewQaId);
         sendDataDao.addQaView(qaViewId,qaViewUserId,qaViewQaId,time);
     }
 }

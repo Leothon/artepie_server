@@ -144,6 +144,7 @@ public class PayUtils {
                 sb.append(k + "=" + v + "&");
             }
         }
+        System.out.println("拼接字符串: " + sb);
         sb.append("key=" + PropertyUtil.getInstance().getProperty("WxPay.key"));
         String sign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
         return sign;

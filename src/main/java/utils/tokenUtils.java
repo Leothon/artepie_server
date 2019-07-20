@@ -60,7 +60,7 @@ public class tokenUtils {
         JWSObject jwsObject = JWSObject.parse(token);
 
         //获取到载荷
-        Payload payload=jwsObject.getPayload();
+        Payload payload = jwsObject.getPayload();
 
         //建立一个解锁密匙
         JWSVerifier jwsVerifier = new MACVerifier(secret);
@@ -81,7 +81,7 @@ public class tokenUtils {
                 if (nowTime > expTime) {
                     //已经过期
                     System.out.println(expTime + "   " + nowTime);
-                    resultMap.clear();
+                    //resultMap.clear();
                     resultMap.put("Result", 2);
 
                 }
@@ -125,18 +125,24 @@ public class tokenUtils {
             if (token != null) {
 
                 Map<String, Object> validMap = valid(token);
+
                 int i = (int) validMap.get("Result");
+
+                JSONObject jsonObject = (JSONObject) validMap.get("data");
+
+
+                tokenValid.setUid(jsonObject.get("uid").toString());
+
+                tokenValid.setSta(jsonObject.get("sta").toString());
+
+                tokenValid.setExp(jsonObject.get("exp").toString());
                 if (i == 0) {
                     tokenValid.setExpired(false);
-                    JSONObject jsonObject = (JSONObject) validMap.get("data");
-                    tokenValid.setUid(jsonObject.get("uid").toString());
 
-                    tokenValid.setSta(jsonObject.get("sta").toString());
-
-                    tokenValid.setExp(jsonObject.get("exp").toString());
 
                 } else if (i == 2) {
                     tokenValid.setExpired(true);
+
                 }
 
                 return tokenValid;
@@ -153,8 +159,20 @@ public class tokenUtils {
 
 
 //    public static void  main(String [] args){
-//        String token = tokenUtils.getToken("19861986198619861986");
+////        //String token = tokenUtils.getToken("19861986198619861986");
+////
+////        TokenValid tokenValid = tokenUtils.ValidToken("eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxOTg2MDAwMDAwMDAwMDAwMDAwMSIsInN0YSI6MTU0NjI0MDIwODY3MywiZXhwIjoxNTYxNzkyMjA4NjczfQ.um79TgWI7e2za8YkKuJ6OpZewNZY5a3LVfGXmhhdk-U");
+////        //TokenValid tokenValid = tokenUtils.ValidToken("eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI1Njk5MTAwMDAwMDA5OTQxNDEyNCIsInN0YSI6MTU2MDkzMjc3Mzg0MiwiZXhwIjoxNTc2NDg0NzczODQyfQ.ySvlLHZgIf1iKfaioxdU3l2LLm4rjZr5Np_VrYpmMdI");
+////
+////        String uuid = tokenValid.getUid();
+////        if (tokenValid.isExpired()){
+////            System.out.println("过期" + uuid);
+////        }else {
+////            System.out.println("没过期");
+////        }
 //
-//        System.out.println(token);
+//
+//
+//        System.out.println(String.valueOf(Double.parseDouble("25.99")*100));
 //    }
 }

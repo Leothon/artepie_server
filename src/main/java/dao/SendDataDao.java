@@ -43,6 +43,8 @@ public interface SendDataDao {
 
     void insertVideoView(@Param("classdViewId") String classdViewId,@Param("classdViewClassdId") String classdViewClassdId,@Param("classdViewUserId") String classdViewUserId,@Param("classdViewTime") String classdViewTime,@Param("classdViewClassId") String classdViewClassId);
 
+    void insertVideoViewMore(@Param("classdViewClassdId") String classdViewClassdId,@Param("classdViewUserId") String classdViewUserId,@Param("classdViewTime") String classdViewTime,@Param("classdViewClassId") String classdViewClassId);
+
     void removeViewHis(@Param("uuid") String uuid, @Param("classdId") String classdId);
 
     void uploadArticle(@Param("articleId") String articleId,@Param("articleAuthorId") String articleAuthorId,@Param("articleTime") String articleTime,@Param("articleContent") String articleContent,@Param("articleImg") String articleImg,@Param("articleTitle") String articleTitle);
@@ -59,6 +61,7 @@ public interface SendDataDao {
     void sendAuthInfo(@Param("authId") String authId,@Param("authUserId") String authUserId,@Param("authImg") String authImg,@Param("authInfo") String authInfo,@Param("authTime") String authTime);
 
 
+    void addVideoViewCount(@Param("classdid") String classdid,@Param("classid") String classid);
 
     void insertFeedBackInfo(@Param("feedbackId") String feedbackId,@Param("userId") String userId,@Param("feedbackContent") String feedBackContent,@Param("feedbackTime") String feedbackTime);
 
@@ -92,5 +95,16 @@ public interface SendDataDao {
     void removeLikeArticleComment(@Param("artCommentId") String artCommentId,@Param("userId") String userId);
 
 
+    void addQaViewCount(String qaId);
     void addQaView(@Param("qaViewId") String qaViewId,@Param("qaViewUserId") String qaViewUserId,@Param("qaViewQaId") String qaViewQaId,@Param("qaViewTime") String qaViewTime);
+
+    void insertOrders(@Param("orderId") String orderId,@Param("orderNumber") String orderNumber,@Param("orderUserId") String orderUserId,@Param("orderTime") String orderTime,@Param("orderClassId") String orderClassId,@Param("orderPirce") String orderPirce,@Param("orderDiscount") String orderDiscount,@Param("orderEndPrice") String orderEndPrice,@Param("orderStatus") String orderStatus);
+
+
+    void updateTransaction(@Param("transactionId") String transactionId,@Param("payType") String payType,@Param("payStatus") String payStatus,@Param("bankType") String bankType,@Param("wechatNumber") String wechatNumber,@Param("endTime") String endTime);
+
+
+    void insertClassBuyInfo(@Param("class_buy_id") String class_buy_id,@Param("class_buy_class_id") String class_buy_class_id,@Param("class_buy_user_id") String class_buy_user_id,@Param("buy_time") String buy_time);
+
+    void updateUserBalance(@Param("userId") String userId,@Param("balance") String balance);
 }

@@ -76,4 +76,6 @@ public interface GetDataService {
     ArrayList<ArticleComment> getArticleComment(String articleId);
 
     ArrayList<ArticleComment> getArticleCommentMore(String articleId, int currentPage);
+
+    ArrayList<String> getclassdids(String classid);
 }

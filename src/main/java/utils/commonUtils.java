@@ -12,23 +12,9 @@ import java.util.UUID;
 
 public class commonUtils {
 
-    /**
-     * 生成验证码
-     * @return
-     */
-    public static int getVerifyCode(){
-
-        Random r = new Random();
-
-        return r.nextInt(900000)+100000;
-
-    }
 
 
-    public static void sendVerifyCode(String phoneNumber,int verifyCode){
 
-        //TODO 此处通过第三方接口给手机号码发送生成的验证码
-    }
 
 
     public static String createUUID() {

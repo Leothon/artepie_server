@@ -1,5 +1,6 @@
 package controller;
 
+import dao.SendDataDao;
 import dto.Result;
 import dto.SendQAData;
 import entity.*;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.GetDataService;
 import service.SendDataService;
 import service.UserService;
+import utils.PayUtils;
 import utils.commonUtils;
 import utils.tokenUtils;
+
+import java.util.ArrayList;
+
 @Controller
 public class SendDataController {
 
@@ -26,6 +31,9 @@ public class SendDataController {
 
     @Autowired
     GetDataService getDataService;
+
+    @Autowired
+    SendDataDao sendDataDao;
 
     @PostMapping("/sendqadata")
     @ResponseBody
@@ -218,6 +226,25 @@ public class SendDataController {
         return new Result<>(true,"成功");
     }
 
+    /**
+     * 刷课代码
+     * @param uuid
+     * @param classId
+     * @param count
+     * @return
+     */
+    @PostMapping("/moreviewclass")
+    @ResponseBody
+    public Result<String> moreView(@RequestParam("userid") String uuid,@RequestParam("classid") String classId,@RequestParam("count") int count){
+        ArrayList<String> classdids = getDataService.getclassdids(classId);
+        for (int i = 0;i < classdids.size();i ++){
+            for (int j = 0;j < count;j ++){
+                sendDataService.addVideoViewMore(uuid,classdids.get(i),classId);
+            }
+        }
+
+        return new Result<>(true,"成功");
+    }
     @PostMapping("/removeclassviewhis")
     @ResponseBody
     public Result<String> removeClassViewHis(@RequestParam("token") String token,@RequestParam("classdid") String classdId){
@@ -408,5 +435,32 @@ public class SendDataController {
         String uuid = tokenUtils.ValidToken(token).getUid();
         sendDataService.addQaView(uuid,qaId);
         return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/createorder")
+    @ResponseBody
+    public Result<Orders> createOrder(@RequestBody Orders orders){
+
+        String orderId = "orders" + commonUtils.createUUID();
+        String orderDate = commonUtils.getTime();
+        String orderNumber = (orderId + PayUtils.getDateStr()).replace("orders","");
+        String orderStatus = "待支付";
+        sendDataDao.insertOrders(orderId,orderNumber,orders.getOrder_user_id(),orderDate,orders.getOrder_class_id(),orders.getOrder_class_price(),orders.getOrder_discount(),orders.getOrder_end_price(),orderStatus);
+        //Orders createorders = new Orders();
+
+
+        orders.setOrder_id(orderId);
+        orders.setOrder_number(orderNumber);
+        orders.setOrder_date(orderDate);
+        orders.setOrder_status(orderStatus);
+
+
+//        createorders.setMerchandise(orders.getMerchandise());
+//        createorders.setOrder_class_id(orders.getOrder_class_id());
+//        createorders.setOrder_user_id(orders.getOrder_user_id());
+//        createorders.setOrder_class_price(orders.getOrder_class_price());
+//        createorders.setOrder_discount(orders.getOrder_discount());
+//        createorders.setOrder_end_price(orders.getOrder_end_price());
+        return new Result<>(true,orders);
     }
 }

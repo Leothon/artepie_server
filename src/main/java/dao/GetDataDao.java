@@ -149,4 +149,17 @@ public interface GetDataDao {
     ArrayList<createArticle> getArticleInfo();
 
     int getQaView(String qaId);
+
+    ArrayList<String> getClassdids(String classid);
+
+    void insertArticleViewCount(String articleid);
+
+    Orders getOrders(String tradeNumber);
+
+
+    String getAuthorIdByClassId(String classId);
+
+
+
+
 }

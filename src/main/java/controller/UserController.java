@@ -54,14 +54,27 @@ public class UserController {
     @GetMapping("/usepasswordlogin")
     @ResponseBody
     public Result<User> usePasswordLogin(@RequestParam("phonenumber") String phoneNumber,@RequestParam("password") String password){
-        String passwordInDB = userService.getPasswordByPhoneNumber(phoneNumber);
-        if (passwordInDB.equals("")){
-            return new Result<>(false,"您尚未设置密码，请使用验证码登录");
-        }else if (passwordInDB.equals(password)){
-            return new Result<>(true, userService.getUserInfoById(tokenUtils.ValidToken(userService.returnTokenByPhone(phoneNumber)).getUid()));
+
+        if (!userService.phoneExits(phoneNumber)){
+            return new Result<>(false,"该号码未注册，请使用短信验证码注册！");
         }else {
-            return new Result<>(false,"密码错误！");
+            String passwordInDB = userService.getPasswordByPhoneNumber(phoneNumber);
+            if (passwordInDB.equals("")){
+                return new Result<>(false,"您尚未设置密码，请使用验证码登录");
+            }else if (passwordInDB.equals(password)){
+                String token = userService.returnTokenByPhone(phoneNumber);
+                TokenValid tokenValid = tokenUtils.ValidToken(token);
+                String uuid = tokenValid.getUid();
+                if (tokenValid.isExpired()){
+                    String newtoken = tokenUtils.getToken(uuid);
+                    userService.updateToken(newtoken,uuid);
+                }
+                return new Result<>(true, userService.getUserInfoById(tokenUtils.ValidToken(userService.returnTokenByPhone(phoneNumber)).getUid()));
+            }else {
+                return new Result<>(false,"密码错误！");
+            }
         }
+
     }
 
 
@@ -85,7 +98,7 @@ public class UserController {
 
     @PostMapping("/uploadfile")
     @ResponseBody
-    public Result<String> updateUserInfo(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
+    public Result<String> updateFile(@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
 
 
         String fileName = file.getOriginalFilename();
@@ -149,6 +162,16 @@ public class UserController {
     @GetMapping("/getuserinfobyqq")
     @ResponseBody
     public Result<User> getUserInfoByQQ(@RequestParam("accesstoken") String accessToken) {
+        String token = userService.getTokenByAccessToken(accessToken);
+        System.out.println("令牌值" + token);
+        TokenValid tokenValid = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        System.out.println("用户ID" + uuid);
+        if (tokenValid.isExpired()){
+            String newtoken = tokenUtils.getToken(uuid);
+            System.out.println("新的令牌值" + newtoken);
+            userService.updateToken(newtoken,uuid);
+        }
         return new Result<>(true, userService.getUserInfoByQQ(accessToken));
     }
 
@@ -226,4 +249,6 @@ public class UserController {
         }
 
     }
+
+
 }

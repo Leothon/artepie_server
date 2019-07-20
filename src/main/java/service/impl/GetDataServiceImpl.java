@@ -22,17 +22,23 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Override
     public HomeData getHomeData(String uuid) {
+
         ArrayList<Banner> banners = getDataDao.getBanners();
+
+        //ArrayList<SelectClass> selectClasses = new ArrayList<>();
         ArrayList<SelectClass> selectClasses = getDataDao.getClasses();
 
+
         for (int i = 0; i < selectClasses.size(); i ++){
-            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            //TODO 这一句
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
                 selectClasses.get(i).setIsbuy(true);
             }else {
                 selectClasses.get(i).setIsbuy(false);
             }
         }
+
         ArrayList<User> teachers = getDataDao.getTeacherInUser();
         HomeData homeData = new HomeData();
         homeData.setBanners(banners);
@@ -45,7 +51,7 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<SelectClass> getMoreClass(int currentPage, String uuid) {
         ArrayList<SelectClass> selectClasses = getDataDao.getMoreClass(currentPage);
         for (int i = 0; i < selectClasses.size(); i ++){
-            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
                 selectClasses.get(i).setIsbuy(true);
             }else {
@@ -72,7 +78,7 @@ public class GetDataServiceImpl implements GetDataService {
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
+            //qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -114,7 +120,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             String reId = qaMoreData.get(i).getQa_re_id();
-            qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
+            //qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
 
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
@@ -153,7 +159,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaData.size();i ++){
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
+            //qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -194,7 +200,7 @@ public class GetDataServiceImpl implements GetDataService {
         for (int i = 0;i < qaMoreData.size();i ++){
             qaMoreData.get(i).setQa_content(EmojiParser.parseToUnicode(qaMoreData.get(i).getQa_content()));
             String reId = qaMoreData.get(i).getQa_re_id();
-            qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
+            //qaMoreData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaMoreData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -233,7 +239,7 @@ public class GetDataServiceImpl implements GetDataService {
         QAData qaData = getDataDao.getQADetail(qaId);
         String reId = qaData.getQa_re_id();
         qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
-        qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
+        //qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
         if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
             if (qaDataSingle != null){
@@ -299,7 +305,7 @@ public class GetDataServiceImpl implements GetDataService {
         QAData qaData = getDataDao.getQADetail(qaId);
         qaData.setQa_content(EmojiParser.parseToUnicode(qaData.getQa_content()));
         String reId = qaData.getQa_re_id();
-        qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
+        //qaData.setQa_view(Integer.toString(getDataDao.getQaView(qaId)));
 
         if (reId != null){
             QAData qaDataSingle = getDataDao.getQADetail(reId);
@@ -381,7 +387,7 @@ public class GetDataServiceImpl implements GetDataService {
     public VideoDetail getVideoDetail(String uuid, String classId, String classdId) {
         ClassDetailList classDetailList = getDataDao.getClassVideo(classId,classdId);
         classDetailList.setClassd_like(Integer.toString(getDataDao.getFavCount(classId)));
-        classDetailList.setClassd_view(Integer.toString(getDataDao.getClassdView(classdId)));
+        //classDetailList.setClassd_view(Integer.toString(getDataDao.getClassdView(classdId)));
 
         ArrayList<String> classdIds = getDataDao.getClassdIds(classId);
 
@@ -438,7 +444,7 @@ public class GetDataServiceImpl implements GetDataService {
     public TeacherClass getTeaClass(String uuid, String teaId) {
         ArrayList<SelectClass> teaClass = getDataDao.getClassByTea(teaId);
         for (int i = 0;i < teaClass.size();i ++){
-            teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            //teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
             if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
                 teaClass.get(i).setIsbuy(true);
             }else {
@@ -457,7 +463,7 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<SelectClass> teaClass = getDataDao.getClassByType(type);
 
         for (int i = 0;i < teaClass.size();i ++){
-            teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            //teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
             if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
                 teaClass.get(i).setIsbuy(true);
             }else {
@@ -493,64 +499,70 @@ public class GetDataServiceImpl implements GetDataService {
     @Override
     public ArrayList<ClassDetailList> getClassViewById(String uuid) {
 
-        return getDataDao.getViewHisById(uuid);
+        //return getDataDao.getViewHisById(uuid);
+        return new ArrayList<ClassDetailList>();
     }
 
     @Override
     public BagPageData getBagPageData(String uuid) {
 
-        ArrayList<ClassDView> classDViews = getDataDao.getStudyEveryday(uuid, commonUtils.getTime());
+        //ArrayList<ClassDView> classDViews = getDataDao.getStudyEveryday(uuid, commonUtils.getTime());
         StudyLine studyLine = new StudyLine();
         int[] days = {0,0,0,0,0,0,0};
         ArrayList<String> day = new ArrayList<>();
-        for (int i = 0;i < classDViews.size();i ++){
 
-            switch (commonUtils.getTimeRange(commonUtils.getTime(),classDViews.get(i).getClassd_view_time())){
-                case "0":
-                    days[6] ++;
-                    break;
-                case "1":
-                    days[5] ++;
-                    break;
-                case "2":
-                    days[4] ++;
-                    break;
-                case "3":
-                    days[3] ++;
-                    break;
-                case "4":
-                    days[2] ++;
-                    break;
-                case "5":
-                    days[1] ++;
-                    break;
-                case "6":
-                    days[0] ++;
-                    break;
-                default:
-                    break;
-            }
-        }
-        studyLine.setClassCount(classDViews.size());
+//        for (int i = 0;i < classDViews.size();i ++){
+//
+//            switch (commonUtils.getTimeRange(commonUtils.getTime(),classDViews.get(i).getClassd_view_time())){
+//                case "0":
+//                    days[6] ++;
+//                    break;
+//                case "1":
+//                    days[5] ++;
+//                    break;
+//                case "2":
+//                    days[4] ++;
+//                    break;
+//                case "3":
+//                    days[3] ++;
+//                    break;
+//                case "4":
+//                    days[2] ++;
+//                    break;
+//                case "5":
+//                    days[1] ++;
+//                    break;
+//                case "6":
+//                    days[0] ++;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+        //studyLine.setClassCount(classDViews.size());
 
+        studyLine.setClassCount(0);
         for (int j = 0;j < days.length;j ++){
-            day.add(Integer.toString(days[j]));
+            day.add("0");
+//            day.add(Integer.toString(days[j]));
         }
 
         studyLine.setClassCountDat(day);
+        //ArrayList<SelectClass> buyClasses = new ArrayList<>();
         ArrayList<SelectClass> buyClasses = getDataDao.getBuyClassByid(uuid);
         for (int i = 0;i < buyClasses.size();i ++){
-            buyClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(buyClasses.get(i).getSelectId())));
+            //buyClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(buyClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(buyClasses.get(i).getSelectId(),uuid) == 0){
                 buyClasses.get(i).setIsbuy(true);
             }else {
                 buyClasses.get(i).setIsbuy(false);
             }
         }
+        //ArrayList<SelectClass> fineClasses = new ArrayList<>();
         ArrayList<SelectClass> fineClasses = getDataDao.getClasses();
 
         for (int i = 0;i < fineClasses.size();i ++){
-            fineClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(fineClasses.get(i).getSelectId())));
+            //fineClasses.get(i).setSelectstucount(Integer.toString(getDataDao. getClassView(fineClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(fineClasses.get(i).getSelectId(),uuid) == 0){
                 fineClasses.get(i).setIsbuy(true);
             }else {
@@ -573,7 +585,7 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<Article> articles = getDataDao.getArticleList();
 
         for (int i = 0;i < articles.size();i++){
-            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            //articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
             articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         ArticleData articleData = new ArticleData();
@@ -587,7 +599,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getMoreArticleList(currentPage);
         for (int i = 0;i < articles.size();i++){
-            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            //articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
             articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
@@ -598,7 +610,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getArticleListById(uuid);
         for (int i = 0;i < articles.size();i++){
-            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            //articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
             articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
@@ -609,7 +621,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<Article> articles = getDataDao.getMoreArticleListById(uuid,currentPage);
         for (int i = 0;i < articles.size();i++){
-            articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            //articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
             articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
         }
         return articles;
@@ -627,6 +639,7 @@ public class GetDataServiceImpl implements GetDataService {
         article.setLikeCount(String.valueOf(getDataDao.getArticleLike(articleId)));
         article.setCommentCount(String.valueOf(getDataDao.getArticleCommentCount(articleId)));
         String viewId = "articleview" + commonUtils.createUUID();
+        getDataDao.insertArticleViewCount(articleId);
         getDataDao.insertArticleView(viewId,articleId,uuid,commonUtils.getTime());
         return article;
     }
@@ -663,7 +676,7 @@ public class GetDataServiceImpl implements GetDataService {
 
         ArrayList<SelectClass> selectClasses = getDataDao.getClassDataByKeyword(keyword);
         for (int i = 0; i < selectClasses.size(); i ++){
-            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
                 selectClasses.get(i).setIsbuy(true);
             }else {
@@ -682,7 +695,7 @@ public class GetDataServiceImpl implements GetDataService {
 
             qaData.get(i).setQa_content(EmojiParser.parseToUnicode(qaData.get(i).getQa_content()));
             String reId = qaData.get(i).getQa_re_id();
-            qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
+            //qaData.get(i).setQa_view(Integer.toString(getDataDao.getQaView(qaData.get(i).getQa_id())));
             if (reId != null){
                 QAData qaDataSingle = getDataDao.getQADetail(reId);
                 if (qaDataSingle != null){
@@ -730,7 +743,7 @@ public class GetDataServiceImpl implements GetDataService {
     public ArrayList<SelectClass> getSelectClassByUserId(String userId) {
         ArrayList<SelectClass> selectClasses = getDataDao.getClassByTea(userId);
         for (int i = 0;i < selectClasses.size();i ++){
-            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),userId) == 0){
                 selectClasses.get(i).setIsbuy(true);
             }else {
@@ -745,7 +758,7 @@ public class GetDataServiceImpl implements GetDataService {
         ArrayList<SelectClass> selectClasses = getDataDao.getClasses();
 
         for (int i = 0; i < selectClasses.size(); i ++){
-            selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
             if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),uuid) == 0){
                 selectClasses.get(i).setIsbuy(true);
             }else {
@@ -792,5 +805,10 @@ public class GetDataServiceImpl implements GetDataService {
     @Override
     public ArrayList<ArticleComment> getArticleCommentMore(String articleId, int currentPage) {
         return getDataDao.getArticleCommentMore(articleId,currentPage);
+    }
+
+    @Override
+    public ArrayList<String> getclassdids(String classid) {
+        return getDataDao.getClassdIds(classid);
     }
 }

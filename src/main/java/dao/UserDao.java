@@ -22,7 +22,7 @@ public interface UserDao {
 
     String getTokenByUid(String userId);
 
-    void updateUserInfo(@Param("username") String username,@Param("userSex") int userSex,@Param("userBirth") String userBirth,@Param("userPhone") String userPhone,@Param("userSignal") String userSignal,@Param("userAddress") String userAddress,@Param("userId") String userId,@Param("userPassword") String passWord);
+    void updateUserInfo(@Param("username") String username,@Param("userSex") int userSex,@Param("userBirth") String userBirth,@Param("userPhone") String userPhone,@Param("userSignal") String userSignal,@Param("userAddress") String userAddress,@Param("userId") String userId);
 
     void updateUserIcon(@Param("userIcon") String userIcon,@Param("userId") String userId);
 
@@ -43,5 +43,6 @@ public interface UserDao {
     void updateToken(@Param("token") String token,@Param("uuid") String uuid);
 
 
+    String getTokenByAccessToken(String accessToken);
     void insertFalseUser(@Param("uuid") String uuid,@Param("userName") String username,@Param("token") String token,@Param("registerTime") String time,@Param("phone") String phone);
 }
