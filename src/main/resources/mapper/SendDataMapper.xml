@@ -262,4 +262,10 @@
         user_balance = #{balance}
         where user_id = #{userId}
     </update>
+
+    <update id="updateCoin">
+        update `user` set
+        user_art_coin = #{artCoin}
+        where user_id = #{userId}
+    </update>
 </mapper>

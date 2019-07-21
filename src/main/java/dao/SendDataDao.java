@@ -1,6 +1,7 @@
 package dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.print.DocFlavor;
@@ -107,4 +108,6 @@ public interface SendDataDao {
     void insertClassBuyInfo(@Param("class_buy_id") String class_buy_id,@Param("class_buy_class_id") String class_buy_class_id,@Param("class_buy_user_id") String class_buy_user_id,@Param("buy_time") String buy_time);
 
     void updateUserBalance(@Param("userId") String userId,@Param("balance") String balance);
+
+    void updateCoin(@Param("userId") String userId, @Param("artCoin") String artCoin);
 }

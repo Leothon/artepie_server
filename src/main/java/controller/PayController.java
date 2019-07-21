@@ -1,11 +1,22 @@
 package controller;
 
+import Config.AlipayConfig;
 import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradeAppPayRequest;
+import com.alipay.api.response.AlipayTradeAppPayResponse;
 import dao.GetDataDao;
 import dao.SendDataDao;
+import dao.UserDao;
 import dto.Result;
+import entity.AlipayBean;
 import entity.Merchandise;
 import entity.Orders;
+import entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +46,8 @@ public class PayController {
     SendDataDao sendDataDao;
     @Autowired
     GetDataDao getDataDao;
+    @Autowired
+    UserDao userDao;
 
     @Autowired
     SendDataService sendDataService;
@@ -59,7 +72,7 @@ public class PayController {
             parameters.put("mch_id", PropertyUtil.getInstance().getProperty("WxPay.mchid"));
             parameters.put("nonce_str", PayUtils.CreateNoncestr());
 
-            parameters.put("body", "artepieclass-" + orders.getOrder_number());
+            parameters.put("body", "artepieclass-" + orders.getOrder_name());
             parameters.put("out_trade_no", orders.getOrder_number()); // 订单id这里我的订单id生成规则是订单id+时间
             parameters.put("fee_type", "CNY");
             //parameters.put("total_fee", "1"); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
@@ -94,6 +107,98 @@ public class PayController {
             baseResult.setSuccess(false);
         }
         return baseResult;
+    }
+
+
+    @PostMapping("/verifyalipaytransaction")
+    @ResponseBody
+    public Result<String> getAliPay(@RequestBody AlipayBean alipayBean) {
+
+
+        // 实例化客户端
+        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALIPAY_URL, AlipayConfig.APP_ID,
+                AlipayConfig.PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,
+                AlipayConfig.SIGN_TYPE);
+// 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
+        AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+// SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+        AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+        model.setBody(alipayBean.getBody());
+        model.setSubject(alipayBean.getSubject());
+        model.setOutTradeNo(alipayBean.getOut_trade_no());// outtradeno 生存订单
+        model.setTimeoutExpress("60m");
+        model.setTotalAmount(alipayBean.getTotal_amount());
+        model.setProductCode("QUICK_MSECURITY_PAY");
+        request.setBizModel(model);
+        request.setNotifyUrl(AlipayConfig.CALLBACK_URL);//异步回调url
+
+// 这里和普通的接口调用不同，使用的是sdkExecute
+        try {
+            AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
+            return new Result<>(true,response.getBody());
+        }catch (AlipayApiException e){
+            e.printStackTrace();
+        }
+
+        // System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+
+
+        return new Result<>(false,"出错");
+    }
+
+
+    @RequestMapping("/alipaynotify")
+    @ResponseBody
+    public void alipayNotify(HttpServletRequest request) throws IOException {
+        Map<String, String> params = new HashMap<String, String>();
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+            }
+            // 乱码解决，这段代码在出现乱码时使用。
+            // valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            params.put(name, valueStr);
+        }
+        // 切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
+        try {
+            boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET,
+                    AlipayConfig.SIGN_TYPE);
+            if (flag) {
+                String trade_status = params.get("trade_status");
+                String out_trade_no = params.get("out_trade_no");
+                String trade_no = params.get("trade_no");
+                String price = params.get("total_amount");
+                Orders orders = getDataDao.getOrders(out_trade_no);
+                if ("TRADE_SUCCESS".equals(trade_status)) { // 交易支付成功的执行相关业务逻辑
+
+                    //TODO 支付成功
+
+                    String endTime  = commonUtils.getTime();
+                    sendDataDao.updateTransaction(orders.getOrder_id(),"alipay","已支付","无","",endTime);
+                    String classBuyId = "buy" + commonUtils.createUUID();
+                    sendDataDao.insertClassBuyInfo(classBuyId,orders.getOrder_class_id(),orders.getOrder_user_id(),endTime);
+                    String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
+                    sendDataDao.updateUserBalance(getDataDao.getUserIdByClassId(orders.getOrder_class_id()),authorPrice);
+                    User user = userDao.getUserInfo(orders.getOrder_user_id());
+                    String lastCoin = commonUtils.computeLastCoin(orders.getOrder_discount(),user.getUser_art_coin());
+                    sendDataDao.updateCoin(user.getUser_id(),lastCoin);
+                    if (getDataDao.isFav(orders.getOrder_user_id(),orders.getOrder_class_id()) != 0){
+                        String favId = "fav" + commonUtils.createUUID();
+                        sendDataService.addFav(orders.getOrder_user_id(),orders.getOrder_class_id(),favId);
+                    }
+                } else if ("TRADE_CLOSED".equals(trade_status)) { // 未付款交易超时关闭,或支付完成后全额退款,执行相关业务逻辑
+                    sendDataDao.updateTransaction(orders.getOrder_id(),"alipay","支付失败","无","",null);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -164,7 +269,11 @@ public class PayController {
                     sendDataDao.updateTransaction(orders.getOrder_id(),pay_type,pay_status,bank_type,transaction_id,transaction_end_time);
                     String classBuyId = "buy" + commonUtils.createUUID();
                     sendDataDao.insertClassBuyInfo(classBuyId,orders.getOrder_class_id(),orders.getOrder_user_id(),transaction_end_time);
-                    sendDataDao.updateUserBalance(getDataDao.getUserIdByClassId(orders.getOrder_class_id()),price);
+                    String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
+                    sendDataDao.updateUserBalance(getDataDao.getUserIdByClassId(orders.getOrder_class_id()),authorPrice);
+                    User user = userDao.getUserInfo(orders.getOrder_user_id());
+                    String lastCoin = commonUtils.computeLastCoin(orders.getOrder_discount(),user.getUser_art_coin());
+                    sendDataDao.updateCoin(user.getUser_id(),lastCoin);
                     if (getDataDao.isFav(orders.getOrder_user_id(),orders.getOrder_class_id()) != 0){
                         String favId = "fav" + commonUtils.createUUID();
                         sendDataService.addFav(orders.getOrder_user_id(),orders.getOrder_class_id(),favId);

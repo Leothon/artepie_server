@@ -4,6 +4,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -15,7 +16,18 @@ public class commonUtils {
 
 
 
+    public static String computeLastCoin(String removePrice,String totalCoin){
+        Float removeCoinCount = Float.valueOf(removePrice)*100;
+        String endPrice = String.valueOf(Float.valueOf(totalCoin) - removeCoinCount);
 
+        return endPrice.substring(0,endPrice.indexOf("."));
+    }
+
+    public static String computeAuthorPrice(String classPrice){
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        return df.format(Float.valueOf(classPrice)*0.88);
+    }
 
     public static String createUUID() {
         int machineId = 1;

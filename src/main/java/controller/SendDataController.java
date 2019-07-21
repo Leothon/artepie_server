@@ -1,6 +1,7 @@
 package controller;
 
 import dao.SendDataDao;
+import dao.UserDao;
 import dto.Result;
 import dto.SendQAData;
 import entity.*;
@@ -34,6 +35,7 @@ public class SendDataController {
 
     @Autowired
     SendDataDao sendDataDao;
+
 
     @PostMapping("/sendqadata")
     @ResponseBody
@@ -455,12 +457,17 @@ public class SendDataController {
         orders.setOrder_status(orderStatus);
 
 
-//        createorders.setMerchandise(orders.getMerchandise());
-//        createorders.setOrder_class_id(orders.getOrder_class_id());
-//        createorders.setOrder_user_id(orders.getOrder_user_id());
-//        createorders.setOrder_class_price(orders.getOrder_class_price());
-//        createorders.setOrder_discount(orders.getOrder_discount());
-//        createorders.setOrder_end_price(orders.getOrder_end_price());
         return new Result<>(true,orders);
     }
+
+    @PostMapping("/addcoin")
+    @ResponseBody
+    public Result<String> createOrder(@RequestParam("token") String token,@RequestParam("artcoin") String artCoin) {
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        sendDataDao.updateCoin(uuid,artCoin);
+        return new Result<>(true,"完成");
+    }
+
 }

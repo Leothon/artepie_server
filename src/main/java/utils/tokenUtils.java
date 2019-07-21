@@ -1,11 +1,12 @@
 package utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import entity.TokenValid;
 import net.minidev.json.JSONObject;
-import org.springframework.test.context.TestExecutionListeners;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -172,7 +173,27 @@ public class tokenUtils {
 ////        }
 //
 //
+////        AlipayBean test = new AlipayBean();
+////        test.setBody("简介");
+////        test.setOut_trade_no("585825");
+////        test.setSubject("标题");
+////        test.setTotal_amount("0.01");
 //
-//        System.out.println(String.valueOf(Double.parseDouble("25.99")*100));
+//
+////        String string =
+////                "{\"alipay_trade_app_pay_response\":{\"code\":\"10000\",\"msg\":\"Success\",\"app_id\":\"2014072300007148\",\"out_trade_no\":\"081622560194853\",\"trade_no\":\"2016081621001004400236957647\",\"total_amount\":\"0.01\",\"seller_id\":\"2088702849871851\",\"charset\":\"utf-8\",\"timestamp\":\"2016-10-11 17:43:36\"},\"sign\":\"NGfStJf3i3ooWBuCDIQSumOpaGBcQz+aoAqyGh3W6EqA/gmyPYwLJ2REFijY9XPTApI9YglZyMw+ZMhd3kb0mh4RAXMrb6mekX4Zu8Nf6geOwIa9kLOnw0IMCjxi4abDIfXhxrXyj********\",\"sign_type\":\"RSA2\"}";
+////
+////
+////        JsonParser parse =new JsonParser();
+////        JsonObject json=(JsonObject) parse.parse(string);
+////
+////        String content = json.get("alipay_trade_app_pay_response").toString();
+////
+////        JsonObject json1 = (JsonObject)parse.parse(content);
+//
+//
+//
+//
+//        System.out.println(commonUtils.computeLastCoin("59.99","6000"));
 //    }
 }
