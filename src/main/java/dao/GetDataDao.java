@@ -161,5 +161,9 @@ public interface GetDataDao {
 
 
 
+    ArrayList<Fav> getUserIdByClassIdInFav(String classId);
+
+
+
 
 }

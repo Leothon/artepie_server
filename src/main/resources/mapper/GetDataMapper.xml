@@ -613,5 +613,15 @@
         where class_id = #{classId}
     </select>
 
+    
+    <resultMap id="favMap" type="entity.Fav">
+        <id column="fav_class_id" property="fav_class_id"/>
+        <result column="fav_id" property="fav_id"/>
+        <result column="fav_user_id" property="fav_user_id"/>
+        <result column="fav_time" property="fav_time"/>
+    </resultMap>
 
+    <select id="getUserIdByClassIdInFav" resultMap="favMap">
+        select fav_id,fav_user_id,fav_class_id,fav_time from fav where fav_class_id = #{classId}
+    </select>
 </mapper>

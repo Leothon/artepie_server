@@ -1,5 +1,6 @@
 package controller;
 
+import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
 import dto.Result;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.GetDataService;
 import service.SendDataService;
 import service.UserService;
+import utils.JpushUtils;
 import utils.PayUtils;
 import utils.commonUtils;
 import utils.tokenUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class SendDataController {
@@ -35,6 +39,8 @@ public class SendDataController {
 
     @Autowired
     SendDataDao sendDataDao;
+    @Autowired
+    GetDataDao getDataDao;
 
 
     @PostMapping("/sendqadata")
@@ -260,6 +266,7 @@ public class SendDataController {
     @ResponseBody
     public Result<String> uploadArticle(@RequestBody Article article){
 
+
         sendDataService.uploadArticle(article.getArticleTitle(),article.getArticleImg(),article.getArticleContent(),article.getArticleAuthorId());
         return new Result<>(true,"成功");
     }
@@ -470,4 +477,20 @@ public class SendDataController {
         return new Result<>(true,"完成");
     }
 
+    @PostMapping("/test")
+    @ResponseBody
+    public Result<String> test(@RequestParam("classid") String classId) {
+
+
+
+        ArrayList<Fav> fav = getDataDao.getUserIdByClassIdInFav(classId);
+
+        for(int i = 0;i < fav.size();i ++ ){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",fav.get(i).getFav_user_id());
+            parm.put("msg",  "您关注的课程 " + " 已经更新");
+            JpushUtils.jpushAndroidByAlias(parm);
+        }
+        return new Result<>(true,"完成");
+    }
 }

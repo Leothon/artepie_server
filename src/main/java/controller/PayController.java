@@ -119,9 +119,9 @@ public class PayController {
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALIPAY_URL, AlipayConfig.APP_ID,
                 AlipayConfig.PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,
                 AlipayConfig.SIGN_TYPE);
-// 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
+        // 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
-// SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+        // SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
         model.setBody(alipayBean.getBody());
         model.setSubject(alipayBean.getSubject());
@@ -149,7 +149,10 @@ public class PayController {
 
     @RequestMapping("/alipaynotify")
     @ResponseBody
-    public void alipayNotify(HttpServletRequest request) throws IOException {
+    public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+
+
         Map<String, String> params = new HashMap<String, String>();
         Map requestParams = request.getParameterMap();
         for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
@@ -159,15 +162,22 @@ public class PayController {
             for (int i = 0; i < values.length; i++) {
                 valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
             }
+            System.out.println("前" + name + ":" + valueStr);
             // 乱码解决，这段代码在出现乱码时使用。
-            // valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            //System.out.println("后" + name + ":" +  valueStr);
             params.put(name, valueStr);
         }
+
+//        VHKbZT359Ce0bh08Brhs4hxMte4v6HInDWTIIK5FEe5+jtIDcbgKbM4YpzuP5zgsIsQgXAaXAQz4I9goD0BGXuirqfr1XaC7c5NizZyeyJfRCx4YseUa5GAUVY2/Z60GIwARRMrCv0C9osGCPpBwCB5iozSCaWH+Ik/ZvV0odF5hHoJeQkNQMDTL/5K5PFyhmdE5Da1FLAeKiIM0dZyPyPUCN5FUS/rB8kgKFDVAvMuDfDP9FLkdUJE5BbN712qAkAN1u7ihFtNkLcMUTB9oskAuFnZfD8pcIZeUfuIDmEFeut7DOmaL//X1d6rhL90dFEDahxJy3NedFQaTEf06IQ==
+
+
         // 切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         try {
-            boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET,
-                    AlipayConfig.SIGN_TYPE);
+            boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET,AlipayConfig.SIGN_TYPE);
+            System.out.println(flag + "验证");
             if (flag) {
+                System.out.println("验证成功");
                 String trade_status = params.get("trade_status");
                 String out_trade_no = params.get("out_trade_no");
                 String trade_no = params.get("trade_no");
@@ -176,6 +186,7 @@ public class PayController {
                 if ("TRADE_SUCCESS".equals(trade_status)) { // 交易支付成功的执行相关业务逻辑
 
                     //TODO 支付成功
+                    System.out.println("支付成功");
 
                     String endTime  = commonUtils.getTime();
                     sendDataDao.updateTransaction(orders.getOrder_id(),"alipay","已支付","无","",endTime);
@@ -190,10 +201,23 @@ public class PayController {
                         String favId = "fav" + commonUtils.createUUID();
                         sendDataService.addFav(orders.getOrder_user_id(),orders.getOrder_class_id(),favId);
                     }
+                    BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+                    out.write("success".getBytes());
+                    out.flush();
+                    out.close();
                 } else if ("TRADE_CLOSED".equals(trade_status)) { // 未付款交易超时关闭,或支付完成后全额退款,执行相关业务逻辑
                     sendDataDao.updateTransaction(orders.getOrder_id(),"alipay","支付失败","无","",null);
 
+                    BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+                    out.write("failure".getBytes());
+                    out.flush();
+                    out.close();
                 }
+            }else {
+                BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+                out.write("failure".getBytes());
+                out.flush();
+                out.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

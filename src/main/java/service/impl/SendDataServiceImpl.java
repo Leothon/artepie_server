@@ -5,6 +5,7 @@ import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
 import dto.createArticle;
+import entity.Fav;
 import entity.TokenValid;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -338,6 +339,17 @@ public class SendDataServiceImpl implements SendDataService {
         String allDuration = String.valueOf(Integer.parseInt(getDataDao.getClassAllDuration(classclassdId)) + Integer.parseInt(classdDuration)) ;
         sendDataDao.addDuration(classclassdId,allDuration);
         sendDataDao.uploadClassDetail(classdId,titleWithoutSensitiveWord,classclassdId,desWithoutSensitiveWord,classdDuration,classdVideo,commonUtils.getTime(),classdVideoCover);
+
+
+        ArrayList<Fav> fav = getDataDao.getUserIdByClassIdInFav(classclassdId);
+
+        for(int i = 0;i < fav.size();i ++ ){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",fav.get(i).getFav_user_id());
+            parm.put("msg",  "您关注的课程 " + classdTitle + " 已经更新");
+            JpushUtils.jpushAndroidByAlias(parm);
+        }
+
     }
 
     @Override
