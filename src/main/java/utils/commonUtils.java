@@ -14,6 +14,12 @@ import java.util.UUID;
 public class commonUtils {
 
 
+    public static String computeBalance(String oldBalance,String classPrice){
+
+
+
+        return  String.valueOf(Float.valueOf(oldBalance) + Float.valueOf(classPrice));
+    }
 
 
     public static String computeLastCoin(String removePrice,String totalCoin){

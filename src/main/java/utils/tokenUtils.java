@@ -1,10 +1,13 @@
 package utils;
 
+import Config.AlipayConfig;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
+import dto.Result;
 import entity.TokenValid;
 import net.minidev.json.JSONObject;
 
@@ -160,40 +163,33 @@ public class tokenUtils {
 
 
 //    public static void  main(String [] args){
-////        //String token = tokenUtils.getToken("19861986198619861986");
+//
+//
+////        JsonParser parse = new JsonParser();
+////        JsonObject pay_response = (JsonObject) parse.parse("{\"alipay_trade_app_pay_response\":{\"code\":\"10000\",\"msg\":\"Success\",\"app_id\":\"2019012063113262\",\"auth_app_id\":\"2019012063113262\",\"charset\":\"utf-8\",\"timestamp\":\"2019-07-22 20:55:14\",\"out_trade_no\":\"100000051237123820190722205503\",\"total_amount\":\"0.01\",\"trade_no\":\"2019072222001412850540662708\",\"seller_id\":\"2088431241820052\"},\"sign\":\"E6uq9vj6EoctF1NWCdqrg7wvJNmFtOVuxwZMxYUYhdPA35Y0ktuKE+YcE5NBls3uEAEXb2Xh1H+oyzZJdmwOAEZ5PiRg95bg8k9SqHbjAvZs4NKaWMSXP0SNI6bgkKPbWnsSXHSQvs18zMqpXmpjNw0g/kx0if0RuXQkHdXT2PsuZ8qR5FL23isFtKAtL6D9/vI+PrChq0WWLhMWdwCLe30vuu2sNh9j2GwAkBVgxUCnFulSb0/I7AQ4z5Iub2Ch0V2DsKb4B3Jh/C6li1NPSStj5F4Nhxp08yfxnf4DbBrQiuCbsVmktKJr4XQTqKWIl4hJqbOWRRq+fygeWI0MsA==\",\"sign_type\":\"RSA2\"}");
+////        String content = pay_response.get("alipay_trade_app_pay_response").toString();
+////        String sign = pay_response.get("sign").toString();
+////        String sign_type = pay_response.get("sign_type").toString();
+////        System.out.println(content);
+////        System.out.println(sign);
+////        System.out.println(sign_type);
+////        try {
+////            boolean flag = AlipaySignature.rsaCheck(content,sign, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.CHARSET,"RSA2");
+////            System.out.println(flag);
+////            if (flag) {
 ////
-////        TokenValid tokenValid = tokenUtils.ValidToken("eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxOTg2MDAwMDAwMDAwMDAwMDAwMSIsInN0YSI6MTU0NjI0MDIwODY3MywiZXhwIjoxNTYxNzkyMjA4NjczfQ.um79TgWI7e2za8YkKuJ6OpZewNZY5a3LVfGXmhhdk-U");
-////        //TokenValid tokenValid = tokenUtils.ValidToken("eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiI1Njk5MTAwMDAwMDA5OTQxNDEyNCIsInN0YSI6MTU2MDkzMjc3Mzg0MiwiZXhwIjoxNTc2NDg0NzczODQyfQ.ySvlLHZgIf1iKfaioxdU3l2LLm4rjZr5Np_VrYpmMdI");
 ////
-////        String uuid = tokenValid.getUid();
-////        if (tokenValid.isExpired()){
-////            System.out.println("过期" + uuid);
-////        }else {
-////            System.out.println("没过期");
+////
+////                System.out.println("成功");
+////
+////            }else {
+////                System.out.println("失败");
+////            }
+////        }catch (Exception e){
+////            e.printStackTrace();
 ////        }
 //
+//        System.out.println(commonUtils.computeBalance("152.96","253.96"));
 //
-////        AlipayBean test = new AlipayBean();
-////        test.setBody("简介");
-////        test.setOut_trade_no("585825");
-////        test.setSubject("标题");
-////        test.setTotal_amount("0.01");
-//
-//
-////        String string =
-////                "{\"alipay_trade_app_pay_response\":{\"code\":\"10000\",\"msg\":\"Success\",\"app_id\":\"2014072300007148\",\"out_trade_no\":\"081622560194853\",\"trade_no\":\"2016081621001004400236957647\",\"total_amount\":\"0.01\",\"seller_id\":\"2088702849871851\",\"charset\":\"utf-8\",\"timestamp\":\"2016-10-11 17:43:36\"},\"sign\":\"NGfStJf3i3ooWBuCDIQSumOpaGBcQz+aoAqyGh3W6EqA/gmyPYwLJ2REFijY9XPTApI9YglZyMw+ZMhd3kb0mh4RAXMrb6mekX4Zu8Nf6geOwIa9kLOnw0IMCjxi4abDIfXhxrXyj********\",\"sign_type\":\"RSA2\"}";
-////
-////
-////        JsonParser parse =new JsonParser();
-////        JsonObject json=(JsonObject) parse.parse(string);
-////
-////        String content = json.get("alipay_trade_app_pay_response").toString();
-////
-////        JsonObject json1 = (JsonObject)parse.parse(content);
-//
-//
-//
-//
-//        System.out.println(commonUtils.computeLastCoin("59.99","6000"));
 //    }
 }

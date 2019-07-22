@@ -9,6 +9,8 @@ import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
+
+import com.google.gson.JsonObject;
 import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
@@ -22,16 +24,14 @@ import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import service.SendDataService;
 import utils.PayUtils;
 import utils.PropertyUtil;
 import utils.XMLUtil;
 import utils.commonUtils;
-
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
@@ -147,9 +147,41 @@ public class PayController {
     }
 
 
+    @RequestMapping("/alipaynotifyend")
+    @ResponseBody
+    public Result<String> alipayNotify(@RequestParam("orderinfo") String orderInfo){
+
+
+        JsonParser parse = new JsonParser();
+        JsonObject pay_response = (JsonObject) parse.parse(orderInfo);
+        String content = pay_response.get("alipay_trade_app_pay_response").toString();
+        String sign = pay_response.get("sign").toString();
+        //String sign_type = pay_response.get("sign_type").toString();
+        try {
+            boolean flag = AlipaySignature.rsaCheck(content,sign,AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.CHARSET,"RSA2");
+
+            if (flag) {
+
+
+
+
+                return new Result<>(true,"成功");
+
+
+            }else {
+                return new Result<>(false,"验签失败");
+            }
+            }catch (Exception e){
+            return new Result<>(false,"失败");
+        }
+
+
+
+    }
+
     @RequestMapping("/alipaynotify")
     @ResponseBody
-    public void alipayNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void alipayNotifyAsny(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
 
@@ -175,9 +207,9 @@ public class PayController {
         // 切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         try {
             boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET,AlipayConfig.SIGN_TYPE);
-            System.out.println(flag + "验证");
+
             if (flag) {
-                System.out.println("验证成功");
+
                 String trade_status = params.get("trade_status");
                 String out_trade_no = params.get("out_trade_no");
                 String trade_no = params.get("trade_no");
@@ -185,15 +217,16 @@ public class PayController {
                 Orders orders = getDataDao.getOrders(out_trade_no);
                 if ("TRADE_SUCCESS".equals(trade_status)) { // 交易支付成功的执行相关业务逻辑
 
-                    //TODO 支付成功
-                    System.out.println("支付成功");
 
                     String endTime  = commonUtils.getTime();
                     sendDataDao.updateTransaction(orders.getOrder_id(),"alipay","已支付","无","",endTime);
                     String classBuyId = "buy" + commonUtils.createUUID();
                     sendDataDao.insertClassBuyInfo(classBuyId,orders.getOrder_class_id(),orders.getOrder_user_id(),endTime);
                     String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
-                    sendDataDao.updateUserBalance(getDataDao.getUserIdByClassId(orders.getOrder_class_id()),authorPrice);
+                    String authorId = getDataDao.getUserIdByClassId(orders.getOrder_class_id());
+                    String authorBalance = userDao.getUserInfo(authorId).getUser_balance();
+                    String authorEndBalance = commonUtils.computeBalance(authorBalance,authorPrice);
+                    sendDataDao.updateUserBalance(authorId,authorEndBalance);
                     User user = userDao.getUserInfo(orders.getOrder_user_id());
                     String lastCoin = commonUtils.computeLastCoin(orders.getOrder_discount(),user.getUser_art_coin());
                     sendDataDao.updateCoin(user.getUser_id(),lastCoin);
@@ -294,7 +327,10 @@ public class PayController {
                     String classBuyId = "buy" + commonUtils.createUUID();
                     sendDataDao.insertClassBuyInfo(classBuyId,orders.getOrder_class_id(),orders.getOrder_user_id(),transaction_end_time);
                     String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
-                    sendDataDao.updateUserBalance(getDataDao.getUserIdByClassId(orders.getOrder_class_id()),authorPrice);
+                    String authorId = getDataDao.getUserIdByClassId(orders.getOrder_class_id());
+                    String authorBalance = userDao.getUserInfo(authorId).getUser_balance();
+                    String authorEndBalance = commonUtils.computeBalance(authorBalance,authorPrice);
+                    sendDataDao.updateUserBalance(authorId,authorEndBalance);
                     User user = userDao.getUserInfo(orders.getOrder_user_id());
                     String lastCoin = commonUtils.computeLastCoin(orders.getOrder_discount(),user.getUser_art_coin());
                     sendDataDao.updateCoin(user.getUser_id(),lastCoin);
