@@ -331,6 +331,11 @@
     </select>
 
 
+
+    <select id="getBuyClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `class_buy` a join `class` b on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uuid} order by a.class_buy_time
+    </select>
+
     <resultMap id="classDetailByIdView" type="entity.ClassDetailList">
         <id column="classd_id" property="classd_id"/>
         <result column="classd_title" property="classd_title"/>
@@ -623,5 +628,50 @@
 
     <select id="getUserIdByClassIdInFav" resultMap="favMap">
         select fav_id,fav_user_id,fav_class_id,fav_time from fav where fav_class_id = #{classId}
+    </select>
+
+    <resultMap id="outBillMap" type="entity.Bill">
+        <id column="transaction_user_id" property="userId"/>
+        <result column="class_title" property="title"/>
+        <result column="transaction_date" property="time"/>
+        <result column="transaction_class_id" property="classId"/>
+        <result column="transaction_end_price" property="endCount"/>
+        <result column="transaction_id" property="billId"/>
+    </resultMap>
+    <select id="getOutBill" resultMap="outBillMap">
+        select a.transaction_user_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_end_price,a.transaction_id from
+        transaction_order a join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date
+    </select>
+
+    <resultMap id="inBillMap" type="entity.Bill">
+        <id column="class_author_id" property="userId"/>
+        <result column="class_title" property="title"/>
+        <result column="transaction_date" property="time"/>
+        <result column="transaction_class_id" property="classId"/>
+        <result column="transaction_price" property="count"/>
+        <result column="transaction_id" property="billId"/>
+        <result column="user_icon" property="billIcon"/>
+    </resultMap>
+    <select id="getInBill" resultMap="inBillMap">
+        select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
+
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} order by a.transaction_date
+    </select>
+
+    <resultMap id="OrderHisMap" type="entity.OrderHis">
+        <id column="transaction_id" property="orderId"/>
+        <result column="class_author" property="authorName"/>
+        <result column="transaction_status" property="orderStatus"/>
+        <result column="class_img" property="orderImg"/>
+        <result column="class_title" property="orderTitle"/>
+        <result column="class_des" property="orderDes"/>
+        <result column="transaction_date" property="orderTime"/>
+        <result column="transaction_end_price" property="orderCount"/>
+    </resultMap>
+    <select id="getOrderHis" resultMap="OrderHisMap">
+        select a.transaction_id,a.transaction_status,a.transaction_date,a.transaction_end_price,b.class_author,b.class_img,b.class_title,b.class_des
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date
     </select>
 </mapper>

@@ -2,6 +2,7 @@ package controller;
 
 import Config.AlipayConfig;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -152,11 +153,11 @@ public class PayController {
     public Result<String> alipayNotify(@RequestParam("orderinfo") String orderInfo){
 
 
-        JsonParser parse = new JsonParser();
-        JsonObject pay_response = (JsonObject) parse.parse(orderInfo);
-        String content = pay_response.get("alipay_trade_app_pay_response").toString();
-        String sign = pay_response.get("sign").toString();
-        //String sign_type = pay_response.get("sign_type").toString();
+
+        JSONObject outJson = JSONObject.parseObject(orderInfo);
+
+        String content = outJson.getString("alipay_trade_app_pay_response");
+        String sign = outJson.getString("sign");
         try {
             boolean flag = AlipaySignature.rsaCheck(content,sign,AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.CHARSET,"RSA2");
 
@@ -300,7 +301,7 @@ public class PayController {
                 String transaction_id = (String) packageParams.get("transaction_id"); // 微信支付订单号
                 // 查询订单 根据订单号查询订单
                 String pay_type = "wechat";
-                String pay_status = "支付成功";
+                String pay_status = "已支付";
                 String bank_type = (String) packageParams.get("bank_type");
                 String transaction_end_time = (String) packageParams.get("time_end");
                 Orders orders = getDataDao.getOrders(out_trade_no);
@@ -310,8 +311,6 @@ public class PayController {
 
                 String tempPrice = String.valueOf((Double.parseDouble(orders.getOrder_end_price())*100));
                 String price = tempPrice.substring(0,tempPrice.indexOf("."));
-                System.out.println("本地订单价格" + price);
-                System.out.println("返回的价格" + total_fee);
                 if (PropertyUtil.getInstance().getProperty("WxPay.mchid").equals(mch_id) && orders != null
                      && total_fee.trim().toString().equals(price)){
                     /** 这里是我项目里的消费状态

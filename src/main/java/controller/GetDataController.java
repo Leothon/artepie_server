@@ -1,5 +1,8 @@
 package controller;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+import dao.GetDataDao;
+import dao.SendDataDao;
 import dto.*;
 import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.GetDataService;
 import service.UserService;
+import utils.SortClass;
 import utils.commonUtils;
 import utils.tokenUtils;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Controller
 public class GetDataController {
@@ -26,6 +31,11 @@ public class GetDataController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SendDataDao sendDataDao;
+    @Autowired
+    GetDataDao getDataDao;
 
     @GetMapping("/gethomedata")
     @ResponseBody
@@ -401,14 +411,14 @@ public class GetDataController {
 
     @GetMapping("/getauthimg")
     @ResponseBody
-    public Result getAuthImg(@RequestParam("userid") String userId){
+    public Result<String> getAuthImg(@RequestParam("userid") String userId){
 
         return new Result(true,getDataService.getAuthImg(userId));
     }
 
     @GetMapping("/authuser")
     @ResponseBody
-    public Result authUser(@RequestParam("userid") String userId,@RequestParam("userrole") String userRole,@RequestParam("usertype") int type){
+    public Result<String> authUser(@RequestParam("userid") String userId,@RequestParam("userrole") String userRole,@RequestParam("usertype") int type){
 
 
         getDataService.authUser(userRole,userId,type);
@@ -417,7 +427,7 @@ public class GetDataController {
 
     @GetMapping("/getarticlecomment")
     @ResponseBody
-    public Result getArticleComment(@RequestParam("articleid") String articleId){
+    public Result<ArrayList<ArticleComment>> getArticleComment(@RequestParam("articleid") String articleId){
 
 
 
@@ -425,12 +435,51 @@ public class GetDataController {
     }
     @GetMapping("/getarticlecommentmore")
     @ResponseBody
-    public Result getArticleComment(@RequestParam("articleid") String articleId,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<ArticleComment>> getArticleComment(@RequestParam("articleid") String articleId,@RequestParam("currentPage") int currentPage){
 
 
 
         return new Result(true,getDataService.getArticleCommentMore(articleId,currentPage));
     }
 
+    @GetMapping("/getbuyclass")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getBuyClass(@RequestParam("token") String token){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result(true,getDataDao.getBuyClassByUid(uuid));
+    }
+
+    @GetMapping("/getbills")
+    @ResponseBody
+    public Result<ArrayList<Bill>> getBills(@RequestParam("token") String token){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        ArrayList<Bill> outBill = getDataDao.getOutBill(uuid);
+        ArrayList<Bill> inBill = getDataDao.getInBill(uuid);
+
+        for (int i = 0;i < outBill.size();i ++){
+            outBill.get(i).setOutIn(0);
+        }
+        for (int j = 0;j < inBill.size();j ++){
+            inBill.get(j).setOutIn(1);
+            inBill.get(j).setCount(commonUtils.computeAuthorPrice(inBill.get(j).getCount()));
+            outBill.add(inBill.get(j));
+        }
+        Collections.sort(outBill, new SortClass());
+        return new Result(true,outBill);
+    }
+
+    @GetMapping("/getorderhis")
+    @ResponseBody
+    public Result<ArrayList<OrderHis>> getOrderHis(@RequestParam("token") String token){
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+
+        return new Result(true,getDataDao.getOrderHis(uuid));
+    }
 
 }

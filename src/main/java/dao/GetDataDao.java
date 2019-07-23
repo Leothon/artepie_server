@@ -165,5 +165,12 @@ public interface GetDataDao {
 
 
 
+    ArrayList<SelectClass> getBuyClassByUid(String uuid);
+
+    ArrayList<Bill> getOutBill(String uuid);
+
+    ArrayList<Bill> getInBill(String uuid);
+
+    ArrayList<OrderHis> getOrderHis(String uuid);
 
 }
