@@ -110,4 +110,8 @@ public interface SendDataDao {
     void updateUserBalance(@Param("userId") String userId,@Param("balance") String balance);
 
     void updateCoin(@Param("userId") String userId, @Param("artCoin") String artCoin);
+
+    void insertPsd(@Param("psdId") String psdId,@Param("uuid") String uuid, @Param("psd") String psd);
+
+
 }

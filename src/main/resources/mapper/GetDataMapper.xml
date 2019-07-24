@@ -659,6 +659,14 @@
         join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} order by a.transaction_date
     </select>
 
+
+    <select id="getInfifteen" resultMap="inBillMap">
+        select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
+
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where  (DATE_SUB(CURDATE(), INTERVAL 15 DAY) <![CDATA[<=]]> date(d.user_register_time)) and b.class_author_id = #{uuid} order by a.transaction_date
+    </select>
+
     <resultMap id="OrderHisMap" type="entity.OrderHis">
         <id column="transaction_id" property="orderId"/>
         <result column="class_author" property="authorName"/>
@@ -673,5 +681,15 @@
         select a.transaction_id,a.transaction_status,a.transaction_date,a.transaction_end_price,b.class_author,b.class_img,b.class_title,b.class_des
         from transaction_order a
         join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date
+    </select>
+
+    <select id="isHasPsd" resultType="integer" parameterType="string">
+        select isnull((select psd_id from psd where psd_user_id = #{uuid}))
+    </select>
+
+
+
+    <select id="getPsd" resultType="string" parameterType="string">
+        select psd_content from psd where psd_user_id = #{uuid}
     </select>
 </mapper>

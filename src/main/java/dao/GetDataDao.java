@@ -171,6 +171,11 @@ public interface GetDataDao {
 
     ArrayList<Bill> getInBill(String uuid);
 
+    ArrayList<Bill> getInfifteen(String uuid);
     ArrayList<OrderHis> getOrderHis(String uuid);
+
+    int isHasPsd(String uuid);
+
+    String getPsd(String uuid);
 
 }

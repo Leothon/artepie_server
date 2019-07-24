@@ -189,7 +189,8 @@ public class tokenUtils {
 //            e.printStackTrace();
 //        }
 
-        System.out.println(AlipayConfig.PRIVATE_KEY.length() + "");
+
+        System.out.println(Float.valueOf("3") >= Float.valueOf("2.55"));
 
     }
 }

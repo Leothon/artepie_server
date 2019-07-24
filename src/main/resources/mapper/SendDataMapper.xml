@@ -268,4 +268,11 @@
         user_art_coin = #{artCoin}
         where user_id = #{userId}
     </update>
+
+
+    <insert id="insertPsd">
+        insert into psd
+        (psd_id,psd_user_id,psd_content)
+        values (#{psdId},#{uuid},#{psd})
+    </insert>
 </mapper>

@@ -493,4 +493,30 @@ public class SendDataController {
         }
         return new Result<>(true,"完成");
     }
+
+
+    @PostMapping("/setpsd")
+    @ResponseBody
+    public Result<String> setPsd(@RequestParam("token") String token,@RequestParam("psd") String psd) {
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        String psdId = "psd" + commonUtils.createUUID();
+        sendDataDao.insertPsd(psdId,uuid,psd);
+        return new Result<>(true,"密码设置完成");
+    }
+
+
+    @PostMapping("/verifypsd")
+    @ResponseBody
+    public Result<String> verifyPsd(@RequestParam("token") String token,@RequestParam("psd") String psd) {
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        String psdInDB = getDataDao.getPsd(uuid);
+        if (psdInDB.equals(psd)){
+            return new Result<>(true,"密码验证成功");
+        }else {
+            return new Result<>(false,"密码验证失败");
+        }
+
+    }
 }

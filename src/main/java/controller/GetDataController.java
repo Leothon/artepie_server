@@ -3,6 +3,7 @@ package controller;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import dao.GetDataDao;
 import dao.SendDataDao;
+import dao.UserDao;
 import dto.*;
 import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class GetDataController {
     SendDataDao sendDataDao;
     @Autowired
     GetDataDao getDataDao;
+
+    @Autowired
+    UserDao userDao;
 
     @GetMapping("/gethomedata")
     @ResponseBody
@@ -480,6 +484,37 @@ public class GetDataController {
 
 
         return new Result(true,getDataDao.getOrderHis(uuid));
+    }
+
+
+    @GetMapping("/getcashtotal")
+    @ResponseBody
+    public Result<String> getcashtotal(@RequestParam("token") String token){
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        Float fifteenTotal = 0f;
+        ArrayList<Bill> bills = getDataDao.getInfifteen(uuid);
+        for (int i = 0;i < bills.size();i ++){
+            bills.get(i).setCount(commonUtils.computeAuthorPrice(bills.get(i).getCount()));
+            fifteenTotal += Float.valueOf(bills.get(i).getCount());
+        }
+        Float couldTotal = Float.valueOf(userDao.getUserInfo(uuid).getUser_balance()) - fifteenTotal;
+        return new Result(true,String.valueOf(couldTotal));
+    }
+
+
+    @GetMapping("/ishaspsd")
+    @ResponseBody
+    public Result<String> isHasPsd(@RequestParam("token") String token){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        if (getDataDao.isHasPsd(uuid) == 0){
+            return new Result(true,"true");
+        }else {
+            return new Result(true,"false");
+        }
+
     }
 
 }
