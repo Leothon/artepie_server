@@ -29,10 +29,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.SendDataService;
-import utils.PayUtils;
-import utils.PropertyUtil;
-import utils.XMLUtil;
-import utils.commonUtils;
+import utils.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javax.servlet.http.HttpServletRequest;
@@ -364,17 +361,33 @@ public class PayController {
 
     @PostMapping("/getcash")
     @ResponseBody
-    public Result<String> getCash(@RequestParam("cashinfo") String cashInfo) {
+    public Result<String> getCash(@RequestParam("cashinfo") String cashInfo,@RequestParam("token") String token) {
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        String numberOrder = "c" + commonUtils.createUUID();
+        String endInfo = "{ \"out_biz_no\":\"" + numberOrder + "\"," + cashInfo;
+
+        System.out.println("未合成订单" + cashInfo);
+        System.out.println("合成订单" + endInfo);
+        JSONObject outJson = JSONObject.parseObject(endInfo);
+
+        String amount = outJson.getString("amount");
 
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALIPAY_URL, AlipayConfig.APP_ID,
                 AlipayConfig.PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,
                 AlipayConfig.SIGN_TYPE);
         AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
-        request.setBizContent(cashInfo);
+        request.setBizContent(endInfo);
         try {
             AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
 
             if (response.isSuccess()) {
+
+                String newBalance = commonUtils.computeLastBalance(amount,userDao.getUserInfo(uuid).getUser_balance());
+
+                sendDataDao.updateUserBalance(uuid,newBalance);
+
                 return new Result<>(true,"订单号" + response.getOrderId() + "账单号" + response.getOutBizNo() + "提现日期" + response.getPayDate());
             } else {
                 return new Result<>(false,"提现失败");

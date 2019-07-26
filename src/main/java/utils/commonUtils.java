@@ -17,8 +17,8 @@ public class commonUtils {
     public static String computeBalance(String oldBalance,String classPrice){
 
 
-
-        return  String.valueOf(Float.valueOf(oldBalance) + Float.valueOf(classPrice));
+        DecimalFormat df = new DecimalFormat("#.00");
+        return  df.format(Float.valueOf(oldBalance) + Float.valueOf(classPrice));
     }
 
 
@@ -27,6 +27,12 @@ public class commonUtils {
         String endPrice = String.valueOf(Float.valueOf(totalCoin) - removeCoinCount);
 
         return endPrice.substring(0,endPrice.indexOf("."));
+    }
+
+    public static String computeLastBalance(String removePrice,String oldBalance){
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        return df.format(Float.valueOf(oldBalance) - Float.valueOf(removePrice));
     }
 
     public static String computeAuthorPrice(String classPrice){

@@ -523,10 +523,12 @@
         <id column="update_id" property="updateId"/>
         <result column="update_version" property="updateVersion"/>
         <result column="update_time" property="updateTime"/>
+        <result column="update_code" property="updateCode"/>
+        <result column="update_content" property="updateContent"/>
     </resultMap>
 
     <select id="getUpdate" resultMap="updateMap">
-        select update_id,update_version,update_time from `update` order by update_time desc limit 1
+        select update_id,update_version,update_time,update_code,update_content from `update` order by update_time desc limit 1
     </select>
 
     <select id="getAuthImg" resultType="string">
@@ -640,7 +642,7 @@
     </resultMap>
     <select id="getOutBill" resultMap="outBillMap">
         select a.transaction_user_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_end_price,a.transaction_id from
-        transaction_order a join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date
+        transaction_order a join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date
     </select>
 
     <resultMap id="inBillMap" type="entity.Bill">
@@ -656,7 +658,7 @@
         select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
 
         from transaction_order a
-        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} order by a.transaction_date
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date
     </select>
 
 
@@ -664,7 +666,7 @@
         select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
 
         from transaction_order a
-        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where  (DATE_SUB(CURDATE(), INTERVAL 15 DAY) <![CDATA[<=]]> date(d.user_register_time)) and b.class_author_id = #{uuid} order by a.transaction_date
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where  (DATE_SUB(CURDATE(), INTERVAL 15 DAY) <![CDATA[<=]]> date(a.transaction_date)) and b.class_author_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date
     </select>
 
     <resultMap id="OrderHisMap" type="entity.OrderHis">

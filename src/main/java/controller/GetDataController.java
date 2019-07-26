@@ -20,6 +20,7 @@ import utils.commonUtils;
 import utils.tokenUtils;
 
 import java.net.URLDecoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -493,14 +494,24 @@ public class GetDataController {
 
 
         String uuid = tokenUtils.ValidToken(token).getUid();
+
+        if (userDao.getUserInfo(uuid).getUser_balance() == null){
+            return new Result(true,"0");
+        }
         Float fifteenTotal = 0f;
         ArrayList<Bill> bills = getDataDao.getInfifteen(uuid);
         for (int i = 0;i < bills.size();i ++){
             bills.get(i).setCount(commonUtils.computeAuthorPrice(bills.get(i).getCount()));
             fifteenTotal += Float.valueOf(bills.get(i).getCount());
+            System.out.println("每笔账单" + fifteenTotal);
         }
+        System.out.println("近期现金" + fifteenTotal);
+
         Float couldTotal = Float.valueOf(userDao.getUserInfo(uuid).getUser_balance()) - fifteenTotal;
-        return new Result(true,String.valueOf(couldTotal));
+        System.out.println("可提现金" + couldTotal);
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        return new Result(true,df.format(couldTotal));
     }
 
 
