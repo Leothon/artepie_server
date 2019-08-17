@@ -736,7 +736,14 @@ public class GetDataServiceImpl implements GetDataService {
 
     @Override
     public ArrayList<Article> searchArticleByKeyword(String keyword,String uuid) {
-        return getDataDao.getArticleByKeyword(keyword);
+
+
+        ArrayList<Article> articles = getDataDao.getArticleByKeyword(keyword);
+        for (int i = 0;i < articles.size();i++){
+            //articles.get(i).setArticleVisionCount(String.valueOf(getDataDao.getArticleVisionCount(articles.get(i).getArticleId())));
+            articles.get(i).setLikeCount(String.valueOf(getDataDao.getArticleLike(articles.get(i).getArticleId())));
+        }
+        return articles;
     }
 
     @Override

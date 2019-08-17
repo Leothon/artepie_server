@@ -407,6 +407,9 @@ public class GetDataController {
 
         String uuid = tokenUtils.ValidToken(token).getUid();
 
+
+        String startId = "start" + commonUtils.createUUID();
+        sendDataDao.insertStartTime(startId,commonUtils.getTime(),uuid);
         return new Result<Update>(true,getDataService.getUpdate(uuid));
 
 
@@ -527,5 +530,6 @@ public class GetDataController {
         }
 
     }
+
 
 }

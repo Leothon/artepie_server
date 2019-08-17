@@ -213,8 +213,11 @@ public class PayController {
 
                     String endTime = commonUtils.getTime();
                     sendDataDao.updateTransaction(orders.getOrder_id(), "alipay", "已支付", "无", "", endTime);
-                    String classBuyId = "buy" + commonUtils.createUUID();
-                    sendDataDao.insertClassBuyInfo(classBuyId, orders.getOrder_class_id(), orders.getOrder_user_id(), endTime);
+                    if (getDataDao.isUserBuy(orders.getOrder_class_id(),orders.getOrder_user_id()) == 1){
+                        String classBuyId = "buy" + commonUtils.createUUID();
+                        sendDataDao.insertClassBuyInfo(classBuyId, orders.getOrder_class_id(), orders.getOrder_user_id(), endTime);
+                    }
+
                     String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
                     String authorId = getDataDao.getUserIdByClassId(orders.getOrder_class_id());
                     String authorBalance = userDao.getUserInfo(authorId).getUser_balance();
@@ -311,8 +314,11 @@ public class PayController {
                      */
 
                     sendDataDao.updateTransaction(orders.getOrder_id(), pay_type, pay_status, bank_type, transaction_id, transaction_end_time);
-                    String classBuyId = "buy" + commonUtils.createUUID();
-                    sendDataDao.insertClassBuyInfo(classBuyId, orders.getOrder_class_id(), orders.getOrder_user_id(), transaction_end_time);
+                    if (getDataDao.isUserBuy(orders.getOrder_class_id(),orders.getOrder_user_id()) == 1){
+                        String classBuyId = "buy" + commonUtils.createUUID();
+                        sendDataDao.insertClassBuyInfo(classBuyId, orders.getOrder_class_id(), orders.getOrder_user_id(), transaction_end_time);
+                    }
+
                     String authorPrice = commonUtils.computeAuthorPrice(orders.getOrder_class_price());
                     String authorId = getDataDao.getUserIdByClassId(orders.getOrder_class_id());
                     String authorBalance = userDao.getUserInfo(authorId).getUser_balance();

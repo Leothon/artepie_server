@@ -11,7 +11,7 @@
 
     <insert id="insertPhoneTokenUuid">
 
-        insert into `user` (user_id,user_phone,user_token,user_name,user_register_time,user_role,user_password) values (#{uuid},#{phoneNumber},#{token},#{username},#{registerTime},"未知","")
+        insert into `user` (user_id,user_phone,user_token,user_name,user_register_time,user_role,user_password,user_balance,user_art_coin) values (#{uuid},#{phoneNumber},#{token},#{username},#{registerTime},"未知","","0","0")
     </insert>
 
     <select id="getTokenByPhoneNumber" parameterType="string" resultType="string">
@@ -68,13 +68,13 @@
     </update>
 
     <insert id="insertQQRegister">
-        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password)
-        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","")
+        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password,user_phone,user_balance,user_art_coin)
+        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","",#{phone},"0","0")
     </insert>
 
     <insert id="insertWeChatRegister">
-        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password,user_address)
-        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","",#{location})
+        insert into `user` (user_id,user_name,user_icon,user_sex,user_token,user_register_time,tencent_token,user_role,user_password,user_address,user_phone,user_balance,user_art_coin)
+        values (#{uuid} ,#{userName} ,#{userIcon} ,#{sex} ,#{token} ,#{registerTime} ,#{tencentToken} ,"未知","",#{location},#{phone},"0","0")
     </insert>
 
     <update id="updatePhoneNumber" parameterType="string">
@@ -105,8 +105,8 @@
 
 
     <insert id="insertFalseUser">
-        insert into `user` (user_id,user_name,user_sex,user_password,user_token,user_register_time,user_phone,user_role)
-        values (#{uuid} ,#{userName},"0","7cf28171508943deefee4b3da7f41923",#{token},#{registerTime},#{phone},"注册")
+        insert into `user` (user_id,user_name,user_sex,user_password,user_token,user_register_time,user_phone,user_role,user_balance,user_art_coin)
+        values (#{uuid} ,#{userName},"0","7cf28171508943deefee4b3da7f41923",#{token},#{registerTime},#{phone},"注册","0","0")
     </insert>
 
     <select id="getTokenByAccessToken" resultType="string">

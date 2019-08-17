@@ -275,4 +275,12 @@
         (psd_id,psd_user_id,psd_content)
         values (#{psdId},#{uuid},#{psd})
     </insert>
+
+
+
+    <insert id="insertStartTime">
+        insert into start
+        (start_id,create_time,start_user_id)
+        values (#{startId},#{createTime},#{userId})
+    </insert>
 </mapper>

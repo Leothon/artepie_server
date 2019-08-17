@@ -113,5 +113,6 @@ public interface SendDataDao {
 
     void insertPsd(@Param("psdId") String psdId,@Param("uuid") String uuid, @Param("psd") String psd);
 
+    void insertStartTime(@Param("startId") String startId,@Param("createTime") String createTime, @Param("userId") String userId);
 
 }

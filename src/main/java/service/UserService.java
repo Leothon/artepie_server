@@ -17,8 +17,8 @@ public interface UserService {
 
     void updateInfo(User user);
 
-    void qqRegister(String uuid,String userIcon,String userName,int sex,String registerTime,String token,String tencentToken);
-    void weChatRegister(String uuid,String userIcon,String userName,int sex,String location,String registerTime,String token,String tencentToken);
+    void qqRegister(String uuid,String userIcon,String userName,int sex,String registerTime,String token,String tencentToken,String phone);
+    void weChatRegister(String uuid,String userIcon,String userName,int sex,String location,String registerTime,String token,String tencentToken,String phone);
 
     User getUserInfoByQQ(String accessToken);
 

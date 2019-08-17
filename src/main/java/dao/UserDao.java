@@ -26,9 +26,9 @@ public interface UserDao {
 
     void updateUserIcon(@Param("userIcon") String userIcon,@Param("userId") String userId);
 
-    void insertQQRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken);
+    void insertQQRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken,@Param("phone") String phone);
 
-    void insertWeChatRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("location") String location,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken);
+    void insertWeChatRegister(@Param("uuid") String uuid,@Param("userIcon")  String userIcon,@Param("userName")  String userName,@Param("sex")  int sex,@Param("location") String location,@Param("registerTime")  String registerTime,@Param("token")  String token,@Param("tencentToken")  String tencentToken,@Param("phone") String phone);
 
     User getUserInfoByQQ(String accessToken);
 

@@ -34,7 +34,7 @@ public class UserController {
             tokeninfo.setInfo("注册成功");
             tokeninfo.setToken(token);
             String registerTime = commonUtils.getTime();
-            userService.register(uuid, phonenumber, token, "用户" + uuid, registerTime);
+            userService.register(uuid, phonenumber, token, "用户" + commonUtils.getRandomString(8), registerTime);
             return new Result<User>(true, userService.getUserInfoById(uuid));
         } else {
             //已注册
@@ -137,7 +137,8 @@ public class UserController {
         tokeninfo.setInfo("注册成功");
         tokeninfo.setToken(token);
         String registerTime = commonUtils.getTime();
-        userService.qqRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), registerTime, token, user.getTencent_token());
+        String phone = user.getUser_phone() + "";
+        userService.qqRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), registerTime, token, user.getTencent_token(),phone);
 
         return new Result<User>(true, userService.getUserInfoById(uuid));
 
@@ -152,7 +153,8 @@ public class UserController {
         tokeninfo.setInfo("注册成功");
         tokeninfo.setToken(token);
         String registerTime = commonUtils.getTime();
-        userService.weChatRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), user.getUser_address(),registerTime, token, user.getTencent_token());
+        String phone = user.getUser_phone() + "";
+        userService.weChatRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), user.getUser_address(),registerTime, token, user.getTencent_token(),phone);
 
         return new Result<User>(true, userService.getUserInfoById(uuid));
 

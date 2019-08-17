@@ -178,4 +178,7 @@ public interface GetDataDao {
 
     String getPsd(String uuid);
 
+    String getAuthorIdByArticleId(String articleId);
+    String getTitleByArticleId(String articleId);
+
 }

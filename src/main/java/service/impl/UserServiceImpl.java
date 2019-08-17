@@ -58,13 +58,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void qqRegister(String uuid, String userIcon, String userName, int sex, String registerTime, String token, String tencentToken) {
-        userDao.insertQQRegister(uuid,userIcon,userName,sex,registerTime,token,tencentToken);
+    public void qqRegister(String uuid, String userIcon, String userName, int sex, String registerTime, String token, String tencentToken,String phone) {
+        userDao.insertQQRegister(uuid,userIcon,userName,sex,registerTime,token,tencentToken,phone);
     }
 
     @Override
-    public void weChatRegister(String uuid, String userIcon, String userName, int sex,String location, String registerTime, String token, String tencentToken) {
-        userDao.insertWeChatRegister(uuid,userIcon,userName,sex,location,registerTime,token,tencentToken);
+    public void weChatRegister(String uuid, String userIcon, String userName, int sex,String location, String registerTime, String token, String tencentToken,String phone) {
+        userDao.insertWeChatRegister(uuid,userIcon,userName,sex,location,registerTime,token,tencentToken,phone);
     }
     @Override
     public User getUserInfoByQQ(String accessToken) {

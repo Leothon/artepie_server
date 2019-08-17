@@ -18,7 +18,7 @@
     <resultMap id="classMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
-        <result column="user_name" property="selectauthor"/>
+        <result column="class_author" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
         <result column="user_id" property="selectauthorid"/>
@@ -28,20 +28,20 @@
     </resultMap>
 
     <select id="getClassInfo" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_id = #{classId}
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_id = #{classId}
     </select>
     <select id="getClasses" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
     </select>
 
     <select id="getClassByTea" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc
     </select>
 
 
 
     <select id="getClassByType" resultMap="classMap">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc
     </select>
 
 
@@ -66,7 +66,7 @@
     <resultMap id="classDetailMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
         <result column="class_title" property="selectlisttitle"/>
-        <result column="user_name" property="selectauthor"/>
+        <result column="class_author" property="selectauthor"/>
         <result column="class_price" property="selectprice"/>
         <result column="class_img" property="selectbackimg"/>
         <result column="class_des" property="selectdesc"/>
@@ -79,7 +79,7 @@
     </resultMap>
 
     <select id="getClassDetail" resultMap="classDetailMap">
-        select a.class_id,a.class_title,b.user_name,a.class_count,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
+        select a.class_id,a.class_title,a.class_author,a.class_count,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
     </select>
 
     <resultMap id="userMapa" type="entity.User">
@@ -694,4 +694,14 @@
     <select id="getPsd" resultType="string" parameterType="string">
         select psd_content from psd where psd_user_id = #{uuid}
     </select>
+
+    <select id="getAuthorIdByArticleId" resultType="string" parameterType="string">
+        select article_author_id from article where article_id = #{articleId}
+    </select>
+
+    <select id="getTitleByArticleId" resultType="string" parameterType="string">
+        select article_title from article where article_id = #{articleId}
+    </select>
+
+
 </mapper>

@@ -131,6 +131,19 @@ public class SendDataServiceImpl implements SendDataService {
         if (getDataDao.isArticleLike(userId,articleId) != 0){
             sendDataDao.likeArticle(articleLikeId,userId,articleId,commonUtils.getTime());
         }
+
+        String authorId = getDataDao.getAuthorIdByArticleId(articleId);
+        String authorTitle = getDataDao.getTitleByArticleId(articleId);
+        if (!authorId.equals(userId)){
+            Map<String, String> parm = new HashMap<String, String>();
+            parm.put("id",authorId);
+            User user = userDao.getUserInfo(userId);
+            parm.put("msg",user.getUser_name() + "推荐了您的文章: " + authorTitle);
+            JpushUtils.jpushAndroidByAlias(parm);
+            //String noticeId = "noticeId" + commonUtils.createUUID();
+            //sendDataDao.noticeInfo(noticeId,uuid,authorId,contentWithoutSensitiveWord,"qacomment",qaId,0,commonUtils.getTime());
+        }
+
     }
 
     @Override
