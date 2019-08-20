@@ -318,7 +318,7 @@ public class SendDataServiceImpl implements SendDataService {
     }
 
     @Override
-    public void createClassInfo(String classId,String classTitle, String classAuthor, String classAuthorId, String classPrice, String classDes, String classImg, String classType, String classAuthorDes) {
+    public void createClassInfo(String classId,String classTitle, String classAuthor, String classAuthorId, String classPrice, String classDes, String classImg, String classType) {
 
         String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
@@ -327,11 +327,11 @@ public class SendDataServiceImpl implements SendDataService {
         if (classPrice.equals("")){
             classPrice = "0.00";
         }
-        sendDataDao.createClassInfo(classId,titleWithoutSensitiveWord,classAuthor,classAuthorId,classPrice,desWithoutSensitiveWord,classImg,classType,classAuthorDes,commonUtils.getTime());
+        sendDataDao.createClassInfo(classId,titleWithoutSensitiveWord,classAuthor,classAuthorId,classPrice,desWithoutSensitiveWord,classImg,classType,commonUtils.getTime());
     }
 
     @Override
-    public void editClassInfo(String classId,String classTitle, String classPrice, String classDes, String classImg, String classType) {
+    public void editClassInfo(String classId,String classTitle, String classPrice, String classDes, String classImg, String classType,int ser) {
         String titlewithoutemoji = EmojiParser.parseToAliases(classTitle);
         String deswithoutemoji = EmojiParser.parseToAliases(classDes);
         String titleWithoutSensitiveWord = SensitiveWord.getInstance().filterInfo(titlewithoutemoji);
@@ -339,7 +339,7 @@ public class SendDataServiceImpl implements SendDataService {
         if (classPrice.equals("")){
             classPrice = "0.00";
         }
-        sendDataDao.editClassInfo(classId,titleWithoutSensitiveWord,classPrice,desWithoutSensitiveWord,classImg,classType,commonUtils.getTime());
+        sendDataDao.editClassInfo(classId,titleWithoutSensitiveWord,classPrice,desWithoutSensitiveWord,classImg,classType,commonUtils.getTime(),ser);
 
     }
 

@@ -346,7 +346,7 @@ public class SendDataController {
     @ResponseBody
     public Result<String> createClass(@RequestBody SelectClass selectClass){
         String classId = "class" + commonUtils.createUUID();
-        sendDataService.createClassInfo(classId,selectClass.getSelectlisttitle(),selectClass.getSelectauthor(),selectClass.getSelectauthorid(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType(),selectClass.getSelectauthordes());
+        sendDataService.createClassInfo(classId,selectClass.getSelectlisttitle(),selectClass.getSelectauthor(),selectClass.getSelectauthorid(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType());
 
         return new Result<>(true,classId);
     }
@@ -354,7 +354,12 @@ public class SendDataController {
     @PostMapping("/editclass")
     @ResponseBody
     public Result<String> editClass(@RequestBody SelectClass selectClass){
-        sendDataService.editClassInfo(selectClass.getSelectId(),selectClass.getSelectlisttitle(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType());
+
+        int ser = 0;
+        if (selectClass.isSerialize()){
+            ser = 1;
+        }
+        sendDataService.editClassInfo(selectClass.getSelectId(),selectClass.getSelectlisttitle(),selectClass.getSelectprice(),selectClass.getSelectdesc(),selectClass.getSelectbackimg(),selectClass.getType(),ser);
         return new Result<>(true,selectClass.getSelectId());
     }
 

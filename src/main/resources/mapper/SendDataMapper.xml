@@ -133,8 +133,8 @@
     </insert>
 
     <insert id="createClassInfo">
-        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_author_des,class_score,class_create_time,class_count)
-        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},#{classAuthorDes},"暂无评分",#{classTime},0)
+        insert into class (class_id,class_title,class_author,class_author_id,class_price,class_des,class_img,class_duration,class_type,class_type_detail,class_score,class_create_time,class_count,serialize_status,authorize)
+        values (#{classId},#{classTitle},#{classAuthor},#{classAuthorId},#{classsPrice},#{classDes},#{classImg},"0","音乐",#{classType},"暂无评分",#{classTime},0,1,0)
     </insert>
 
     <update id="editClassInfo">
@@ -144,7 +144,8 @@
         class_des = #{classDes},
         class_img = #{classImg},
         class_type_detail = #{classType},
-        class_create_time = #{classTime}
+        class_create_time = #{classTime},
+        serialize_status = #{ser}
         where class_id = #{classId}
     </update>
 

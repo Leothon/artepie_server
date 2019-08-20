@@ -46,8 +46,8 @@ public interface SendDataService {
 
     void sendFeedBack(String uuid, String content);
 
-    void createClassInfo(String classId,String classTitle,String classAuthor,String classAuthorId, String classPrice, String classDes,String classImg, String classType, String classAuthorDes);
-    void editClassInfo(String classId,String classTitle, String classPrice, String classDes,String classImg, String classType);
+    void createClassInfo(String classId,String classTitle,String classAuthor,String classAuthorId, String classPrice, String classDes,String classImg, String classType);
+    void editClassInfo(String classId,String classTitle, String classPrice, String classDes,String classImg, String classType,int ser);
 
 
 

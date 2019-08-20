@@ -1,4 +1,5 @@
 package entity;
+import	java.util.Set;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,25 @@ public class SelectClass {
     private String selectauthordes;
     private String selectscore;
 
+    private boolean serialize;
 
+    public boolean isSerialize() {
+        return serialize;
+    }
+
+    public void setSerialize(boolean serialize) {
+        this.serialize = serialize;
+    }
+
+    private boolean authorize;
+
+    public boolean isAuthorize() {
+        return authorize;
+    }
+
+    public void setAuthorize(boolean authorize) {
+        this.authorize = authorize;
+    }
 
     private String selectauthorid;
 

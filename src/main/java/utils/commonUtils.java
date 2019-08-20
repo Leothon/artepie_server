@@ -1,11 +1,13 @@
 package utils;
 
+import entity.Bill;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
@@ -110,7 +112,28 @@ public class commonUtils {
 
 //
 //    public static void main(String args[]){
-//        System.out.println(getRandomString(8));
+//
+//
+//        ArrayList<String> inBill = new ArrayList<> ();
+//        inBill.add("12.56");
+//        inBill.add("523.36");
+//        inBill.add("89.54");
+//        inBill.add("78.45");
+//        inBill.add("12.02");
+//        inBill.add("58.00");
+//        inBill.add("5.54");
+//        inBill.add("458.78");
+//        inBill.add("85.30");
+//
+//        DecimalFormat df = new DecimalFormat("#.00");
+//        Float balance = 0.00f;
+//        for (int j = 0;j < inBill.size();j ++){
+//
+//            balance += Float.valueOf(inBill.get(j));
+//        }
+//        String endBalance = df.format(balance);
+//
+//        System.out.println(endBalance);
 //    }
 
 

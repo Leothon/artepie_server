@@ -1,7 +1,10 @@
 package controller;
 
+import dao.GetDataDao;
+import dao.SendDataDao;
 import dto.Result;
 import dto.Token;
+import entity.Bill;
 import entity.TokenValid;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import utils.commonUtils;
 import utils.tokenUtils;
 
 import java.io.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 @Controller
 public class UserController {
@@ -20,6 +25,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    GetDataDao getDataDao;
+
+    @Autowired
+    SendDataDao sendDataDao;
 
     @GetMapping("/usephonelogin")
     @ResponseBody
@@ -85,6 +95,20 @@ public class UserController {
 
         TokenValid tokenValid = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
+
+        //TODO
+        ArrayList<Bill> inBill = getDataDao.getInBill(uuid);
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        Float balance = 0.00f;
+        for (int j = 0;j < inBill.size();j ++){
+            inBill.get(j).setCount(commonUtils.computeAuthorPrice(inBill.get(j).getCount()));
+
+            balance += Float.valueOf(inBill.get(j).getCount());
+        }
+        String endBalance = df.format(balance);
+
+        sendDataDao.updateUserBalance(uuid, endBalance);
         return new Result<User>(true, userService.getUserInfoById(uuid));
     }
 
