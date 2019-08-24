@@ -96,7 +96,6 @@ public class UserController {
         TokenValid tokenValid = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
 
-        //TODO
         ArrayList<Bill> inBill = getDataDao.getInBill(uuid);
 
         DecimalFormat df = new DecimalFormat("#.00");

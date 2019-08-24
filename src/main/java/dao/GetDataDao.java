@@ -26,8 +26,9 @@ public interface GetDataDao {
 
     QAData getQADetail(String qaId);
     ArrayList<Comment> getComment(String qaId);
+    ArrayList<Comment> getMoreComment(@Param("qaId")String qaId,@Param("currentPage") int currentPage);
     ArrayList<Reply> getReply(String commentId);
-
+    ArrayList<Reply> getMoreReply(@Param("commentId") String commentId,@Param("currentPage") int currentPage);
 
     Comment getSingleComment(String commentId);
 
@@ -58,6 +59,7 @@ public interface GetDataDao {
     int isFav(@Param("userId") String userId,@Param("classId") String classId);
 
     ArrayList<ClassDetailList> getClassList(String classId);
+    ArrayList<ClassDetailList> getMoreClassList(@Param("classId") String classId,@Param("currentPage") int currentPage);
 
 
     ClassDetailList getClassVideo(@Param("classId") String classId,@Param("classdId") String classdId);
@@ -70,12 +72,14 @@ public interface GetDataDao {
     int getFavCount(String classId);
 
     ArrayList<SelectClass> getClassByTea(String teaId);
+    ArrayList<SelectClass> getMoreClassByTea(@Param("teaId") String teaId,@Param("currentPage") int currentPage);
 
     ArrayList<SelectClass> getClassByMyself(String teaId);
 
     User getTeaInfo(String teaId);
 
     ArrayList<SelectClass> getClassByType(String type);
+    ArrayList<SelectClass> getMoreClassByType(@Param("type") String type,@Param("currentPage") int currentPage);
 
     int getTypeClassCount(String type);
 
@@ -84,6 +88,7 @@ public interface GetDataDao {
     int isQQOrWeChatRegister(String accessToken);
 
     ArrayList<SelectClass> getFavClassByUid(String uuid);
+    ArrayList<SelectClass> getMoreFavClassByUid(@Param("uuid") String uuid,@Param("currentPage") int currentPage);
 
     ArrayList<ClassDetailList> getViewHisById(String uuid);
 
@@ -110,6 +115,7 @@ public interface GetDataDao {
 
 
     ArrayList<NoticeInfo> getNoticeInfo(String userId);
+    ArrayList<NoticeInfo> getMoreNoticeInfo(@Param("page") int page,@Param("userId") String userId);
 
     int isHasNotice(String userId);
     int isHasClassDetail(String classId);
@@ -166,13 +172,19 @@ public interface GetDataDao {
 
 
     ArrayList<SelectClass> getBuyClassByUid(String uuid);
+    ArrayList<SelectClass> getMoreBuyClassByUid(@Param("uuid") String uuid,@Param("currentPage") int currentPage);
 
     ArrayList<Bill> getOutBill(String uuid);
+    ArrayList<Bill> getMoreOutBill(@Param("uuid") String uuid,@Param("currentPage") int currentPage);
+
 
     ArrayList<Bill> getInBill(String uuid);
+    ArrayList<Bill> getMoreInBill(@Param("uuid") String uuid,@Param("currentPage") int currentPage);
 
     ArrayList<Bill> getInfifteen(String uuid);
+
     ArrayList<OrderHis> getOrderHis(String uuid);
+    ArrayList<OrderHis> getMoreOrderHis(@Param("uuid") String uuid,@Param("currentPage") int currentPage);
 
     int isHasPsd(String uuid);
 

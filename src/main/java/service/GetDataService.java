@@ -36,7 +36,7 @@ public interface GetDataService {
 
     String isQQOrWeChatRegister(String accessToken);
 
-    ArrayList<SelectClass> getFavClassByUid(String uuid);
+
 
     ArrayList<ClassDetailList> getClassViewById(String uuid);
 

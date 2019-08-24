@@ -1,6 +1,7 @@
 package controller;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
+import com.vdurmont.emoji.EmojiParser;
 import dao.GetDataDao;
 import dao.SendDataDao;
 import dao.UserDao;
@@ -104,10 +105,6 @@ public class GetDataController {
     @ResponseBody
     public Result<ArrayList<QAData>> getQuestionDataById(@RequestParam("userid") String userId){
 
-
-
-
-
         return new Result<ArrayList<QAData>>(true,getDataService.getQADataById(userId));
 
     }
@@ -138,6 +135,55 @@ public class GetDataController {
         }
     }
 
+
+    @GetMapping("/getmoreqadetail")
+    @ResponseBody
+    public Result<ArrayList<Comment>> getMoreQADetail(@RequestParam("token") String token,@RequestParam("qaid") String qaId,@RequestParam("currentpage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+        String tokenInDb = userService.getTokenByUID(uuid);
+
+        if (tokenInDb.equals(token)){
+
+            ArrayList<Comment> comments = getDataDao.getMoreComment(qaId,currentPage);
+            for (int i = 0;i < comments.size();i ++){
+
+                comments.get(i).setComment_q_content(EmojiParser.parseToUnicode(comments.get(i).getComment_q_content()));
+                comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
+                if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
+                    comments.get(i).setComment_liked(true);
+                }else {
+                    comments.get(i).setComment_liked(false);
+                }
+
+                if (Integer.parseInt(comments.get(i).getComment_q_like()) >= 5){
+                    if (Integer.parseInt(comments.get(i).getComment_q_like()) > Integer.parseInt(comments.get(0).getComment_q_like())){
+                        Comment temp  = comments.get(i);
+                        comments.remove(i);
+                        comments.add(0,temp);
+                    }
+                }
+                ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
+                for (int j = 0;j < replies.size();j ++){
+                    replies.get(j).setReply_comment(EmojiParser.parseToUnicode(replies.get(j).getReply_comment()));
+                    replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
+                    if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
+                        replies.get(j).setReply_liked(true);
+                    }else {
+                        replies.get(j).setReply_liked(false);
+                    }
+                }
+                comments.get(i).setReplies(replies);
+            }
+            return new Result<ArrayList<Comment>>(true,comments);
+        }else {
+            return new Result<>(false,"登录过期或者错误，请重新登录");
+        }
+    }
+
+
+
     @GetMapping("/getqainfo")
     @ResponseBody
     public Result<QAData> getQA(@RequestParam("token") String token,@RequestParam("qaid") String qaId){
@@ -154,6 +200,8 @@ public class GetDataController {
     }
 
 
+
+
     @GetMapping("/getcommentdetail")
     @ResponseBody
     public Result<CommentDetail> getCommentDetail(@RequestParam("commentid") String commentId,@RequestParam("token") String token){
@@ -161,6 +209,25 @@ public class GetDataController {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         return new Result<CommentDetail>(true,getDataService.getCommentDetail(commentId,uuid));
+    }
+
+    @GetMapping("/getmorecommentdetail")
+    @ResponseBody
+    public Result<ArrayList<Reply>> getMoreCommentDetail(@RequestParam("commentid") String commentId,@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        ArrayList<Reply> replie = getDataDao.getMoreReply(commentId,currentPage);
+        for (int i = 0;i < replie.size();i ++){
+            replie.get(i).setReply_comment(EmojiParser.parseToUnicode(replie.get(i).getReply_comment()));
+            replie.get(i).setReply_like(Integer.toString(getDataDao.getReplyLike(replie.get(i).getReply_id())));
+            if (getDataDao.isReplyLike(uuid,replie.get(i).getReply_id()) == 0){
+                replie.get(i).setReply_liked(true);
+            }else {
+                replie.get(i).setReply_liked(false);
+            }
+        }
+        return new Result<ArrayList<Reply>>(true,replie);
     }
 
 
@@ -177,6 +244,19 @@ public class GetDataController {
     }
 
 
+    @GetMapping("/getmoreclassdetail")
+    @ResponseBody
+    public Result<ArrayList<ClassDetailList>> getMoreClassDetail(@RequestParam("token") String token,@RequestParam("classid") String classId,@RequestParam("currentPage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+
+
+        ArrayList<ClassDetailList> classDetailList = getDataDao.getMoreClassList(classId,currentPage);
+        return new Result<ArrayList<ClassDetailList>>(true,classDetailList);
+
+    }
+
+
 
     @GetMapping("/getclassvideo")
     @ResponseBody
@@ -184,6 +264,36 @@ public class GetDataController {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         return new Result<>(true,getDataService.getVideoDetail(uuid,classId,classdId));
+    }
+
+    @GetMapping("/getmoreclassvideo")
+    @ResponseBody
+    public  Result<ArrayList<Comment>> getMoreClassVideo(@RequestParam("token") String token,@RequestParam("classdid") String classdId,@RequestParam("currentPage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        ArrayList<Comment> comments = getDataDao.getMoreComment(classdId,currentPage);
+
+        for (int i = 0;i < comments.size();i ++){
+            comments.get(i).setComment_q_content(comments.get(i).getComment_q_content());
+            comments.get(i).setComment_q_like(Integer.toString(getDataDao.getCommentLike(comments.get(i).getComment_q_id())));
+            if (getDataDao.isCommentLike(uuid,comments.get(i).getComment_q_id()) == 0){
+                comments.get(i).setComment_liked(true);
+            }else {
+                comments.get(i).setComment_liked(false);
+            }
+            ArrayList<Reply> replies = getDataDao.getReply(comments.get(i).getComment_q_id());
+            for (int j = 0;j < replies.size();j ++){
+                replies.get(j).setReply_comment(replies.get(j).getReply_comment());
+                replies.get(j).setReply_like(Integer.toString(getDataDao.getReplyLike(replies.get(j).getReply_id())));
+                if (getDataDao.isReplyLike(uuid,replies.get(j).getReply_id()) == 0){
+                    replies.get(j).setReply_liked(true);
+                }else {
+                    replies.get(j).setReply_liked(false);
+                }
+            }
+            comments.get(i).setReplies(replies);
+        }
+        return new Result<ArrayList<Comment>>(true,comments);
     }
 
 
@@ -198,12 +308,46 @@ public class GetDataController {
         return new Result<>(true,getDataService.getTeaClass(uuid,teaId));
     }
 
+    @GetMapping("/getmoreteaclass")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getMoreTeaClass(@RequestParam("token") String token,@RequestParam("teaid") String teaId,@RequestParam("currentPage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        ArrayList<SelectClass> teaClass = getDataDao.getMoreClassByTea(teaId,currentPage);
+        for (int i = 0;i < teaClass.size();i ++){
+            //teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
+                teaClass.get(i).setIsbuy(true);
+            }else {
+                teaClass.get(i).setIsbuy(false);
+            }
+        }
+        return new Result<ArrayList<SelectClass>>(true,teaClass);
+    }
+
+
+
     @GetMapping("/getclassbyuserid")
     @ResponseBody
     public Result<ArrayList<SelectClass>> getClassByUserId(@RequestParam("userid") String userId){
 
-
         return new Result<>(true,getDataService.getSelectClassByUserId(userId));
+    }
+
+    @GetMapping("/getmoreclassbyuserid")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getClassByUserId(@RequestParam("userid") String userId,@RequestParam("currentPage") int currentPage){
+
+        ArrayList<SelectClass> selectClasses = getDataDao.getMoreClassByTea(userId,currentPage);
+        for (int i = 0;i < selectClasses.size();i ++){
+            //selectClasses.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(selectClasses.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(selectClasses.get(i).getSelectId(),userId) == 0){
+                selectClasses.get(i).setIsbuy(true);
+            }else {
+                selectClasses.get(i).setIsbuy(false);
+            }
+        }
+        return new Result<>(true,selectClasses);
     }
 
 
@@ -227,6 +371,31 @@ public class GetDataController {
             decodeType = URLDecoder.decode(type,"utf-8");
         }catch (Exception e){
             e.printStackTrace();
+        }
+        return new Result<>(true,getDataService.getClassByType(uuid,decodeType));
+    }
+
+    @GetMapping("/getmoreclassbytype")
+    @ResponseBody
+    public Result<TypeClass> getMoreClassByType(@RequestParam("token") String token,@RequestParam("type") String type,@RequestParam("currentPage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        String decodeType = "";
+        try{
+            decodeType = URLDecoder.decode(type,"utf-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        ArrayList<SelectClass> teaClass = getDataDao.getMoreClassByType(decodeType,currentPage);
+
+        for (int i = 0;i < teaClass.size();i ++){
+            //teaClass.get(i).setSelectstucount(Integer.toString(getDataDao.getClassView(teaClass.get(i).getSelectId())));
+            if (getDataDao.isUserBuy(teaClass.get(i).getSelectId(),uuid) == 0){
+                teaClass.get(i).setIsbuy(true);
+            }else {
+                teaClass.get(i).setIsbuy(false);
+            }
         }
         return new Result<>(true,getDataService.getClassByType(uuid,decodeType));
     }
@@ -255,7 +424,15 @@ public class GetDataController {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
 
-        return new Result<>(true,getDataService.getFavClassByUid(uuid));
+        return new Result<>(true,getDataDao.getFavClassByUid(uuid));
+    }
+
+    @GetMapping("/getmorefavclassbyuid")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getMoreFavClassByUid(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+        TokenValid tokenValid  = tokenUtils.ValidToken(token);
+        String uuid = tokenValid.getUid();
+        return new Result<>(true,getDataDao.getMoreFavClassByUid(uuid,currentPage));
     }
 
     @GetMapping("/getclassviewhis")
@@ -318,6 +495,8 @@ public class GetDataController {
     }
 
 
+
+
     @GetMapping("/ishasnotice")
     @ResponseBody
     public Result<String> isHasNotice(@RequestParam("token") String token){
@@ -337,6 +516,25 @@ public class GetDataController {
         String uuid = tokenUtils.ValidToken(token).getUid();
 
         return new Result<>(true,getDataService.getNoticeInfo(uuid));
+    }
+
+
+    @GetMapping("/getmorenoticeinfo")
+    @ResponseBody
+    public Result<ArrayList<NoticeInfo>> getMoreNoticeInfo(@RequestParam("current") int page,@RequestParam("token") String token){
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        ArrayList<NoticeInfo> noticeInfos = getDataDao.getMoreNoticeInfo(page,uuid);
+        for (int i = 0;i < noticeInfos.size();i ++){
+            noticeInfos.get(i).setNoticeContent(EmojiParser.parseToUnicode(noticeInfos.get(i).getNoticeContent()));
+            User user = getDataDao.getUserInfoInGet(noticeInfos.get(i).getNoticeFromUserId());
+            if (user != null){
+                noticeInfos.get(i).setUserName(user.getUser_name());
+                noticeInfos.get(i).setUserIcon(user.getUser_icon());
+            }
+
+        }
+        return new Result<>(true,noticeInfos);
     }
 
     @GetMapping("/getauthinfo")
@@ -459,6 +657,16 @@ public class GetDataController {
         return new Result(true,getDataDao.getBuyClassByUid(uuid));
     }
 
+
+    @GetMapping("/getmorebuyclass")
+    @ResponseBody
+    public Result<ArrayList<SelectClass>> getMoreBuyClass(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+        return new Result(true,getDataDao.getMoreBuyClassByUid(uuid,currentPage));
+    }
+
     @GetMapping("/getbills")
     @ResponseBody
     public Result<ArrayList<Bill>> getBills(@RequestParam("token") String token){
@@ -466,6 +674,26 @@ public class GetDataController {
         String uuid = tokenUtils.ValidToken(token).getUid();
         ArrayList<Bill> outBill = getDataDao.getOutBill(uuid);
         ArrayList<Bill> inBill = getDataDao.getInBill(uuid);
+
+        for (int i = 0;i < outBill.size();i ++){
+            outBill.get(i).setOutIn(0);
+        }
+        for (int j = 0;j < inBill.size();j ++){
+            inBill.get(j).setOutIn(1);
+            inBill.get(j).setCount(commonUtils.computeAuthorPrice(inBill.get(j).getCount()));
+            outBill.add(inBill.get(j));
+        }
+        Collections.sort(outBill, new SortClass());
+        return new Result(true,outBill);
+    }
+
+    @GetMapping("/getmorebills")
+    @ResponseBody
+    public Result<ArrayList<Bill>> getMoreBills(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        ArrayList<Bill> outBill = getDataDao.getMoreOutBill(uuid,currentPage);
+        ArrayList<Bill> inBill = getDataDao.getMoreInBill(uuid,currentPage);
 
         for (int i = 0;i < outBill.size();i ++){
             outBill.get(i).setOutIn(0);
@@ -488,6 +716,17 @@ public class GetDataController {
 
 
         return new Result(true,getDataDao.getOrderHis(uuid));
+    }
+
+    @GetMapping("/getmoreorderhis")
+    @ResponseBody
+    public Result<ArrayList<OrderHis>> getMoreOrderHis(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+
+
+        String uuid = tokenUtils.ValidToken(token).getUid();
+
+
+        return new Result(true,getDataDao.getMoreOrderHis(uuid,currentPage));
     }
 
 

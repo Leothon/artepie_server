@@ -490,11 +490,7 @@ public class GetDataServiceImpl implements GetDataService {
         return Integer.toString(getDataDao.isQQOrWeChatRegister(accessToken));
     }
 
-    @Override
-    public ArrayList<SelectClass> getFavClassByUid(String uuid) {
 
-        return getDataDao.getFavClassByUid(uuid);
-    }
 
     @Override
     public ArrayList<ClassDetailList> getClassViewById(String uuid) {
