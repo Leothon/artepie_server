@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d1319f-671a-4f98-a654-5340dd06630a" name="Default Changelist" comment="所有页面分页显示">
+    <list default="true" id="35d1319f-671a-4f98-a654-5340dd06630a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GetDataController.java" afterDir="false" />
     </list>
@@ -41,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="716" column="33" selection-start-line="716" selection-start-column="18" selection-end-line="716" selection-end-column="33" />
+            <state relative-caret-position="-101">
+              <caret line="718" column="117" selection-start-line="718" selection-start-column="117" selection-end-line="718" selection-end-column="117" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,8 +110,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="304" column="46" selection-start-line="304" selection-start-column="35" selection-end-line="304" selection-end-column="46" />
+            <state relative-caret-position="305">
+              <caret line="51" column="70" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="739" column="27" selection-start-line="739" selection-start-column="16" selection-end-line="739" selection-end-column="27" />
+            <state relative-caret-position="830">
+              <caret line="93" column="64" lean-forward="true" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -140,8 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="14" column="37" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="37" />
+            <state relative-caret-position="578">
+              <caret line="61" column="100" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,7 +161,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getqadetail</find>
       <find>getcomment</find>
       <find>getcommentdetail</find>
       <find>getReply</find>
@@ -179,11 +178,9 @@
       <find>getarticlecomment</find>
       <find>getArticleComment</find>
       <find>getHomeData</find>
-      <find>getBuyClassByUid</find>
       <find>getClasses</find>
       <find>getMoreComment</find>
       <find>getfa</find>
-      <find>getQA</find>
       <find>getQADetail</find>
       <find>getMoreClassList</find>
       <find>getMoreClassByTea</find>
@@ -191,6 +188,9 @@
       <find>getMoreBuyClassByUid</find>
       <find>getOutBill</find>
       <find>getOrderHis</find>
+      <find>getQA</find>
+      <find>getBuyClassByUid</find>
+      <find>getMoreClass</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -348,6 +348,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cogitoweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cogitoweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -435,7 +443,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566832316312" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566833782489" />
     <property name="last_opened_file_path" value="D:/artepieweb/first_vue" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -831,7 +839,7 @@
       <workItem from="1565447956573" duration="19669000" />
       <workItem from="1566354982648" duration="871000" />
       <workItem from="1566479281675" duration="588000" />
-      <workItem from="1566532066329" duration="19961000" />
+      <workItem from="1566532066329" duration="21504000" />
     </task>
     <task id="LOCAL-00001" summary="修复若干BUG">
       <created>1552395000703</created>
@@ -987,11 +995,18 @@
       <option name="project" value="LOCAL" />
       <updated>1566662812915</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="修改课程数据类型错误">
+      <created>1566832384559</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1566832384559</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="494344000" />
+    <option name="totallyTimeSpent" value="495887000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1111,7 +1126,8 @@
     <MESSAGE value="提现功能完成，增加更新内容显示" />
     <MESSAGE value="修改默认余额和艺币数目为0" />
     <MESSAGE value="所有页面分页显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="所有页面分页显示" />
+    <MESSAGE value="修改课程数据类型错误" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改课程数据类型错误" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/entity/Orders.java">
@@ -1504,30 +1520,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="14" column="37" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/service/GetDataService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="22" column="16" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="304" column="46" selection-start-line="304" selection-start-column="35" selection-end-line="304" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1541,17 +1537,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/impl/GetDataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="51" column="70" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/GetDataDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="61" column="100" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="100" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GetDataMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="739" column="27" selection-start-line="739" selection-start-column="16" selection-end-line="739" selection-end-column="27" />
+        <state relative-caret-position="830">
+          <caret line="93" column="64" lean-forward="true" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/GetDataController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="716" column="33" selection-start-line="716" selection-start-column="18" selection-end-line="716" selection-end-column="33" />
+        <state relative-caret-position="-101">
+          <caret line="718" column="117" selection-start-line="718" selection-start-column="117" selection-end-line="718" selection-end-column="117" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

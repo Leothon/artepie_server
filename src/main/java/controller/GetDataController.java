@@ -213,7 +213,7 @@ public class GetDataController {
 
     @GetMapping("/getmorecommentdetail")
     @ResponseBody
-    public Result<ArrayList<Reply>> getMoreCommentDetail(@RequestParam("commentid") String commentId,@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<Reply>> getMoreCommentDetail(@RequestParam("commentid") String commentId,@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
 
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
@@ -244,7 +244,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreclassdetail")
     @ResponseBody
-    public Result<ArrayList<ClassDetailList>> getMoreClassDetail(@RequestParam("token") String token,@RequestParam("classid") String classId,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<ClassDetailList>> getMoreClassDetail(@RequestParam("token") String token,@RequestParam("classid") String classId,@RequestParam("currentpage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         ArrayList<ClassDetailList> classDetailList = getDataDao.getMoreClassList(classId,currentPage);
@@ -264,7 +264,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreclassvideo")
     @ResponseBody
-    public  Result<ArrayList<Comment>> getMoreClassVideo(@RequestParam("token") String token,@RequestParam("classdid") String classdId,@RequestParam("currentPage") int currentPage){
+    public  Result<ArrayList<Comment>> getMoreClassVideo(@RequestParam("token") String token,@RequestParam("classdid") String classdId,@RequestParam("currentpage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         ArrayList<Comment> comments = getDataDao.getMoreComment(classdId,currentPage);
@@ -306,7 +306,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreteaclass")
     @ResponseBody
-    public Result<ArrayList<SelectClass>> getMoreTeaClass(@RequestParam("token") String token,@RequestParam("teaid") String teaId,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getMoreTeaClass(@RequestParam("token") String token,@RequestParam("teaid") String teaId,@RequestParam("currentpage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         ArrayList<SelectClass> teaClass = getDataDao.getMoreClassByTea(teaId,currentPage);
@@ -332,7 +332,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreclassbyuserid")
     @ResponseBody
-    public Result<ArrayList<SelectClass>> getClassByUserId(@RequestParam("userid") String userId,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getClassByUserId(@RequestParam("userid") String userId,@RequestParam("currentpage") int currentPage){
 
         ArrayList<SelectClass> selectClasses = getDataDao.getMoreClassByTea(userId,currentPage);
         for (int i = 0;i < selectClasses.size();i ++){
@@ -373,7 +373,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreclassbytype")
     @ResponseBody
-    public Result<ArrayList<SelectClass>> getMoreClassByType(@RequestParam("token") String token,@RequestParam("type") String type,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getMoreClassByType(@RequestParam("token") String token,@RequestParam("type") String type,@RequestParam("currentpage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         String decodeType = "";
@@ -425,7 +425,7 @@ public class GetDataController {
 
     @GetMapping("/getmorefavclassbyuid")
     @ResponseBody
-    public Result<ArrayList<SelectClass>> getMoreFavClassByUid(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getMoreFavClassByUid(@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         return new Result<>(true,getDataDao.getMoreFavClassByUid(uuid,currentPage));
@@ -637,7 +637,7 @@ public class GetDataController {
     }
     @GetMapping("/getarticlecommentmore")
     @ResponseBody
-    public Result<ArrayList<ArticleComment>> getArticleComment(@RequestParam("articleid") String articleId,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<ArticleComment>> getArticleComment(@RequestParam("articleid") String articleId,@RequestParam("currentpage") int currentPage){
 
 
 
@@ -656,7 +656,7 @@ public class GetDataController {
 
     @GetMapping("/getmorebuyclass")
     @ResponseBody
-    public Result<ArrayList<SelectClass>> getMoreBuyClass(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getMoreBuyClass(@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
 
         String uuid = tokenUtils.ValidToken(token).getUid();
 
@@ -685,7 +685,7 @@ public class GetDataController {
 
     @GetMapping("/getmorebills")
     @ResponseBody
-    public Result<ArrayList<Bill>> getMoreBills(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<Bill>> getMoreBills(@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
 
         String uuid = tokenUtils.ValidToken(token).getUid();
         ArrayList<Bill> outBill = getDataDao.getMoreOutBill(uuid,currentPage);
@@ -716,7 +716,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreorderhis")
     @ResponseBody
-    public Result<ArrayList<OrderHis>> getMoreOrderHis(@RequestParam("token") String token,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<OrderHis>> getMoreOrderHis(@RequestParam("token") String token,@RequestParam("currentpage") int currentPage){
 
 
         String uuid = tokenUtils.ValidToken(token).getUid();
