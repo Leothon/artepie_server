@@ -237,8 +237,6 @@ public class GetDataController {
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
 
-
-
         return new Result<ClassDetail>(true,getDataService.getClassDetail(uuid,classId));
 
     }
@@ -249,8 +247,6 @@ public class GetDataController {
     public Result<ArrayList<ClassDetailList>> getMoreClassDetail(@RequestParam("token") String token,@RequestParam("classid") String classId,@RequestParam("currentPage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
-
-
         ArrayList<ClassDetailList> classDetailList = getDataDao.getMoreClassList(classId,currentPage);
         return new Result<ArrayList<ClassDetailList>>(true,classDetailList);
 
@@ -377,7 +373,7 @@ public class GetDataController {
 
     @GetMapping("/getmoreclassbytype")
     @ResponseBody
-    public Result<TypeClass> getMoreClassByType(@RequestParam("token") String token,@RequestParam("type") String type,@RequestParam("currentPage") int currentPage){
+    public Result<ArrayList<SelectClass>> getMoreClassByType(@RequestParam("token") String token,@RequestParam("type") String type,@RequestParam("currentPage") int currentPage){
         TokenValid tokenValid  = tokenUtils.ValidToken(token);
         String uuid = tokenValid.getUid();
         String decodeType = "";
@@ -397,7 +393,7 @@ public class GetDataController {
                 teaClass.get(i).setIsbuy(false);
             }
         }
-        return new Result<>(true,getDataService.getClassByType(uuid,decodeType));
+        return new Result<>(true,teaClass);
     }
 
     @GetMapping("/getbuyclassinfo")
