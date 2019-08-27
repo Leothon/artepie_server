@@ -529,7 +529,7 @@
         <result column="user_role" property="user_role"/>
     </resultMap>
     <select id="getQADataByKeyword" resultMap="qaMap">
-        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
         from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_content like "%"#{keyword}"%" order by a.qa_time desc limit 15
     </select>
     <select id="getUserByKeyword" resultMap="userMap">

@@ -261,7 +261,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/createmoreuser")
+    @GetMapping("/createmoreuser")
     @ResponseBody
     public Result<String> createMoreUser(@RequestParam("username") String username,@RequestParam("userphone") String userPhone){
         if (!userService.phoneExits(userPhone)){

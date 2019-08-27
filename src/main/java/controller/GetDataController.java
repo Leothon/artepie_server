@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.GetDataService;
 import service.UserService;
-import utils.SortClass;
-import utils.commonUtils;
-import utils.tokenUtils;
+import utils.*;
 
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class GetDataController {
@@ -766,5 +765,25 @@ public class GetDataController {
 
     }
 
+
+    @GetMapping("/batchregister")
+    @ResponseBody
+    public Result<String> batchRegister(@RequestParam("path") String path){
+
+
+        List<RegisterEntity> registerEntities = MoreUtils.getExcel(path);
+
+        for (int i = 0;i < registerEntities.size();i ++){
+
+            String username = registerEntities.get(i).getUsername();
+            String userphone = registerEntities.get(i).getUserPhone();
+            if (!userService.phoneExits(userphone)){
+                String uuid = "5699" + commonUtils.createUUID();
+                String token = tokenUtils.getToken(uuid);
+                userService.insertFalseUser(uuid,username,token,userphone);
+            }
+        }
+        return new Result<>(true,"完事儿");
+    }
 
 }
