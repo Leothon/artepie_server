@@ -284,4 +284,26 @@
         (start_id,create_time,start_user_id)
         values (#{startId},#{createTime},#{userId})
     </insert>
+
+
+    <insert id="insertSplashInfo">
+        insert into splash
+        (splash_id,splash_url,splash_to_url,splash_time)
+        values (#{splashId},#{splashUrl},#{splashToUrl},#{splashTime})
+    </insert>
+
+    <insert id="insertCustomShow">
+        insert into custom_show
+        (custom_show_id,custom_show_title,custom_show_video,custom_show_cover,custom_show_time)
+        values (#{customShowId},#{customShowTitle},#{customShowVideo},#{customShowCover},#{customShowTime})
+    </insert>
+
+
+
+
+    <insert id="insertCustomInfo">
+        insert into custom
+        (custom_id,custom_user_id,custom_info,custom_time)
+        values (#{customId},#{customUserId},#{customInfo},#{customTime})
+    </insert>
 </mapper>

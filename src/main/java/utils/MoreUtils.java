@@ -83,48 +83,4 @@ public class MoreUtils {
         String Value = sfhssfCellCell.getStringCellValue();
         return String.valueOf(Value);
     }
-
-    /**
-     *
-     * @Title: isEmpty
-     * @Description: TODO判断值是否为空，如果为空返回0;
-     * @return long    返回类型
-     */
-    private long isEmptyForLong(String value) {
-        long result = 0;
-        value = value.trim();
-        if (value != null && !"".equals(value)) {
-            result = Long.valueOf(value);
-        }
-        return result;
-    }
-
-    /**
-     *
-     * @Title: isEmptyForFloat
-     * @Description: TODO判断值是否为空，如果为空返回0;
-     * @return float    返回类型
-     */
-    private float isEmptyForFloat(String value) {
-        float result = 0;
-        value = value.trim();
-        if (value != null && !"".equals(value)) {
-            result = Float.valueOf((value));
-        }
-        return result;
-    }
-    private int isEmptyForInt(String value) {
-        int result = 0;
-        value = value.trim();
-        if (value != null && !"".equals(value)) {
-            result = Integer.valueOf((value));
-        }
-        return result;
-    }
-
-
-
-
-
-
 }

@@ -33,6 +33,8 @@ public interface UserService {
 
     void insertFalseUser(String uuid,String username,String token,String phone);
 
+    void insertFalseUserWithTime(String uuid,String username,String token,String phone,String time);
+
 
 
     String getTokenByAccessToken(String accessToken);

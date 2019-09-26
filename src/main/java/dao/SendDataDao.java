@@ -115,4 +115,11 @@ public interface SendDataDao {
 
     void insertStartTime(@Param("startId") String startId,@Param("createTime") String createTime, @Param("userId") String userId);
 
+
+    void insertSplashInfo(@Param("splashId") String splashId,@Param("splashUrl") String splashUrl,@Param("splashToUrl") String splashToUrl,@Param("splashTime") String splashTime);
+
+    void insertCustomShow(@Param("customShowId") String customShowId,@Param("customShowTitle") String customShowTitle,@Param("customShowVideo") String customShowVideo,@Param("customShowTime") String customShowTime,@Param("customShowCover") String customShowCover);
+
+
+    void insertCustomInfo(@Param("customId") String customId,@Param("customUserId") String customUserId,@Param("customInfo") String customInfo,@Param("customTime") String customTime);
 }

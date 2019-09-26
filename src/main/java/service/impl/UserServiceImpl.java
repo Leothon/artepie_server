@@ -107,6 +107,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void insertFalseUserWithTime(String uuid, String username, String token, String phone, String time) {
+        userDao.insertFalseUser(uuid,username, token,time,phone);
+    }
+
+    @Override
     public String getTokenByAccessToken(String accessToken) {
         return userDao.getTokenByAccessToken(accessToken);
     }

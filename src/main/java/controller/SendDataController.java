@@ -524,4 +524,33 @@ public class SendDataController {
         }
 
     }
+
+
+    @PostMapping("/changesplash")
+    @ResponseBody
+    public Result<String> changeSplash(@RequestParam("imgurl") String imgUrl,@RequestParam("tourl") String toUrl){
+        String splashId = "splash" + commonUtils.createUUID();
+        String time = commonUtils.getTime();
+        sendDataDao.insertSplashInfo(splashId,imgUrl,toUrl,time);
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/createcustomshow")
+    @ResponseBody
+    public Result<String> createCustomShow(@RequestParam("title") String title,@RequestParam("video") String video,@RequestParam("cover") String cover){
+        String customShowId = "customshow" + commonUtils.createUUID();
+        String time = commonUtils.getTime();
+        sendDataDao.insertCustomShow(customShowId,title,video,time,cover);
+        return new Result<>(true,"成功");
+    }
+
+    @PostMapping("/uploadcustominfo")
+    @ResponseBody
+    public Result<String> uploadCustomInfo(@RequestParam("token") String token,@RequestParam("info") String info){
+        String customId = "custom" + commonUtils.createUUID();
+        String uuid = tokenUtils.ValidToken(token).getUid();
+        String time = commonUtils.getTime();
+        sendDataDao.insertCustomInfo(customId,uuid,info,time);
+        return new Result<>(true,"成功");
+    }
 }

@@ -768,4 +768,19 @@
     </select>
 
 
+
+    <select id="getSplashUrl" resultType="dto.SplashInfo">
+        select * from splash order by splash_time desc limit 1
+    </select>
+
+    <resultMap id="customShowMap" type="dto.CustomShow">
+        <id column="custom_show_id" property="videoId"/>
+        <result column="custom_show_video" property="videoUrl"/>
+        <result column="custom_show_cover" property="videoCoverUrl"/>
+        <result column="custom_show_title" property="videoTitle"/>
+    </resultMap>
+
+    <select id="getCustomShow" resultMap="customShowMap" parameterType="integer">
+        select custom_show_id,custom_show_video,custom_show_cover,custom_show_title from custom_show order by custom_show_time desc limit #{currentPage},15
+    </select>
 </mapper>

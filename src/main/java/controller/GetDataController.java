@@ -786,4 +786,21 @@ public class GetDataController {
         return new Result<>(true,"完事儿");
     }
 
+
+    @GetMapping("/getsplash")
+    @ResponseBody
+    public Result<SplashInfo> getSplash(@RequestParam("type") String type){
+
+
+        return new Result<>(true,getDataDao.getSplashUrl());
+    }
+
+    @GetMapping("/getcustomshow")
+    @ResponseBody
+    public Result<ArrayList<CustomShow>> getCustomShow(@RequestParam("currentpage") int currentPage){
+
+
+        return new Result<>(true,getDataDao.getCustomShow(currentPage));
+    }
+
 }

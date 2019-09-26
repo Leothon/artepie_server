@@ -276,4 +276,18 @@ public class UserController {
     }
 
 
+    @GetMapping("/createmoreuserwithtime")
+    @ResponseBody
+    public Result<String> createMoreUserWithTime(@RequestParam("username") String username,@RequestParam("userphone") String userPhone,@RequestParam("time") String time){
+        if (!userService.phoneExits(userPhone)){
+            String uuid = "5699" + commonUtils.createUUID();
+            String token = tokenUtils.getToken(uuid);
+            userService.insertFalseUserWithTime(uuid,username,token,userPhone,time);
+            return new Result<>(true,"创建成功");
+        }else {
+            return new Result<>(false,"该号码已注册");
+        }
+
+    }
+
 }

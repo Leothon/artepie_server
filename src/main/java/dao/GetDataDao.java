@@ -1,9 +1,6 @@
 package dao;
 
-import dto.Inform;
-import dto.QAData;
-import dto.Update;
-import dto.createArticle;
+import dto.*;
 import entity.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -192,5 +189,9 @@ public interface GetDataDao {
 
     String getAuthorIdByArticleId(String articleId);
     String getTitleByArticleId(String articleId);
+
+    SplashInfo getSplashUrl();
+
+    ArrayList<CustomShow> getCustomShow(int currentPage);
 
 }

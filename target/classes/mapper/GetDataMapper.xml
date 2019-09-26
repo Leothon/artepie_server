@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.GetDataDao">
+
+
+    <resultMap id="bannerMap" type="entity.Banner">
+        <id column="banner_id" property="banner_id"/>
+        <result column="banner_img" property="banner_img"/>
+        <result column="banner_url" property="banner_url"/>
+        <result column="banner_type" property="banner_type"/>
+        <result column="banner_to_class_id" property="banner_to_class_id"/>
+    </resultMap>
+    <select id="getBanners" resultMap="bannerMap">
+        select banner_id,banner_img,banner_url,banner_type,banner_to_class_id from banner order by banner_create_time desc limit 4
+    </select>
+
+    <resultMap id="classMap" type="entity.SelectClass">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_author" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="user_id" property="selectauthorid"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_type_detail" property="type"/>
+        <result column="class_count" property="selectstucount"/>
+        <result column="serialize_status" property="serialize"/>
+        <result column="authorize" property="authorize"/>
+    </resultMap>
+
+    <select id="getClassInfo" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize
+        from `class` a join `user` b on a.class_author_id = b.user_id
+        where a.class_id = #{classId}
+    </select>
+
+    <select id="getClasses" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize
+        from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
+    </select>
+
+    <select id="getClassByTea" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc limit 20
+    </select>
+
+    <select id="getMoreClassByTea" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc limit #{currentPage},20
+    </select>
+
+
+
+    <select id="getClassByType" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc limit 20
+    </select>
+    <select id="getMoreClassByType" resultMap="classMap">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id  where a.class_type_detail = #{type} order by a.class_create_time desc limit #{currentPage},20
+    </select>
+
+
+    <resultMap id="classBuyMap" type="entity.SelectClass">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_author" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="class_author_id" property="selectauthorid"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_count" property="selectstucount"/>
+    </resultMap>
+    <select id="getBuyClassByid" resultMap="classBuyMap">
+        select b.class_id,b.class_title,b.class_author,b.class_price,b.class_img,b.class_author_id,b.class_des,b.class_count
+        from `class` b join class_buy a on a.class_buy_class_id = b.class_id
+        where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
+
+    </select>
+    <select id="getMoreClass" resultMap="classMap" parameterType="integer">
+        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
+    </select>
+
+    <resultMap id="classDetailMap" type="entity.SelectClass">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_author" property="selectauthor"/>
+        <result column="class_price" property="selectprice"/>
+        <result column="class_img" property="selectbackimg"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_duration" property="selecttime"/>
+        <result column="user_signal" property="selectauthordes"/>
+        <result column="class_type_detail" property="type"/>
+        <result column="class_score" property="selectscore"/>
+        <result column="user_id" property="selectauthorid"/>
+        <result column="class_count" property="selectstucount"/>
+        <result column="serialize_status" property="serialize"/>
+        <result column="authorize" property="authorize"/>
+    </resultMap>
+
+    <select id="getClassDetail" resultMap="classDetailMap">
+        select a.class_id,a.class_title,a.class_author,a.class_count,a.class_price,a.class_img,a.class_des,a.class_duration, b.user_signal ,a.class_score,a.class_type_detail,b.user_id,a.serialize_status,a.authorize from `class` a join `user` b on a.class_author_id = b.user_id where a.class_id = #{classId}
+    </select>
+
+    <resultMap id="userMapa" type="entity.User">
+        <id column="user_id" property="user_id" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_birth" property="user_birth"/>
+        <result column="user_sex" property="user_sex"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_password" property="user_password"/>
+        <result column="user_address" property="user_address"/>
+        <result column="user_token" property="user_token"/>
+        <result column="user_phone" property="user_phone"/>
+        <result column="user_balance" property="user_balance"/>
+        <result column="user_art_coin" property="user_art_coin"/>
+        <result column="user_role" property="user_role"/>
+    </resultMap>
+    <select id="getUserInfoInGet" parameterType="string" resultMap="userMapa">
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        from `user`
+        where user_id = #{userId}
+    </select>
+
+    <select id="isFav" resultType="integer">
+        select isnull((select fav_id from fav where fav_user_id = #{userId} and fav_class_id = #{classId} ))
+    </select>
+    <select id="getClassView" resultType="integer">
+         select count(*) from classd_view where classd_view_class_id = #{classId}
+    </select>
+
+    <select id="getClassdView" resultType="integer">
+         select count(*) from classd_view where classd_view_classd_id = #{classdId}
+    </select>
+
+    <select id="getTypeClassCount" resultType="integer">
+        select count(*) from `class` where class_type_detail = #{type}
+    </select>
+    <select id="getFavCount" resultType="integer">
+        select count(*) from `fav` where fav_class_id = #{classId}
+    </select>
+    <select id="isUserBuy" resultType="integer" parameterType="string">
+        select isnull((select class_buy_id from class_buy where class_buy_class_id = #{classId} and class_buy_user_id = #{userId} ))
+    </select>
+
+    <select id="isQQOrWeChatRegister" resultType="integer" parameterType="string">
+        select isnull((select tencent_token from `user` where tencent_token = #{accessToken} ))
+    </select>
+    <resultMap id="classListMap" type="entity.ClassDetailList">
+        <id column="classd_id" property="classd_id"/>
+        <result column="classd_title" property="classd_title"/>
+        <result column="class_classd_id" property="class_classd_id"/>
+        <result column="classd_des" property="classd_des"/>
+        <result column="classd_duration" property="classd_duration"/>
+        <result column="classd_video" property="classd_video"/>
+        <result column="classd_create_time" property="classd_create_time"/>
+        <result column="classd_video_cover" property="classd_video_cover"/>
+        <result column="classd_status" property="classdStatus"/>
+        <result column="classd_count" property="classd_view"/>
+
+    </resultMap>
+    <select id="getClassList" resultMap="classListMap">
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count
+        from class_detail  where class_classd_id = #{classId} order by classd_create_time limit 20
+    </select>
+    <select id="getMoreClassList" resultMap="classListMap">
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count
+        from class_detail  where class_classd_id = #{classId} order by classd_create_time limit #{currentPage},20
+    </select>
+
+
+    <resultMap id="teacherMap" type="entity.User">
+        <id column="user_id" property="user_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_role" property="user_role"/>
+        <result column="user_signal" property="user_signal"/>
+    </resultMap>
+    <select id="getTeacherInUser" resultMap="teacherMap">
+        select user_id,user_name,user_icon,user_role,user_signal from `user` where user_role = "1教师"
+    </select>
+    <select id="getClassVideo" resultMap="classListMap">
+        select classd_id,classd_title,class_classd_id,classd_des,classd_duration,classd_video,classd_create_time,classd_video_cover,classd_status,classd_count
+        from class_detail  where class_classd_id = #{classId} and classd_id = #{classdId}
+    </select>
+
+
+    <select id="getClassdIds" resultType="string">
+        select classd_id from class_detail where class_classd_id = #{classId} order by classd_create_time
+    </select>
+
+    <select id="getClassPrice" resultType="string">
+        select class_price from `class` where class_id = #{classId}
+    </select>
+    <resultMap id="qaMap" type="dto.QAData">
+        <id column="qa_id" property="qa_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="qa_user_id" property="qa_user_id"/>
+        <result column="qa_content" property="qa_content"/>
+        <result column="user_role" property="user_role"/>
+        <result column="qa_video" property="qa_video"/>
+        <result column="qa_audio" property="qa_audio"/>
+        <result column="qa_time" property="qa_time"/>
+        <result column="qa_video_cover" property="qa_video_cover"/>
+        <result column="qa_re_id" property="qa_re_id"/>
+        <result column="qa_count" property="qa_view"/>
+    </resultMap>
+
+    <select id="getQAData" resultMap="qaMap">
+
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit 15
+    </select>
+
+
+    <select id="getTopQA" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{topId}
+    </select>
+    <select id="getMoreQAData" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id order by a.qa_time desc limit #{currentPage},15
+
+    </select>
+
+    <select id="getQADataById" resultMap="qaMap">
+
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,b.user_id,a.qa_count,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid} order by a.qa_time desc limit 15
+    </select>
+
+
+    <select id="getMoreQADataById" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role,a.qa_re_id
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where b.user_id = #{uuid}  order by a.qa_time desc limit #{currentPage} ,15
+
+    </select>
+
+    <select id="getQADetail" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_re_id,a.qa_audio,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_id = #{qaId}
+
+    </select>
+
+    <resultMap id="commentMap" type="entity.Comment">
+        <id column="comment_q_id" property="comment_q_id"/>
+        <result column="comment_q_qa_id" property="comment_q_qa_id"/>
+        <result column="comment_q_user_id" property="comment_q_user_id"/>
+        <result column="comment_q_content" property="comment_q_content"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="comment_q_time" property="comment_q_time"/>
+    </resultMap>
+
+    <select id="getComment" resultMap="commentMap">
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_qa_id = #{qaId} order by a.comment_q_time desc limit 15
+    </select>
+
+    <select id="getMoreComment" resultMap="commentMap">
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_qa_id = #{qaId} order by a.comment_q_time desc limit #{currentPage},15
+    </select>
+
+    <resultMap id="replyMap" type="entity.Reply">
+        <id column="reply_id" property="reply_id"/>
+        <result column="reply_r_id" property="reply_r_id"/>
+        <result column="reply_comment" property="reply_comment"/>
+        <result column="reply_user_id" property="reply_user_id"/>
+        <result column="reply_to_user_id" property="reply_to_user_id"/>
+        <result column="reply_like" property="reply_like"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="to_user_name" property="to_user_name"/>
+        <result column="to_user_icon" property="to_user_icon"/>
+        <result column="reply_time" property="reply_time"/>
+    </resultMap>
+    <select id="getReply" resultMap="replyMap">
+
+        select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_time,b.user_name,b.user_icon,d.user_name as to_user_name,d.user_icon as to_user_icon
+
+        from reply a
+        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_time desc limit 15
+    </select>
+
+    <select id="getMoreReply" resultMap="replyMap">
+
+        select a.reply_id,a.reply_r_id,a.reply_comment,a.reply_user_id,a.reply_to_user_id,a.reply_time,b.user_name,b.user_icon,d.user_name as to_user_name,d.user_icon as to_user_icon
+
+        from reply a
+        join `user` b on a.reply_user_id = b.user_id join `user` d on a.reply_to_user_id = d.user_id  where a.reply_r_id = #{commentId} order by a.reply_time desc limit #{currentPage},15
+    </select>
+
+
+    <select id="getSingleComment" resultMap="commentMap">
+        select a.comment_q_id,a.comment_q_qa_id,a.comment_q_user_id,a.comment_q_content,a.comment_q_time,b.user_name,b.user_icon from comment_qa a join `user` b
+         on a.comment_q_user_id = b.user_id where a.comment_q_id = #{commentId}
+    </select>
+
+    <select id="getQALike" resultType="integer">
+        select count(*) from qa_like where qa_like_qa_id = #{qaId}
+    </select>
+
+    <select id="getCommentLike" resultType="integer">
+        select count(*) from comment_like where comment_like_comment_id = #{commentId}
+    </select>
+
+    <select id="getQAComment" resultType="integer">
+        select count(*) from comment_qa where comment_q_qa_id = #{qaId}
+    </select>
+
+    <select id="isLike" resultType="integer" parameterType="string">
+        select isnull((select qa_like_id from `qa_like` where qa_like_qa_id = #{qaId} and qa_like_user_id = #{userId}))
+    </select>
+
+    <select id="isCommentLike" resultType="integer" parameterType="string">
+        select isnull((select comment_like_id from comment_like where comment_like_comment_id = #{commentId} and comment_like_user_id = #{userId} ))
+    </select>
+
+    <select id="getReplyLike" resultType="integer">
+        select count(*) from reply_like where reply_like_reply_id = #{replyId}
+    </select>
+
+    <select id="isReplyLike" resultType="integer" parameterType="string">
+         select isnull((select reply_like_id from reply_like where reply_like_reply_id = #{replyId} and reply_like_user_id = #{userId}))
+
+    </select>
+
+    <select id="isArticleLike" resultType="integer" parameterType="string">
+         select isnull((select article_like_id from article_like where article_user_id = #{userId} and article_article_id = #{articleId}))
+
+    </select>
+
+    <select id="getArticleLike" resultType="integer">
+        select count(*) from article_like where article_article_id = #{articleId}
+    </select>
+
+    <select id="getArticleCommentCount" resultType="integer">
+        select count(*) from article_comment where art_com_art_id = #{articleId}
+    </select>
+    <select id="getCommentReplyCount" resultType="integer">
+         select count(*) from reply where reply_r_id = #{commentId}
+    </select>
+
+    <resultMap id="teaInfo" type="entity.User">
+        <id column="user_id" property="user_id"/>
+        <result column="user_name" property="user_name"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_role" property="user_role"/>
+        <result column="user_icon" property="user_icon"/>
+    </resultMap>
+    <select id="getTeaInfo" resultMap="teaInfo">
+        select user_id,user_name,user_signal,user_role,user_icon from `user` where user_id = #{teaId}
+    </select>
+
+    <resultMap id="favClassById" type="entity.SelectClass">
+        <id column="class_id" property="selectId"/>
+        <result column="class_title" property="selectlisttitle"/>
+        <result column="class_des" property="selectdesc"/>
+        <result column="class_img" property="selectbackimg"/>
+    </resultMap>
+
+    <select id="getFavClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `fav` a join `class` b on a.fav_class_id = b.class_id where a.fav_user_id = #{uuid} order by a.fav_time limit 15
+    </select>
+
+    <select id="getMoreFavClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `fav` a join `class` b on a.fav_class_id = b.class_id where a.fav_user_id = #{uuid} order by a.fav_time limit #{currentPage},15
+    </select>
+
+
+
+    <select id="getBuyClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `class_buy` a join `class` b on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uuid} order by a.class_buy_time limit 20
+    </select>
+    <select id="getMoreBuyClassByUid" resultMap="favClassById">
+        select b.class_id,b.class_title,b.class_des,b.class_img from `class_buy` a join `class` b on a.class_buy_class_id = b.class_id where a.class_buy_user_id = #{uuid} order by a.class_buy_time limit #{currentPage},20
+    </select>
+
+    <resultMap id="classDetailByIdView" type="entity.ClassDetailList">
+        <id column="classd_id" property="classd_id"/>
+        <result column="classd_title" property="classd_title"/>
+        <result column="classd_des" property="classd_des"/>
+        <result column="class_classd_id" property="class_classd_id"/>
+    </resultMap>
+    
+    <select id="getViewHisById" resultMap="classDetailByIdView">
+        select b.classd_id,b.classd_title,b.classd_des,b.class_classd_id from class_detail b join classd_view a on a.classd_view_classd_id = b.classd_id where a.classd_view_user_id = #{uuid} and a.classd_view_gone = 1 order by a.classd_view_time
+    </select>
+
+
+    <resultMap id="classDView" type="entity.ClassDView">
+        <id property="classd_view_id" column="classd_view_id"/>
+        <result property="classd_view_classd_id" column="classd_view_classd_id"/>
+        <result property="classd_view_user_id" column="classd_view_user_id"/>
+        <result property="classd_view_time" column="classd_view_time"/>
+        <result property="classd_view_class_id" column="classd_view_class_id"/>
+        <result property="classd_view_gone" column="classd_view_gone"/>
+    </resultMap>
+    <select id="getStudyEveryday" resultMap="classDView">
+
+        select * from (select * from classd_view a where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(#{time}) and a.classd_view_user_id = #{uuid} ) a where not exists (select 1 from classd_view b where b.classd_view_classd_id = a.classd_view_classd_id and a.classd_view_user_id = b.classd_view_user_id and a.classd_view_id &lt; b.classd_view_id)
+    </select>
+
+    <resultMap id="bannerArticle" type="entity.Banner">
+        <id column="article_id" property="banner_id"/>
+        <result column="article_img" property="banner_img"/>
+        <result column="article_title" property="banner_url"/>
+    </resultMap>
+    <select id="getArticleBanner" resultMap="bannerArticle">
+        select article_id,article_img,article_title from article order by article_time desc limit 5
+    </select>
+
+    <resultMap id="articleList" type="entity.Article">
+        <id column="article_id" property="articleId"/>
+        <result column="article_img" property="articleImg"/>
+        <result column="article_time" property="articleTime"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="user_name" property="articleAuthorName"/>
+        <result column="user_icon" property="articleAuthorIcon"/>
+        <result column="user_role" property="authorRole"/>
+        <result column="article_count" property="articleVisionCount"/>
+    </resultMap>
+    <select id="getArticleList" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit 15
+    </select>
+    <select id="getMoreArticleList" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id order by a.article_time desc limit #{currentPage},15
+    </select>
+    <select id="getArticleListById" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id  where b.user_id = #{userId} order by a.article_time desc limit 15
+    </select>
+    <select id="getMoreArticleListById" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where b.user_id = #{userId} order by a.article_time desc limit #{currentPage},15
+    </select>
+
+    <resultMap id="articleDetail" type="entity.Article">
+        <id column="article_id" property="articleId"/>
+        <result column="article_author_id" property="articleAuthorId"/>
+        <result column="article_img" property="articleImg"/>
+        <result column="article_time" property="articleTime"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="user_name" property="articleAuthorName"/>
+        <result column="user_icon" property="articleAuthorIcon"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="user_role" property="authorRole"/>
+        <result column="article_count" property="articleVisionCount"/>
+    </resultMap>
+
+    <select id="getArticleDetail" resultMap="articleDetail">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,a.article_content,a.article_author_id,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where a.article_id = #{articleId}
+    </select>
+
+    <select id="getUserIdByQaId" resultType="string">
+        select qa_user_id from question_answer where qa_id = #{qaId}
+    </select>
+
+    <select id="getUserIdByCommentId" resultType="string">
+        select comment_q_user_id from comment_qa where comment_q_id = #{commentId}
+    </select>
+
+    <select id="getUserIdByReplyId" resultType="string">
+        select reply_user_id from reply where reply_id = #{replyId}
+    </select>
+
+    <resultMap id="noticeMap" type="entity.NoticeInfo">
+        <id column="notice_id" property="noticeId"/>
+        <result column="notice_from_user_id" property="noticeFromUserId"/>
+        <result column="notice_to_user_id" property="noticeToUserId"/>
+        <result column="notice_content" property="noticeContent"/>
+        <result column="notice_type" property="noticeType"/>
+        <result column="notice_target_id" property="noticeTargetId"/>
+        <result column="notice_status" property="noticeStatus"/>
+        <result column="notice_time" property="noticeTime"/>
+    </resultMap>
+    <select id="getNoticeInfo" resultMap="noticeMap">
+        select notice_id,notice_from_user_id,notice_to_user_id,notice_content,notice_type,notice_target_id,notice_status,notice_time from notice
+        where notice_to_user_id = #{userId} order by notice_time desc limit 15
+    </select>
+
+    <select id="getMoreNoticeInfo" resultMap="noticeMap">
+        select notice_id,notice_from_user_id,notice_to_user_id,notice_content,notice_type,notice_target_id,notice_status,notice_time from notice
+        where notice_to_user_id = #{userId} order by notice_time desc limit #{page},15
+    </select>
+
+    <select id="isHasNotice" resultType="integer" parameterType="string">
+        select count(*) from notice where notice_to_user_id = #{userId}  and notice_status = 0
+    </select>
+
+    <select id="isHasClassDetail" resultType="integer" parameterType="string">
+        select count(*) from class_detail where class_classd_id = #{classId}
+    </select>
+
+    <select id="getCommentIdByReplyId" resultType="string">
+        select reply_r_id from reply where reply_id = #{replyId}
+    </select>
+
+    <resultMap id="authMap" type="entity.AuthInfo">
+        <id column="auth_handle_id" property="authId"/>
+        <result column="auth_handle_applicant_id" property="authUserId"/>
+        <result column="auth_handle_img" property="authImg"/>
+        <result column="auth_handle_info" property="authContent"/>
+        <result column="auth_handle_time" property="authTime"/>
+        <result column="auth_handle_status" property="authStatus"/>
+        <result column="auth_handle_advice" property="authAdvice"/>
+    </resultMap>
+    <select id="getAuthInfo" resultMap="authMap">
+        select auth_handle_id,auth_handle_applicant_id,auth_handle_img,auth_handle_info,auth_handle_time,auth_handle_status,auth_handle_advice
+        from auth_handle where auth_handle_applicant_id = #{uuid} order by auth_handle_time desc
+    </select>
+
+    <select id="getClassDataByKeyword" resultMap="classMap">
+        select class_id,class_title,class_author,class_price,class_img,class_author_id,class_des from `class` where class_title like "%"#{keyword}"%" or class_des like "%"#{keyword}"%" or class_author like "%"#{keyword}"%" order by class_create_time desc
+    </select>
+
+    <resultMap id="userMap" type="entity.User">
+        <id column="user_id" property="user_id" />
+        <result column="user_name" property="user_name"/>
+        <result column="user_icon" property="user_icon"/>
+        <result column="user_birth" property="user_birth"/>
+        <result column="user_sex" property="user_sex"/>
+        <result column="user_signal" property="user_signal"/>
+        <result column="user_password" property="user_password"/>
+        <result column="user_address" property="user_address"/>
+        <result column="user_token" property="user_token"/>
+        <result column="user_phone" property="user_phone"/>
+        <result column="user_balance" property="user_balance"/>
+        <result column="user_art_coin" property="user_art_coin"/>
+        <result column="user_role" property="user_role"/>
+    </resultMap>
+    <select id="getQADataByKeyword" resultMap="qaMap">
+        select a.qa_id,a.qa_user_id,a.qa_content,a.qa_video,a.qa_time,a.qa_audio,a.qa_re_id,a.qa_count,b.user_id,b.user_name,b.user_icon,b.user_signal,a.qa_video_cover,b.user_role
+        from question_answer a join `user` b on a.qa_user_id = b.user_id where a.qa_content like "%"#{keyword}"%" order by a.qa_time desc limit 15
+    </select>
+    <select id="getUserByKeyword" resultMap="userMap">
+        select user_id,user_name,user_icon,user_birth,user_sex,user_signal,user_password,user_address,user_token,user_phone,user_balance,user_art_coin,user_role
+        from `user`
+        where user_name like "%"#{keyword}"%" or user_signal like "%"#{keyword}"%" or user_role like "%"#{keyword}"%"
+    </select>
+    <select id="getArticleByKeyword" resultMap="articleList">
+        select a.article_id,a.article_img,a.article_time,a.article_title,b.user_name,b.user_icon,b.user_role,a.article_count from article a join user b on a.article_author_id = b.user_id where a.article_content like "%"#{keyword}"%" or a.article_title like "%"#{keyword}"%" or b.user_name like "%"#{keyword}"%" order by a.article_time desc
+    </select>
+
+    <select id="getUserNameByUserId" resultType="string">
+        select user_name from `user` where user_id = #{userId}
+    </select>
+
+
+    <select id="getUserIdByClassId" resultType="string">
+        select class_author_id from `class` where class_id = #{classId}
+    </select>
+
+    <select id="getClassAllDuration" resultType="string">
+        select class_duration from `class` where class_id = #{classId}
+    </select>
+
+
+    <resultMap id="informMap" type="dto.Inform">
+        <id column="inform_id" property="informId"/>
+        <result column="inform_content" property="informText"/>
+        <result column="inform_time" property="informTime"/>
+    </resultMap>
+
+    <select id="getInform" resultMap="informMap">
+        select inform_id,inform_content,inform_time from inform order by inform_time desc limit 1
+    </select>
+
+    <resultMap id="updateMap" type="dto.Update">
+        <id column="update_id" property="updateId"/>
+        <result column="update_version" property="updateVersion"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_code" property="updateCode"/>
+        <result column="update_content" property="updateContent"/>
+    </resultMap>
+
+    <select id="getUpdate" resultMap="updateMap">
+        select update_id,update_version,update_time,update_code,update_content from `update` order by update_time desc limit 1
+    </select>
+
+    <select id="getAuthImg" resultType="string">
+        select auth_handle_img from auth_handle where auth_handle_applicant_id = #{userId}
+    </select>
+
+    <update id="authUserz">
+        update `user` set user_role = "0"#{userRole} where user_id = #{userId}
+    </update>
+
+    <update id="authUsero">
+        update `user` set user_role = "1"#{userRole} where user_id = #{userId}
+    </update>
+
+    <update id="authUserto">
+        update auth_handle set auth_handle_status = 1,auth_handle_advice = "已成功" where auth_handle_applicant_id = #{userId}
+    </update>
+
+    <select id="getArticleVisionCount" resultType="integer" parameterType="string">
+        select count(*) from article_view where art_vis_co_art_id = #{articleId}
+    </select>
+
+    <insert id="insertArticleView">
+        insert into article_view (art_vis_co_id,art_vis_co_art_id,art_vis_co_user_id,art_vis_co_time,art_vis_gone)
+        values (#{articleViewId} ,#{articleViewArticleId} ,#{articleViewUserId} ,#{articleViewTime},1 )
+    </insert>
+
+
+    <update id="insertArticleViewCount">
+        update article set
+        article_count = convert((convert(article_count,signed) + 1),char)
+        where article_id = #{articleid}
+    </update>
+    <resultMap id="articleCommentMap" type="entity.ArticleComment">
+        <id column="art_com_id" property="articleCommentId"/>
+        <result column="art_com_user_id" property="articleCommentUserId"/>
+        <result column="art_com_art_id" property="articleCommentArticleId"/>
+        <result column="art_com_content" property="articleComment"/>
+        <result column="art_com_time" property="articleCommentTime"/>
+        <result column="art_com_reply" property="articleCommentReply"/>
+        <result column="user_name" property="articleCommentUserName"/>
+        <result column="user_icon" property="articleCommentUserIcon"/>
+    </resultMap>
+    <select id="getArticleComment" resultMap="articleCommentMap">
+        select a.art_com_id,a.art_com_user_id,a.art_com_art_id,a.art_com_content,a.art_com_time,a.art_com_reply,b.user_name,b.user_icon
+        from article_comment a join `user` b on a.art_com_user_id = b.user_id where a.art_com_art_id = #{articleId} order by a.art_com_time desc limit 15
+    </select>
+
+    <select id="getArticleCommentMore" resultMap="articleCommentMap">
+        select a.art_com_id,a.art_com_user_id,a.art_com_art_id,a.art_com_content,a.art_com_time,a.art_com_reply,b.user_name,b.user_icon
+        from article_comment a join `user` b on a.art_com_user_id = b.user_id where a.art_com_art_id = #{articleId} order by a.art_com_time desc limit #{currentPage},15
+    </select>
+
+
+    <resultMap id="articleInfoMap" type="dto.createArticle">
+        <id column="article_id" property="articleId"/>
+        <result column="article_content" property="content"/>
+    </resultMap>
+    <select id="getArticleInfo" resultMap="articleInfoMap">
+        select article_id,article_content from article
+    </select>
+
+    <select id="getQaView" resultType="integer" parameterType="string">
+        select count(*) from qa_view where qa_view_qa_id = #{qaId}
+    </select>
+
+    <select id="getClassdids" resultType="string" parameterType="string">
+        select classd_id from class_detail where class_classd_id = #{classid}
+    </select>
+
+    <resultMap id="orderMap" type="entity.Orders">
+        <id column="transaction_number" property="order_number"/>
+        <result column="transaction_id" property="order_id"/>
+        <result column="transaction_user_id" property="order_user_id"/>
+        <result column="transaction_date" property="order_date"/>
+        <result column="transaction_class_id" property="order_class_id"/>
+        <result column="transaction_pay_type" property="order_pay_type"/>
+        <result column="transaction_price" property="order_class_price"/>
+        <result column="transaction_discount" property="order_discount"/>
+        <result column="transaction_end_price" property="order_end_price"/>
+        <result column="transaction_status" property="order_status"/>
+    </resultMap>
+    <select id="getOrders" resultMap="orderMap">
+        select transaction_number,transaction_id,transaction_user_id,transaction_date,transaction_class_id,transaction_pay_type,transaction_price,transaction_discount,transaction_end_price,transaction_status
+        from transaction_order where transaction_number = #{tradeNumber}
+    </select>
+    <select id="getAuthorIdByClassId" resultType="string" parameterType="string">
+        select class_author_id from `class`
+        where class_id = #{classId}
+    </select>
+
+    
+    <resultMap id="favMap" type="entity.Fav">
+        <id column="fav_class_id" property="fav_class_id"/>
+        <result column="fav_id" property="fav_id"/>
+        <result column="fav_user_id" property="fav_user_id"/>
+        <result column="fav_time" property="fav_time"/>
+    </resultMap>
+
+    <select id="getUserIdByClassIdInFav" resultMap="favMap">
+        select fav_id,fav_user_id,fav_class_id,fav_time from fav where fav_class_id = #{classId}
+    </select>
+
+    <resultMap id="outBillMap" type="entity.Bill">
+        <id column="transaction_user_id" property="userId"/>
+        <result column="class_title" property="title"/>
+        <result column="transaction_date" property="time"/>
+        <result column="transaction_class_id" property="classId"/>
+        <result column="transaction_end_price" property="endCount"/>
+        <result column="transaction_id" property="billId"/>
+    </resultMap>
+    <select id="getOutBill" resultMap="outBillMap">
+        select a.transaction_user_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_end_price,a.transaction_id from
+        transaction_order a join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date limit 10
+    </select>
+
+    <select id="getMoreOutBill" resultMap="outBillMap">
+        select a.transaction_user_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_end_price,a.transaction_id from
+        transaction_order a join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date limit #{currentPage},10
+    </select>
+
+    <resultMap id="inBillMap" type="entity.Bill">
+        <id column="class_author_id" property="userId"/>
+        <result column="class_title" property="title"/>
+        <result column="transaction_date" property="time"/>
+        <result column="transaction_class_id" property="classId"/>
+        <result column="transaction_price" property="count"/>
+        <result column="transaction_id" property="billId"/>
+        <result column="user_icon" property="billIcon"/>
+    </resultMap>
+    <select id="getInBill" resultMap="inBillMap">
+        select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
+
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date limit 10
+    </select>
+
+    <select id="getMoreInBill" resultMap="inBillMap">
+        select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
+
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where b.class_author_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date limit #{currentPage},10
+    </select>
+
+
+    <select id="getInfifteen" resultMap="inBillMap">
+        select b.class_author_id,b.class_title,a.transaction_date,a.transaction_class_id,a.transaction_price,a.transaction_id,d.user_icon
+
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id join `user` d on a.transaction_user_id = d.user_id  where  (DATE_SUB(CURDATE(), INTERVAL 15 DAY) <![CDATA[<=]]> date(a.transaction_date)) and b.class_author_id = #{uuid} and transaction_status = "已支付" order by a.transaction_date
+    </select>
+
+    <resultMap id="OrderHisMap" type="entity.OrderHis">
+        <id column="transaction_id" property="orderId"/>
+        <result column="class_author" property="authorName"/>
+        <result column="transaction_status" property="orderStatus"/>
+        <result column="class_img" property="orderImg"/>
+        <result column="class_title" property="orderTitle"/>
+        <result column="class_des" property="orderDes"/>
+        <result column="transaction_date" property="orderTime"/>
+        <result column="transaction_end_price" property="orderCount"/>
+    </resultMap>
+    <select id="getOrderHis" resultMap="OrderHisMap">
+        select a.transaction_id,a.transaction_status,a.transaction_date,a.transaction_end_price,b.class_author,b.class_img,b.class_title,b.class_des
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date limit 20
+    </select>
+
+    <select id="getMoreOrderHis" resultMap="OrderHisMap">
+        select a.transaction_id,a.transaction_status,a.transaction_date,a.transaction_end_price,b.class_author,b.class_img,b.class_title,b.class_des
+        from transaction_order a
+        join `class` b on a.transaction_class_id = b.class_id where a.transaction_user_id = #{uuid} order by a.transaction_date limit #{currentPage},20
+    </select>
+
+    <select id="isHasPsd" resultType="integer" parameterType="string">
+        select isnull((select psd_id from psd where psd_user_id = #{uuid}))
+    </select>
+
+
+
+    <select id="getPsd" resultType="string" parameterType="string">
+        select psd_content from psd where psd_user_id = #{uuid}
+    </select>
+
+    <select id="getAuthorIdByArticleId" resultType="string" parameterType="string">
+        select article_author_id from article where article_id = #{articleId}
+    </select>
+
+    <select id="getTitleByArticleId" resultType="string" parameterType="string">
+        select article_title from article where article_id = #{articleId}
+    </select>
+
+
+
+    <select id="getSplashUrl" resultType="dto.SplashInfo">
+        select * from splash order by splash_time desc limit 1
+    </select>
+
+    <resultMap id="customShowMap" type="dto.CustomShow">
+        <id column="custom_show_id" property="videoId"/>
+        <result column="custom_show_video" property="videoUrl"/>
+        <result column="custom_show_cover" property="videoCoverUrl"/>
+        <result column="custom_show_title" property="videoTitle"/>
+    </resultMap>
+
+    <select id="getCustomShow" resultMap="customShowMap" parameterType="integer">
+        select custom_show_id,custom_show_video,custom_show_cover,custom_show_title from custom_show order by custom_show_time desc limit #{currentPage},15
+    </select>
+</mapper>
