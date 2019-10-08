@@ -161,6 +161,12 @@ public class UserController {
         tokeninfo.setToken(token);
         String registerTime = commonUtils.getTime();
         String phone = user.getUser_phone() + "";
+
+        if (userService.phoneExits(phone)) {
+            if (!userService.getUserIdByPhoneNumber(phone).equals(uuid)) {
+                userService.insertPhoneNumber(userService.getUserIdByPhoneNumber(phone), "");
+            }
+        }
         userService.qqRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), registerTime, token, user.getTencent_token(),phone);
 
         return new Result<User>(true, userService.getUserInfoById(uuid));
@@ -177,6 +183,11 @@ public class UserController {
         tokeninfo.setToken(token);
         String registerTime = commonUtils.getTime();
         String phone = user.getUser_phone() + "";
+        if (userService.phoneExits(phone)) {
+            if (!userService.getUserIdByPhoneNumber(phone).equals(uuid)) {
+                userService.insertPhoneNumber(userService.getUserIdByPhoneNumber(phone), "");
+            }
+        }
         userService.weChatRegister(uuid, user.getUser_icon(), user.getUser_name(), user.getUser_sex(), user.getUser_address(),registerTime, token, user.getTencent_token(),phone);
 
         return new Result<User>(true, userService.getUserInfoById(uuid));
