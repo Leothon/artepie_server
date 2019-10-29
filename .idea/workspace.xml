@@ -6,11 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35d1319f-671a-4f98-a654-5340dd06630a" name="Default Changelist" comment="修复若干BUG">
+    <list default="true" id="35d1319f-671a-4f98-a654-5340dd06630a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/artepie/artepie.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/artepie/artepie.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/UserController.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -515,7 +512,10 @@
       <workItem from="1569398288994" duration="5183000" />
       <workItem from="1569838202341" duration="3687000" />
       <workItem from="1570190127291" duration="3013000" />
-      <workItem from="1570526055779" duration="599000" />
+      <workItem from="1570526055779" duration="1281000" />
+      <workItem from="1570786774656" duration="915000" />
+      <workItem from="1570788166346" duration="3093000" />
+      <workItem from="1571372576654" duration="1336000" />
     </task>
     <task id="LOCAL-00001" summary="修复若干BUG">
       <created>1552395000703</created>
@@ -692,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566917197297</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary=" 增加功能">
+      <created>1570537584696</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1570537584696</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -759,6 +766,7 @@
     <MESSAGE value="修改课程数据类型错误" />
     <MESSAGE value="修改若干BUG" />
     <MESSAGE value="修复若干BUG" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复若干BUG" />
+    <MESSAGE value=" 增加功能" />
+    <option name="LAST_COMMIT_MESSAGE" value=" 增加功能" />
   </component>
 </project>
