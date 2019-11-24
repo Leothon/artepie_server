@@ -40,6 +40,12 @@
         from `class` a join user b on a.class_author_id = b.user_id  order by class_create_time desc limit 10
     </select>
 
+
+    <select id="getMoreClass" resultMap="classMap" parameterType="integer">
+        select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
+    </select>
+
+
     <select id="getClassByTea" resultMap="classMap">
         select a.class_id,a.class_title,a.class_author,a.class_price,a.class_img,b.user_id,a.class_des,a.class_type_detail,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id where a.class_author_id = #{teaId}  order by a.class_create_time desc limit 20
     </select>
@@ -74,9 +80,7 @@
         where a.class_buy_user_id = #{uid} order by a.class_buy_time desc limit 10
 
     </select>
-    <select id="getMoreClass" resultMap="classMap" parameterType="integer">
-        select a.class_id,a.class_title,b.user_name,a.class_price,a.class_img,b.user_id,a.class_des,a.class_count,a.serialize_status,a.authorize from `class` a join user b on a.class_author_id = b.user_id order by a.class_create_time desc limit #{currentPage} ,10
-    </select>
+
 
     <resultMap id="classDetailMap" type="entity.SelectClass">
         <id column="class_id" property="selectId"/>
